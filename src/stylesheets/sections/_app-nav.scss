@@ -1,0 +1,7 @@
+.app-nav {
+	.nav {
+		@extend .d-flex !optional;
+		@extend .flex-column !optional;
+		@extend .h-100 !optional;
+	}
+}

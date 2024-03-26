@@ -1,0 +1,14 @@
+mixin app-header(data={logo: { name: locals.APP_NAME, href: "index.html",  logos: [{ src: "", color: "", width: "", height: "" }] }})
+	// app header section starts
+	header.app-header
+		// app header content starts
+		.app-header-content
+			.container
+				p header
+		// app header content ends
+		if (page_title === "Home")
+			// app notifications starts
+			.container.position-relative
+				include ../sections/_app-toasts.pug
+			// app notifications ends
+	// app header section ends

@@ -1,0 +1,4 @@
+{
+	"compilerOptions": { "baseUrl": "src/scripts" },
+	"include": ["src/scripts"]
+}

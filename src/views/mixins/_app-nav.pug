@@ -1,0 +1,8 @@
+include ./_app-nav-list.pug
+
+mixin app-nav(data={header_type: "", list: []})
+	// navigation list starts
+	nav(class=`app-nav${data.header_type ? ` app-nav-${data.header_type}` : ""} w-100`)
+		if (data.list && data.list.length)
+			+app-nav-list({ list: data.list, header_type: data.header_type })
+	// navigation list ends

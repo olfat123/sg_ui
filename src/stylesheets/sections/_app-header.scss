@@ -1,0 +1,30 @@
+
+.app-header {
+	position: absolute;
+	top: 0;
+	width: 100%;
+	z-index: $zindex-fixed;
+	@include transition($transition-base);
+
+	&:not(.app-header-scrolling) {
+		background: transparent;
+	}
+
+	&-scrolling {
+		position: fixed !important;
+		animation-duration: 0.5s;
+		background: var(--#{$prefix}body-bg);
+		@extend .animated !optional;
+
+		&-up,
+		&:focus-within {
+			@extend .shadow-lg !optional;
+			@include animate-prefixer(animation-name, slideInDown);
+		}
+
+		&-down {
+			@extend .shadow-none !optional;
+			@include animate-prefixer(animation-name, slideOutUp);
+		}
+	}
+}

@@ -1,0 +1,18 @@
+extends ./layouts/_index.pug
+
+append variables
+	- var page_title = "404 - NotFound";
+
+block styles
+
+block content
+	// application main content stars
+	main#main.app-main
+		include ./sections/_error.pug
+	// application main content ends
+
+block modals
+
+block off-canvas
+
+block scripts

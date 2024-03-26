@@ -1,0 +1,4 @@
+{
+	"src/**/*.{js,ts,json,css,scss,md}": ["npm run prettify"],
+	"src/**/*.{js,ts,json}": ["npm run lint"]
+}

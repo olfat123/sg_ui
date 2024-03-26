@@ -1,0 +1,8 @@
+include ./_app-nav-link.pug
+
+mixin app-nav-list(data={list: [], header_type: ""})
+	ul.nav.mb-0(role="menubar")
+		each navListItem, i in data.list
+			- var isNavListItemActive = String(navListItem.title).toLowerCase().includes(String(page_title).toLowerCase());
+			li.nav-item
+				+app-nav-link({ isActive: isNavListItemActive, link: navListItem })

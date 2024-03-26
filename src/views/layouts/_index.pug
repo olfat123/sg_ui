@@ -1,0 +1,20 @@
+block variables
+
+doctype html
+html(lang=locals.APP_LANGUAGE, dir=locals.APP_DIRECTION, data-bs-theme=locals.APP_THEME)
+	include ../base/_head.pug
+	body
+		// application starts
+		include ../sections/_app-svgs.pug
+		#app
+			include ../sections/_app-loader.pug
+			include ../sections/_app-header.pug
+			block content
+			include ../sections/_app-footer.pug
+			include ../sections/_app-scroll-to-top.pug
+		#portals
+			block modals
+			include ../off-canvases/_app-header.pug
+			block off-canvas
+		// application ends
+		include ../base/_foot.pug

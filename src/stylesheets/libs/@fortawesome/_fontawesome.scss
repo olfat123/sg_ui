@@ -1,0 +1,157 @@
+/*!
+ * Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com
+ * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
+ * Copyright 2023 Fonticons, Inc.
+ */
+// Font Awesome core compile (Web Fonts-based)
+// -------------------------
+@import "variables-overrides.scss";
+@import "~@fortawesome/fontawesome-free/scss/functions";
+@import "~@fortawesome/fontawesome-free/scss/variables";
+@import "~@fortawesome/fontawesome-free/scss/mixins";
+@import "~@fortawesome/fontawesome-free/scss/core";
+@import "~@fortawesome/fontawesome-free/scss/sizing";
+@import "~@fortawesome/fontawesome-free/scss/fixed-width";
+@import "~@fortawesome/fontawesome-free/scss/list";
+@import "~@fortawesome/fontawesome-free/scss/bordered-pulled";
+@import "~@fortawesome/fontawesome-free/scss/animated";
+@import "~@fortawesome/fontawesome-free/scss/rotated-flipped";
+@import "~@fortawesome/fontawesome-free/scss/stacked";
+@import "~@fortawesome/fontawesome-free/scss/icons";
+@import "~@fortawesome/fontawesome-free/scss/screen-reader";
+@import "~@fortawesome/fontawesome-free/scss/brands";
+@import "~@fortawesome/fontawesome-free/scss/regular";
+@import "~@fortawesome/fontawesome-free/scss/solid";
+
+// Brands icons
+@font-face {
+	font-family: "Font Awesome 6 Brands";
+	src: url("#{$fa-font-path}/FontAwesome6Brands-Regular.eot");
+	src:
+		url("#{$fa-font-path}/FontAwesome6Brands-Regular.eot?#iefix") format("embedded-opentype"),
+		url("#{$fa-font-path}/FontAwesome6Brands-Regular.woff2") format("woff2"),
+		url("#{$fa-font-path}/FontAwesome6Brands-Regular.woff") format("woff"),
+		url("#{$fa-font-path}/FontAwesome6Brands-Regular.ttf") format("truetype"),
+		url("#{$fa-font-path}/FontAwesome6Brands-Regular.svg#FontAwesome6Brands-Regular") format("svg");
+	font-weight: normal;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: "Font Awesome 6 Brands";
+	src: url("#{$fa-font-path}/FontAwesome6Brands-Regular_1.eot");
+	src:
+		url("#{$fa-font-path}/FontAwesome6Brands-Regular_1.eot?#iefix") format("embedded-opentype"),
+		url("#{$fa-font-path}/FontAwesome6Brands-Regular_1.woff2") format("woff2"),
+		url("#{$fa-font-path}/FontAwesome6Brands-Regular_1.woff") format("woff"),
+		url("#{$fa-font-path}/FontAwesome6Brands-Regular_1.ttf") format("truetype"),
+		url("#{$fa-font-path}/FontAwesome6Brands-Regular_1.svg#FontAwesome6Brands-Regular") format("svg");
+	font-weight: normal;
+	font-style: normal;
+	font-display: swap;
+}
+
+.fab,
+.fa-brands {
+	font-family: "Font Awesome 6 Brands";
+}
+
+// regular icons
+@font-face {
+	font-family: "Font Awesome 6 Free";
+	src: url("#{$fa-font-path}/FontAwesome6Free-Regular.eot");
+	src:
+		url("#{$fa-font-path}/FontAwesome6Free-Regular.eot?#iefix") format("embedded-opentype"),
+		url("#{$fa-font-path}/FontAwesome6Free-Regular.woff2") format("woff2"),
+		url("#{$fa-font-path}/FontAwesome6Free-Regular.woff") format("woff"),
+		url("#{$fa-font-path}/FontAwesome6Free-Regular.ttf") format("truetype"),
+		url("#{$fa-font-path}/FontAwesome6Free-Regular.svg#FontAwesome6Free-Regular") format("svg");
+	font-weight: normal;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: "Font Awesome 6 Free";
+	src: url("#{$fa-font-path}/FontAwesome6Free-Regular_1.eot");
+	src:
+		url("#{$fa-font-path}/FontAwesome6Free-Regular_1.eot?#iefix") format("embedded-opentype"),
+		url("#{$fa-font-path}/FontAwesome6Free-Regular_1.woff2") format("woff2"),
+		url("#{$fa-font-path}/FontAwesome6Free-Regular_1.woff") format("woff"),
+		url("#{$fa-font-path}/FontAwesome6Free-Regular_1.ttf") format("truetype"),
+		url("#{$fa-font-path}/FontAwesome6Free-Regular_1.svg#FontAwesome6Free-Regular") format("svg");
+	font-weight: normal;
+	font-style: normal;
+	font-display: swap;
+}
+
+.far,
+.fa-regular {
+	font-family: "Font Awesome 6 Free";
+	font-weight: 400;
+}
+
+@font-face {
+	font-family: "Font Awesome v4 Compatibility";
+	src: url("#{$fa-font-path}/FontAwesomev4Compatibility-Regular.eot");
+	src:
+		url("#{$fa-font-path}/FontAwesomev4Compatibility-Regular.eot?#iefix") format("embedded-opentype"),
+		url("#{$fa-font-path}/FontAwesomev4Compatibility-Regular.woff2") format("woff2"),
+		url("#{$fa-font-path}/FontAwesomev4Compatibility-Regular.woff") format("woff"),
+		url("#{$fa-font-path}/FontAwesomev4Compatibility-Regular.ttf") format("truetype"),
+		url("#{$fa-font-path}/FontAwesomev4Compatibility-Regular.svg#FontAwesomev4Compatibility-Regular") format("svg");
+	font-weight: normal;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: "Font Awesome 6 Free Solid";
+	src: url("#{$fa-font-path}/FontAwesome6Free-Solid.eot");
+	src:
+		url("#{$fa-font-path}/FontAwesome6Free-Solid.eot?#iefix") format("embedded-opentype"),
+		url("#{$fa-font-path}/FontAwesome6Free-Solid.woff2") format("woff2"),
+		url("#{$fa-font-path}/FontAwesome6Free-Solid.woff") format("woff"),
+		url("#{$fa-font-path}/FontAwesome6Free-Solid.ttf") format("truetype"),
+		url("#{$fa-font-path}/FontAwesome6Free-Solid.svg#FontAwesome6Free-Solid") format("svg");
+	font-weight: 900;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: "Font Awesome v4 Compatibility";
+	src: url("#{$fa-font-path}/FontAwesomev4Compatibility-Regular_1.eot");
+	src:
+		url("#{$fa-font-path}/FontAwesomev4Compatibility-Regular_1.eot?#iefix") format("embedded-opentype"),
+		url("#{$fa-font-path}/FontAwesomev4Compatibility-Regular_1.woff2") format("woff2"),
+		url("#{$fa-font-path}/FontAwesomev4Compatibility-Regular_1.woff") format("woff"),
+		url("#{$fa-font-path}/FontAwesomev4Compatibility-Regular_1.ttf") format("truetype"),
+		url("#{$fa-font-path}/FontAwesomev4Compatibility-Regular_1.svg#FontAwesomev4Compatibility-Regular")
+			format("svg");
+	font-weight: normal;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: "Font Awesome 6 Free Solid";
+	src: url("#{$fa-font-path}/FontAwesome6Free-Solid_1.eot");
+	src:
+		url("#{$fa-font-path}/FontAwesome6Free-Solid_1.eot?#iefix") format("embedded-opentype"),
+		url("#{$fa-font-path}/FontAwesome6Free-Solid_1.woff2") format("woff2"),
+		url("#{$fa-font-path}/FontAwesome6Free-Solid_1.woff") format("woff"),
+		url("#{$fa-font-path}/FontAwesome6Free-Solid_1.ttf") format("truetype"),
+		url("#{$fa-font-path}/FontAwesome6Free-Solid_1.svg#FontAwesome6Free-Solid") format("svg");
+	font-weight: 900;
+	font-style: normal;
+	font-display: swap;
+}
+
+.fa,
+.fas,
+.fa-solid {
+	font-family: "Font Awesome 6 Free Solid";
+	font-weight: 900;
+}

@@ -1,0 +1,6 @@
+{
+	"env": { "browser": true, "es2021": true },
+	"extends": ["airbnb-base", "plugin:prettier/recommended"],
+	"parserOptions": { "ecmaVersion": 2020 },
+	"rules": { "import/no-named-as-default": 0, "import/no-extraneous-dependencies": 0 },
+}

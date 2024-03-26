@@ -1,0 +1,4 @@
+mixin app-nav-link(data={isActive: false, link: {} })
+	- var isLinkHasChildren = Boolean(data.link && data.link.children && data.link.children.length);
+	a(class=`nav-link btn btn-link rounded-0 text-capitalize px-0 px-lg-3 font-family-cormorant-garamond ${data.isActive ? "active" : ""}`, aria-current=((data.isActive) ? "page" : undefined), href=((isLinkHasChildren) ? "#" : data.link.href), role="menuitem")
+		=data.link.title
