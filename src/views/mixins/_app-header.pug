@@ -1,4 +1,6 @@
 include ./_app-logo.pug
+include ./_app-social-nav.pug
+include ./_app-nav.pug
 
 mixin app-header(data={logo: { name: locals.APP_NAME, href: "index.html",  logos: [{ src: "", color: "", width: "", height: "" }] }})
 	// app header section starts
@@ -10,9 +12,27 @@ mixin app-header(data={logo: { name: locals.APP_NAME, href: "index.html",  logos
 					.col.col-md-auto
 						+app-logo(data.logo)
 					.col-auto.align-self-center
-						p.mb-0 nav
+						.hstack.align-items-stretch
+							.flex-shrink-0.align-self-center.d-none.d-xl-inline-block.me-2.me-lg-3
+								+app-nav({ type: "header", list: locals.navList })
+							.flex-shrink-0.align-self-center.me-2.me-lg-3
+								+app-social-nav({ type: "header" })
+							.overflow-hidden.me-2.me-lg-3(aria-hidden="true")
+								.vr.h-100
+							.flex-shrink-0.align-self-center
+								// login modal open button starts
+								button.d-none.d-xl-inline-block.btn.btn-link.text-reset.text-primary-hover.text-primary-focus.rounded-pill.text-decoration-none(data-bs-target="#" data-bs-toggle="modal" aria-controls="" type="button")
+									strong login
+								// login modal open button ends
+
+								// side menu open button starts
+								button.app-nav-offcanvas-toggler.d-xl-none.btn.btn-link.text-reset.text-primary-hover.text-primary-focus.rounded-pill.text-decoration-none(data-bs-target="#app-header-offcanvas" data-bs-toggle="offcanvas" aria-controls="app-header-offcanvas" type="button")
+									svg(width="32px" height="18px" fill="currentColor")
+										use(href="#icon-menu")
+									span.visually-hidden menu
+								// side menu open button ends
 		// app header content ends
-		if (page_title === "Home")
+		if (locals.IS_PRODUCTION && page_title === "Home")
 			// app notifications starts
 			.container.position-relative
 				include ../sections/_app-toasts.pug

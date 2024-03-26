@@ -1,12 +1,11 @@
-mixin app-social-nav(data={ type: "", variant:"", opacity: "", fontSize: "", labelledby: "", allowTitle: false })
-	- var socialNavList = [{title: "Facebook", href: "#", icon: "icon-facebook",iconWidth: "10.462", iconHeight: "21.276"},{title: "Instagram", href: "#", icon: "icon-instagram",iconWidth: "17.16", iconHeight: "17.16"},{title: "Twitter", href: "#", icon: "icon-twitter",iconWidth: "18.122", iconHeight: "18.52"},{title: "Youtube", href: "#", icon: "icon-youtube",iconWidth: "21.849", iconHeight: "16.779"},{title: "Tiktok", href: "#", icon: "icon-tiktok",iconWidth: "18.262", iconHeight: "22.827"}];
-	if (socialNavList.length)
-		// social navigation starts
-		nav(class=`app-social-nav${data.type ? ` app-social-nav-${data.type}` : ""}` data-bs-placement="top" data-bs-toggle="tooltip" aria-labelledby=(data.labelledby || undefined), aria-label=!data.labelledby ? "Social Media navigation" : undefined)
-			ul.nav.mb-0(role="menubar")
-				each socialNavListItem in socialNavList
+mixin app-social-nav(data={ type: "", labelledby: "" })
+	- var list = [{title: "linkedin", icon: "linkedin-in", href: "https://linkedin.com"}, {title: "facebook", icon: "facebook-f", href: "https://facebook.com"}, {title: "X", icon: "x-twitter", href: "https://x.com"}];
+	if (list.length)
+		// social nav starts
+		nav(class=`app-social-nav${data.type ? ` app-social-nav-${data.type}` : ""}`, aria-labelledby=(data.labelledby || undefined), aria-label=!data.labelledby ? "Social Media navigation" : undefined)
+			ul.nav.mb-0
+				each listItem in list
 					li.nav-item
-						a.nav-link.focus-ring.focus-ring-dark.text-center(class=`${data.variant ? data.variant : ""} ${data.fontSize ? data.fontSize : ""} ${data.opacity ? data.opacity : ""}` data-bs-placement=((!data.allowTitle) ? "top" : undefined) data-bs-toggle=((!data.allowTitle) ? "tooltip" : undefined) aria-label=`Follow Us on ${socialNavListItem.title}` href=socialNavListItem.href target="_blank" rel="noopener noreferrer" title=`Follow Us on ${socialNavListItem.title}`, role="menuitem")
-							svg(width=socialNavListItem.iconWidth height=socialNavListItem.iconHeight)
-								use(href=`#${socialNavListItem.icon}`)
-		// social navigation ends/.
+						a.nav-link.btn.btn-link.px-2.py-1.text-reset.text-primary-hover.text-primary-focus(data-bs-placement="top" data-bs-toggle="tooltip" aria-label=`Follow Us On ${listItem.title}` href=listItem.href target="_blank" rel="noopener noreferrer" title=`Follow Us On ${listItem.title}`)
+							i.fab(class=`fa-${listItem.icon}`, aria-hidden="true")
+		// social nav ends/.

@@ -1,7 +1,24 @@
 .app-nav {
 	.nav {
-		@extend .d-flex !optional;
-		@extend .flex-column !optional;
-		@extend .h-100 !optional;
+		&-item {
+			&:not(:last-child) {
+				@include media-breakpoint-up(lg) {
+					margin-right: 0.5rem;
+				}
+				@include media-breakpoint-up(xxl) {
+					margin-right: 1.375rem;
+				}
+			}
+		}
+		&-link {
+			--#{$prefix}nav-link-padding-y: 6px;
+			--#{$prefix}nav-link-padding-x: 14px;
+
+			&:hover,
+			&:focus,
+			&.active {
+				background: var(--#{$prefix}primary);
+			}
+		}
 	}
 }

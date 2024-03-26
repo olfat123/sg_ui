@@ -1,1 +1,7 @@
-.app-social-nav {}
+.app-social-nav {
+	&-header {
+		.nav-link {
+			--#{$prefix}nav-link-font-size: #{map-get($font-sizes, 4)};
+		}
+	}
+}

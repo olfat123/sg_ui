@@ -8,14 +8,18 @@
 	&:not(.app-header-scrolling) {
 		background: transparent;
 		padding: 2.875rem 0;
+		@extend .text-white !optional;
+		.vr {
+			@extend .bg-white !optional;
+		}
 	}
 
 	&-scrolling {
 		position: fixed !important;
 		animation-duration: 0.5s;
-		background: var(--#{$prefix}white);
 		padding: 1rem 0;
 		@extend .animated !optional;
+		@extend .text-bg-white !optional;
 
 		&-up,
 		&:focus-within {
@@ -34,5 +38,23 @@
 				filter: invert(1);
 			}
 		}
+
+		.app-nav {
+			.nav-link {
+				&:hover,
+				&:focus,
+				&.active {
+					color: var(--#{$prefix}white) !important;
+				}
+			}
+		}
+
+		.vr {
+			@extend .bg-dark !optional;
+		}
+	}
+
+	.btn-link {
+		@extend .text-uppercase !optional;
 	}
 }
