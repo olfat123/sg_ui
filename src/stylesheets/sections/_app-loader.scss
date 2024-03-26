@@ -13,4 +13,24 @@
 	z-index: 999999999;
 	@include transition($transition-base);
 	animation-duration: 1s !important;
+
+	& > div {
+		animation: fadeInOutAnimation ease-in-out 1.5s;
+		animation-iteration-count: infinite;
+		animation-fill-mode: both;
+	}
+
+	@keyframes fadeInOutAnimation {
+		0% {
+			opacity: 0.5;
+		}
+
+		50% {
+			opacity: 1;
+		}
+
+		100% {
+			opacity: 0.5;
+		}
+	}
 }

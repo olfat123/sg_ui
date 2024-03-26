@@ -1,6 +1,6 @@
 mixin app-logo(data={ name:"", href: "", logos: [{ src: "", color: "", width: "", height: "" }]})
 	// app logo starts
-	a.app-logo.focus-ring.focus-ring-dark.d-block.w-fit-content(href=data.href, title=`Click For ${data.name} Home`)
+	a.app-logo.focus-ring.d-block.w-fit-content(href=data.href, title=`Click For ${data.name} Home`)
 		each logo, i in data.logos
 			img.app-logo-image.img-fluid.text-reset(class=`${logo.color ? `app-logo-image-${logo.color}` : "" }` src=logo.src, alt=`Click For ${data.name} Home`, width=logo.width, height=logo.height)
 	// app logo ends

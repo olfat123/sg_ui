@@ -6592,7 +6592,7 @@ var navigateAnimation = function navigateAnimation() {
       e.preventDefault();
       e.stopPropagation();
       (_document$body = document.body) === null || _document$body === void 0 ? void 0 : _document$body.classList.remove("dom-loaded");
-      (0, _animateCss["default"])(".app-loader", "fadeIn").then(function () {
+      (0, _animateCss["default"])(".app-loader", "slideInRight").then(function () {
         window.location.href = link.href;
       });
     });
@@ -6786,13 +6786,11 @@ function _interopRequireDefault(obj) {
   // Executes the given code when the window is fully loaded.
   window.onload = function () {
     var loaderImage = document.querySelector(".app-loader img");
-    (0, _animateCss["default"])(loaderImage, "fadeOut").then(function () {
+    (0, _animateCss["default"])(".app-loader", "slideOutLeft").then(function () {
+      var _document$body;
       loaderImage.parentNode.removeChild(loaderImage);
-      (0, _animateCss["default"])(".app-loader", "fadeOut").then(function () {
-        var _document$body;
-        (_document$body = document.body) === null || _document$body === void 0 ? void 0 : _document$body.classList.add("dom-loaded");
-        (0, _aos["default"])();
-      });
+      (_document$body = document.body) === null || _document$body === void 0 ? void 0 : _document$body.classList.add("dom-loaded");
+      (0, _aos["default"])();
     });
   };
 

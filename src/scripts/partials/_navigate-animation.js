@@ -10,7 +10,7 @@ const navigateAnimation = () => {
 			e.preventDefault();
 			e.stopPropagation();
 			document.body?.classList.remove("dom-loaded");
-			animateCss(".app-loader", "fadeIn").then(() => {
+			animateCss(".app-loader", "slideInRight").then(() => {
 				window.location.href = link.href;
 			});
 		})

@@ -7,12 +7,14 @@
 
 	&:not(.app-header-scrolling) {
 		background: transparent;
+		padding: 2.875rem 0;
 	}
 
 	&-scrolling {
 		position: fixed !important;
 		animation-duration: 0.5s;
 		background: var(--#{$prefix}white);
+		padding: 1rem 0;
 		@extend .animated !optional;
 
 		&-up,
@@ -24,6 +26,13 @@
 		&-down {
 			@extend .shadow-none !optional;
 			@include animate-prefixer(animation-name, slideOutUp);
+		}
+
+		.app-logo {
+			@extend .w-75 !optional;
+			img {
+				filter: invert(1);
+			}
 		}
 	}
 }

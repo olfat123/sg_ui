@@ -1,10 +1,16 @@
+include ./_app-logo.pug
+
 mixin app-header(data={logo: { name: locals.APP_NAME, href: "index.html",  logos: [{ src: "", color: "", width: "", height: "" }] }})
 	// app header section starts
 	header.app-header
 		// app header content starts
 		.app-header-content
 			.container
-				p header
+				.row.gx-gutter.align-items-center.justify-content-between.flex-nowrap
+					.col.col-md-auto
+						+app-logo(data.logo)
+					.col-auto.align-self-center
+						p.mb-0 nav
 		// app header content ends
 		if (page_title === "Home")
 			// app notifications starts
