@@ -10,7 +10,7 @@ const config = {
 	is_production: !!util.env.production,
 	is_rtl_included: true,
 	app: {
-		name: "TCG",
+		name: "The City Guards Hub",
 		theme: "light",
 		themeColor: "#AF3A3A",
 		language: "en",

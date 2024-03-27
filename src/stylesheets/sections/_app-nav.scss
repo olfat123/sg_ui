@@ -1,5 +1,10 @@
 .app-nav {
-	.nav {
+	&-link {
+		--#{$prefix}nav-link-padding-y: 6px;
+		--#{$prefix}nav-link-padding-x: 14px;
+	}
+
+	&:not(.app-nav-footer) {
 		&-item {
 			&:not(:last-child) {
 				@include media-breakpoint-up(lg) {
@@ -10,14 +15,13 @@
 				}
 			}
 		}
-		&-link {
-			--#{$prefix}nav-link-padding-y: 6px;
-			--#{$prefix}nav-link-padding-x: 14px;
-
-			&:hover,
-			&:focus,
-			&.active {
-				background: var(--#{$prefix}primary);
+		.nav {
+			&-link {
+				&:hover,
+				&:focus,
+				&.active {
+					background: var(--#{$prefix}primary);
+				}
 			}
 		}
 	}
@@ -30,6 +34,24 @@
 			@extend .justify-content-between !optional;
 			&-item {
 				@extend .my-3 !optional;
+			}
+		}
+	}
+
+	&-footer {
+		.nav-item {
+			&:not(:last-child) {
+				margin-right: 3rem;
+			}
+		}
+		.nav-link {
+			@extend .text-secondary !optional;
+			@extend .text-dark-hover !optional;
+			@extend .text-dark-focus !optional;
+			@extend .px-0 !optional;
+
+			&.active {
+				@extend .text-dark !optional;
 			}
 		}
 	}

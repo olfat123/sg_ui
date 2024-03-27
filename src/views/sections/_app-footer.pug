@@ -1,4 +1,23 @@
+include ../mixins/_app-logo.pug
+include ../mixins/_app-social-nav.pug
+include ../mixins/_app-nav.pug
+
 // app footer starts
 footer.app-footer
-	p footer section
+	.container
+		.row.g-gutter.align-items-xl-center.justify-content-xl-between
+			.col-12.col-xl-2
+				+app-logo({ name: locals.APP_NAME, href: "index.html",  logos: [{ src: "./assets/images/logo/logo-dark.svg", width: "142", height: "54" }] })
+			.col-12.col-lg
+				+app-nav({ type: "footer", list: locals.navList })
+			.col-12.col-lg-auto
+				+app-social-nav({ type: "footer" })
+			.col-12
+				// app copyrights starts
+				p.fw-light.small.text-capitalize.text-secondary.mb-0
+					small
+						|© 2024
+						span.mx-1=`${locals.APP_NAME} -`
+						|Premium Space Helping Security Guards  & Security Investigation.
+				// app copyrights ends
 // app footer ends

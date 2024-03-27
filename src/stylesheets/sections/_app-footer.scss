@@ -1,1 +1,13 @@
-.app-footer {}
+.app-footer {
+	padding: 1.75rem 0;
+
+	@include media-breakpoint-up(xl) {
+		padding: 2.75rem 0;
+	}
+
+	.app-logo {
+		@extend .op-50 !optional;
+		@extend .op-100-hover !optional;
+		@extend .op-100-focus !optional;
+	}
+}

@@ -54,13 +54,6 @@
 	}
 }
 
-.app-header,
-#app-header-offcanvas {
-	.btn-link {
-		@extend .text-uppercase !optional;
-	}
-}
-
 .app-header:not(.app-header-scrolling),
 #app-header-offcanvas .offcanvas-header {
 	padding: 1rem 0;

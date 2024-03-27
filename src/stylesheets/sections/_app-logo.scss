@@ -1,2 +1,6 @@
 .app-logo {
+	&,
+	&-img {
+		@include transition($transition-base);
+	}
 }

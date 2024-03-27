@@ -1,4 +1,4 @@
 mixin app-nav-link(data={isActive: false, link: {} })
 	- var isLinkHasChildren = Boolean(data.link && data.link.children && data.link.children.length);
-	a(class=`nav-link btn btn-link text-reset rounded-pill ${data.isActive ? "active" : ""}`, aria-current=((data.isActive) ? "page" : undefined), href=((isLinkHasChildren) ? "#" : data.link.href), role="menuitem")
+	a(class=`nav-link btn btn-link text-uppercase text-reset rounded-pill ${data.isActive ? "active" : ""}`, aria-current=((data.isActive) ? "page" : undefined), href=((isLinkHasChildren) ? "#" : data.link.href), role="menuitem")
 		strong=data.link.title

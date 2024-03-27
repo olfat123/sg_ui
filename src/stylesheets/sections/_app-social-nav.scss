@@ -1,7 +1,13 @@
 .app-social-nav {
-	&-header {
+	.nav-link {
+		--#{$prefix}nav-link-font-size: #{map-get($font-sizes, 4)};
+	}
+
+	&-footer {
 		.nav-link {
-			--#{$prefix}nav-link-font-size: #{map-get($font-sizes, 4)};
+			@extend .text-secondary !optional;
+			@extend .text-dark-hover !optional;
+			@extend .text-dark-focus !optional;
 		}
 	}
 }

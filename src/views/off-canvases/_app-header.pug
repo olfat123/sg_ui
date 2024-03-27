@@ -2,7 +2,7 @@
 #app-header-offcanvas.offcanvas.offcanvas-end.text-bg-dark(tabindex="-1")
 	.offcanvas-header
 		.row.g-0.align-items-center.justify-content-between.flex-nowrap.w-100
-			.col.col-md-auto
+			.col.col-xl-auto
 				+app-logo({ name: locals.APP_NAME, href: "index.html",  logos: [{ src: "./assets/images/logo/logo-light.svg", width: "180", height: "67.33" }] })
 			.col-auto
 				.hstack.align-items-stretch
@@ -20,7 +20,7 @@
 			+app-nav({ type: "offcanvas", list: locals.navList })
 			hr.border.bg-transparent.m-0
 			// login modal open button starts
-			button.btn.btn-link.text-reset.text-primary-hover.text-primary-focus.rounded-pill.text-decoration-none(data-bs-target="#login-modal" data-bs-toggle="modal" type="button")
+			button.btn.btn-link.text-uppercase.text-reset.text-primary-hover.text-primary-focus.rounded-pill.text-decoration-none(data-bs-target="#login-modal" data-bs-toggle="modal" type="button")
 				strong login
 			// login modal open button ends
 // app main header offcanvas ends

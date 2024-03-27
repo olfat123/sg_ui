@@ -9,7 +9,7 @@ mixin app-header(data={logo: { name: locals.APP_NAME, href: "index.html",  logos
 		.app-header-content
 			.container
 				.row.g-0.align-items-center.justify-content-between.flex-nowrap.w-100
-					.col.col-md-auto
+					.col.col-xl-auto
 						+app-logo(data.logo)
 					.col-auto
 						.hstack.align-items-stretch
@@ -21,7 +21,7 @@ mixin app-header(data={logo: { name: locals.APP_NAME, href: "index.html",  logos
 								.vr.h-100
 							.flex-shrink-0.align-self-center
 								// login modal open button starts
-								button.d-none.d-xl-inline-block.btn.btn-link.text-reset.text-primary-hover.text-primary-focus.rounded-pill.text-decoration-none(data-bs-target="#login-modal" data-bs-toggle="modal" aria-controls="" type="button")
+								button.d-none.d-xl-inline-block.btn.btn-link.text-uppercase.text-reset.text-primary-hover.text-primary-focus.rounded-pill.text-decoration-none(data-bs-target="#login-modal" data-bs-toggle="modal" aria-controls="" type="button")
 									strong login
 								// login modal open button ends
 
