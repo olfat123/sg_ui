@@ -405,24 +405,96 @@
 			<div class="modal-dialog modal-dialog-centered">
 				<div class="modal-content">
 					<div class="modal-header flex-column text-center">
-						<button class="btn btn-link rounded-xl p-2 icon-link icon-link-hover icon-link-hover-rotate text-reset text-primary-hover text-primary-focus text-decoration-none ms-auto" type="button" data-bs-dismiss="modal" aria-label="Close">
+						<button class="btn btn-link text-uppercase rounded-xl p-2 icon-link icon-link-hover icon-link-hover-rotate text-reset text-primary-hover text-primary-focus text-decoration-none ms-auto" type="button" data-bs-dismiss="modal" aria-label="Close">
 							<svg class="bi w-24px h-24px" width="24px" height="24px" fill="currentColor">
 								<use href="#icon-close"></use>
-							</svg><span class="visually-hidden">close</span>
+							</svg><strong class="fw-bolder visually-hidden">close</strong>
 						</button>
 						<h5 class="modal-title h2 lh-1 text-capitalize" id="login-modal-label"><strong class="fw-bolder">welcome back</strong></h5>
 						<p class="mb-0"><strong>login to your account below</strong></p>
 					</div>
 					<div class="modal-body">
-						<form id="login-form" action="#">...</form>
-					</div>
-					<div class="modal-footer">
-						<button class="btn btn-primary btn-lg rounded-pill text-capitalize w-100" type="submit" form="login-form"><strong>login</strong></button>
+						<!-- login form starts-->
+						<form class="needs-validation" id="login-form" action="/" method="POST" novalidate="">
+							<fieldset>
+								<legend class="visually-hidden">login form</legend>
+								<div class="row g-3">
+									<div class="col-12">
+										<label class="form-label visually-hidden" for="loginEmailField">Email</label>
+										<input class="form-control rounded-pill text-truncate" id="loginEmailField" type="email" name="email" placeholder="Email" autocomplete="email" required="">
+										<div class="valid-feedback text-uppercase"><strong>looks good !</strong></div>
+										<div class="invalid-feedback text-uppercase"><strong>This filed is mandatory!</strong></div>
+									</div>
+									<div class="col-12">
+										<label class="form-label visually-hidden" for="loginPasswordField">Password</label>
+										<input class="form-control rounded-pill text-truncate" id="loginPasswordField" type="password" name="password" placeholder="Password" autocomplete="current-password" required="">
+										<div class="valid-feedback text-uppercase"><strong>looks good !</strong></div>
+										<div class="invalid-feedback text-uppercase"><strong>This filed is mandatory!</strong></div>
+									</div>
+									<div class="col-12 col-md-auto me-auto">
+										<div class="form-check">
+											<input class="form-check-input" id="rememberMeField" type="checkbox" name="remember_me" value="1">
+											<label class="form-check-label" for="rememberMeField">Remember Me</label>
+										</div>
+									</div>
+									<div class="col-12 col-md-auto">
+										<button class="btn btn-link link-dark p-0 text-capitalize text-primary-hover text-primary-focus text-decoration-none" type="button" data-bs-target="#forgot-password-modal" data-bs-toggle="modal">forgot password?</button>
+									</div>
+									<div class="col-12 mt-5">
+										<button class="btn btn-primary btn-lg rounded-pill text-capitalize w-100" type="submit"><strong>login</strong></button>
+									</div>
+								</div>
+							</fieldset>
+						</form>
+						<!-- login form ends-->
 					</div>
 				</div>
 			</div>
 		</div>
 		<!-- login modal ends-->
+		<!-- forgot password modal starts-->
+		<div class="modal fade" id="forgot-password-modal" tabindex="-1" aria-labelledby="forgot-password-modal-label" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-header flex-column text-center">
+						<div class="hstack gap-3 justify-content-between">
+							<button class="btn btn-link text-uppercase rounded-xl p-2 icon-link icon-link-hover icon-link-hover-reversed text-reset text-primary-hover text-primary-focus text-decoration-none" type="button" data-bs-target="#login-modal" data-bs-toggle="modal">
+								<svg class="bi w-24px h-24px" width="24px" height="24px" fill="currentColor">
+									<use href="#icon-arrow-right"></use>
+								</svg><strong class="fw-bolder">back</strong>
+							</button>
+							<button class="btn btn-link text-uppercase rounded-xl p-2 icon-link icon-link-hover icon-link-hover-rotate text-reset text-primary-hover text-primary-focus text-decoration-none" type="button" data-bs-dismiss="modal" aria-label="Close">
+								<svg class="bi w-24px h-24px" width="24px" height="24px" fill="currentColor">
+									<use href="#icon-close"></use>
+								</svg><span class="visually-hidden">close</span>
+							</button>
+						</div>
+						<h5 class="modal-title h2 lh-1 text-capitalize" id="forgot-password-modal-label"><strong class="fw-bolder">Forgot password?</strong></h5>
+					</div>
+					<div class="modal-body">
+						<!-- forgot password form starts-->
+						<form class="needs-validation" id="forgot-password-form" action="/" method="POST" novalidate="">
+							<fieldset>
+								<legend class="visually-hidden">forgot password form</legend>
+								<div class="row g-3">
+									<div class="col-12">
+										<label class="form-label visually-hidden" for="forgotPasswordEmailField">Email</label>
+										<input class="form-control rounded-pill text-truncate" id="forgotPasswordEmailField" type="email" name="email" placeholder="Email" autocomplete="email" required="">
+										<div class="valid-feedback text-uppercase"><strong>looks good !</strong></div>
+										<div class="invalid-feedback text-uppercase"><strong>This filed is mandatory!</strong></div>
+									</div>
+									<div class="col-12 mt-5">
+										<button class="btn btn-primary btn-lg rounded-pill text-capitalize w-100" type="submit"><strong>reset password</strong></button>
+									</div>
+								</div>
+							</fieldset>
+						</form>
+						<!-- forgot password form ends-->
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- forgot password modal ends-->
 		<!-- app main header offcanvas starts-->
 		<div class="offcanvas offcanvas-end text-bg-dark" id="app-header-offcanvas" tabindex="-1">
 			<div class="offcanvas-header">
