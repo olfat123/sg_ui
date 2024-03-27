@@ -1,6 +1,7 @@
 /* eslint-disable no-new */
 import Alert from "bootstrap/js/dist/alert";
 import Dropdown from "bootstrap/js/dist/dropdown";
+import Modal from "bootstrap/js/dist/modal";
 import Offcanvas from "bootstrap/js/dist/offcanvas";
 import Tab from "bootstrap/js/dist/tab";
 import Toast from "bootstrap/js/dist/toast";
@@ -11,6 +12,7 @@ export default () => {
 	[...(document.querySelectorAll(".offcanvas") || [])].map((ele) => new Offcanvas(ele));
 	[...(document.querySelectorAll(".toast") || [])].map((ele) => new Toast(ele, { autohide: false })?.show());
 	[...(document.querySelectorAll("[data-bs-toggle='tooltip']") || [])].map((ele) => new Tooltip(ele));
+	[...(document.querySelectorAll("[data-bs-toggle='modal']") || [])].map((ele) => new Modal(ele));
 	[...(document.querySelectorAll(".dropdown-toggle") || [])].forEach((ele) => {
 		const dropdown = new Dropdown(ele);
 		const enterEvents = ["mouseenter"];

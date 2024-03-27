@@ -60,9 +60,13 @@
 	<!-- app SVGs starts-->
 	<svg class="app-svg-definitions visually-hidden" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
 		<defs>
-			<symbol id="icon-menu" viewBox="0 0 16 16">
+			<symbol id="icon-menu" viewBox="0 0 32 18">
 				<title>menu</title>
-				<path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"></path>
+				<g transform="translate(0 0.5)">
+					<line x1="32" fill="none" stroke-width="1"></line>
+					<line x1="32" transform="translate(0 8)" fill="none" stroke-width="1"></line>
+					<line x1="32" transform="translate(0 17)" fill="none" stroke-width="1"></line>
+				</g>
 			</symbol>
 			<symbol id="icon-close" viewBox="0 0 16 16">
 				<title>close</title>
@@ -119,14 +123,14 @@
 			<!-- app header content starts-->
 			<div class="app-header-content">
 				<div class="container">
-					<div class="row gx-gutter align-items-center justify-content-between flex-nowrap">
+					<div class="row g-0 align-items-center justify-content-between flex-nowrap w-100">
 						<div class="col col-md-auto">
 							<!-- app logo starts--><a class="app-logo focus-ring d-block w-fit-content p-1 rounded" href="index.html" title="Click For TCG Home"><img class="app-logo-image img-fluid text-reset" src="./assets/images/logo/logo-light.svg" alt="Click For TCG Home" width="180" height="67.33"></a>
 							<!-- app logo ends-->
 						</div>
-						<div class="col-auto align-self-center">
+						<div class="col-auto">
 							<div class="hstack align-items-stretch">
-								<div class="flex-shrink-0 align-self-center d-none d-xl-inline-block me-2 me-lg-3">
+								<div class="flex-shrink-0 align-self-center d-none d-xl-inline-block me-1 me-xl-3">
 									<!-- navigation list starts-->
 									<nav class="app-nav app-nav-header w-100">
 										<ul class="nav mb-0" role="menubar">
@@ -144,7 +148,7 @@
 									</nav>
 									<!-- navigation list ends-->
 								</div>
-								<div class="flex-shrink-0 align-self-center me-2 me-lg-3">
+								<div class="flex-shrink-0 align-self-center me-1 me-xl-3">
 									<!-- social nav starts-->
 									<nav class="app-social-nav app-social-nav-header" aria-label="Social Media navigation">
 										<ul class="nav mb-0">
@@ -155,16 +159,16 @@
 									</nav>
 									<!-- social nav ends/.-->
 								</div>
-								<div class="overflow-hidden me-2 me-lg-3" aria-hidden="true">
+								<div class="overflow-hidden me-1 me-xl-3" aria-hidden="true">
 									<div class="vr h-100"></div>
 								</div>
 								<div class="flex-shrink-0 align-self-center">
 									<!-- login modal open button starts-->
-									<button class="d-none d-xl-inline-block btn btn-link text-reset text-primary-hover text-primary-focus rounded-pill text-decoration-none" data-bs-target="#" data-bs-toggle="modal" aria-controls="" type="button"><strong>login</strong></button>
+									<button class="d-none d-xl-inline-block btn btn-link text-reset text-primary-hover text-primary-focus rounded-pill text-decoration-none" data-bs-target="#login-modal" data-bs-toggle="modal" aria-controls="" type="button"><strong>login</strong></button>
 									<!-- login modal open button ends-->
 									<!-- side menu open button starts-->
-									<button class="app-nav-offcanvas-toggler d-xl-none btn btn-link text-reset text-primary-hover text-primary-focus rounded-pill text-decoration-none" data-bs-target="#app-header-offcanvas" data-bs-toggle="offcanvas" aria-controls="app-header-offcanvas" type="button">
-										<svg width="32px" height="18px" fill="currentColor">
+									<button class="app-nav-offcanvas-toggler d-xl-none btn btn-link text-reset text-primary-hover text-primary-focus text-decoration-none" data-bs-target="#app-header-offcanvas" data-bs-toggle="offcanvas" aria-controls="app-header-offcanvas" type="button">
+										<svg width="32" height="18" stroke="currentColor">
 											<use href="#icon-menu"></use>
 										</svg><span class="visually-hidden">menu</span>
 									</button>
@@ -205,13 +209,87 @@
 		<!-- app scroll to top button ends-->
 	</div>
 	<div id="portals">
+		<!-- login modal starts-->
+		<div class="modal fade" id="login-modal" tabindex="-1" aria-labelledby="login-modal-label" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-header flex-column text-center">
+						<button class="btn btn-link rounded-xl p-2 icon-link icon-link-hover icon-link-hover-rotate text-reset text-primary-hover text-primary-focus text-decoration-none ms-auto" type="button" data-bs-dismiss="modal" aria-label="Close">
+							<svg class="bi w-24px h-24px" width="24px" height="24px" fill="currentColor">
+								<use href="#icon-close"></use>
+							</svg><span class="visually-hidden">close</span>
+						</button>
+						<h5 class="modal-title h2 lh-1 text-capitalize" id="login-modal-label"><strong class="fw-bolder">welcome back</strong></h5>
+						<p class="mb-0"><strong>login to your account below</strong></p>
+					</div>
+					<div class="modal-body">
+						<form id="login-form" action="#">...</form>
+					</div>
+					<div class="modal-footer">
+						<button class="btn btn-primary btn-lg rounded-pill text-capitalize w-100" type="submit" form="login-form"><strong>login</strong></button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- login modal ends-->
 		<!-- app main header offcanvas starts-->
 		<div class="offcanvas offcanvas-end text-bg-dark" id="app-header-offcanvas" tabindex="-1">
 			<div class="offcanvas-header">
-				<p>offcanvas header</p>
+				<div class="row g-0 align-items-center justify-content-between flex-nowrap w-100">
+					<div class="col col-md-auto">
+						<!-- app logo starts--><a class="app-logo focus-ring d-block w-fit-content p-1 rounded" href="index.html" title="Click For TCG Home"><img class="app-logo-image img-fluid text-reset" src="./assets/images/logo/logo-light.svg" alt="Click For TCG Home" width="180" height="67.33"></a>
+						<!-- app logo ends-->
+					</div>
+					<div class="col-auto">
+						<div class="hstack align-items-stretch">
+							<div class="flex-shrink-0 align-self-center me-2">
+								<!-- social nav starts-->
+								<nav class="app-social-nav app-social-nav-header" aria-label="Social Media navigation">
+									<ul class="nav mb-0">
+										<li class="nav-item"><a class="nav-link btn btn-link px-2 py-1 text-reset text-primary-hover text-primary-focus" data-bs-placement="top" data-bs-toggle="tooltip" aria-label="Follow Us On linkedin" href="https://linkedin.com" target="_blank" rel="noopener noreferrer" title="Follow Us On linkedin"><i class="fab fa-linkedin-in" aria-hidden="true"></i></a></li>
+										<li class="nav-item"><a class="nav-link btn btn-link px-2 py-1 text-reset text-primary-hover text-primary-focus" data-bs-placement="top" data-bs-toggle="tooltip" aria-label="Follow Us On facebook" href="https://facebook.com" target="_blank" rel="noopener noreferrer" title="Follow Us On facebook"><i class="fab fa-facebook-f" aria-hidden="true"></i></a></li>
+										<li class="nav-item"><a class="nav-link btn btn-link px-2 py-1 text-reset text-primary-hover text-primary-focus" data-bs-placement="top" data-bs-toggle="tooltip" aria-label="Follow Us On X" href="https://x.com" target="_blank" rel="noopener noreferrer" title="Follow Us On X"><i class="fab fa-x-twitter" aria-hidden="true"></i></a></li>
+									</ul>
+								</nav>
+								<!-- social nav ends/.-->
+							</div>
+							<div class="overflow-hidden me-2" aria-hidden="true">
+								<div class="vr h-100"></div>
+							</div>
+							<div class="flex-shrink-0 align-self-center">
+								<button class="btn btn-link icon-link icon-link-hover icon-link-hover-rotate text-reset text-primary-hover text-primary-focus text-decoration-none" type="button" data-bs-dismiss="offcanvas" aria-label="Close">
+									<svg class="bi w-2rem h-2rem" width="32px" height="32px" fill="currentColor">
+										<use href="#icon-close"></use>
+									</svg><span class="visually-hidden">close</span>
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
-			<div class="offcanvas-body">
-				<p>offcanvas body</p>
+			<div class="offcanvas-body py-4">
+				<div class="vstack gap-3 h-100">
+					<!-- navigation list starts-->
+					<nav class="app-nav app-nav-offcanvas w-100">
+						<ul class="nav mb-0" role="menubar">
+							<li class="nav-item"><a class="nav-link btn btn-link text-reset rounded-pill " href="index.html" role="menuitem"><strong>Home</strong></a>
+							</li>
+							<li class="nav-item"><a class="nav-link btn btn-link text-reset rounded-pill " href="companies.html" role="menuitem"><strong>Directory Listing</strong></a>
+							</li>
+							<li class="nav-item"><a class="nav-link btn btn-link text-reset rounded-pill " href="about-us.html" role="menuitem"><strong>About Us</strong></a>
+							</li>
+							<li class="nav-item"><a class="nav-link btn btn-link text-reset rounded-pill " href="news.html" role="menuitem"><strong>Our News</strong></a>
+							</li>
+							<li class="nav-item"><a class="nav-link btn btn-link text-reset rounded-pill " href="career.html" role="menuitem"><strong>Careers</strong></a>
+							</li>
+						</ul>
+					</nav>
+					<!-- navigation list ends-->
+					<hr class="border bg-transparent m-0">
+					<!-- login modal open button starts-->
+					<button class="btn btn-link text-reset text-primary-hover text-primary-focus rounded-pill text-decoration-none" data-bs-target="#login-modal" data-bs-toggle="modal" type="button"><strong>login</strong></button>
+					<!-- login modal open button ends-->
+				</div>
 			</div>
 		</div>
 		<!-- app main header offcanvas ends-->

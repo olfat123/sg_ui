@@ -2570,7 +2570,7 @@ function withinMaxClamp(min, value, max) {
 }));
 
 
-},{"./base-component.js":68,"./dom/event-handler.js":70,"./util/component-functions.js":79,"./util/index.js":82}],68:[function(require,module,exports){
+},{"./base-component.js":68,"./dom/event-handler.js":70,"./util/component-functions.js":80,"./util/index.js":83}],68:[function(require,module,exports){
 /*!
   * Bootstrap base-component.js v5.3.3 (https://getbootstrap.com/)
   * Copyright 2011-2024 The Bootstrap Authors (https://github.com/twbs/bootstrap/graphs/contributors)
@@ -2656,7 +2656,7 @@ function withinMaxClamp(min, value, max) {
 }));
 
 
-},{"./dom/data.js":69,"./dom/event-handler.js":70,"./util/config.js":80,"./util/index.js":82}],69:[function(require,module,exports){
+},{"./dom/data.js":69,"./dom/event-handler.js":70,"./util/config.js":81,"./util/index.js":83}],69:[function(require,module,exports){
 /*!
   * Bootstrap data.js v5.3.3 (https://getbootstrap.com/)
   * Copyright 2011-2024 The Bootstrap Authors (https://github.com/twbs/bootstrap/graphs/contributors)
@@ -2960,7 +2960,7 @@ function withinMaxClamp(min, value, max) {
 }));
 
 
-},{"../util/index.js":82}],71:[function(require,module,exports){
+},{"../util/index.js":83}],71:[function(require,module,exports){
 /*!
   * Bootstrap manipulator.js v5.3.3 (https://getbootstrap.com/)
   * Copyright 2011-2024 The Bootstrap Authors (https://github.com/twbs/bootstrap/graphs/contributors)
@@ -3140,7 +3140,7 @@ function withinMaxClamp(min, value, max) {
 }));
 
 
-},{"../util/index.js":82}],73:[function(require,module,exports){
+},{"../util/index.js":83}],73:[function(require,module,exports){
 /*!
   * Bootstrap dropdown.js v5.3.3 (https://getbootstrap.com/)
   * Copyright 2011-2024 The Bootstrap Authors (https://github.com/twbs/bootstrap/graphs/contributors)
@@ -3544,7 +3544,329 @@ function withinMaxClamp(min, value, max) {
 }));
 
 
-},{"./base-component.js":68,"./dom/event-handler.js":70,"./dom/manipulator.js":71,"./dom/selector-engine.js":72,"./util/index.js":82,"@popperjs/core":34}],74:[function(require,module,exports){
+},{"./base-component.js":68,"./dom/event-handler.js":70,"./dom/manipulator.js":71,"./dom/selector-engine.js":72,"./util/index.js":83,"@popperjs/core":34}],74:[function(require,module,exports){
+/*!
+  * Bootstrap modal.js v5.3.3 (https://getbootstrap.com/)
+  * Copyright 2011-2024 The Bootstrap Authors (https://github.com/twbs/bootstrap/graphs/contributors)
+  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
+  */
+(function (global, factory) {
+  typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('./base-component.js'), require('./dom/event-handler.js'), require('./dom/selector-engine.js'), require('./util/backdrop.js'), require('./util/component-functions.js'), require('./util/focustrap.js'), require('./util/index.js'), require('./util/scrollbar.js')) :
+  typeof define === 'function' && define.amd ? define(['./base-component', './dom/event-handler', './dom/selector-engine', './util/backdrop', './util/component-functions', './util/focustrap', './util/index', './util/scrollbar'], factory) :
+  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.Modal = factory(global.BaseComponent, global.EventHandler, global.SelectorEngine, global.Backdrop, global.ComponentFunctions, global.Focustrap, global.Index, global.Scrollbar));
+})(this, (function (BaseComponent, EventHandler, SelectorEngine, Backdrop, componentFunctions_js, FocusTrap, index_js, ScrollBarHelper) { 'use strict';
+
+  /**
+   * --------------------------------------------------------------------------
+   * Bootstrap modal.js
+   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
+   * --------------------------------------------------------------------------
+   */
+
+
+  /**
+   * Constants
+   */
+
+  const NAME = 'modal';
+  const DATA_KEY = 'bs.modal';
+  const EVENT_KEY = `.${DATA_KEY}`;
+  const DATA_API_KEY = '.data-api';
+  const ESCAPE_KEY = 'Escape';
+  const EVENT_HIDE = `hide${EVENT_KEY}`;
+  const EVENT_HIDE_PREVENTED = `hidePrevented${EVENT_KEY}`;
+  const EVENT_HIDDEN = `hidden${EVENT_KEY}`;
+  const EVENT_SHOW = `show${EVENT_KEY}`;
+  const EVENT_SHOWN = `shown${EVENT_KEY}`;
+  const EVENT_RESIZE = `resize${EVENT_KEY}`;
+  const EVENT_CLICK_DISMISS = `click.dismiss${EVENT_KEY}`;
+  const EVENT_MOUSEDOWN_DISMISS = `mousedown.dismiss${EVENT_KEY}`;
+  const EVENT_KEYDOWN_DISMISS = `keydown.dismiss${EVENT_KEY}`;
+  const EVENT_CLICK_DATA_API = `click${EVENT_KEY}${DATA_API_KEY}`;
+  const CLASS_NAME_OPEN = 'modal-open';
+  const CLASS_NAME_FADE = 'fade';
+  const CLASS_NAME_SHOW = 'show';
+  const CLASS_NAME_STATIC = 'modal-static';
+  const OPEN_SELECTOR = '.modal.show';
+  const SELECTOR_DIALOG = '.modal-dialog';
+  const SELECTOR_MODAL_BODY = '.modal-body';
+  const SELECTOR_DATA_TOGGLE = '[data-bs-toggle="modal"]';
+  const Default = {
+    backdrop: true,
+    focus: true,
+    keyboard: true
+  };
+  const DefaultType = {
+    backdrop: '(boolean|string)',
+    focus: 'boolean',
+    keyboard: 'boolean'
+  };
+
+  /**
+   * Class definition
+   */
+
+  class Modal extends BaseComponent {
+    constructor(element, config) {
+      super(element, config);
+      this._dialog = SelectorEngine.findOne(SELECTOR_DIALOG, this._element);
+      this._backdrop = this._initializeBackDrop();
+      this._focustrap = this._initializeFocusTrap();
+      this._isShown = false;
+      this._isTransitioning = false;
+      this._scrollBar = new ScrollBarHelper();
+      this._addEventListeners();
+    }
+
+    // Getters
+    static get Default() {
+      return Default;
+    }
+    static get DefaultType() {
+      return DefaultType;
+    }
+    static get NAME() {
+      return NAME;
+    }
+
+    // Public
+    toggle(relatedTarget) {
+      return this._isShown ? this.hide() : this.show(relatedTarget);
+    }
+    show(relatedTarget) {
+      if (this._isShown || this._isTransitioning) {
+        return;
+      }
+      const showEvent = EventHandler.trigger(this._element, EVENT_SHOW, {
+        relatedTarget
+      });
+      if (showEvent.defaultPrevented) {
+        return;
+      }
+      this._isShown = true;
+      this._isTransitioning = true;
+      this._scrollBar.hide();
+      document.body.classList.add(CLASS_NAME_OPEN);
+      this._adjustDialog();
+      this._backdrop.show(() => this._showElement(relatedTarget));
+    }
+    hide() {
+      if (!this._isShown || this._isTransitioning) {
+        return;
+      }
+      const hideEvent = EventHandler.trigger(this._element, EVENT_HIDE);
+      if (hideEvent.defaultPrevented) {
+        return;
+      }
+      this._isShown = false;
+      this._isTransitioning = true;
+      this._focustrap.deactivate();
+      this._element.classList.remove(CLASS_NAME_SHOW);
+      this._queueCallback(() => this._hideModal(), this._element, this._isAnimated());
+    }
+    dispose() {
+      EventHandler.off(window, EVENT_KEY);
+      EventHandler.off(this._dialog, EVENT_KEY);
+      this._backdrop.dispose();
+      this._focustrap.deactivate();
+      super.dispose();
+    }
+    handleUpdate() {
+      this._adjustDialog();
+    }
+
+    // Private
+    _initializeBackDrop() {
+      return new Backdrop({
+        isVisible: Boolean(this._config.backdrop),
+        // 'static' option will be translated to true, and booleans will keep their value,
+        isAnimated: this._isAnimated()
+      });
+    }
+    _initializeFocusTrap() {
+      return new FocusTrap({
+        trapElement: this._element
+      });
+    }
+    _showElement(relatedTarget) {
+      // try to append dynamic modal
+      if (!document.body.contains(this._element)) {
+        document.body.append(this._element);
+      }
+      this._element.style.display = 'block';
+      this._element.removeAttribute('aria-hidden');
+      this._element.setAttribute('aria-modal', true);
+      this._element.setAttribute('role', 'dialog');
+      this._element.scrollTop = 0;
+      const modalBody = SelectorEngine.findOne(SELECTOR_MODAL_BODY, this._dialog);
+      if (modalBody) {
+        modalBody.scrollTop = 0;
+      }
+      index_js.reflow(this._element);
+      this._element.classList.add(CLASS_NAME_SHOW);
+      const transitionComplete = () => {
+        if (this._config.focus) {
+          this._focustrap.activate();
+        }
+        this._isTransitioning = false;
+        EventHandler.trigger(this._element, EVENT_SHOWN, {
+          relatedTarget
+        });
+      };
+      this._queueCallback(transitionComplete, this._dialog, this._isAnimated());
+    }
+    _addEventListeners() {
+      EventHandler.on(this._element, EVENT_KEYDOWN_DISMISS, event => {
+        if (event.key !== ESCAPE_KEY) {
+          return;
+        }
+        if (this._config.keyboard) {
+          this.hide();
+          return;
+        }
+        this._triggerBackdropTransition();
+      });
+      EventHandler.on(window, EVENT_RESIZE, () => {
+        if (this._isShown && !this._isTransitioning) {
+          this._adjustDialog();
+        }
+      });
+      EventHandler.on(this._element, EVENT_MOUSEDOWN_DISMISS, event => {
+        // a bad trick to segregate clicks that may start inside dialog but end outside, and avoid listen to scrollbar clicks
+        EventHandler.one(this._element, EVENT_CLICK_DISMISS, event2 => {
+          if (this._element !== event.target || this._element !== event2.target) {
+            return;
+          }
+          if (this._config.backdrop === 'static') {
+            this._triggerBackdropTransition();
+            return;
+          }
+          if (this._config.backdrop) {
+            this.hide();
+          }
+        });
+      });
+    }
+    _hideModal() {
+      this._element.style.display = 'none';
+      this._element.setAttribute('aria-hidden', true);
+      this._element.removeAttribute('aria-modal');
+      this._element.removeAttribute('role');
+      this._isTransitioning = false;
+      this._backdrop.hide(() => {
+        document.body.classList.remove(CLASS_NAME_OPEN);
+        this._resetAdjustments();
+        this._scrollBar.reset();
+        EventHandler.trigger(this._element, EVENT_HIDDEN);
+      });
+    }
+    _isAnimated() {
+      return this._element.classList.contains(CLASS_NAME_FADE);
+    }
+    _triggerBackdropTransition() {
+      const hideEvent = EventHandler.trigger(this._element, EVENT_HIDE_PREVENTED);
+      if (hideEvent.defaultPrevented) {
+        return;
+      }
+      const isModalOverflowing = this._element.scrollHeight > document.documentElement.clientHeight;
+      const initialOverflowY = this._element.style.overflowY;
+      // return if the following background transition hasn't yet completed
+      if (initialOverflowY === 'hidden' || this._element.classList.contains(CLASS_NAME_STATIC)) {
+        return;
+      }
+      if (!isModalOverflowing) {
+        this._element.style.overflowY = 'hidden';
+      }
+      this._element.classList.add(CLASS_NAME_STATIC);
+      this._queueCallback(() => {
+        this._element.classList.remove(CLASS_NAME_STATIC);
+        this._queueCallback(() => {
+          this._element.style.overflowY = initialOverflowY;
+        }, this._dialog);
+      }, this._dialog);
+      this._element.focus();
+    }
+
+    /**
+     * The following methods are used to handle overflowing modals
+     */
+
+    _adjustDialog() {
+      const isModalOverflowing = this._element.scrollHeight > document.documentElement.clientHeight;
+      const scrollbarWidth = this._scrollBar.getWidth();
+      const isBodyOverflowing = scrollbarWidth > 0;
+      if (isBodyOverflowing && !isModalOverflowing) {
+        const property = index_js.isRTL() ? 'paddingLeft' : 'paddingRight';
+        this._element.style[property] = `${scrollbarWidth}px`;
+      }
+      if (!isBodyOverflowing && isModalOverflowing) {
+        const property = index_js.isRTL() ? 'paddingRight' : 'paddingLeft';
+        this._element.style[property] = `${scrollbarWidth}px`;
+      }
+    }
+    _resetAdjustments() {
+      this._element.style.paddingLeft = '';
+      this._element.style.paddingRight = '';
+    }
+
+    // Static
+    static jQueryInterface(config, relatedTarget) {
+      return this.each(function () {
+        const data = Modal.getOrCreateInstance(this, config);
+        if (typeof config !== 'string') {
+          return;
+        }
+        if (typeof data[config] === 'undefined') {
+          throw new TypeError(`No method named "${config}"`);
+        }
+        data[config](relatedTarget);
+      });
+    }
+  }
+
+  /**
+   * Data API implementation
+   */
+
+  EventHandler.on(document, EVENT_CLICK_DATA_API, SELECTOR_DATA_TOGGLE, function (event) {
+    const target = SelectorEngine.getElementFromSelector(this);
+    if (['A', 'AREA'].includes(this.tagName)) {
+      event.preventDefault();
+    }
+    EventHandler.one(target, EVENT_SHOW, showEvent => {
+      if (showEvent.defaultPrevented) {
+        // only register focus restorer if modal will actually get shown
+        return;
+      }
+      EventHandler.one(target, EVENT_HIDDEN, () => {
+        if (index_js.isVisible(this)) {
+          this.focus();
+        }
+      });
+    });
+
+    // avoid conflict when clicking modal toggler while another one is open
+    const alreadyOpen = SelectorEngine.findOne(OPEN_SELECTOR);
+    if (alreadyOpen) {
+      Modal.getInstance(alreadyOpen).hide();
+    }
+    const data = Modal.getOrCreateInstance(target);
+    data.toggle(this);
+  });
+  componentFunctions_js.enableDismissTrigger(Modal);
+
+  /**
+   * jQuery
+   */
+
+  index_js.defineJQueryPlugin(Modal);
+
+  return Modal;
+
+}));
+
+
+},{"./base-component.js":68,"./dom/event-handler.js":70,"./dom/selector-engine.js":72,"./util/backdrop.js":79,"./util/component-functions.js":80,"./util/focustrap.js":82,"./util/index.js":83,"./util/scrollbar.js":85}],75:[function(require,module,exports){
 /*!
   * Bootstrap offcanvas.js v5.3.3 (https://getbootstrap.com/)
   * Copyright 2011-2024 The Bootstrap Authors (https://github.com/twbs/bootstrap/graphs/contributors)
@@ -3792,7 +4114,7 @@ function withinMaxClamp(min, value, max) {
 }));
 
 
-},{"./base-component.js":68,"./dom/event-handler.js":70,"./dom/selector-engine.js":72,"./util/backdrop.js":78,"./util/component-functions.js":79,"./util/focustrap.js":81,"./util/index.js":82,"./util/scrollbar.js":84}],75:[function(require,module,exports){
+},{"./base-component.js":68,"./dom/event-handler.js":70,"./dom/selector-engine.js":72,"./util/backdrop.js":79,"./util/component-functions.js":80,"./util/focustrap.js":82,"./util/index.js":83,"./util/scrollbar.js":85}],76:[function(require,module,exports){
 /*!
   * Bootstrap tab.js v5.3.3 (https://getbootstrap.com/)
   * Copyright 2011-2024 The Bootstrap Authors (https://github.com/twbs/bootstrap/graphs/contributors)
@@ -4079,7 +4401,7 @@ function withinMaxClamp(min, value, max) {
 }));
 
 
-},{"./base-component.js":68,"./dom/event-handler.js":70,"./dom/selector-engine.js":72,"./util/index.js":82}],76:[function(require,module,exports){
+},{"./base-component.js":68,"./dom/event-handler.js":70,"./dom/selector-engine.js":72,"./util/index.js":83}],77:[function(require,module,exports){
 /*!
   * Bootstrap toast.js v5.3.3 (https://getbootstrap.com/)
   * Copyright 2011-2024 The Bootstrap Authors (https://github.com/twbs/bootstrap/graphs/contributors)
@@ -4280,7 +4602,7 @@ function withinMaxClamp(min, value, max) {
 }));
 
 
-},{"./base-component.js":68,"./dom/event-handler.js":70,"./util/component-functions.js":79,"./util/index.js":82}],77:[function(require,module,exports){
+},{"./base-component.js":68,"./dom/event-handler.js":70,"./util/component-functions.js":80,"./util/index.js":83}],78:[function(require,module,exports){
 /*!
   * Bootstrap tooltip.js v5.3.3 (https://getbootstrap.com/)
   * Copyright 2011-2024 The Bootstrap Authors (https://github.com/twbs/bootstrap/graphs/contributors)
@@ -4828,7 +5150,7 @@ function withinMaxClamp(min, value, max) {
 }));
 
 
-},{"./base-component.js":68,"./dom/event-handler.js":70,"./dom/manipulator.js":71,"./util/index.js":82,"./util/sanitizer.js":83,"./util/template-factory.js":85,"@popperjs/core":34}],78:[function(require,module,exports){
+},{"./base-component.js":68,"./dom/event-handler.js":70,"./dom/manipulator.js":71,"./util/index.js":83,"./util/sanitizer.js":84,"./util/template-factory.js":86,"@popperjs/core":34}],79:[function(require,module,exports){
 /*!
   * Bootstrap backdrop.js v5.3.3 (https://getbootstrap.com/)
   * Copyright 2011-2024 The Bootstrap Authors (https://github.com/twbs/bootstrap/graphs/contributors)
@@ -4969,7 +5291,7 @@ function withinMaxClamp(min, value, max) {
 }));
 
 
-},{"../dom/event-handler.js":70,"./config.js":80,"./index.js":82}],79:[function(require,module,exports){
+},{"../dom/event-handler.js":70,"./config.js":81,"./index.js":83}],80:[function(require,module,exports){
 /*!
   * Bootstrap component-functions.js v5.3.3 (https://getbootstrap.com/)
   * Copyright 2011-2024 The Bootstrap Authors (https://github.com/twbs/bootstrap/graphs/contributors)
@@ -5013,7 +5335,7 @@ function withinMaxClamp(min, value, max) {
 }));
 
 
-},{"../dom/event-handler.js":70,"../dom/selector-engine.js":72,"./index.js":82}],80:[function(require,module,exports){
+},{"../dom/event-handler.js":70,"../dom/selector-engine.js":72,"./index.js":83}],81:[function(require,module,exports){
 /*!
   * Bootstrap config.js v5.3.3 (https://getbootstrap.com/)
   * Copyright 2011-2024 The Bootstrap Authors (https://github.com/twbs/bootstrap/graphs/contributors)
@@ -5083,7 +5405,7 @@ function withinMaxClamp(min, value, max) {
 }));
 
 
-},{"../dom/manipulator.js":71,"./index.js":82}],81:[function(require,module,exports){
+},{"../dom/manipulator.js":71,"./index.js":83}],82:[function(require,module,exports){
 /*!
   * Bootstrap focustrap.js v5.3.3 (https://getbootstrap.com/)
   * Copyright 2011-2024 The Bootstrap Authors (https://github.com/twbs/bootstrap/graphs/contributors)
@@ -5198,7 +5520,7 @@ function withinMaxClamp(min, value, max) {
 }));
 
 
-},{"../dom/event-handler.js":70,"../dom/selector-engine.js":72,"./config.js":80}],82:[function(require,module,exports){
+},{"../dom/event-handler.js":70,"../dom/selector-engine.js":72,"./config.js":81}],83:[function(require,module,exports){
 /*!
   * Bootstrap index.js v5.3.3 (https://getbootstrap.com/)
   * Copyright 2011-2024 The Bootstrap Authors (https://github.com/twbs/bootstrap/graphs/contributors)
@@ -5481,7 +5803,7 @@ function withinMaxClamp(min, value, max) {
 }));
 
 
-},{}],83:[function(require,module,exports){
+},{}],84:[function(require,module,exports){
 /*!
   * Bootstrap sanitizer.js v5.3.3 (https://getbootstrap.com/)
   * Copyright 2011-2024 The Bootstrap Authors (https://github.com/twbs/bootstrap/graphs/contributors)
@@ -5597,7 +5919,7 @@ function withinMaxClamp(min, value, max) {
 }));
 
 
-},{}],84:[function(require,module,exports){
+},{}],85:[function(require,module,exports){
 /*!
   * Bootstrap scrollbar.js v5.3.3 (https://getbootstrap.com/)
   * Copyright 2011-2024 The Bootstrap Authors (https://github.com/twbs/bootstrap/graphs/contributors)
@@ -5712,7 +6034,7 @@ function withinMaxClamp(min, value, max) {
 }));
 
 
-},{"../dom/manipulator.js":71,"../dom/selector-engine.js":72,"./index.js":82}],85:[function(require,module,exports){
+},{"../dom/manipulator.js":71,"../dom/selector-engine.js":72,"./index.js":83}],86:[function(require,module,exports){
 /*!
   * Bootstrap template-factory.js v5.3.3 (https://getbootstrap.com/)
   * Copyright 2011-2024 The Bootstrap Authors (https://github.com/twbs/bootstrap/graphs/contributors)
@@ -5865,7 +6187,7 @@ function withinMaxClamp(min, value, max) {
 }));
 
 
-},{"../dom/selector-engine.js":72,"./config.js":80,"./index.js":82,"./sanitizer.js":83}],86:[function(require,module,exports){
+},{"../dom/selector-engine.js":72,"./config.js":81,"./index.js":83,"./sanitizer.js":84}],87:[function(require,module,exports){
 (function (global){(function (){
 
 // ------------------------------------------
@@ -6366,7 +6688,7 @@ function withinMaxClamp(min, value, max) {
 }));
 
 }).call(this)}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],87:[function(require,module,exports){
+},{}],88:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -6417,7 +6739,7 @@ var _default = function _default() {
 };
 exports["default"] = _default;
 
-},{"aos":66}],88:[function(require,module,exports){
+},{"aos":66}],89:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault2 = require("@babel/runtime/helpers/interopRequireDefault");
@@ -6428,6 +6750,7 @@ Object.defineProperty(exports, "__esModule", {
 exports["default"] = void 0;
 var _alert = _interopRequireDefault(require("bootstrap/js/dist/alert"));
 var _dropdown = _interopRequireDefault(require("bootstrap/js/dist/dropdown"));
+var _modal = _interopRequireDefault(require("bootstrap/js/dist/modal"));
 var _offcanvas = _interopRequireDefault(require("bootstrap/js/dist/offcanvas"));
 var _tab = _interopRequireDefault(require("bootstrap/js/dist/tab"));
 var _toast = _interopRequireDefault(require("bootstrap/js/dist/toast"));
@@ -6453,6 +6776,9 @@ var _default = function _default() {
   });
   (0, _toConsumableArray2["default"])(document.querySelectorAll("[data-bs-toggle='tooltip']") || []).map(function (ele) {
     return new _tooltip["default"](ele);
+  });
+  (0, _toConsumableArray2["default"])(document.querySelectorAll("[data-bs-toggle='modal']") || []).map(function (ele) {
+    return new _modal["default"](ele);
   });
   (0, _toConsumableArray2["default"])(document.querySelectorAll(".dropdown-toggle") || []).forEach(function (ele) {
     var dropdown = new _dropdown["default"](ele);
@@ -6508,7 +6834,7 @@ var _default = function _default() {
 };
 exports["default"] = _default;
 
-},{"@babel/runtime/helpers/interopRequireDefault":3,"@babel/runtime/helpers/toConsumableArray":6,"bootstrap/js/dist/alert":67,"bootstrap/js/dist/dropdown":73,"bootstrap/js/dist/offcanvas":74,"bootstrap/js/dist/tab":75,"bootstrap/js/dist/toast":76,"bootstrap/js/dist/tooltip":77}],89:[function(require,module,exports){
+},{"@babel/runtime/helpers/interopRequireDefault":3,"@babel/runtime/helpers/toConsumableArray":6,"bootstrap/js/dist/alert":67,"bootstrap/js/dist/dropdown":73,"bootstrap/js/dist/modal":74,"bootstrap/js/dist/offcanvas":75,"bootstrap/js/dist/tab":76,"bootstrap/js/dist/toast":77,"bootstrap/js/dist/tooltip":78}],90:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault2 = require("@babel/runtime/helpers/interopRequireDefault");
@@ -6537,7 +6863,7 @@ var _default = function _default() {
 };
 exports["default"] = _default;
 
-},{"../utils/_dom":97,"../utils/_vars":98,"@babel/runtime/helpers/interopRequireDefault":3,"@babel/runtime/helpers/toConsumableArray":6,"rellax":86}],90:[function(require,module,exports){
+},{"../utils/_dom":98,"../utils/_vars":99,"@babel/runtime/helpers/interopRequireDefault":3,"@babel/runtime/helpers/toConsumableArray":6,"rellax":87}],91:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -6570,7 +6896,7 @@ var _default = function _default() {
 };
 exports["default"] = _default;
 
-},{"@babel/runtime/helpers/interopRequireDefault":3,"@babel/runtime/helpers/toConsumableArray":6}],91:[function(require,module,exports){
+},{"@babel/runtime/helpers/interopRequireDefault":3,"@babel/runtime/helpers/toConsumableArray":6}],92:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault2 = require("@babel/runtime/helpers/interopRequireDefault");
@@ -6600,7 +6926,7 @@ var navigateAnimation = function navigateAnimation() {
 };
 var _default = exports["default"] = navigateAnimation;
 
-},{"../utils/_animate-css":95,"@babel/runtime/helpers/interopRequireDefault":3,"@babel/runtime/helpers/toConsumableArray":6}],92:[function(require,module,exports){
+},{"../utils/_animate-css":96,"@babel/runtime/helpers/interopRequireDefault":3,"@babel/runtime/helpers/toConsumableArray":6}],93:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -6662,7 +6988,7 @@ var scrollToTopButton = function scrollToTopButton() {
 
   // Adds a scroll, resize, and orientationchange event listener to the window
   // to update the visibility of the scroll-to-top button
-  ["resize", "orientationchange", "focus", "blur", "visibilitychange"].forEach(function (event) {
+  ["scroll", "resize", "orientationchange", "focus", "blur", "visibilitychange"].forEach(function (event) {
     window.addEventListener(event, (0, _debounce["default"])(function () {
       return scrollToTopButtonVisibilityIndicator(scrollToTopButtonDOM);
     }, _vars["default"].debounce_time_in_ms));
@@ -6671,7 +6997,7 @@ var scrollToTopButton = function scrollToTopButton() {
 exports.scrollToTopButton = scrollToTopButton;
 var _default = exports["default"] = scrollToTopButton;
 
-},{"../utils/_animate-css":95,"../utils/_debounce":96,"../utils/_dom":97,"../utils/_vars":98}],93:[function(require,module,exports){
+},{"../utils/_animate-css":96,"../utils/_debounce":97,"../utils/_dom":98,"../utils/_vars":99}],94:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -6766,7 +7092,7 @@ var scrollingHeader = function scrollingHeader() {
 exports.scrollingHeader = scrollingHeader;
 var _default = exports["default"] = scrollingHeader;
 
-},{"../utils/_dom":97}],94:[function(require,module,exports){
+},{"../utils/_dom":98}],95:[function(require,module,exports){
 "use strict";
 
 var _aos = _interopRequireDefault(require("./libs/_aos"));
@@ -6805,7 +7131,7 @@ function _interopRequireDefault(obj) {
   });
 })();
 
-},{"./libs/_aos":87,"./libs/_bootstrap":88,"./libs/_rellax":89,"./libs/_swiper":90,"./partials/_navigate-animation":91,"./partials/_scroll-to-top-button":92,"./partials/_scrolling-header":93,"./utils/_animate-css":95}],95:[function(require,module,exports){
+},{"./libs/_aos":88,"./libs/_bootstrap":89,"./libs/_rellax":90,"./libs/_swiper":91,"./partials/_navigate-animation":92,"./partials/_scroll-to-top-button":93,"./partials/_scrolling-header":94,"./utils/_animate-css":96}],96:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -6845,7 +7171,7 @@ var animateCss = function animateCss(element, animation) {
 exports.animateCss = animateCss;
 var _default = exports["default"] = animateCss;
 
-},{"./_dom":97}],96:[function(require,module,exports){
+},{"./_dom":98}],97:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -6878,7 +7204,7 @@ var debounce = function debounce(func, wait, immediate) {
 };
 var _default = exports["default"] = debounce;
 
-},{}],97:[function(require,module,exports){
+},{}],98:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -6962,7 +7288,7 @@ var scrollToTop = function scrollToTop() {
 };
 exports.scrollToTop = scrollToTop;
 
-},{"@babel/runtime/helpers/interopRequireDefault":3,"@babel/runtime/helpers/typeof":7}],98:[function(require,module,exports){
+},{"@babel/runtime/helpers/interopRequireDefault":3,"@babel/runtime/helpers/typeof":7}],99:[function(require,module,exports){
 "use strict";
 
 var _document$getElements, _document$getElements2;
@@ -6982,4 +7308,4 @@ var vars = {
 };
 var _default = exports["default"] = vars;
 
-},{"./_dom":97}]},{},[94]);
+},{"./_dom":98}]},{},[95]);

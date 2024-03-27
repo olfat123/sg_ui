@@ -52,7 +52,7 @@ export const scrollToTopButton = () => {
 
 	// Adds a scroll, resize, and orientationchange event listener to the window
 	// to update the visibility of the scroll-to-top button
-	["resize", "orientationchange", "focus", "blur", "visibilitychange"].forEach((event) => {
+	["scroll", "resize", "orientationchange", "focus", "blur", "visibilitychange"].forEach((event) => {
 		window.addEventListener(
 			event,
 			debounce(() => scrollToTopButtonVisibilityIndicator(scrollToTopButtonDOM), vars.debounce_time_in_ms)

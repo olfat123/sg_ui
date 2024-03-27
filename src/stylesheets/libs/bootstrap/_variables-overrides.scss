@@ -629,7 +629,7 @@ $font-weight-normal: 400 !default;
 $font-weight-medium: 500 !default;
 $font-weight-semibold: 600 !default;
 $font-weight-bold: 700 !default;
-$font-weight-bolder: bolder !default;
+$font-weight-bolder: 900 !default;
 
 $font-weight-base: $font-weight-normal !default;
 
@@ -637,12 +637,12 @@ $line-height-base: 1.5 !default;
 $line-height-sm: 1.25 !default;
 $line-height-lg: 2 !default;
 
-$h1-font-size: $font-size-base * 2.5 !default;
-$h2-font-size: $font-size-base * 2 !default;
-$h3-font-size: $font-size-base * 1.75 !default;
-$h4-font-size: $font-size-base * 1.5 !default;
-$h5-font-size: $font-size-base * 1.25 !default;
-$h6-font-size: $font-size-base !default;
+$h1-font-size: $font-size-base * 2.5 !default; // 40px
+$h2-font-size: $font-size-base * 2.1875 !default; // 35px
+$h3-font-size: $font-size-base * 1.875 !default; // 30px
+$h4-font-size: $font-size-base * 1.5625 !default; // 25px
+$h5-font-size: $font-size-base * 1.25 !default; // 20px
+$h6-font-size: $font-size-base !default; // 16px
 // scss-docs-end font-variables
 
 // scss-docs-start font-sizes
@@ -1536,14 +1536,14 @@ $modal-title-line-height: $line-height-base !default;
 $modal-content-color: null !default;
 $modal-content-bg: var(--#{$prefix}body-bg) !default;
 $modal-content-border-color: var(--#{$prefix}border-color-translucent) !default;
-$modal-content-border-width: var(--#{$prefix}border-width) !default;
-$modal-content-border-radius: var(--#{$prefix}border-radius-lg) !default;
+$modal-content-border-width: 0 !default;
+$modal-content-border-radius: var(--#{$prefix}border-radius-xl) !default;
 $modal-content-inner-border-radius: subtract($modal-content-border-radius, $modal-content-border-width) !default;
-$modal-content-box-shadow-xs: var(--#{$prefix}box-shadow-sm) !default;
-$modal-content-box-shadow-sm-up: var(--#{$prefix}box-shadow) !default;
+$modal-content-box-shadow-xs: var(--#{$prefix}box-shadow) !default;
+$modal-content-box-shadow-sm-up: var(--#{$prefix}box-shadow-lg) !default;
 
 $modal-backdrop-bg: $black !default;
-$modal-backdrop-opacity: 0.5 !default;
+$modal-backdrop-opacity: 0.8 !default;
 
 $modal-header-border-color: var(--#{$prefix}border-color) !default;
 $modal-header-border-width: $modal-content-border-width !default;

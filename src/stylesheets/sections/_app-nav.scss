@@ -21,4 +21,16 @@
 			}
 		}
 	}
+
+	&-offcanvas {
+		@extend .flex-grow-1 !optional;
+		.nav {
+			@extend .h-100 !optional;
+			@extend .flex-column !optional;
+			@extend .justify-content-between !optional;
+			&-item {
+				@extend .my-3 !optional;
+			}
+		}
+	}
 }
