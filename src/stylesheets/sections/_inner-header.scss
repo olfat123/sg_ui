@@ -1,1 +1,19 @@
-.inner-header {}
+.inner-header {
+	padding-top: 6rem;
+
+	&:not(:has(+ section)) {
+		padding-bottom: 2rem;
+	}
+	&:has(+ section) {
+		padding-bottom: 6rem;
+		& + section {
+			z-index: 1;
+			position: relative;
+			margin-top: calc(-1 * 4.125rem);
+		}
+	}
+
+	.section-bg {
+		mask: linear-gradient(to top, transparent 0, var(--#{$prefix}body-bg) calc(100% - 7.1875rem)) !important;
+	}
+}

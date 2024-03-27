@@ -1,0 +1,14 @@
+mixin breadcrumb(data=[], divider="", meta= {label: "breadcrumb"})
+	// breadcrumb nav starts
+	nav(aria-label=`${meta.label}` style=divider ? `--bs-breadcrumb-divider: '${divider}';` : undefined)
+		ol.breadcrumb.p-0.m-0
+			each page, index in data
+				li.breadcrumb-item.text-capitalize(aria-current=(index !== data.length-1) ? undefined : "page", class=(index !== data.length-1) ? undefined : "active")
+					if (index !== data.length-1)
+						a.focus-ring.focus-ring-dark.link-white.text-dark-hover.text-dark-focus.text-decoration-none(href=`${page.href}`)
+							= `${page.title}`
+					else
+						= `${String(page.title).split("").slice(0, 25).join('')}`
+						if (String(page.title).split("").length >= 25)
+							| ...
+	// breadcrumb nav ends

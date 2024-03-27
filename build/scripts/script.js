@@ -7015,17 +7015,20 @@ var scrollingHeader = function scrollingHeader() {
   var appMain = document.querySelector(".app-main");
   var appInnerHeader = document.querySelector(".inner-header");
   var heroSection = document.querySelector(".hero");
+  var vendorSection = document.querySelector(".vendor");
   var errorSection = document.querySelector(".error");
   var lastScrollTop = appHeader === null || appHeader === void 0 ? void 0 : appHeader.offsetTop;
   var appHeaderHeight = 0;
   var appInnerHeaderHeight = 0;
   var heroSectionHeight = 0;
+  var vendorSectionHeight = 0;
   var errorSectionHeight = 0;
   var headerChangePoint = 0;
   var mainPaddingTop = appMain ? (0, _dom.getNodeCSSPropertyValue)(appMain, "padding-top") : "0px";
   var innerHeaderPaddingTop = appInnerHeader ? (0, _dom.getNodeCSSPropertyValue)(appInnerHeader, "padding-top") : "0px";
   var errorSectionPaddingTop = errorSection ? (0, _dom.getNodeCSSPropertyValue)(errorSection, "padding-top") : "0px";
   var heroSectionPaddingTop = heroSection ? (0, _dom.getNodeCSSPropertyValue)(heroSection, "padding-top") : "0px";
+  var vendorSectionPaddingTop = vendorSection ? (0, _dom.getNodeCSSPropertyValue)(vendorSection, "padding-top") : "0px";
   var scrollingClassName = "app-header-scrolling";
   var scrollingUpClassName = "app-header-scrolling-up";
   var scrollingDownClassName = "app-header-scrolling-down";
@@ -7037,8 +7040,9 @@ var scrollingHeader = function scrollingHeader() {
     if (appHeader) appHeaderHeight = Math.max((0, _dom.getNodeHeight)(appHeader), appHeaderHeight);
     if (appInnerHeader) appInnerHeaderHeight = Math.max((0, _dom.getNodeHeight)(appInnerHeader), appInnerHeaderHeight);
     if (heroSection) heroSectionHeight = Math.max((0, _dom.getNodeHeight)(heroSection), heroSectionHeight);
+    if (vendorSection) vendorSectionHeight = Math.max((0, _dom.getNodeHeight)(vendorSection), vendorSectionHeight);
     if (errorSection) errorSectionHeight = Math.max((0, _dom.getNodeHeight)(errorSection), errorSectionHeight);
-    headerChangePoint = heroSectionHeight || appInnerHeaderHeight || errorSectionHeight || appHeaderHeight || 0;
+    headerChangePoint = heroSectionHeight || vendorSectionHeight || appInnerHeaderHeight || errorSectionHeight || appHeaderHeight || 0;
   };
 
   /**
@@ -7053,6 +7057,8 @@ var scrollingHeader = function scrollingHeader() {
         appInnerHeader.style.paddingTop = "calc(".concat(innerHeaderPaddingTop, " + ").concat(appHeaderHeight, "px)");
       } else if (heroSection) {
         heroSection.style.paddingTop = "calc(".concat(heroSectionPaddingTop, " + ").concat(appHeaderHeight, "px)");
+      } else if (vendorSection) {
+        vendorSection.style.paddingTop = "calc(".concat(vendorSectionPaddingTop, " + ").concat(appHeaderHeight, "px)");
       } else if (errorSection) {
         errorSection.style.paddingTop = "calc(".concat(errorSectionPaddingTop, " + ").concat(appHeaderHeight, "px)");
       } else {

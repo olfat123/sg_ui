@@ -14,7 +14,7 @@ mixin app-header(data={logo: { name: locals.APP_NAME, href: "index.html",  logos
 					.col-auto
 						.hstack.align-items-stretch
 							.flex-shrink-0.align-self-center.d-none.d-xl-inline-block.me-1.me-xl-3
-								+app-nav({ type: "header", list: locals.navList })
+								+app-nav({ type: "header", list: locals.navList }, true)
 							.flex-shrink-0.align-self-center.me-1.me-xl-3
 								+app-social-nav({ type: "header" })
 							.overflow-hidden.me-1.me-xl-3(aria-hidden="true")

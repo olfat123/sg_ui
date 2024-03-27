@@ -1,8 +1,8 @@
 include ./_app-nav-list.pug
 
-mixin app-nav(data={type: "", list: []})
+mixin app-nav(data={type: "", list: []}, allowSkipToContent=false)
 	// navigation list starts
 	nav(class=`app-nav${data.type ? ` app-nav-${data.type}` : ""} w-100`)
 		if (data.list && data.list.length)
-			+app-nav-list({ list: data.list, type: data.type })
+			+app-nav-list({ list: data.list, type: data.type}, allowSkipToContent)
 	// navigation list ends

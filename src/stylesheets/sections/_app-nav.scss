@@ -5,17 +5,17 @@
 	}
 
 	&:not(.app-nav-footer) {
-		&-item {
-			&:not(:last-child) {
-				@include media-breakpoint-up(lg) {
-					margin-right: 0.5rem;
-				}
-				@include media-breakpoint-up(xxl) {
-					margin-right: 1.375rem;
+		.nav {
+			&-item {
+				&:not(:last-child) {
+					@include media-breakpoint-up(lg) {
+						margin-right: 0.5rem;
+					}
+					@include media-breakpoint-up(xxl) {
+						margin-right: 1.375rem;
+					}
 				}
 			}
-		}
-		.nav {
 			&-link {
 				&:hover,
 				&:focus,
@@ -41,14 +41,15 @@
 	&-footer {
 		.nav-item {
 			&:not(:last-child) {
-				margin-right: 3rem;
+				margin-right: 2.5rem;
 			}
 		}
 		.nav-link {
 			@extend .text-secondary !optional;
 			@extend .text-dark-hover !optional;
 			@extend .text-dark-focus !optional;
-			@extend .px-0 !optional;
+			@extend .px-2 !optional;
+			@extend .rounded !optional;
 
 			&.active {
 				@extend .text-dark !optional;

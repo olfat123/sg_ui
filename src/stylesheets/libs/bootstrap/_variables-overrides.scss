@@ -1658,9 +1658,9 @@ $breadcrumb-padding-x: 0 !default;
 $breadcrumb-item-padding-x: 0.5rem !default;
 $breadcrumb-margin-bottom: 1rem !default;
 $breadcrumb-bg: null !default;
-$breadcrumb-divider-color: var(--#{$prefix}secondary-color) !default;
-$breadcrumb-active-color: var(--#{$prefix}secondary-color) !default;
-$breadcrumb-divider: quote("/") !default;
+$breadcrumb-divider-color: var(--#{$prefix}white-color) !default;
+$breadcrumb-active-color: var(--#{$prefix}white-color) !default;
+$breadcrumb-divider: quote("|") !default;
 $breadcrumb-divider-flipped: $breadcrumb-divider !default;
 $breadcrumb-border-radius: null !default;
 // scss-docs-end breadcrumb-variables

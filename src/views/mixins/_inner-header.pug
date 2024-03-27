@@ -1,5 +1,12 @@
-mixin inner-header(data={type: "", title: "", img: ""})
+include ./_breadcrumb.pug
+
+mixin inner-header(data={type: "", bg_img: "", breadcrumb: [{ title: "", href: "" }]})
 	// application inner pages header
-	header(class=`inner-header${ data.type ? ` inner-header-${data.type}` : ""}`)
-		p inner header section
+	header.text-white.section-with-bg(class=`inner-header${ data.type ? ` inner-header-${data.type}` : ""}`)
+		.section-bg.bg-dark
+			.section-bg-content
+				img.section-bg-image.object-position-top.op-40(src=data.bg_img, alt="", loading="lazy", width="1280", height="362")
+		.container
+			if (data.breadcrumb && data.breadcrumb.length)
+				+breadcrumb(data.breadcrumb)
 	// application inner pages header end/.

@@ -10,17 +10,20 @@ export const scrollingHeader = () => {
 	const appMain = document.querySelector(".app-main");
 	const appInnerHeader = document.querySelector(".inner-header");
 	const heroSection = document.querySelector(".hero");
+	const vendorSection = document.querySelector(".vendor");
 	const errorSection = document.querySelector(".error");
 	let lastScrollTop = appHeader?.offsetTop;
 	let appHeaderHeight = 0;
 	let appInnerHeaderHeight = 0;
 	let heroSectionHeight = 0;
+	let vendorSectionHeight = 0;
 	let errorSectionHeight = 0;
 	let headerChangePoint = 0;
 	const mainPaddingTop = appMain ? getNodeCSSPropertyValue(appMain, "padding-top") : "0px";
 	const innerHeaderPaddingTop = appInnerHeader ? getNodeCSSPropertyValue(appInnerHeader, "padding-top") : "0px";
 	const errorSectionPaddingTop = errorSection ? getNodeCSSPropertyValue(errorSection, "padding-top") : "0px";
 	const heroSectionPaddingTop = heroSection ? getNodeCSSPropertyValue(heroSection, "padding-top") : "0px";
+	const vendorSectionPaddingTop = vendorSection ? getNodeCSSPropertyValue(vendorSection, "padding-top") : "0px";
 	const scrollingClassName = "app-header-scrolling";
 	const scrollingUpClassName = "app-header-scrolling-up";
 	const scrollingDownClassName = "app-header-scrolling-down";
@@ -32,8 +35,15 @@ export const scrollingHeader = () => {
 		if (appHeader) appHeaderHeight = Math.max(getNodeHeight(appHeader), appHeaderHeight);
 		if (appInnerHeader) appInnerHeaderHeight = Math.max(getNodeHeight(appInnerHeader), appInnerHeaderHeight);
 		if (heroSection) heroSectionHeight = Math.max(getNodeHeight(heroSection), heroSectionHeight);
+		if (vendorSection) vendorSectionHeight = Math.max(getNodeHeight(vendorSection), vendorSectionHeight);
 		if (errorSection) errorSectionHeight = Math.max(getNodeHeight(errorSection), errorSectionHeight);
-		headerChangePoint = heroSectionHeight || appInnerHeaderHeight || errorSectionHeight || appHeaderHeight || 0;
+		headerChangePoint =
+			heroSectionHeight ||
+			vendorSectionHeight ||
+			appInnerHeaderHeight ||
+			errorSectionHeight ||
+			appHeaderHeight ||
+			0;
 	};
 
 	/**
@@ -49,6 +59,8 @@ export const scrollingHeader = () => {
 				appInnerHeader.style.paddingTop = `calc(${innerHeaderPaddingTop} + ${appHeaderHeight}px)`;
 			} else if (heroSection) {
 				heroSection.style.paddingTop = `calc(${heroSectionPaddingTop} + ${appHeaderHeight}px)`;
+			} else if (vendorSection) {
+				vendorSection.style.paddingTop = `calc(${vendorSectionPaddingTop} + ${appHeaderHeight}px)`;
 			} else if (errorSection) {
 				errorSection.style.paddingTop = `calc(${errorSectionPaddingTop} + ${appHeaderHeight}px)`;
 			} else {

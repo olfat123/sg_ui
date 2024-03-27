@@ -1,17 +1,15 @@
 extends ./layouts/_index.pug
+include ./mixins/_inner-header.pug
 
 append variables
-	- var page_title = "Home";
+	- var page_title = "become a vendor";
 
 block styles
 
 block content
 	// application main content stars
 	main#main.app-main
-		include ./sections/_hero.pug
-		section
-			.container
-				include ./sections/_typography.pug
+		include ./sections/_vendor.pug
 	// application main content ends
 
 block modals
