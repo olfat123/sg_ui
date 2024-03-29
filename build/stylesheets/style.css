@@ -840,6 +840,11 @@ summary {
     width: 33.33333%;
   }
 
+  .col-xl-7 {
+    flex: 0 0 auto;
+    width: 58.33333%;
+  }
+
   .col-xl-8 {
     flex: 0 0 auto;
     width: 66.66667%;
@@ -2761,7 +2766,7 @@ fieldset:disabled .btn {
   opacity: 0.4 !important;
 }
 
- .app-footer .app-logo {
+.op-50, .app-footer .app-logo {
   opacity: 0.5 !important;
 }
 
@@ -3042,6 +3047,10 @@ fieldset:disabled .btn {
   margin-bottom: 1rem !important;
 }
 
+.mb-5 {
+  margin-bottom: 3rem !important;
+}
+
 [dir="ltr"] .ms-auto {
   margin-left: auto !important;
 }
@@ -3071,9 +3080,19 @@ fieldset:disabled .btn {
   padding-left: 0.5rem !important;
 }
 
+.px-5 {
+  padding-right: 3rem !important;
+  padding-left: 3rem !important;
+}
+
 .py-1 {
   padding-top: 0.25rem !important;
   padding-bottom: 0.25rem !important;
+}
+
+.py-2 {
+  padding-top: 0.5rem !important;
+  padding-bottom: 0.5rem !important;
 }
 
 .py-3 {
@@ -3084,6 +3103,11 @@ fieldset:disabled .btn {
 .py-4 {
   padding-top: 1.5rem !important;
   padding-bottom: 1.5rem !important;
+}
+
+.py-5 {
+  padding-top: 3rem !important;
+  padding-bottom: 3rem !important;
 }
 
 .pt-0 {
@@ -3241,6 +3265,10 @@ fieldset:disabled .btn {
   border-radius: var(--tcg-border-radius) !important;
 }
 
+.rounded-4 {
+  border-radius: var(--tcg-border-radius-xl) !important;
+}
+
 .rounded-5 {
   border-radius: var(--tcg-border-radius-xxl) !important;
 }
@@ -3275,6 +3303,16 @@ fieldset:disabled .btn {
 }
 
 @media (min-width: 768px) {
+
+  .px-md-4 {
+    padding-right: 1.5rem !important;
+    padding-left: 1.5rem !important;
+  }
+
+  .py-md-6 {
+    padding-top: 4rem !important;
+    padding-bottom: 4rem !important;
+  }
   /* rtl:begin:remove */
   /* rtl:end:remove */
   /* rtl:begin:remove */
@@ -3329,6 +3367,16 @@ fieldset:disabled .btn {
 
   [dir="rtl"] .me-xl-3 {
     margin-left: 1rem !important;
+  }
+
+  .px-xl-6 {
+    padding-right: 4rem !important;
+    padding-left: 4rem !important;
+  }
+
+  .py-xl-7 {
+    padding-top: 6rem !important;
+    padding-bottom: 6rem !important;
   }
   /* rtl:begin:remove */
   /* rtl:end:remove */
@@ -3482,6 +3530,20 @@ body {
   animation-iteration-count: infinite;
 }
 
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+.fadeIn {
+  animation-name: fadeIn;
+}
+
 @keyframes fadeInRight {
   0% {
     opacity: 0;
@@ -3496,6 +3558,20 @@ body {
 
 .fadeInRight {
   animation-name: fadeInRight;
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+.fadeOut {
+  animation-name: fadeOut;
 }
 
 @keyframes fadeOutRight {
@@ -3556,36 +3632,6 @@ body {
   100% {
     transform: translate3d(0, 0, 0);
   }
-}
-
-@keyframes slideInRight {
-  0% {
-    transform: translate3d(100%, 0, 0);
-    visibility: visible;
-  }
-
-  100% {
-    transform: translate3d(0, 0, 0);
-  }
-}
-
-.slideInRight {
-  animation-name: slideInRight;
-}
-
-@keyframes slideOutLeft {
-  0% {
-    transform: translate3d(0, 0, 0);
-    visibility: visible;
-  }
-
-  100% {
-    transform: translate3d(-100%, 0, 0);
-  }
-}
-
-.slideOutLeft {
-  animation-name: slideOutLeft;
 }
 
 @keyframes slideOutUp {
@@ -3752,13 +3798,6 @@ body[data-aos-easing="ease-in-out"] [data-aos], [data-aos][data-aos][data-aos-ea
 /**
  * Slide animations
  */
-[data-aos^='slide'][data-aos^='slide'] {
-  transition-property: transform;
-}
-
-[data-aos^='slide'][data-aos^='slide'].aos-animate {
-  transform: translate3d(0, 0, 0);
-}
 
 /**
  * Flip animations:
@@ -4841,7 +4880,23 @@ button.swiper-pagination-bullet {
 }
 
 .error {
+  padding-top: 4rem;
+  padding-bottom: 4rem;
   min-height: 100%;
+}
+
+@media (min-width: 768px) {
+  .error {
+    padding-top: 6rem;
+    padding-bottom: 6rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  .error {
+    padding-top: 9rem;
+    padding-bottom: 9rem;
+  }
 }
 
 .hero {

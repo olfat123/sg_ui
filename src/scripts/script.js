@@ -11,7 +11,7 @@ import animateCss from "./utils/_animate-css";
 	// Executes the given code when the window is fully loaded.
 	window.onload = () => {
 		const loaderImage = document.querySelector(".app-loader img");
-		animateCss(".app-loader", "slideOutLeft").then(() => {
+		animateCss(".app-loader", "fadeOut").then(() => {
 			loaderImage.parentNode.removeChild(loaderImage);
 			document.body?.classList.add("dom-loaded");
 			aos();
