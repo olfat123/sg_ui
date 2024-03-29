@@ -204,3 +204,9 @@
 .text-reset {
 	color: inherit !important;
 }
+
+.form-select {
+	&:invalid {
+		color: $input-placeholder-color;
+	}
+}

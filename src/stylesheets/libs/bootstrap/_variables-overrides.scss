@@ -957,7 +957,7 @@ $form-check-transition: null !default;
 
 $form-check-input-active-filter: brightness(90%) !default;
 
-$form-check-input-bg: $body-bg !default;
+$form-check-input-bg: transparent !default;
 $form-check-input-border: var(--#{$prefix}border-width) solid var(--#{$prefix}secondary) !default;
 $form-check-input-border-radius: 2px !default;
 $form-check-radio-border-radius: 50% !default;
@@ -1370,18 +1370,18 @@ $card-spacer-x: $spacer !default;
 $card-title-spacer-y: $spacer * 0.5 !default;
 $card-title-color: null !default;
 $card-subtitle-color: null !default;
-$card-border-width: var(--#{$prefix}border-width) !default;
+$card-border-width: 0 !default;
 $card-border-color: var(--#{$prefix}border-color-translucent) !default;
-$card-border-radius: var(--#{$prefix}border-radius) !default;
+$card-border-radius: var(--#{$prefix}border-radius-xl) !default;
 $card-box-shadow: null !default;
 $card-inner-border-radius: subtract($card-border-radius, $card-border-width) !default;
-$card-cap-padding-y: $card-spacer-y * 0.5 !default;
+$card-cap-padding-y: $spacer * 2.625 !default;
 $card-cap-padding-x: $card-spacer-x !default;
-$card-cap-bg: rgba(var(--#{$prefix}body-color-rgb), 0.03) !default;
+$card-bg: var(--#{$prefix}white) !default;
+$card-cap-bg: transparent !default;
 $card-cap-color: null !default;
 $card-height: null !default;
 $card-color: null !default;
-$card-bg: var(--#{$prefix}body-bg) !default;
 $card-img-overlay-padding: $spacer !default;
 $card-group-margin: $grid-gutter-width * 0.5 !default;
 // scss-docs-end card-variables
