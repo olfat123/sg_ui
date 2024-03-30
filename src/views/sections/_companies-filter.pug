@@ -1,0 +1,43 @@
+// companies filter section starts
+section.pb-4
+	.container
+		.row
+			.col-12.col-lg-4.col-xl-3
+				h1.display-5.text-capitalize.text-white.mb-0
+					strong.fw-bolder Security Companies
+			.col-12.col-lg-8.offset-xl-1.mt-4.mt-lg-0.align-self-lg-end
+				include ../forms/_companies-search.pug
+			.col-12.col-sm-11.col-md-10.col-lg-9.col-xl-8.mx-auto.mt-4.mt-lg-5
+				.row.gy-3.g-md-4.row-cols-1.row-cols-md-2.row-cols-xl-3
+					.col
+						.input-group.input-group-sm.rounded-5.flex-nowrap.text-capitalize.border.py-1.gap-1
+							label.input-group-text.bg-transparent.px-3.w-6rem.w-xl-fit-content.border-0(for="companiesFilterCityField")
+								strong.fw-bolder City
+							.vr.border.bg-transparent.op-100(aria-hidden="true")
+							select#companiesFilterCityField.form-select.flex-grow-1.bg-transparent.text-truncate.m-0.border-0(name="city")
+								option(value="" selected hidden) Choose city
+								option(value="1") city One
+								option(value="2") city Two
+								option(value="3") city Three
+					.col
+						.input-group.input-group-sm.rounded-5.flex-nowrap.text-capitalize.border.py-1.gap-1
+							label.input-group-text.bg-transparent.px-3.w-6rem.w-xl-fit-content.border-0(for="companiesFilterStateField")
+								strong.fw-bolder State
+							.vr.border.bg-transparent.op-100(aria-hidden="true")
+							select#companiesFilterStateField.form-select.flex-grow-1.bg-transparent.text-truncate.m-0.border-0(name="state")
+								option(value="" selected hidden) Choose state
+								option(value="1") State One
+								option(value="2") State Two
+								option(value="3") State Three
+					.col
+						.input-group.input-group-sm.rounded-5.flex-nowrap.text-capitalize.border.py-1.gap-1
+							label.input-group-text.bg-transparent.px-3.w-6rem.w-xl-fit-content.border-0(for="CompaniesFilterRatingField")
+								strong.fw-bolder Rating
+							.vr.border.bg-transparent.op-100(aria-hidden="true")
+							select#CompaniesFilterRatingField.form-select.flex-grow-1.bg-transparent.text-truncate.m-0.border-0(name="rating")
+								option(value="" selected hidden) Choose Rating
+								option(value="4") Above 4
+								option(value="3") Above 3
+								option(value="2") Above 2
+								option(value="1") Above 2
+// companies filter section ends

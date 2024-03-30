@@ -2,6 +2,7 @@ const gulp = require("gulp");
 const gulpPug = require("gulp-pug");
 const config = require("../gulpconfig");
 const navList = require("../../seeds/navList.json");
+const companies = require("../../seeds/companies.json");
 
 const isIterableArray = (array) => Array.isArray(array) && array.length > 0;
 
@@ -28,6 +29,7 @@ const pug = () =>
 					APP_THEME_COLOR: config.app.themeColor,
 					APP_THEME: config.app.theme,
 					navList,
+					companies,
 				},
 			})
 		)

@@ -1,0 +1,27 @@
+mixin companyCard(data={}, isSwiperSlide=false)
+	article.card.company-card.shadow.h-100
+		.card-img-top.ratio.ratio-89x44.text-bg-dark.overflow-hidden
+			img.object-fit-cover.w-100.h-100(class=(isSwiperSlide ? "swiper-lazy" : undefined), src=(!isSwiperSlide ? data.header_img : undefined), data-src=(isSwiperSlide ? data.header_img : undefined), alt=data.title||"", width="356", height="176", loading="lazy")
+			if (isSwiperSlide)
+				.swiper-lazy-preloader.swiper-lazy-preloader-white.start-50
+		.card-body.p-1
+			.hstack.align-items-end.mb-3
+				.ratio.ratio-1x1.w-94px.h-94px.flex-shrink-0.text-bg-dark.shadow.rounded-circle
+					img.w-94px.h-94px.rounded-circle.object-fit-cover(src=data.logo, alt="", height="94", width="94", loading="lazy")
+				.flex-grow-1
+					p.mb-0.p-1.small rating
+			h3.card-title.h5.text-capitalize
+				strong.fw-bolder=data.title
+			.hstack.gap-gutter.flex-wrap
+				each service in data.services
+					.badge.bg-dark.text-dark.text-capitalize.rounded-pill=service
+		.card-footer.p-1.pt-3
+			.row
+				.col-6
+					a.btn.btn-primary.rounded-pill.w-100.text-capitalize.text-decoration-none(href="companies-single.html")
+						strong get a quot
+				.col-6
+					a.btn.btn-link.rounded-pill.w-100.icon-link.icon-link-hover.justify-content-center.text-decoration-none(href="companies-single.html")
+						svg.bi.h-auto.w-auto.ms-n2(width="14.405" height="12.99" fill="currentColor")
+							use(href="#icon-arrow-right-sm")
+						strong know more

@@ -1,0 +1,16 @@
+.company-card {
+	padding: map-get($spacers, gutter);
+	--#{$prefix}card-inner-border-radius: calc(var(--tcg-border-radius-xl) - #{map-get($spacers, gutter)});
+	.card {
+		&-img-top {
+			mask: linear-gradient(to top, transparent 0, var(--#{$prefix}card-bg) calc(100% - 2.875rem)) !important;
+			& + .card-body {
+				margin-top: calc(-1 * 2.9375rem);
+			}
+		}
+	}
+
+	.badge {
+		--#{$prefix}bg-opacity: 0.1;
+	}
+}

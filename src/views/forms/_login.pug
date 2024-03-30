@@ -5,14 +5,14 @@ form.needs-validation#login-form(action="/" method="POST" novalidate)
 		.row.g-3
 			.col-12
 				label.form-label.visually-hidden(for="loginEmailField") Email
-				input#loginEmailField.form-control.rounded-5.text-truncate(type="email", name="email", placeholder="Email", autocomplete="email", required)
+				input#loginEmailField.form-control.text-truncate(type="email", name="email", placeholder="Email", autocomplete="email", required)
 				.valid-feedback.text-uppercase
 					strong looks good !
 				.invalid-feedback.text-uppercase
 					strong This filed is mandatory!
 			.col-12
 				label.form-label.visually-hidden(for="loginPasswordField") Password
-				input#loginPasswordField.form-control.rounded-5.text-truncate(type="password", name="password", placeholder="Password", autocomplete="current-password", required)
+				input#loginPasswordField.form-control.text-truncate(type="password", name="password", placeholder="Password", autocomplete="current-password", required)
 				.valid-feedback.text-uppercase
 					strong looks good !
 				.invalid-feedback.text-uppercase

@@ -1,0 +1,67 @@
+#companies-search-form {
+	.input-group {
+		border-radius: var(--#{$prefix}border-radius-xl);
+		@include media-breakpoint-up(lg) {
+			border-radius: var(--#{$prefix}border-radius-pill);
+		}
+		.form-control {
+			@include media-breakpoint-down(lg) {
+				border-radius: var(--#{$prefix}border-radius-lg) var(--#{$prefix}border-radius-lg) 0 0;
+			}
+		}
+		.form-select {
+			@include media-breakpoint-up(lg) {
+				border-radius: 0 var(--#{$prefix}border-radius-xxl) var(--#{$prefix}border-radius-xxl) 0;
+			}
+			@include media-breakpoint-down(lg) {
+				border-radius: 0 0 var(--#{$prefix}border-radius-lg) var(--#{$prefix}border-radius-lg);
+			}
+		}
+		button {
+			&[type="submit"] {
+				--#{$prefix}submit-negative-margin: 65px;
+				@include media-breakpoint-down(lg) {
+					border-radius: var(--#{$prefix}border-radius-lg) !important;
+					margin: 0;
+				}
+				@include media-breakpoint-up(lg) {
+					&,
+					&:hover,
+					&:focus,
+					&:active {
+						&,
+						.btn-text,
+						svg {
+							@include transition($transition-base !important);
+						}
+					}
+
+					&:hover,
+					&:focus,
+					&:active {
+						.btn-text {
+							transition-delay: 0.2s !important;
+						}
+					}
+
+					&:not(:hover):not(:focus):not(:active) {
+						margin-left: var(--#{$prefix}submit-negative-margin);
+						.btn-text {
+							opacity: 0;
+							z-index: -1;
+							transition-delay: 0s !important;
+							+ svg {
+								margin-left: calc(-1 * var(--#{$prefix}submit-negative-margin));
+							}
+						}
+
+						&,
+						.btn-text + svg {
+							transition-delay: 0.2s !important;
+						}
+					}
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,14 @@
+include ../mixins/_company-card.pug
+
+// related companies section starts
+section.py-4.py-md-5.py-xl-6
+	.container
+		.row.gy-4
+			.col-12
+				h2.display-5.text-capitalize.mb-0
+					strong.fw-bolder Related Security Companies
+			.col-12
+				.row.gy-3.row-cols-1.row-cols-md-2.row-cols-xl-3
+					each company in locals.companies.slice(1, 4)
+						+companyCard(company)
+// related companies section ends

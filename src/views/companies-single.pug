@@ -3,7 +3,7 @@ include ./mixins/_inner-header.pug
 
 append variables
 	- var page_title = "Directory Listing";
-	- var header_data = { bg_img: "./assets/images/backgrounds/dashboard-compressed.webp", breadcrumb: [{ title: "Home", href: "index.html" }, { title: "search", href: "directories.html" }, { title: "Black Hound Security", href: "directories-single.html" }] };
+	- var header_data = { bg_img: "./assets/images/backgrounds/dashboard-compressed.webp", breadcrumb: [{ title: "Home", href: "index.html" }, { title: "search", href: "companies.html" }, { title: "Black Hound Security", href: "companies-single.html" }] };
 
 block styles
 
@@ -14,6 +14,7 @@ block content
 		section
 			.container
 				include ./sections/_typography.pug
+		include ./sections/_companies-related.pug
 		include ./sections/_vendor-home.pug
 	// application main content ends
 
