@@ -12,8 +12,4 @@
 			border-bottom-right-radius: var(--#{$prefix}card-inner-border-radius);
 		}
 	}
-
-	.badge {
-		--#{$prefix}bg-opacity: 0.1;
-	}
 }

@@ -1,0 +1,48 @@
+// quote form starts
+form.needs-validation#quote-form(action="companies-single.html" method="POST" novalidate)
+	fieldset
+		legend.visually-hidden quote form
+		.row.gy-3
+			.col-12
+				label.form-label.visually-hidden(for="quoteFullNameField") Your Name
+				input#quoteFullNameField.form-control.text-truncate(type="text", name="full_name", placeholder="Your Name", autocomplete="name", required)
+				.valid-feedback.text-uppercase
+					strong looks good !
+				.invalid-feedback.text-uppercase
+					strong This filed is mandatory!
+			.col-12
+				label.form-label.visually-hidden(for="quoteEmailField") Email
+				input#quoteEmailField.form-control.text-truncate(type="email", name="email", placeholder="Email", autocomplete="email", required)
+				.valid-feedback.text-uppercase
+					strong looks good !
+				.invalid-feedback.text-uppercase
+					strong This filed is mandatory!
+			.col-12
+				label.form-label.visually-hidden(for="quotePhoneField") Phone
+				input#quotePhoneField.form-control.text-truncate(type="tel", name="phone", placeholder="Phone", autocomplete="tel", required)
+				.valid-feedback.text-uppercase
+					strong looks good !
+				.invalid-feedback.text-uppercase
+					strong This filed is mandatory!
+			.col-12
+				label.form-label.visually-hidden(for="quoteNeededServicesField") Needed Services
+				select#quoteNeededServicesField.form-select.text-truncate(name="needed_services", value="", required)
+					option(value="", selected, hidden) Needed Services
+					option(value="1") Service One
+					option(value="2") Service Two
+					option(value="3") Service Three
+				.valid-feedback.text-uppercase
+					strong looks good !
+				.invalid-feedback.text-uppercase
+					strong This filed is mandatory!
+			.col-12
+				label.form-label.visually-hidden(for="quoteNotesField") Notes
+				textarea#quoteNotesField.form-control.text-truncate(name="notes", placeholder="Notes", required)
+				.valid-feedback.text-uppercase
+					strong looks good !
+				.invalid-feedback.text-uppercase
+					strong This filed is mandatory!
+			.col-12
+				button.btn.btn-primary.rounded-pill.text-capitalize.w-100(type="submit")
+					strong submit request
+// quote form ends

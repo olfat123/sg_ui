@@ -16,7 +16,14 @@
 		"logo": "./assets/images/companies/2-logo-compressed.webp",
 		"header_img": "./assets/images/companies/2-compressed.webp",
 		"rating": 4.7,
-		"services": ["Security Guard Services", "Mobile Patrols", "Event Security", "Access Control Systems"],
+		"services": [
+			"Security Guard Services",
+			"Mobile Patrols",
+			"Event Security",
+			"Access Control Systems",
+			"Private Investigation Services",
+			"Security Consultation and Risk Assessment"
+		],
 		"state": "Los Angeles, California, USA",
 		"address": "5396 North Reese Avenue, Fresno CA 93722",
 		"is_featured": true,
