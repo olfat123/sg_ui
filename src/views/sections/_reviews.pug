@@ -1,0 +1,27 @@
+include ../mixins/_review-card.pug
+
+// reviews section starts
+section.py-5.py-lg-6
+	.container
+		.row.gy-3.justify-content-center.justify-content-md-between.align-items-md-center
+			.col-12.col-md-auto
+				h2.h5.text-capitalize.mb-0
+					strong Reviews
+			.col-12.order-md-last
+				#reviews-slider.swiper.container-off-canvas-end.container-off-canvas-start.vw-100
+					.swiper-wrapper
+						each review in locals.reviews
+							.swiper-slide
+								+reviewCard(review)
+			.col-12.col-md-auto
+				// NOTE: slider navigation buttons [for], and [aria-controls] attributes must has slider unique id value.
+				.btn-group.swiper-navigation-wrapper.rounded-pill.bg-gray-400
+					button.btn.btn-link.link-dark.p-3.pe-2.icon-link.icon-link-hover.icon-link-hover-reversed.swiper-navigation-btn.swiper-navigation-btn-prev(aria-label="prev" type="button" data-target="#reviews-slider", aria-controls="reviews-slider")
+						svg.bi.rtl-mirror.h-auto.w-auto(width="14.405" height="12.99" fill="currentColor")
+							use(href="#icon-arrow-left-sm")
+						span.visually-hidden prev
+					button.btn.btn-link.link-dark.p-3.ps-2.icon-link.icon-link-hover.swiper-navigation-btn.swiper-navigation-btn-next(aria-label="next" type="button" data-target="#reviews-slider", aria-controls="reviews-slider")
+						svg.bi.rtl-mirror.h-auto.w-auto(width="14.405" height="12.99" fill="currentColor")
+							use(href="#icon-arrow-right-sm")
+						span.visually-hidden next
+// reviews section ends

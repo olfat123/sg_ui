@@ -1,0 +1,15 @@
+mixin reviewCard(data={})
+	.card.review-card
+		.card-body
+			p.mb-0
+				small=data.review
+		.card-footer.pt-0.hstack.gap-3.flex-nowrap.align-items-center.justify-content-between
+			.hstack.gap-2.flex-nowrap.align-items-center
+				.ratio.ratio-1x1.w-32px.h-32px.flex-shrink-0.text-bg-dark.shadow.rounded-circle
+					img.w-32px.h-32px.rounded-circle.object-fit-cover(src=data.avatar, alt="", height="32", width="32", loading="lazy")
+				.flex-grow-1
+					p.text-capitalize.mb-0.lh-1
+						small
+							strong=data.author
+			p.mb-0
+				small rating

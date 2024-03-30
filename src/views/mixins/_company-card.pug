@@ -1,3 +1,5 @@
+include ./_service-badge.pug
+
 mixin companyCard(data={}, isSponsored=false, isSwiperSlide=false)
 	article.card.company-card.shadow.h-100.p-gutter
 		if (isSponsored)
@@ -17,15 +19,16 @@ mixin companyCard(data={}, isSponsored=false, isSwiperSlide=false)
 			h3.card-title.h5.text-capitalize
 				strong.fw-bolder=data.title
 			.hstack.gap-gutter.flex-wrap
-				each service in data.services
-					.badge.bg-dark.text-dark.text-capitalize.rounded-pill=service
+				each service in data.services.slice(0, 3)
+					+serviceBadge({text: service})
+				p.mb-0 +4
 		.card-footer.p-1.pt-3
-			.row
-				.col-6
-					a.btn.btn-primary.rounded-pill.w-100.text-capitalize.text-decoration-none(href="companies-single.html")
+			.row.g-gutter.flex-wrap
+				.col
+					a.btn.btn-primary.white-space-nowrap.rounded-pill.w-100.text-capitalize.text-decoration-none(href="companies-single.html")
 						strong get a quot
-				.col-6
-					a.btn.btn-link.rounded-pill.w-100.icon-link.gap-3.icon-link-hover.justify-content-center.text-decoration-none(href="companies-single.html")
+				.col
+					a.btn.btn-link.white-space-nowrap.flex-nowrap.rounded-pill.w-100.icon-link.gap-3.icon-link-hover.justify-content-center.text-decoration-none(href="companies-single.html")
 						svg.bi.h-auto.w-auto.ms-n2(width="14.405" height="12.99" fill="currentColor")
 							use(href="#icon-arrow-right-sm")
 						strong know more

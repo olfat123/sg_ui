@@ -17721,7 +17721,7 @@ function _interopRequireWildcard(e, r) {
 }
 /* eslint-disable no-new */
 var _default = function _default() {
-  // events slider
+  // companies slider
   new _swiper["default"]("#companies-sponsored-slider", _objectSpread(_objectSpread({
     modules: [].concat((0, _toConsumableArray2["default"])(_vars["default"].swiper_autoplay_enable ? [_swiper.Autoplay] : []), [_swiper.Keyboard, _swiper.Navigation, _swiper.Lazy]),
     speed: _vars["default"].swiper_speed,
@@ -17732,7 +17732,7 @@ var _default = function _default() {
     updateOnWindowResize: true,
     centeredSlides: true,
     slideToClickedSlide: true,
-    slidesPerView: 1.25,
+    slidesPerView: 1,
     slidesPerGroup: 1,
     spaceBetween: 16,
     keyboard: {
@@ -17753,15 +17753,51 @@ var _default = function _default() {
       prevEl: ".swiper-navigation-btn-prev[data-target='#companies-sponsored-slider']",
       nextEl: ".swiper-navigation-btn-next[data-target='#companies-sponsored-slider']"
     },
-    breakpoints: (0, _defineProperty2["default"])((0, _defineProperty2["default"])((0, _defineProperty2["default"])({}, +(0, _dom.getNodeCSSPropertyValue)(document.documentElement, "--".concat(_vars["default"].css_prefix, "sm")).split("px")[0], {
-      slidesPerView: 2.15,
-      slidesPerGroup: 2
-    }), +(0, _dom.getNodeCSSPropertyValue)(document.documentElement, "--".concat(_vars["default"].css_prefix, "lg")).split("px")[0], {
-      slidesPerView: 2.75,
+    breakpoints: (0, _defineProperty2["default"])((0, _defineProperty2["default"])({}, +(0, _dom.getNodeCSSPropertyValue)(document.documentElement, "--".concat(_vars["default"].css_prefix, "md")).split("px")[0], {
+      slidesPerView: 2,
       slidesPerGroup: 2,
       centeredSlides: false
     }), +(0, _dom.getNodeCSSPropertyValue)(document.documentElement, "--".concat(_vars["default"].css_prefix, "xl")).split("px")[0], {
-      slidesPerView: 3.15,
+      slidesPerView: 3,
+      slidesPerGroup: 3,
+      centeredSlides: false
+    })
+  }));
+
+  // reviews slider
+  new _swiper["default"]("#reviews-slider", _objectSpread(_objectSpread({
+    modules: [].concat((0, _toConsumableArray2["default"])(_vars["default"].swiper_autoplay_enable ? [_swiper.Autoplay] : []), [_swiper.Keyboard, _swiper.Navigation]),
+    speed: _vars["default"].swiper_speed,
+    loop: false,
+    observer: true,
+    observeParents: true,
+    resizeObserver: true,
+    updateOnWindowResize: true,
+    centeredSlides: true,
+    slideToClickedSlide: true,
+    slidesPerView: 1,
+    slidesPerGroup: 1,
+    spaceBetween: 16,
+    keyboard: {
+      enabled: true,
+      onlyInViewport: true
+    }
+  }, _vars["default"].swiper_autoplay_enable && {
+    autoplay: {
+      delay: _vars["default"].swiper_autoplay_delay
+    }
+  }), {}, {
+    loopedSlides: (0, _toConsumableArray2["default"])(document.querySelectorAll("#reviews-slider .swiper-slide")).length,
+    navigation: {
+      prevEl: ".swiper-navigation-btn-prev[data-target='#reviews-slider']",
+      nextEl: ".swiper-navigation-btn-next[data-target='#reviews-slider']"
+    },
+    breakpoints: (0, _defineProperty2["default"])((0, _defineProperty2["default"])({}, +(0, _dom.getNodeCSSPropertyValue)(document.documentElement, "--".concat(_vars["default"].css_prefix, "md")).split("px")[0], {
+      slidesPerView: 2,
+      slidesPerGroup: 2,
+      centeredSlides: false
+    }), +(0, _dom.getNodeCSSPropertyValue)(document.documentElement, "--".concat(_vars["default"].css_prefix, "xl")).split("px")[0], {
+      slidesPerView: 3,
       slidesPerGroup: 3,
       centeredSlides: false
     })

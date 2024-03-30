@@ -106,3 +106,38 @@ input.hide-clear[type="search"]::-webkit-search-results-decoration {
 textarea {
 	height: 8.75rem !important;
 }
+
+.container-off-canvas-start {
+	margin-left: calc((#{$grid-gutter-width} * 0.5) * -1);
+	padding-left: 0;
+
+	@each $breakpoint in map-keys($grid-breakpoints) {
+		@include media-breakpoint-up($breakpoint, $grid-breakpoints) {
+			@if (map-get($container-max-widths, $breakpoint)) {
+				margin-left: calc(
+					((100vw - ((#{map-get($container-max-widths, $breakpoint)} - #{$grid-gutter-width}))) * 0.5) * -1
+				) !important;
+				padding-left: calc(
+					((100vw - ((#{map-get($container-max-widths, $breakpoint)} - #{$grid-gutter-width}))) * 0.5)
+				) !important;
+			}
+		}
+	}
+}
+.container-off-canvas-end {
+	margin-right: calc((#{$grid-gutter-width} * 0.5) * -1);
+	padding-right: 0;
+
+	@each $breakpoint in map-keys($grid-breakpoints) {
+		@include media-breakpoint-up($breakpoint, $grid-breakpoints) {
+			@if (map-get($container-max-widths, $breakpoint)) {
+				margin-right: calc(
+					((100vw - ((#{map-get($container-max-widths, $breakpoint)} - #{$grid-gutter-width}))) * 0.5) * -1
+				) !important;
+				padding-right: calc(
+					((100vw - ((#{map-get($container-max-widths, $breakpoint)} - #{$grid-gutter-width}))) * 0.5)
+				) !important;
+			}
+		}
+	}
+}

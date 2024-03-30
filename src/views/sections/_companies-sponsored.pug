@@ -8,13 +8,13 @@ section.companies-sponsored.py-4.py-md-5.py-xl-6
 				h2.h3.text-primary.text-capitalize.text-center.mb-0
 					strong Sponsored in your City
 			.col-12
-				.swiper.pb-5.pt-3#companies-sponsored-slider
+				#companies-sponsored-slider.swiper.pb-5.pt-3.container-off-canvas-end.container-off-canvas-start.vw-100
 					.swiper-wrapper
 						each company in locals.companies
 							.swiper-slide.h-auto
 								+companyCard(company, true, true)
 			.col-auto
-				// NOTE: magazine slider navigation buttons for, and aria-controls attributes must has slider unique id value.
+				// NOTE: slider navigation buttons [for], and [aria-controls] attributes must has slider unique id value.
 				.btn-group.swiper-navigation-wrapper
 					button.btn.btn-link.link-dark.icon-link.icon-link-hover.icon-link-hover-reversed.swiper-navigation-btn.swiper-navigation-btn-prev(aria-label="prev" type="button" data-target="#companies-sponsored-slider", aria-controls="companies-sponsored-slider")
 						svg.bi.rtl-mirror.w-auto.h-auto(width="82" height="16.538")

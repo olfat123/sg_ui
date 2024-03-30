@@ -10,7 +10,7 @@ $white: #fff !default;
 $gray-100: #f8f9fa !default;
 $gray-200: #f0f0f0 !default;
 $gray-300: #dee2e6 !default;
-$gray-400: #ced4da !default;
+$gray-400: #d8d8d8 !default;
 $gray-500: #adb5bd !default;
 $gray-600: #6c757d !default;
 $gray-700: #495057 !default;
@@ -321,6 +321,7 @@ $theme-colors: (
 	"white": $white,
 	"black": $black,
 	"yellow": $yellow,
+	"gray-400": $gray-400,
 ) !default;
 // scss-docs-end theme-colors-map
 
@@ -1326,7 +1327,7 @@ $pagination-padding-x-lg: 1.5rem !default;
 $pagination-font-size: $font-size-base !default;
 
 $pagination-color: var(--#{$prefix}body-color) !default;
-$pagination-bg: rgba(var(--#{$prefix}dark), 0.1) !default;
+$pagination-bg: $gray-400 !default;
 $pagination-border-radius: var(--#{$prefix}border-radius) !default;
 $pagination-border-width: 0 !default;
 $pagination-margin-start: calc(
@@ -1381,7 +1382,7 @@ $card-border-color: var(--#{$prefix}border-color-translucent) !default;
 $card-border-radius: var(--#{$prefix}border-radius-xl) !default;
 $card-box-shadow: null !default;
 $card-inner-border-radius: subtract($card-border-radius, $card-border-width) !default;
-$card-cap-padding-y: $spacer * 2.625 !default;
+$card-cap-padding-y: $card-spacer-y !default;
 $card-cap-padding-x: $card-spacer-x !default;
 $card-bg: var(--#{$prefix}white) !default;
 $card-cap-bg: transparent !default;

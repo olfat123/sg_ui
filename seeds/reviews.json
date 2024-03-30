@@ -1,0 +1,38 @@
+[
+	{
+		"review": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.",
+		"rating": 4,
+		"author": "username",
+		"avatar": "./assets/images/avatars/1-compressed.webp"
+	},
+	{
+		"review": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. ",
+		"rating": 4,
+		"author": "username",
+		"avatar": "./assets/images/avatars/2-compressed.webp"
+	},
+	{
+		"review": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. ",
+		"rating": 5,
+		"author": "username",
+		"avatar": "./assets/images/avatars/3-compressed.webp"
+	},
+	{
+		"review": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.",
+		"rating": 4,
+		"author": "username",
+		"avatar": "./assets/images/avatars/1-compressed.webp"
+	},
+	{
+		"review": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. ",
+		"rating": 4,
+		"author": "username",
+		"avatar": "./assets/images/avatars/2-compressed.webp"
+	},
+	{
+		"review": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. ",
+		"rating": 5,
+		"author": "username",
+		"avatar": "./assets/images/avatars/3-compressed.webp"
+	}
+]

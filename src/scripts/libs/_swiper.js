@@ -4,7 +4,7 @@ import { getNodeCSSPropertyValue } from "../utils/_dom";
 import vars from "../utils/_vars";
 
 export default () => {
-	// events slider
+	// companies slider
 	new Swiper("#companies-sponsored-slider", {
 		modules: [...(vars.swiper_autoplay_enable ? [Autoplay] : []), Keyboard, Navigation, Lazy],
 		speed: vars.swiper_speed,
@@ -15,7 +15,7 @@ export default () => {
 		updateOnWindowResize: true,
 		centeredSlides: true,
 		slideToClickedSlide: true,
-		slidesPerView: 1.25,
+		slidesPerView: 1,
 		slidesPerGroup: 1,
 		spaceBetween: 16,
 		keyboard: { enabled: true, onlyInViewport: true },
@@ -28,20 +28,52 @@ export default () => {
 			nextEl: ".swiper-navigation-btn-next[data-target='#companies-sponsored-slider']",
 		},
 		breakpoints: {
-			// when window width is small
-			[+getNodeCSSPropertyValue(document.documentElement, `--${vars.css_prefix}sm`).split("px")[0]]: {
-				slidesPerView: 2.15,
-				slidesPerGroup: 2,
-			},
-			// when window width is large
-			[+getNodeCSSPropertyValue(document.documentElement, `--${vars.css_prefix}lg`).split("px")[0]]: {
-				slidesPerView: 2.75,
+			// when window width is medium
+			[+getNodeCSSPropertyValue(document.documentElement, `--${vars.css_prefix}md`).split("px")[0]]: {
+				slidesPerView: 2,
 				slidesPerGroup: 2,
 				centeredSlides: false,
 			},
 			// when window width is x-large
 			[+getNodeCSSPropertyValue(document.documentElement, `--${vars.css_prefix}xl`).split("px")[0]]: {
-				slidesPerView: 3.15,
+				slidesPerView: 3,
+				slidesPerGroup: 3,
+				centeredSlides: false,
+			},
+		},
+	});
+
+	// reviews slider
+	new Swiper("#reviews-slider", {
+		modules: [...(vars.swiper_autoplay_enable ? [Autoplay] : []), Keyboard, Navigation],
+		speed: vars.swiper_speed,
+		loop: false,
+		observer: true,
+		observeParents: true,
+		resizeObserver: true,
+		updateOnWindowResize: true,
+		centeredSlides: true,
+		slideToClickedSlide: true,
+		slidesPerView: 1,
+		slidesPerGroup: 1,
+		spaceBetween: 16,
+		keyboard: { enabled: true, onlyInViewport: true },
+		...(vars.swiper_autoplay_enable && { autoplay: { delay: vars.swiper_autoplay_delay } }),
+		loopedSlides: [...document.querySelectorAll("#reviews-slider .swiper-slide")].length,
+		navigation: {
+			prevEl: ".swiper-navigation-btn-prev[data-target='#reviews-slider']",
+			nextEl: ".swiper-navigation-btn-next[data-target='#reviews-slider']",
+		},
+		breakpoints: {
+			// when window width is large
+			[+getNodeCSSPropertyValue(document.documentElement, `--${vars.css_prefix}md`).split("px")[0]]: {
+				slidesPerView: 2,
+				slidesPerGroup: 2,
+				centeredSlides: false,
+			},
+			// when window width is x-large
+			[+getNodeCSSPropertyValue(document.documentElement, `--${vars.css_prefix}xl`).split("px")[0]]: {
+				slidesPerView: 3,
 				slidesPerGroup: 3,
 				centeredSlides: false,
 			},

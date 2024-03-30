@@ -1,19 +1,19 @@
 include ./_company-card.pug
 
 mixin homeCompanies(data={title: "", description: "", ctaText: "", list: []}, isReversed=false)
-	section.py-4.py-md-5.py-xl-6
+	section.py-5.py-lg-6
 		.container
-			.row.gy-4.gy-md-0.gx-md-3.gx-xl-4.flex-md-nowrap(class=(isReversed?"flex-row-reverse":""))
-				.col-12.col-md-4.align-self-center
-					h2.text-capitalize.mb-4
+			.row.gy-4.gy-lg-0.gx-lg-3.gx-xl-4.flex-lg-nowrap(class=(isReversed?"flex-row-reverse":""))
+				.col-12.col-lg-4.align-self-center
+					h2.text-capitalize.mb-3
 						small.fs-6.d-block Based On Your Location
 						strong.text-primary.display-5.fw-bolder=data.title
 					p
 						small=data.description
 					a.btn.btn-outline-primary.text-decoration-none.text-capitalize.px-5.mt-4.rounded-pill(href="companies.html")
 						strong=data.ctaText
-				.col-12.col-md-8
-					.row.gy-3.row-cols-1.row-cols-lg-2
+				.col-12.col-lg-8
+					.row.gy-3.row-cols-1.row-cols-md-2
 						each company in data.list
 							.col
 								+companyCard(company)
