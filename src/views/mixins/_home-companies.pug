@@ -1,7 +1,7 @@
 include ./_company-card.pug
 
-mixin homeCompanies(data={title: "", description: "", ctaText: "", list: []}, isReversed=false)
-	section.py-5.py-lg-6
+mixin homeCompanies(data={title: "", slug: "", description: "", ctaText: "", list: []}, isReversed=false)
+	section.py-5.py-lg-6(id=(slug ? `home-companies-${slug}` : ""))
 		.container
 			.row.gy-4.gy-lg-0.gx-lg-3.gx-xl-4.flex-lg-nowrap(class=(isReversed?"flex-row-reverse":""))
 				.col-12.col-lg-4.align-self-center

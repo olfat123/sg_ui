@@ -1,0 +1,60 @@
+.btn-scroll-down {
+	&-indicator {
+		position: relative;
+		display: block;
+		height: 2.3125rem;
+		width: 1.625rem;
+		border-radius: 0.5rem;
+		border: #{$border-width * 2} $border-style currentColor;
+
+		&::after {
+			content: "";
+			position: absolute;
+			display: block;
+			/*rtl:ignore*/
+			left: 50%;
+			top: 50%;
+			/*rtl:ignore*/
+			transform: translate(-50%, -50%);
+			height: 0.5rem;
+			width: #{$border-width * 3};
+			border-radius: 0.5rem;
+			background-color: currentColor;
+			animation: scrollDown 1.5s linear infinite;
+
+			@include transition($btn-transition);
+		}
+
+		@keyframes scrollDown {
+			0% {
+				top: 0;
+				transform: translate(-50%, 0);
+				opacity: 0;
+			}
+
+			50% {
+				top: 50%;
+				transform: translate(-50%, -50%);
+				opacity: 1;
+			}
+
+			100% {
+				top: 100%;
+				transform: translate(-50%, -100%);
+				opacity: 0;
+			}
+		}
+	}
+
+	&:hover,
+	&:focus,
+	&:active {
+		.scroll-down-indicator {
+			&::after {
+				height: 0.75rem;
+				width: 0.45rem;
+				@include transition($btn-transition);
+			}
+		}
+	}
+}

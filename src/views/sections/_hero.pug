@@ -3,5 +3,20 @@ section.hero.text-white.section-with-bg
 	.section-bg.text-bg-dark
 		.section-bg-content
 			img.section-bg-image.object-position-top.op-40(src="./assets/images/backgrounds/hero-compressed.webp", alt="", loading="lazy", width="1280", height="720")
-	p hero section
+	.container
+		.row.gy-4.gx-sm-0.justify-content-center
+			.col-12.col-md-10.col-lg-8.col-xl-6
+				h1.display-5.text-capitalize.text-center.mb-0
+					strong.fw-bolder Get The Best Proposal For Your Security Needs
+			.col-12.col-sm-11.col-md-10.col-lg-9.col-xl-8
+				.vstack.gap-3.justify-content-center
+					include ../forms/_companies-search.pug
+					p.text-center.text-dark.mb-0 The most comprehensive and updated knowledge base for the security industry
+			.col-12.m-0
+			.col-auto
+				button.btn.btn-link.link-dark.btn-scroll-down.icon-link.icon-link-hover.icon-link-hover-down.text-decoration-none.p-1.text-center.text-capitalize.flex-column(href="#home-companies-featured-companies")
+					small scroll for more
+					span.btn-scroll-down-indicator
+					svg.bi.rtl-mirror.h-auto.w-auto(width="12.99" height="14.405" fill="currentColor")
+						use(href="#icon-arrow-down-sm")
 // hero section ends
