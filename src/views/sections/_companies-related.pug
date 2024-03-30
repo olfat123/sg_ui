@@ -10,5 +10,6 @@ section.py-4.py-md-5.py-xl-6
 			.col-12
 				.row.gy-3.row-cols-1.row-cols-md-2.row-cols-xl-3
 					each company in locals.companies.slice(1, 4)
-						+companyCard(company)
+						.col
+							+companyCard(company)
 // related companies section ends
