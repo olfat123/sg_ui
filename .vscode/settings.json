@@ -6,5 +6,8 @@
 		"source.sortImports": "explicit",
 		"source.organizeImports": "explicit",
 		"source.sortMembers": "explicit"
+	},
+	"[html]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
 	}
 }

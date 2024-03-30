@@ -210,3 +210,7 @@
 		color: $input-placeholder-color;
 	}
 }
+
+.pagination {
+	--#{$prefix}bg-opacity: 0.1;
+}

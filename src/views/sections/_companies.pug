@@ -1,3 +1,4 @@
+include ../mixins/_pagination.pug
 include ../mixins/_company-card.pug
 
 // companies section starts
@@ -12,5 +13,5 @@ section.py-4.py-md-5.py-xl-6
 			.col-12
 				hr.bg-transparent.my-0
 			.col-auto
-				p.text-bg-dark.p-4.mb-0 pagination
+				+pagination("companies.html", 1, 20)
 // companies section ends

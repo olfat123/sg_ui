@@ -1,5 +1,4 @@
 .company-card {
-	padding: map-get($spacers, gutter);
 	--#{$prefix}card-inner-border-radius: calc(var(--tcg-border-radius-xl) - #{map-get($spacers, gutter)});
 	.card {
 		&-img-top {
@@ -7,6 +6,10 @@
 			& + .card-body {
 				margin-top: calc(-1 * 2.9375rem);
 			}
+		}
+		&-sponsored-flag {
+			border-top-left-radius: var(--#{$prefix}card-inner-border-radius);
+			border-bottom-right-radius: var(--#{$prefix}card-inner-border-radius);
 		}
 	}
 

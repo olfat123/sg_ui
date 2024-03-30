@@ -1,5 +1,9 @@
-mixin companyCard(data={}, isSwiperSlide=false)
-	article.card.company-card.shadow.h-100
+mixin companyCard(data={}, isSponsored=false, isSwiperSlide=false)
+	article.card.company-card.shadow.h-100.p-gutter
+		if (isSponsored)
+			.card-sponsored-flag.text-capitalize.text-bg-yellow.px-3.py-1.position-absolute.top-0.start-0.z-3.ms-gutter.mt-gutter
+				small
+					strong sponsored
 		.card-img-top.ratio.ratio-89x44.text-bg-dark.overflow-hidden
 			img.object-fit-cover.w-100.h-100(class=(isSwiperSlide ? "swiper-lazy" : undefined), src=(!isSwiperSlide ? data.header_img : undefined), data-src=(isSwiperSlide ? data.header_img : undefined), alt=data.title||"", width="356", height="176", loading="lazy")
 			if (isSwiperSlide)
@@ -21,7 +25,7 @@ mixin companyCard(data={}, isSwiperSlide=false)
 					a.btn.btn-primary.rounded-pill.w-100.text-capitalize.text-decoration-none(href="companies-single.html")
 						strong get a quot
 				.col-6
-					a.btn.btn-link.rounded-pill.w-100.icon-link.icon-link-hover.justify-content-center.text-decoration-none(href="companies-single.html")
+					a.btn.btn-link.rounded-pill.w-100.icon-link.gap-3.icon-link-hover.justify-content-center.text-decoration-none(href="companies-single.html")
 						svg.bi.h-auto.w-auto.ms-n2(width="14.405" height="12.99" fill="currentColor")
 							use(href="#icon-arrow-right-sm")
 						strong know more

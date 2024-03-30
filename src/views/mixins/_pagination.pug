@@ -1,0 +1,19 @@
+mixin pagination(baseUrl="#", page=1, pages=10)
+	// pagination
+	nav(aria-label="page navigation")
+		ul.pagination.bg-dark.p-1.rounded-pill.m-0.hstack.gap-5.align-items-center.justify-content-center.flex-nowrap.text-capitalize
+			li.page-item
+				// NOTE: in case of current page is equal 1, add class="disabled", tabindex="-1", and aria-disabled="true"
+				a.icon-link.rounded-pill.gap-3.icon-link-hover.icon-link-hover-reversed.page-link(class=`${(page==1) ? "disabled" : ""}`, title="previous page", href=`${baseUrl}?page=${Math.max(page - 1, 0)}`, tabindex=`${(page==1) ? "-1" : "0"}`, aria-disabled=`${(page==1)}`)
+					strong prev
+					svg.bi.rtl-mirror(width="14.405" height="12.99" fill="currentColor")
+						use(href="#icon-arrow-left-sm")
+			li.page-item
+				strong=`Page ${page}/${pages}`
+			li.page-item
+				// NOTE: in case of current page is equal to pages total number, add class="disabled", tabindex="-1", and aria-disabled="true"
+				a.icon-link.rounded-pill.gap-3.icon-link-hover.page-link(class=`${(page == pages) ? "disabled" : ""}`, title="next page", href=`${baseUrl}?page=${Math.min(page + 1, pages)}`, tabindex=`${(page == pages) ? "-1" : "0"}`, aria-disabled=`${(page == pages)}`)
+					svg.bi.rtl-mirror(width="14.405" height="12.99" fill="currentColor")
+						use(href="#icon-arrow-right-sm")
+					strong next
+	// pagination end/.

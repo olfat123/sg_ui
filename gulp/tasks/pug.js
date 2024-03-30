@@ -16,6 +16,7 @@ const pug = () =>
 		.src(config.paths.src.pug)
 		.pipe(
 			gulpPug({
+				doctype: "html",
 				pretty: config.is_production,
 				data: {
 					IS_PRODUCTION: config.is_production,
