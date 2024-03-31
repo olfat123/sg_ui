@@ -1,83 +1,11 @@
-include ../mixins/_service-badge.pug
+include ../mixins/_companies-info.pug
 
 // companies single section starts
 article.companies-single
-	- var company = locals.companies[1];
 	.container
 		.row.gy-5
 			.col-12.col-lg-7.col-xl-6
-				header.mb-5
-					.hstack.gap-3.align-items-center
-						.ratio.ratio-1x1.w-148px.h-148px.flex-shrink-0.text-bg-dark.shadow.rounded-circle
-							img.w-148px.h-148px.rounded-circle.object-fit-cover(src=company.logo, alt="", height="148", width="148", loading="lazy")
-						.vstack.gap-1.flex-grow-1.align-self-center
-							h1.display-6.text-capitalize.mb-0
-								strong.fw-bolder Black Hound Security
-							address.d-block.mb-0
-								strong Los Angeles, California, USA
-							p.mb-0.small rating
-					.card.mt-5
-						.card-body.p-2
-							.hstack.gap-3.align-items-center
-								.flex-shrink-0.ratio.ratio.1x1.w-44px.h-44px
-									img.object-fit-contain(src="./assets/images/icons/verified.svg", alt="", width="44", height="44", loading="lazy")
-								.flex-grow-1
-									p.text-capitalize.mb-0
-										strong Verified Security Company
-				section
-					.row.gy-5
-						.col-12
-							h2.h5.text-primary.text-capitalize.mb-3
-								strong About Us
-							.small.white-space-pre-wrap
-								p=company.about_us
-						.col-12
-							h2.h5.text-primary.text-capitalize.mb-3
-								strong provided services
-							.hstack.gap-gutter.flex-wrap
-								each service in company.services
-									+serviceBadge({text: service})
-						.col-12
-							h2.h5.text-primary.text-capitalize.mb-3
-								strong License
-							.table-responsive
-								table.table.table-striped.table-borderless
-									caption.visually-hidden license information
-									tbody
-										tr
-											td
-												small
-													strong License Type
-											td.text-end
-												small Class 1 License
-										tr
-											td
-												small
-													strong License Number
-											td.text-end
-												small 729RD290K1
-										tr
-											td
-												small
-													strong Expiration Date
-											td.text-end
-												small January 2030
-						.col-12
-							h2.h5.text-primary.text-capitalize.mb-3
-								strong License
-							address.d-block
-								strong 5396 North Reese Avenue, Fresno CA 93722
-							.card.rounded-4.overflow-hidden.shadow
-								.card-body.p-0
-									.ratio.ratio-286x147.text-bg-dark
-										// NOTE: Google map URL structure "https://maps.google.com/maps/embed/v1/place?key=<API_KEY>&q=<LOCATION_LAT>,<LOCATION_LONG>&zoom=<ZOOM_LEVEL>"
-										iframe.w-100.h-100(aria-hidden="false",src="https://maps.google.com/maps/embed/v1/place?key=AIzaSyCxkvH5GLpfLqDp-PFgNueG5hkCcGcfrI8&q=30.0444,31.2357&zoom=14",title="address map", width="572", height="294", loading="lazy",tabindex="0",allowfullscreen)
+				+companiesInfo(true)
 			.col-12.col-lg-5.offset-xl-1
-				aside.sticky-top.mt-n5.pt-5
-					.card.shadow
-						.card-header.py-4
-							h5.text-capitalize.mb-0
-								strong Get A Quote
-						.card-body.pt-0
-							include ../forms/_quote.pug
+				include ./_companies-quote.pug
 // companies single section ends

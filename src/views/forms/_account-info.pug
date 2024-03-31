@@ -7,26 +7,20 @@ form.needs-validation#account-info-form(action="dashboard-account-edit.html" met
 				label.form-label(for="accountInfoNameField")
 					strong Name
 				input#accountInfoNameField.form-control.form-control-sm.bg-white.text-truncate(type="text", name="name", value="Account holder name", placeholder="Name", autocomplete="name", required)
-				.valid-feedback.text-uppercase
-					strong looks good !
 				.invalid-feedback.text-uppercase
-					strong This filed is mandatory!
+					strong mandatory field!
 			.col-12
 				label.form-label(for="accountInfoEmailField")
 					strong Email
 				input#accountInfoEmailField.form-control.form-control-sm.bg-white.text-truncate(type="email", name="email", value="email@domain.com", placeholder="Email", autocomplete="email", required)
-				.valid-feedback.text-uppercase
-					strong looks good !
 				.invalid-feedback.text-uppercase
-					strong This filed is mandatory!
+					strong mandatory field!
 			.col-12
 				label.form-label(for="accountInfoPhoneField")
 					strong Phone
 				input#accountInfoPhoneField.form-control.form-control-sm.bg-white.text-truncate(type="tel", name="phone", value="01234567890", placeholder="Phone", autocomplete="tel", required)
-				.valid-feedback.text-uppercase
-					strong looks good !
 				.invalid-feedback.text-uppercase
-					strong This filed is mandatory!
+					strong mandatory field!
 			.col-auto
 				button.btn.btn-link.p-0.text-capitalize.text-decoration-none(type="button", data-bs-toggle="modal", data-bs-target="#change-password-modal")
 					strong Change Password

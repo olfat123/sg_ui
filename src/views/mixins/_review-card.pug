@@ -1,3 +1,5 @@
+include ./_rating.pug
+
 mixin reviewCard(data={})
 	.card.review-card
 		.card-body
@@ -12,4 +14,4 @@ mixin reviewCard(data={})
 						small
 							strong=data.author
 			p.mb-0
-				small rating
+				+rating()

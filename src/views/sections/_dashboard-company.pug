@@ -1,3 +1,5 @@
+include ../mixins/_companies-info.pug
+
 // dashboard company section starts
 section
 	.container
@@ -15,5 +17,5 @@ section
 								use(href="#icon-edit")
 							strong edit company
 					.col-12
-						p.text-bg-dark.p-2.mb-0 content
+						+companiesInfo(false)
 // dashboard company section ends

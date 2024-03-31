@@ -7,18 +7,14 @@ form.needs-validation#login-form(action="/" method="POST" novalidate)
 				label.form-label.visually-hidden(for="loginEmailField")
 					strong Email
 				input#loginEmailField.form-control.text-truncate(type="email", name="email", placeholder="Email", autocomplete="email", required)
-				.valid-feedback.text-uppercase
-					strong looks good !
 				.invalid-feedback.text-uppercase
-					strong This filed is mandatory!
+					strong mandatory field!
 			.col-12
 				label.form-label.visually-hidden(for="loginPasswordField")
 					strong Password
 				input#loginPasswordField.form-control.text-truncate(type="password", name="password", placeholder="Password", autocomplete="current-password", required)
-				.valid-feedback.text-uppercase
-					strong looks good !
 				.invalid-feedback.text-uppercase
-					strong This filed is mandatory!
+					strong mandatory field!
 			.col-12.col-md-auto.me-auto
 				.form-check
 					input#rememberMeField.form-check-input(type="checkbox", name="remember_me", value="1")
