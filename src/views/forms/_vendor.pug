@@ -5,42 +5,48 @@ form.needs-validation#vendor-form(action="/" method="POST" novalidate)
 		.row.g-3
 			.col-12.col-md-6
 				.mb-3
-					label.form-label.visually-hidden(for="vendorFullNameField") Full Name
+					label.form-label.visually-hidden(for="vendorFullNameField")
+						strong Full Name
 					input#vendorFullNameField.form-control.text-truncate(type="text", name="full_name", placeholder="Full Name", autocomplete="name", required)
 					.valid-feedback.text-uppercase
 						strong looks good !
 					.invalid-feedback.text-uppercase
 						strong This filed is mandatory!
 				.mb-3
-					label.form-label.visually-hidden(for="vendorEmailField") Email
+					label.form-label.visually-hidden(for="vendorEmailField")
+						strong Email
 					input#vendorEmailField.form-control.text-truncate(type="email", name="email", placeholder="Email", autocomplete="email", required)
 					.valid-feedback.text-uppercase
 						strong looks good !
 					.invalid-feedback.text-uppercase
 						strong This filed is mandatory!
 				.mb-3
-					label.form-label.visually-hidden(for="vendorPhoneField") Phone
+					label.form-label.visually-hidden(for="vendorPhoneField")
+						strong Phone
 					input#vendorPhoneField.form-control.text-truncate(type="tel", name="phone", placeholder="Phone", autocomplete="tel", required)
 					.valid-feedback.text-uppercase
 						strong looks good !
 					.invalid-feedback.text-uppercase
 						strong This filed is mandatory!
 				.mb-3
-					label.form-label.visually-hidden(for="vendorPasswordField") Password
+					label.form-label.visually-hidden(for="vendorPasswordField")
+						strong Password
 					input#vendorPasswordField.form-control.text-truncate(type="password", name="password", placeholder="Password", autocomplete="new-password", required)
 					.valid-feedback.text-uppercase
 						strong looks good !
 					.invalid-feedback.text-uppercase
 						strong This filed is mandatory!
 				.mb-3
-					label.form-label.visually-hidden(for="vendorPasswordConfirmationField") Confirm Password
+					label.form-label.visually-hidden(for="vendorPasswordConfirmationField")
+						strong Confirm Password
 					input#vendorPasswordConfirmationField.form-control.text-truncate(type="password", name="password_confirmation", placeholder="Confirm Password", autocomplete="new-password", required)
 					.valid-feedback.text-uppercase
 						strong looks good !
 					.invalid-feedback.text-uppercase
 						strong This filed is mandatory!
 				.mb-3
-					label.form-label.visually-hidden(for="vendorCompanyNameField") Company Name
+					label.form-label.visually-hidden(for="vendorCompanyNameField")
+						strong Company Name
 					input#vendorCompanyNameField.form-control.text-truncate(type="text", name="company_name", placeholder="Company Name", autocomplete="organization", required)
 					.valid-feedback.text-uppercase
 						strong looks good !
@@ -51,7 +57,8 @@ form.needs-validation#vendor-form(action="/" method="POST" novalidate)
 						svg.flex-shrink-0.text-primary(xmlns="http://www.w3.org/2000/svg" width="22.536" height="25" viewBox="0 0 22.536 25" fill="currentColor")
 							path(d="M21.083,15.408l-1.849-1.849-8.32-8.32a3.922,3.922,0,0,0-5.547,5.547l8.32,8.322a.872.872,0,1,0,1.233-1.233L6.6,9.553A2.179,2.179,0,0,1,9.682,6.472L18,14.791l1.849,1.849A3.923,3.923,0,1,1,14.3,22.187l-1.54-1.541L4.135,12.018,3.519,11.4A5.666,5.666,0,0,1,11.531,3.39l9.244,9.245A.872.872,0,1,0,22.008,11.4L12.763,2.157A7.408,7.408,0,0,0,2.286,12.634l9.244,9.244,1.543,1.541a5.666,5.666,0,0,0,8.01-8.012Zm0,0" transform="translate(-0.128 0)")
 						.input-group.flex-grow-1.vstack
-							label.form-label.text-capitalize.mb-0(for="vendorCompanyLogoField") Company Logo
+							label.form-label.text-capitalize.mb-0(for="vendorCompanyLogoField")
+								strong Company Logo
 							input#vendorCompanyLogoField.form-control.bg-transparent.w-100.text-truncate.border-0.p-0(name="company_logo" type="file" accept="application/*" required)
 							p.form-text.text-capitalize.m-0 PDF, DOC, DOCX. Max File size 5MB.
 							.valid-feedback.text-uppercase.text-end
@@ -63,7 +70,8 @@ form.needs-validation#vendor-form(action="/" method="POST" novalidate)
 						svg.flex-shrink-0.text-primary(xmlns="http://www.w3.org/2000/svg" width="22.536" height="25" viewBox="0 0 22.536 25" fill="currentColor")
 							path(d="M21.083,15.408l-1.849-1.849-8.32-8.32a3.922,3.922,0,0,0-5.547,5.547l8.32,8.322a.872.872,0,1,0,1.233-1.233L6.6,9.553A2.179,2.179,0,0,1,9.682,6.472L18,14.791l1.849,1.849A3.923,3.923,0,1,1,14.3,22.187l-1.54-1.541L4.135,12.018,3.519,11.4A5.666,5.666,0,0,1,11.531,3.39l9.244,9.245A.872.872,0,1,0,22.008,11.4L12.763,2.157A7.408,7.408,0,0,0,2.286,12.634l9.244,9.244,1.543,1.541a5.666,5.666,0,0,0,8.01-8.012Zm0,0" transform="translate(-0.128 0)")
 						.input-group.flex-grow-1.vstack
-							label.form-label.text-capitalize.mb-0(for="vendorCoverPhotoField") Cover Photo
+							label.form-label.text-capitalize.mb-0(for="vendorCoverPhotoField")
+								strong Cover Photo
 							input#vendorCoverPhotoField.form-control.bg-transparent.w-100.text-truncate.border-0.p-0(name="cover_photo" type="file" accept="application/*" required)
 							p.form-text.text-capitalize.m-0 PDF, DOC, DOCX. Max File size 5MB.
 							.valid-feedback.text-uppercase.text-end
@@ -73,45 +81,52 @@ form.needs-validation#vendor-form(action="/" method="POST" novalidate)
 				.mb-3
 					.form-check
 						input#vendorIsVerifiedCompanyField.form-check-input(type="checkbox", name="is_verified_company", value="1")
-						label.form-check-label(for="vendorIsVerifiedCompanyField") I am a verified security company
+						label.form-check-label(for="vendorIsVerifiedCompanyField")
+							strong I am a verified security company
 			.col-12.col-md-6
 				.mb-3
-					label.form-label.visually-hidden(for="vendorAddressField") Address
+					label.form-label.visually-hidden(for="vendorAddressField")
+						strong Address
 					input#vendorAddressField.form-control.text-truncate(type="text", name="address", placeholder="Address", autocomplete="street-address", required)
 					.valid-feedback.text-uppercase
 						strong looks good !
 					.invalid-feedback.text-uppercase
 						strong This filed is mandatory!
 				.mb-3
-					label.form-label.visually-hidden(for="vendorGoogleMapLinkField") Google Map Link
+					label.form-label.visually-hidden(for="vendorGoogleMapLinkField")
+						strong Google Map Link
 					input#vendorGoogleMapLinkField.form-control.text-truncate(type="url", name="google_map_link", placeholder="Google Map Link", autocomplete="url", required)
 					.valid-feedback.text-uppercase
 						strong looks good !
 					.invalid-feedback.text-uppercase
 						strong This filed is mandatory!
 				.mb-3
-					label.form-label.visually-hidden(for="vendorCountryField") Country
+					label.form-label.visually-hidden(for="vendorCountryField")
+						strong Country
 					input#vendorCountryField.form-control.text-truncate(type="text", name="country", placeholder="Country", autocomplete="country", required)
 					.valid-feedback.text-uppercase
 						strong looks good !
 					.invalid-feedback.text-uppercase
 						strong This filed is mandatory!
 				.mb-3
-					label.form-label.visually-hidden(for="vendorCityField") City
+					label.form-label.visually-hidden(for="vendorCityField")
+						strong City
 					input#vendorCityField.form-control.text-truncate(type="text", name="city", placeholder="City", autocomplete="address-level2", required)
 					.valid-feedback.text-uppercase
 						strong looks good !
 					.invalid-feedback.text-uppercase
 						strong This filed is mandatory!
 				.mb-3
-					label.form-label.visually-hidden(for="vendorStateField") State
+					label.form-label.visually-hidden(for="vendorStateField")
+						strong State
 					input#vendorStateField.form-control.text-truncate(type="text", name="state", placeholder="State", autocomplete="address-level1", required)
 					.valid-feedback.text-uppercase
 						strong looks good !
 					.invalid-feedback.text-uppercase
 						strong This filed is mandatory!
 				.mb-3
-					label.form-label.visually-hidden(for="vendorProvidedServicesField") Select Provided Services
+					label.form-label.visually-hidden(for="vendorProvidedServicesField")
+						strong Select Provided Services
 					select#vendorProvidedServicesField.form-select.text-truncate(name="provided_services", value="", required)
 						option(value="", selected, hidden) Select Provided Services
 						option(value="1") Service One
@@ -122,28 +137,32 @@ form.needs-validation#vendor-form(action="/" method="POST" novalidate)
 					.invalid-feedback.text-uppercase
 						strong This filed is mandatory!
 				.mb-3
-					label.form-label.visually-hidden(for="vendorLicenseTypeField") License Type
+					label.form-label.visually-hidden(for="vendorLicenseTypeField")
+						strong License Type
 					input#vendorLicenseTypeField.form-control.text-truncate(type="text", name="license_type", placeholder="License Type", required)
 					.valid-feedback.text-uppercase
 						strong looks good !
 					.invalid-feedback.text-uppercase
 						strong This filed is mandatory!
 				.mb-3
-					label.form-label.visually-hidden(for="vendorLicenseNumberField") License Number
+					label.form-label.visually-hidden(for="vendorLicenseNumberField")
+						strong License Number
 					input#vendorLicenseNumberField.form-control.text-truncate(type="text", name="license_number", placeholder="License Number", required)
 					.valid-feedback.text-uppercase
 						strong looks good !
 					.invalid-feedback.text-uppercase
 						strong This filed is mandatory!
 				.mb-3
-					label.form-label.visually-hidden(for="vendorLicenseExpirationDateField") License Expiration Date
+					label.form-label.visually-hidden(for="vendorLicenseExpirationDateField")
+						strong License Expiration Date
 					input#vendorLicenseExpirationDateField.form-control.text-truncate(type="month", name="license_expiration_date", placeholder="License Expiration Date", required)
 					.valid-feedback.text-uppercase
 						strong looks good !
 					.invalid-feedback.text-uppercase
 						strong This filed is mandatory!
 				.mb-3
-					label.form-label.visually-hidden(for="vendorAboutField") About the company
+					label.form-label.visually-hidden(for="vendorAboutField")
+						strong About the company
 					textarea#vendorAboutField.form-control.text-truncate(name="about", placeholder="About the company", required)
 					.valid-feedback.text-uppercase
 						strong looks good !

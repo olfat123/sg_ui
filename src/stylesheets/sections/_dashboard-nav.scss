@@ -1,0 +1,21 @@
+.dashboard-nav {
+	.nav {
+		&-link {
+			&,
+			&:hover,
+			&:active,
+			&.active {
+				@include transition($transition-base);
+			}
+
+			&:hover,
+			&:focus,
+			&.active,
+			&:active {
+				@extend .fw-bold !optional;
+				@extend .bg-primary !optional;
+				--#{$prefix}bg-opacity: 0.1;
+			}
+		}
+	}
+}

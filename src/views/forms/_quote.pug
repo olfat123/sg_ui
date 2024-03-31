@@ -4,28 +4,32 @@ form.needs-validation#quote-form(action="companies-single.html" method="POST" no
 		legend.visually-hidden quote form
 		.row.gy-3
 			.col-12
-				label.form-label.visually-hidden(for="quoteFullNameField") Your Name
+				label.form-label.visually-hidden(for="quoteFullNameField")
+					strong Your Name
 				input#quoteFullNameField.form-control.text-truncate(type="text", name="full_name", placeholder="Your Name", autocomplete="name", required)
 				.valid-feedback.text-uppercase
 					strong looks good !
 				.invalid-feedback.text-uppercase
 					strong This filed is mandatory!
 			.col-12
-				label.form-label.visually-hidden(for="quoteEmailField") Email
+				label.form-label.visually-hidden(for="quoteEmailField")
+					strong Email
 				input#quoteEmailField.form-control.text-truncate(type="email", name="email", placeholder="Email", autocomplete="email", required)
 				.valid-feedback.text-uppercase
 					strong looks good !
 				.invalid-feedback.text-uppercase
 					strong This filed is mandatory!
 			.col-12
-				label.form-label.visually-hidden(for="quotePhoneField") Phone
+				label.form-label.visually-hidden(for="quotePhoneField")
+					strong Phone
 				input#quotePhoneField.form-control.text-truncate(type="tel", name="phone", placeholder="Phone", autocomplete="tel", required)
 				.valid-feedback.text-uppercase
 					strong looks good !
 				.invalid-feedback.text-uppercase
 					strong This filed is mandatory!
 			.col-12
-				label.form-label.visually-hidden(for="quoteNeededServicesField") Needed Services
+				label.form-label.visually-hidden(for="quoteNeededServicesField")
+					strong Needed Services
 				select#quoteNeededServicesField.form-select.text-truncate(name="needed_services", value="", required)
 					option(value="", selected, hidden) Needed Services
 					option(value="1") Service One
@@ -36,7 +40,8 @@ form.needs-validation#quote-form(action="companies-single.html" method="POST" no
 				.invalid-feedback.text-uppercase
 					strong This filed is mandatory!
 			.col-12
-				label.form-label.visually-hidden(for="quoteNotesField") Notes
+				label.form-label.visually-hidden(for="quoteNotesField")
+					strong Notes
 				textarea#quoteNotesField.form-control.text-truncate(name="notes", placeholder="Notes", required)
 				.valid-feedback.text-uppercase
 					strong looks good !

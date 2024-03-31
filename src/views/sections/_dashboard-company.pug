@@ -1,0 +1,19 @@
+// dashboard company section starts
+section
+	.container
+		.row.gy-4.gy-md-0
+			.col-12.col-md-5.col-xl-4
+				include ./_dashboard-aside-nav.pug
+			.col-12.col-md-7.offset-xl-1
+				.row.gy-4
+					.col-12.col-lg
+						h1.text-capitalize.text-primary.mb-0
+							strong.fw-bolder My Company
+					.col-12.col-lg-auto.align-self-center
+						a.btn.btn-primary.icon-link.text-decoration-none.text-capitalize.rounded-pill.px-5.py-2(href="dashboard-company-edit.html")
+							svg.bi.h-auto.w-auto(width="16", height="16", fill="currentColor")
+								use(href="#icon-edit")
+							strong edit company
+					.col-12
+						p.text-bg-dark.p-2.mb-0 content
+// dashboard company section ends

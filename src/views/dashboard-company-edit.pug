@@ -2,7 +2,7 @@ extends ./layouts/_index.pug
 include ./mixins/_inner-header.pug
 
 append variables
-	- var page_title = "Edit my company";
+	- var page_title = "My Company";
 	- var header_data = { bg_img: "./assets/images/backgrounds/dashboard-compressed.webp", breadcrumb: [{ title: "Home", href: "index.html" }, { title: "my dashboard", href: "dashboard-company.html" }, { title: page_title, href: "dashboard-company-edit.html" }] };
 
 block styles
@@ -11,9 +11,7 @@ block content
 	// application main content stars
 	main#main.app-main
 		+inner-header(header_data)
-		section
-			.container
-				include ./sections/_typography.pug
+		include ./sections/_dashboard-company-edit.pug
 	// application main content ends
 
 block modals

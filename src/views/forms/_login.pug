@@ -4,14 +4,16 @@ form.needs-validation#login-form(action="/" method="POST" novalidate)
 		legend.visually-hidden login form
 		.row.g-3
 			.col-12
-				label.form-label.visually-hidden(for="loginEmailField") Email
+				label.form-label.visually-hidden(for="loginEmailField")
+					strong Email
 				input#loginEmailField.form-control.text-truncate(type="email", name="email", placeholder="Email", autocomplete="email", required)
 				.valid-feedback.text-uppercase
 					strong looks good !
 				.invalid-feedback.text-uppercase
 					strong This filed is mandatory!
 			.col-12
-				label.form-label.visually-hidden(for="loginPasswordField") Password
+				label.form-label.visually-hidden(for="loginPasswordField")
+					strong Password
 				input#loginPasswordField.form-control.text-truncate(type="password", name="password", placeholder="Password", autocomplete="current-password", required)
 				.valid-feedback.text-uppercase
 					strong looks good !
@@ -20,7 +22,8 @@ form.needs-validation#login-form(action="/" method="POST" novalidate)
 			.col-12.col-md-auto.me-auto
 				.form-check
 					input#rememberMeField.form-check-input(type="checkbox", name="remember_me", value="1")
-					label.form-check-label(for="rememberMeField") Remember Me
+					label.form-check-label(for="rememberMeField")
+						strong Remember Me
 			.col-12.col-md-auto
 				button.btn.btn-link.link-dark.p-0.text-capitalize.text-primary-hover.text-primary-focus.text-decoration-none(type="button", data-bs-target="#forgot-password-modal", data-bs-toggle="modal") forgot password?
 			.col-12.mt-5

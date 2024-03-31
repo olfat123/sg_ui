@@ -1,0 +1,15 @@
+// dashboard nav section starts
+aside.sticky-top.mt-n5.pt-5
+	nav.nav.dashboard-nav.card.shadow.overflow-hidden(aria-labelledby="nav-title")
+		.card-header.py-4
+			h5#nav-title.card-title.text-capitalize.mb-0
+				strong.fw-bolder My Dashboard
+		ul.nav-list.list-group.list-group-flush.pb-4
+			each navListItem in [{title: "My Company", href: "dashboard-company.html"}, {title: "My Account", href: "dashboard-account-edit.html"}]
+				li.nav-item.list-group-item.p-0
+					- var isNavListItemActive = String(navListItem.title).toLowerCase().includes(String(page_title).toLowerCase());
+					a.nav-link.btn.btn-link.link-dark.w-100.icon-link.icon-link-hover.shadow-none.text-capitalize.rounded-0.justify-content-between.py-3(class=(isNavListItemActive ? "active" : undefined), href=(navListItem.href) aria-current=(isNavListItemActive ? "page" : undefined))
+						span=navListItem.title
+						svg.bi.rtl-mirror(width="14.405" height="12.99" fill="currentColor")
+							use(href="#icon-arrow-right-sm")
+// dashboard nav section ends

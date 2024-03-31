@@ -2,7 +2,7 @@ extends ./layouts/_index.pug
 include ./mixins/_inner-header.pug
 
 append variables
-	- var page_title = "Edit Account";
+	- var page_title = "My Account";
 	- var header_data = { bg_img: "./assets/images/backgrounds/dashboard-compressed.webp", breadcrumb: [{ title: "Home", href: "index.html" }, { title: "my dashboard", href: "dashboard-company.html" }, { title: page_title, href: "dashboard-account-edit.html" }] };
 
 block styles
@@ -11,12 +11,11 @@ block content
 	// application main content stars
 	main#main.app-main
 		+inner-header(header_data)
-		section
-			.container
-				include ./sections/_typography.pug
+		include ./sections/_dashboard-account-edit.pug
 	// application main content ends
 
 block modals
+	include ./modals/_change-password.pug
 
 block off-canvas
 
