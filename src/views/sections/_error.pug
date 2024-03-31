@@ -1,4 +1,21 @@
 // error section starts
-section.error
-	p error section
+section.error.text-white.section-with-bg.text-center
+	.section-bg.text-bg-dark
+		.section-bg-content
+			img.section-bg-image.object-position-top.op-40(src="./assets/images/backgrounds/hero-compressed.webp", alt="", loading="lazy", width="1280", height="720")
+	.container
+		.row.justify-content-center
+			.col-12.col-sm-11.col-md-10.col-lg-8.col-xl-6
+				.row.gy-5.justify-content-center
+					.col-12
+						h1.display-5.text-capitalize.mb-2
+							span.display-2.d-block
+								em 404
+							strong.d-block page not found
+						p.fs-4.fw-normal.mb-0 It seems nothing Is here
+					.col-auto
+						a.btn.btn-primary.icon-link.icon-link-hover.icon-link-hover-reversed.text-decoration-none.rounded-pill.text-uppercase.px-5.mt-3(href="index.html")
+							svg.bi.rtl-mirror.h-auto.w-auto(width="14.405" height="12.99" fill="currentColor")
+								use(href="#icon-arrow-left-sm")
+							|back to home
 // error section ends

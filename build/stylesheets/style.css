@@ -3716,12 +3716,20 @@ fieldset:disabled .btn {
   gap: 0.5rem !important;
 }
 
+.fs-4 {
+  font-size: calc(1.28125rem + 0.375vw) !important;
+}
+
 .fs-6 {
   font-size: 1rem !important;
 }
 
 .fw-light {
   font-weight: 300 !important;
+}
+
+.fw-normal {
+  font-weight: 400 !important;
 }
 
 .fw-bolder {
@@ -4088,6 +4096,13 @@ fieldset:disabled .btn {
   /* rtl:end:remove */
   /* rtl:begin:remove */
   /* rtl:end:remove */
+}
+
+@media (min-width: 1200px) {
+
+  .fs-4 {
+    font-size: 1.5625rem !important;
+  }
 }
 
 .form-control[type="file"] {
@@ -5781,23 +5796,20 @@ button.swiper-pagination-bullet {
 }
 
 .error {
-  padding-top: 4rem;
-  padding-bottom: 4rem;
-  min-height: 100%;
+  min-height: 100vh;
+  padding-top: 12rem;
+  padding-bottom: 3.5rem;
 }
 
-@media (min-width: 768px) {
+@media screen and (max-height: 500px) {
   .error {
-    padding-top: 6rem;
-    padding-bottom: 6rem;
+    min-height: 100%;
   }
 }
 
-@media (min-width: 1280px) {
-  .error {
-    padding-top: 9rem;
-    padding-bottom: 9rem;
-  }
+.error .section-bg {
+  -webkit-mask: linear-gradient(to top, transparent 0, var(--tcg-body-bg) calc(100% - 13.625rem)) !important;
+          mask: linear-gradient(to top, transparent 0, var(--tcg-body-bg) calc(100% - 13.625rem)) !important;
 }
 
 .hero {
