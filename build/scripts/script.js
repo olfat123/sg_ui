@@ -7519,7 +7519,7 @@ const resize = exports.resize = shortcut('resize');
 const scroll = exports.scroll = shortcut('scroll');
 var _default = exports.default = $;
 
-},{"ssr-window":102}],91:[function(require,module,exports){
+},{"ssr-window":103}],91:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -21548,6 +21548,1876 @@ return jQuery;
 
 }).call(this)}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 },{}],102:[function(require,module,exports){
+(function (global, factory) {
+    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
+    typeof define === 'function' && define.amd ? define(factory) :
+    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.SlimSelect = factory());
+})(this, (function () { 'use strict';
+
+    function generateID() {
+        return Math.random().toString(36).substring(2, 10);
+    }
+    function hasClassInTree(element, className) {
+        function hasClass(e, c) {
+            if (c && e && e.classList && e.classList.contains(c)) {
+                return e;
+            }
+            if (c && e && e.dataset && e.dataset.id && e.dataset.id === className) {
+                return e;
+            }
+            return null;
+        }
+        function parentByClass(e, c) {
+            if (!e || e === document) {
+                return null;
+            }
+            else if (hasClass(e, c)) {
+                return e;
+            }
+            else {
+                return parentByClass(e.parentNode, c);
+            }
+        }
+        return hasClass(element, className) || parentByClass(element, className);
+    }
+    function debounce(func, wait = 50, immediate = false) {
+        let timeout;
+        return function (...args) {
+            const context = self;
+            const later = () => {
+                timeout = null;
+                if (!immediate) {
+                    func.apply(context, args);
+                }
+            };
+            const callNow = immediate && !timeout;
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
+            if (callNow) {
+                func.apply(context, args);
+            }
+        };
+    }
+    function isEqual(a, b) {
+        return JSON.stringify(a) === JSON.stringify(b);
+    }
+    function kebabCase(str) {
+        const result = str.replace(/[A-Z\u00C0-\u00D6\u00D8-\u00DE]/g, (match) => '-' + match.toLowerCase());
+        return str[0] === str[0].toUpperCase() ? result.substring(1) : result;
+    }
+
+    class Optgroup {
+        constructor(optgroup) {
+            this.id = !optgroup.id || optgroup.id === '' ? generateID() : optgroup.id;
+            this.label = optgroup.label || '';
+            this.selectAll = optgroup.selectAll === undefined ? false : optgroup.selectAll;
+            this.selectAllText = optgroup.selectAllText || 'Select All';
+            this.closable = optgroup.closable || 'off';
+            this.options = [];
+            if (optgroup.options) {
+                for (const o of optgroup.options) {
+                    this.options.push(new Option(o));
+                }
+            }
+        }
+    }
+    class Option {
+        constructor(option) {
+            this.id = !option.id || option.id === '' ? generateID() : option.id;
+            this.value = option.value === undefined ? option.text : option.value;
+            this.text = option.text || '';
+            this.html = option.html || '';
+            this.selected = option.selected !== undefined ? option.selected : false;
+            this.display = option.display !== undefined ? option.display : true;
+            this.disabled = option.disabled !== undefined ? option.disabled : false;
+            this.mandatory = option.mandatory !== undefined ? option.mandatory : false;
+            this.placeholder = option.placeholder !== undefined ? option.placeholder : false;
+            this.class = option.class || '';
+            this.style = option.style || '';
+            this.data = option.data || {};
+        }
+    }
+    class Store {
+        constructor(type, data) {
+            this.selectType = 'single';
+            this.data = [];
+            this.selectType = type;
+            this.setData(data);
+        }
+        validateDataArray(data) {
+            if (!Array.isArray(data)) {
+                return new Error('Data must be an array');
+            }
+            for (let dataObj of data) {
+                if (dataObj instanceof Optgroup || 'label' in dataObj) {
+                    if (!('label' in dataObj)) {
+                        return new Error('Optgroup must have a label');
+                    }
+                    if ('options' in dataObj && dataObj.options) {
+                        for (let option of dataObj.options) {
+                            return this.validateOption(option);
+                        }
+                    }
+                }
+                else if (dataObj instanceof Option || 'text' in dataObj) {
+                    return this.validateOption(dataObj);
+                }
+                else {
+                    return new Error('Data object must be a valid optgroup or option');
+                }
+            }
+            return null;
+        }
+        validateOption(option) {
+            if (!('text' in option)) {
+                return new Error('Option must have a text');
+            }
+            return null;
+        }
+        partialToFullData(data) {
+            let dataFinal = [];
+            data.forEach((dataObj) => {
+                if (dataObj instanceof Optgroup || 'label' in dataObj) {
+                    let optOptions = [];
+                    if ('options' in dataObj && dataObj.options) {
+                        dataObj.options.forEach((option) => {
+                            optOptions.push(new Option(option));
+                        });
+                    }
+                    if (optOptions.length > 0) {
+                        dataFinal.push(new Optgroup(dataObj));
+                    }
+                }
+                if (dataObj instanceof Option || 'text' in dataObj) {
+                    dataFinal.push(new Option(dataObj));
+                }
+            });
+            return dataFinal;
+        }
+        setData(data) {
+            this.data = this.partialToFullData(data);
+            if (this.selectType === 'single') {
+                this.setSelectedBy('value', this.getSelected());
+            }
+        }
+        getData() {
+            return this.filter(null, true);
+        }
+        getDataOptions() {
+            return this.filter(null, false);
+        }
+        addOption(option) {
+            this.setData(this.getData().concat(new Option(option)));
+        }
+        setSelectedBy(selectedType, selectedValues) {
+            let firstOption = null;
+            let hasSelected = false;
+            for (let dataObj of this.data) {
+                if (dataObj instanceof Optgroup) {
+                    for (let option of dataObj.options) {
+                        if (!firstOption) {
+                            firstOption = option;
+                        }
+                        option.selected = hasSelected ? false : selectedValues.includes(option[selectedType]);
+                        if (option.selected && this.selectType === 'single') {
+                            hasSelected = true;
+                        }
+                    }
+                }
+                if (dataObj instanceof Option) {
+                    if (!firstOption) {
+                        firstOption = dataObj;
+                    }
+                    dataObj.selected = hasSelected ? false : selectedValues.includes(dataObj[selectedType]);
+                    if (dataObj.selected && this.selectType === 'single') {
+                        hasSelected = true;
+                    }
+                }
+            }
+            if (this.selectType === 'single' && firstOption && !hasSelected) {
+                firstOption.selected = true;
+            }
+        }
+        getSelected() {
+            let selectedOptions = this.getSelectedOptions();
+            let selectedValues = [];
+            selectedOptions.forEach((option) => {
+                selectedValues.push(option.value);
+            });
+            return selectedValues;
+        }
+        getSelectedOptions() {
+            return this.filter((opt) => {
+                return opt.selected;
+            }, false);
+        }
+        getSelectedIDs() {
+            let selectedOptions = this.getSelectedOptions();
+            let selectedIDs = [];
+            selectedOptions.forEach((op) => {
+                selectedIDs.push(op.id);
+            });
+            return selectedIDs;
+        }
+        getOptgroupByID(id) {
+            for (let dataObj of this.data) {
+                if (dataObj instanceof Optgroup && dataObj.id === id) {
+                    return dataObj;
+                }
+            }
+            return null;
+        }
+        getOptionByID(id) {
+            let options = this.filter((opt) => {
+                return opt.id === id;
+            }, false);
+            return options.length ? options[0] : null;
+        }
+        getSelectType() {
+            return this.selectType;
+        }
+        getFirstOption() {
+            let option = null;
+            for (let dataObj of this.data) {
+                if (dataObj instanceof Optgroup) {
+                    option = dataObj.options[0];
+                }
+                else if (dataObj instanceof Option) {
+                    option = dataObj;
+                }
+                if (option) {
+                    break;
+                }
+            }
+            return option;
+        }
+        search(search, searchFilter) {
+            search = search.trim();
+            if (search === '') {
+                return this.getData();
+            }
+            return this.filter((opt) => {
+                return searchFilter(opt, search);
+            }, true);
+        }
+        filter(filter, includeOptgroup) {
+            const dataSearch = [];
+            this.data.forEach((dataObj) => {
+                if (dataObj instanceof Optgroup) {
+                    let optOptions = [];
+                    dataObj.options.forEach((option) => {
+                        if (!filter || filter(option)) {
+                            if (!includeOptgroup) {
+                                dataSearch.push(new Option(option));
+                            }
+                            else {
+                                optOptions.push(new Option(option));
+                            }
+                        }
+                    });
+                    if (optOptions.length > 0) {
+                        let optgroup = new Optgroup(dataObj);
+                        optgroup.options = optOptions;
+                        dataSearch.push(optgroup);
+                    }
+                }
+                if (dataObj instanceof Option) {
+                    if (!filter || filter(dataObj)) {
+                        dataSearch.push(new Option(dataObj));
+                    }
+                }
+            });
+            return dataSearch;
+        }
+    }
+
+    class Render {
+        constructor(settings, store, callbacks) {
+            this.classes = {
+                main: 'ss-main',
+                placeholder: 'ss-placeholder',
+                values: 'ss-values',
+                single: 'ss-single',
+                max: 'ss-max',
+                value: 'ss-value',
+                valueText: 'ss-value-text',
+                valueDelete: 'ss-value-delete',
+                valueOut: 'ss-value-out',
+                deselect: 'ss-deselect',
+                deselectPath: 'M10,10 L90,90 M10,90 L90,10',
+                arrow: 'ss-arrow',
+                arrowClose: 'M10,30 L50,70 L90,30',
+                arrowOpen: 'M10,70 L50,30 L90,70',
+                content: 'ss-content',
+                openAbove: 'ss-open-above',
+                openBelow: 'ss-open-below',
+                search: 'ss-search',
+                searchHighlighter: 'ss-search-highlight',
+                searching: 'ss-searching',
+                addable: 'ss-addable',
+                addablePath: 'M50,10 L50,90 M10,50 L90,50',
+                list: 'ss-list',
+                optgroup: 'ss-optgroup',
+                optgroupLabel: 'ss-optgroup-label',
+                optgroupLabelText: 'ss-optgroup-label-text',
+                optgroupActions: 'ss-optgroup-actions',
+                optgroupSelectAll: 'ss-selectall',
+                optgroupSelectAllBox: 'M60,10 L10,10 L10,90 L90,90 L90,50',
+                optgroupSelectAllCheck: 'M30,45 L50,70 L90,10',
+                optgroupClosable: 'ss-closable',
+                option: 'ss-option',
+                optionDelete: 'M10,10 L90,90 M10,90 L90,10',
+                highlighted: 'ss-highlighted',
+                open: 'ss-open',
+                close: 'ss-close',
+                selected: 'ss-selected',
+                error: 'ss-error',
+                disabled: 'ss-disabled',
+                hide: 'ss-hide',
+            };
+            this.store = store;
+            this.settings = settings;
+            this.callbacks = callbacks;
+            this.main = this.mainDiv();
+            this.content = this.contentDiv();
+            this.updateClassStyles();
+            this.updateAriaAttributes();
+            this.settings.contentLocation.appendChild(this.content.main);
+        }
+        enable() {
+            this.main.main.classList.remove(this.classes.disabled);
+            this.content.search.input.disabled = false;
+        }
+        disable() {
+            this.main.main.classList.add(this.classes.disabled);
+            this.content.search.input.disabled = true;
+        }
+        open() {
+            this.main.arrow.path.setAttribute('d', this.classes.arrowOpen);
+            this.main.main.classList.add(this.settings.openPosition === 'up' ? this.classes.openAbove : this.classes.openBelow);
+            this.main.main.setAttribute('aria-expanded', 'true');
+            this.moveContent();
+            const selectedOptions = this.store.getSelectedOptions();
+            if (selectedOptions.length) {
+                const selectedId = selectedOptions[selectedOptions.length - 1].id;
+                const selectedOption = this.content.list.querySelector('[data-id="' + selectedId + '"]');
+                if (selectedOption) {
+                    this.ensureElementInView(this.content.list, selectedOption);
+                }
+            }
+        }
+        close() {
+            this.main.main.classList.remove(this.classes.openAbove);
+            this.main.main.classList.remove(this.classes.openBelow);
+            this.main.main.setAttribute('aria-expanded', 'false');
+            this.content.main.classList.remove(this.classes.openAbove);
+            this.content.main.classList.remove(this.classes.openBelow);
+            this.main.arrow.path.setAttribute('d', this.classes.arrowClose);
+        }
+        updateClassStyles() {
+            this.main.main.className = '';
+            this.main.main.removeAttribute('style');
+            this.content.main.className = '';
+            this.content.main.removeAttribute('style');
+            this.main.main.classList.add(this.classes.main);
+            this.content.main.classList.add(this.classes.content);
+            if (this.settings.style !== '') {
+                this.main.main.style.cssText = this.settings.style;
+                this.content.main.style.cssText = this.settings.style;
+            }
+            if (this.settings.class.length) {
+                for (const c of this.settings.class) {
+                    if (c.trim() !== '') {
+                        this.main.main.classList.add(c.trim());
+                        this.content.main.classList.add(c.trim());
+                    }
+                }
+            }
+            if (this.settings.contentPosition === 'relative') {
+                this.content.main.classList.add('ss-' + this.settings.contentPosition);
+            }
+        }
+        updateAriaAttributes() {
+            this.main.main.role = 'combobox';
+            this.main.main.setAttribute('aria-haspopup', 'listbox');
+            this.main.main.setAttribute('aria-controls', this.content.main.id);
+            this.main.main.setAttribute('aria-expanded', 'false');
+            this.content.main.setAttribute('role', 'listbox');
+        }
+        mainDiv() {
+            var _a;
+            const main = document.createElement('div');
+            main.dataset.id = this.settings.id;
+            main.setAttribute('aria-label', this.settings.ariaLabel);
+            main.tabIndex = 0;
+            main.onkeydown = (e) => {
+                switch (e.key) {
+                    case 'ArrowUp':
+                    case 'ArrowDown':
+                        this.callbacks.open();
+                        e.key === 'ArrowDown' ? this.highlight('down') : this.highlight('up');
+                        return false;
+                    case 'Tab':
+                        this.callbacks.close();
+                        return true;
+                    case 'Enter':
+                    case ' ':
+                        this.callbacks.open();
+                        const highlighted = this.content.list.querySelector('.' + this.classes.highlighted);
+                        if (highlighted) {
+                            highlighted.click();
+                        }
+                        return false;
+                    case 'Escape':
+                        this.callbacks.close();
+                        return false;
+                }
+                return false;
+            };
+            main.onclick = (e) => {
+                if (this.settings.disabled) {
+                    return;
+                }
+                this.settings.isOpen ? this.callbacks.close() : this.callbacks.open();
+            };
+            const values = document.createElement('div');
+            values.classList.add(this.classes.values);
+            main.appendChild(values);
+            const deselect = document.createElement('div');
+            deselect.classList.add(this.classes.deselect);
+            const selectedOptions = (_a = this.store) === null || _a === void 0 ? void 0 : _a.getSelectedOptions();
+            if (!this.settings.allowDeselect || (this.settings.isMultiple && selectedOptions && selectedOptions.length <= 0)) {
+                deselect.classList.add(this.classes.hide);
+            }
+            else {
+                deselect.classList.remove(this.classes.hide);
+            }
+            deselect.onclick = (e) => {
+                e.stopPropagation();
+                if (this.settings.disabled) {
+                    return;
+                }
+                let shouldDelete = true;
+                const before = this.store.getSelectedOptions();
+                const after = [];
+                if (this.callbacks.beforeChange) {
+                    shouldDelete = this.callbacks.beforeChange(after, before) === true;
+                }
+                if (shouldDelete) {
+                    if (this.settings.isMultiple) {
+                        this.callbacks.setSelected([], false);
+                        this.updateDeselectAll();
+                    }
+                    else {
+                        const firstOption = this.store.getFirstOption();
+                        const value = firstOption ? firstOption.value : '';
+                        this.callbacks.setSelected(value, false);
+                    }
+                    if (this.settings.closeOnSelect) {
+                        this.callbacks.close();
+                    }
+                    if (this.callbacks.afterChange) {
+                        this.callbacks.afterChange(this.store.getSelectedOptions());
+                    }
+                }
+            };
+            const deselectSvg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+            deselectSvg.setAttribute('viewBox', '0 0 100 100');
+            const deselectPath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+            deselectPath.setAttribute('d', this.classes.deselectPath);
+            deselectSvg.appendChild(deselectPath);
+            deselect.appendChild(deselectSvg);
+            main.appendChild(deselect);
+            const arrow = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+            arrow.classList.add(this.classes.arrow);
+            arrow.setAttribute('viewBox', '0 0 100 100');
+            const arrowPath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+            arrowPath.setAttribute('d', this.classes.arrowClose);
+            if (this.settings.alwaysOpen) {
+                arrow.classList.add(this.classes.hide);
+            }
+            arrow.appendChild(arrowPath);
+            main.appendChild(arrow);
+            return {
+                main: main,
+                values: values,
+                deselect: {
+                    main: deselect,
+                    svg: deselectSvg,
+                    path: deselectPath,
+                },
+                arrow: {
+                    main: arrow,
+                    path: arrowPath,
+                },
+            };
+        }
+        mainFocus(eventType) {
+            if (eventType !== 'click') {
+                this.main.main.focus({ preventScroll: true });
+            }
+        }
+        placeholder() {
+            const placeholderOption = this.store.filter((o) => o.placeholder, false);
+            let placeholderText = this.settings.placeholderText;
+            if (placeholderOption.length) {
+                if (placeholderOption[0].html !== '') {
+                    placeholderText = placeholderOption[0].html;
+                }
+                else if (placeholderOption[0].text !== '') {
+                    placeholderText = placeholderOption[0].text;
+                }
+            }
+            const placeholder = document.createElement('div');
+            placeholder.classList.add(this.classes.placeholder);
+            placeholder.innerHTML = placeholderText;
+            return placeholder;
+        }
+        renderValues() {
+            if (!this.settings.isMultiple) {
+                this.renderSingleValue();
+                return;
+            }
+            this.renderMultipleValues();
+            this.updateDeselectAll();
+        }
+        renderSingleValue() {
+            const selected = this.store.filter((o) => {
+                return o.selected && !o.placeholder;
+            }, false);
+            const selectedSingle = selected.length > 0 ? selected[0] : null;
+            if (!selectedSingle) {
+                this.main.values.innerHTML = this.placeholder().outerHTML;
+            }
+            else {
+                const singleValue = document.createElement('div');
+                singleValue.classList.add(this.classes.single);
+                if (selectedSingle.html) {
+                    singleValue.innerHTML = selectedSingle.html;
+                }
+                else {
+                    singleValue.innerText = selectedSingle.text;
+                }
+                this.main.values.innerHTML = singleValue.outerHTML;
+            }
+            if (!this.settings.allowDeselect || !selected.length) {
+                this.main.deselect.main.classList.add(this.classes.hide);
+            }
+            else {
+                this.main.deselect.main.classList.remove(this.classes.hide);
+            }
+        }
+        renderMultipleValues() {
+            let currentNodes = this.main.values.childNodes;
+            let selectedOptions = this.store.filter((opt) => {
+                return opt.selected && opt.display;
+            }, false);
+            if (selectedOptions.length === 0) {
+                this.main.values.innerHTML = this.placeholder().outerHTML;
+                return;
+            }
+            else {
+                const placeholder = this.main.values.querySelector('.' + this.classes.placeholder);
+                if (placeholder) {
+                    placeholder.remove();
+                }
+            }
+            if (selectedOptions.length > this.settings.maxValuesShown) {
+                const singleValue = document.createElement('div');
+                singleValue.classList.add(this.classes.max);
+                singleValue.textContent = this.settings.maxValuesMessage.replace('{number}', selectedOptions.length.toString());
+                this.main.values.innerHTML = singleValue.outerHTML;
+                return;
+            }
+            else {
+                const maxValuesMessage = this.main.values.querySelector('.' + this.classes.max);
+                if (maxValuesMessage) {
+                    maxValuesMessage.remove();
+                }
+            }
+            let removeNodes = [];
+            for (let i = 0; i < currentNodes.length; i++) {
+                const node = currentNodes[i];
+                const id = node.getAttribute('data-id');
+                if (id) {
+                    const found = selectedOptions.filter((opt) => {
+                        return opt.id === id;
+                    }, false);
+                    if (!found.length) {
+                        removeNodes.push(node);
+                    }
+                }
+            }
+            for (const n of removeNodes) {
+                n.classList.add(this.classes.valueOut);
+                setTimeout(() => {
+                    if (this.main.values.hasChildNodes() && this.main.values.contains(n)) {
+                        this.main.values.removeChild(n);
+                    }
+                }, 100);
+            }
+            currentNodes = this.main.values.childNodes;
+            for (let d = 0; d < selectedOptions.length; d++) {
+                let shouldAdd = true;
+                for (let i = 0; i < currentNodes.length; i++) {
+                    if (selectedOptions[d].id === String(currentNodes[i].dataset.id)) {
+                        shouldAdd = false;
+                    }
+                }
+                if (shouldAdd) {
+                    if (this.settings.keepOrder) {
+                        this.main.values.appendChild(this.multipleValue(selectedOptions[d]));
+                    }
+                    else {
+                        if (currentNodes.length === 0) {
+                            this.main.values.appendChild(this.multipleValue(selectedOptions[d]));
+                        }
+                        else if (d === 0) {
+                            this.main.values.insertBefore(this.multipleValue(selectedOptions[d]), currentNodes[d]);
+                        }
+                        else {
+                            currentNodes[d - 1].insertAdjacentElement('afterend', this.multipleValue(selectedOptions[d]));
+                        }
+                    }
+                }
+            }
+        }
+        multipleValue(option) {
+            const value = document.createElement('div');
+            value.classList.add(this.classes.value);
+            value.dataset.id = option.id;
+            const text = document.createElement('div');
+            text.classList.add(this.classes.valueText);
+            text.innerText = option.text;
+            value.appendChild(text);
+            if (!option.mandatory) {
+                const deleteDiv = document.createElement('div');
+                deleteDiv.classList.add(this.classes.valueDelete);
+                deleteDiv.onclick = (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    if (this.settings.disabled) {
+                        return;
+                    }
+                    let shouldDelete = true;
+                    const before = this.store.getSelectedOptions();
+                    const after = before.filter((o) => {
+                        return o.selected && o.id !== option.id;
+                    }, true);
+                    if (this.settings.minSelected && after.length < this.settings.minSelected) {
+                        return;
+                    }
+                    if (this.callbacks.beforeChange) {
+                        shouldDelete = this.callbacks.beforeChange(after, before) === true;
+                    }
+                    if (shouldDelete) {
+                        let selectedValues = [];
+                        for (const o of after) {
+                            if (o instanceof Optgroup) {
+                                for (const c of o.options) {
+                                    selectedValues.push(c.value);
+                                }
+                            }
+                            if (o instanceof Option) {
+                                selectedValues.push(o.value);
+                            }
+                        }
+                        this.callbacks.setSelected(selectedValues, false);
+                        if (this.settings.closeOnSelect) {
+                            this.callbacks.close();
+                        }
+                        if (this.callbacks.afterChange) {
+                            this.callbacks.afterChange(after);
+                        }
+                        this.updateDeselectAll();
+                    }
+                };
+                const deleteSvg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+                deleteSvg.setAttribute('viewBox', '0 0 100 100');
+                const deletePath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+                deletePath.setAttribute('d', this.classes.optionDelete);
+                deleteSvg.appendChild(deletePath);
+                deleteDiv.appendChild(deleteSvg);
+                value.appendChild(deleteDiv);
+            }
+            return value;
+        }
+        contentDiv() {
+            const main = document.createElement('div');
+            main.dataset.id = this.settings.id;
+            const search = this.searchDiv();
+            main.appendChild(search.main);
+            const list = this.listDiv();
+            main.appendChild(list);
+            return {
+                main: main,
+                search: search,
+                list: list,
+            };
+        }
+        moveContent() {
+            if (this.settings.contentPosition === 'relative') {
+                this.moveContentBelow();
+                return;
+            }
+            if (this.settings.openPosition === 'down') {
+                this.moveContentBelow();
+                return;
+            }
+            else if (this.settings.openPosition === 'up') {
+                this.moveContentAbove();
+                return;
+            }
+            if (this.putContent() === 'up') {
+                this.moveContentAbove();
+            }
+            else {
+                this.moveContentBelow();
+            }
+        }
+        searchDiv() {
+            const main = document.createElement('div');
+            const input = document.createElement('input');
+            const addable = document.createElement('div');
+            main.classList.add(this.classes.search);
+            const searchReturn = {
+                main,
+                input,
+            };
+            if (!this.settings.showSearch) {
+                main.classList.add(this.classes.hide);
+                input.readOnly = true;
+            }
+            input.type = 'search';
+            input.placeholder = this.settings.searchPlaceholder;
+            input.tabIndex = -1;
+            input.setAttribute('aria-label', this.settings.searchPlaceholder);
+            input.setAttribute('autocapitalize', 'off');
+            input.setAttribute('autocomplete', 'off');
+            input.setAttribute('autocorrect', 'off');
+            input.oninput = debounce((e) => {
+                this.callbacks.search(e.target.value);
+            }, 100);
+            input.onkeydown = (e) => {
+                switch (e.key) {
+                    case 'ArrowUp':
+                    case 'ArrowDown':
+                        e.key === 'ArrowDown' ? this.highlight('down') : this.highlight('up');
+                        return false;
+                    case 'Tab':
+                        this.callbacks.close();
+                        return true;
+                    case 'Escape':
+                        this.callbacks.close();
+                        return false;
+                    case 'Enter':
+                    case ' ':
+                        if (this.callbacks.addable && e.ctrlKey) {
+                            addable.click();
+                            return false;
+                        }
+                        else {
+                            const highlighted = this.content.list.querySelector('.' + this.classes.highlighted);
+                            if (highlighted) {
+                                highlighted.click();
+                                return false;
+                            }
+                        }
+                        return true;
+                }
+                return true;
+            };
+            main.appendChild(input);
+            if (this.callbacks.addable) {
+                addable.classList.add(this.classes.addable);
+                const plus = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+                plus.setAttribute('viewBox', '0 0 100 100');
+                const plusPath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+                plusPath.setAttribute('d', this.classes.addablePath);
+                plus.appendChild(plusPath);
+                addable.appendChild(plus);
+                addable.onclick = (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    if (!this.callbacks.addable) {
+                        return;
+                    }
+                    const inputValue = this.content.search.input.value.trim();
+                    if (inputValue === '') {
+                        this.content.search.input.focus();
+                        return;
+                    }
+                    const runFinish = (oo) => {
+                        let newOption = new Option(oo);
+                        this.callbacks.addOption(newOption);
+                        if (this.settings.isMultiple) {
+                            let values = this.store.getSelected();
+                            values.push(newOption.value);
+                            this.callbacks.setSelected(values, true);
+                        }
+                        else {
+                            this.callbacks.setSelected([newOption.value], true);
+                        }
+                        this.callbacks.search('');
+                        if (this.settings.closeOnSelect) {
+                            setTimeout(() => {
+                                this.callbacks.close();
+                            }, 100);
+                        }
+                    };
+                    const addableValue = this.callbacks.addable(inputValue);
+                    if (addableValue === false || addableValue === undefined || addableValue === null) {
+                        return;
+                    }
+                    if (addableValue instanceof Promise) {
+                        addableValue.then((value) => {
+                            if (typeof value === 'string') {
+                                runFinish({
+                                    text: value,
+                                    value: value,
+                                });
+                            }
+                            else {
+                                runFinish(value);
+                            }
+                        });
+                    }
+                    else if (typeof addableValue === 'string') {
+                        runFinish({
+                            text: addableValue,
+                            value: addableValue,
+                        });
+                    }
+                    else {
+                        runFinish(addableValue);
+                    }
+                    return;
+                };
+                main.appendChild(addable);
+                searchReturn.addable = {
+                    main: addable,
+                    svg: plus,
+                    path: plusPath,
+                };
+            }
+            return searchReturn;
+        }
+        searchFocus() {
+            this.content.search.input.focus();
+        }
+        getOptions(notPlaceholder = false, notDisabled = false, notHidden = false) {
+            let query = '.' + this.classes.option;
+            if (notPlaceholder) {
+                query += ':not(.' + this.classes.placeholder + ')';
+            }
+            if (notDisabled) {
+                query += ':not(.' + this.classes.disabled + ')';
+            }
+            if (notHidden) {
+                query += ':not(.' + this.classes.hide + ')';
+            }
+            return Array.from(this.content.list.querySelectorAll(query));
+        }
+        highlight(dir) {
+            const options = this.getOptions(true, true, true);
+            if (options.length === 0) {
+                return;
+            }
+            if (options.length === 1) {
+                if (!options[0].classList.contains(this.classes.highlighted)) {
+                    options[0].classList.add(this.classes.highlighted);
+                    return;
+                }
+            }
+            let highlighted = false;
+            for (const o of options) {
+                if (o.classList.contains(this.classes.highlighted)) {
+                    highlighted = true;
+                }
+            }
+            if (!highlighted) {
+                for (const o of options) {
+                    if (o.classList.contains(this.classes.selected)) {
+                        o.classList.add(this.classes.highlighted);
+                        break;
+                    }
+                }
+            }
+            for (let i = 0; i < options.length; i++) {
+                if (options[i].classList.contains(this.classes.highlighted)) {
+                    const prevOption = options[i];
+                    prevOption.classList.remove(this.classes.highlighted);
+                    const prevParent = prevOption.parentElement;
+                    if (prevParent && prevParent.classList.contains(this.classes.open)) {
+                        const optgroupLabel = prevParent.querySelector('.' + this.classes.optgroupLabel);
+                        if (optgroupLabel) {
+                            optgroupLabel.click();
+                        }
+                    }
+                    let selectOption = options[dir === 'down' ? (i + 1 < options.length ? i + 1 : 0) : i - 1 >= 0 ? i - 1 : options.length - 1];
+                    selectOption.classList.add(this.classes.highlighted);
+                    this.ensureElementInView(this.content.list, selectOption);
+                    const selectParent = selectOption.parentElement;
+                    if (selectParent && selectParent.classList.contains(this.classes.close)) {
+                        const optgroupLabel = selectParent.querySelector('.' + this.classes.optgroupLabel);
+                        if (optgroupLabel) {
+                            optgroupLabel.click();
+                        }
+                    }
+                    return;
+                }
+            }
+            options[dir === 'down' ? 0 : options.length - 1].classList.add(this.classes.highlighted);
+            this.ensureElementInView(this.content.list, options[dir === 'down' ? 0 : options.length - 1]);
+        }
+        listDiv() {
+            const options = document.createElement('div');
+            options.classList.add(this.classes.list);
+            return options;
+        }
+        renderError(error) {
+            this.content.list.innerHTML = '';
+            const errorDiv = document.createElement('div');
+            errorDiv.classList.add(this.classes.error);
+            errorDiv.textContent = error;
+            this.content.list.appendChild(errorDiv);
+        }
+        renderSearching() {
+            this.content.list.innerHTML = '';
+            const searchingDiv = document.createElement('div');
+            searchingDiv.classList.add(this.classes.searching);
+            searchingDiv.textContent = this.settings.searchingText;
+            this.content.list.appendChild(searchingDiv);
+        }
+        renderOptions(data) {
+            this.content.list.innerHTML = '';
+            if (data.length === 0) {
+                const noResults = document.createElement('div');
+                noResults.classList.add(this.classes.search);
+                noResults.innerHTML = this.settings.searchText;
+                this.content.list.appendChild(noResults);
+                return;
+            }
+            for (const d of data) {
+                if (d instanceof Optgroup) {
+                    const optgroupEl = document.createElement('div');
+                    optgroupEl.classList.add(this.classes.optgroup);
+                    const optgroupLabel = document.createElement('div');
+                    optgroupLabel.classList.add(this.classes.optgroupLabel);
+                    optgroupEl.appendChild(optgroupLabel);
+                    const optgroupLabelText = document.createElement('div');
+                    optgroupLabelText.classList.add(this.classes.optgroupLabelText);
+                    optgroupLabelText.textContent = d.label;
+                    optgroupLabel.appendChild(optgroupLabelText);
+                    const optgroupActions = document.createElement('div');
+                    optgroupActions.classList.add(this.classes.optgroupActions);
+                    optgroupLabel.appendChild(optgroupActions);
+                    if (this.settings.isMultiple && d.selectAll) {
+                        const selectAll = document.createElement('div');
+                        selectAll.classList.add(this.classes.optgroupSelectAll);
+                        let allSelected = true;
+                        for (const o of d.options) {
+                            if (!o.selected) {
+                                allSelected = false;
+                                break;
+                            }
+                        }
+                        if (allSelected) {
+                            selectAll.classList.add(this.classes.selected);
+                        }
+                        const selectAllText = document.createElement('span');
+                        selectAllText.textContent = d.selectAllText;
+                        selectAll.appendChild(selectAllText);
+                        const selectAllSvg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+                        selectAllSvg.setAttribute('viewBox', '0 0 100 100');
+                        selectAll.appendChild(selectAllSvg);
+                        const selectAllBox = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+                        selectAllBox.setAttribute('d', this.classes.optgroupSelectAllBox);
+                        selectAllSvg.appendChild(selectAllBox);
+                        const selectAllCheck = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+                        selectAllCheck.setAttribute('d', this.classes.optgroupSelectAllCheck);
+                        selectAllSvg.appendChild(selectAllCheck);
+                        selectAll.addEventListener('click', (e) => {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            const currentSelected = this.store.getSelected();
+                            if (allSelected) {
+                                const newSelected = currentSelected.filter((s) => {
+                                    for (const o of d.options) {
+                                        if (s === o.value) {
+                                            return false;
+                                        }
+                                    }
+                                    return true;
+                                });
+                                this.callbacks.setSelected(newSelected, true);
+                                return;
+                            }
+                            else {
+                                const newSelected = currentSelected.concat(d.options.map((o) => o.value));
+                                for (const o of d.options) {
+                                    if (!this.store.getOptionByID(o.id)) {
+                                        this.callbacks.addOption(o);
+                                    }
+                                }
+                                this.callbacks.setSelected(newSelected, true);
+                                return;
+                            }
+                        });
+                        optgroupActions.appendChild(selectAll);
+                    }
+                    if (d.closable !== 'off') {
+                        const optgroupClosable = document.createElement('div');
+                        optgroupClosable.classList.add(this.classes.optgroupClosable);
+                        const optgroupClosableSvg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+                        optgroupClosableSvg.setAttribute('viewBox', '0 0 100 100');
+                        optgroupClosableSvg.classList.add(this.classes.arrow);
+                        optgroupClosable.appendChild(optgroupClosableSvg);
+                        const optgroupClosableArrow = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+                        optgroupClosableSvg.appendChild(optgroupClosableArrow);
+                        if (d.options.some((o) => o.selected) || this.content.search.input.value.trim() !== '') {
+                            optgroupClosable.classList.add(this.classes.open);
+                            optgroupClosableArrow.setAttribute('d', this.classes.arrowOpen);
+                        }
+                        else if (d.closable === 'open') {
+                            optgroupEl.classList.add(this.classes.open);
+                            optgroupClosableArrow.setAttribute('d', this.classes.arrowOpen);
+                        }
+                        else if (d.closable === 'close') {
+                            optgroupEl.classList.add(this.classes.close);
+                            optgroupClosableArrow.setAttribute('d', this.classes.arrowClose);
+                        }
+                        optgroupLabel.addEventListener('click', (e) => {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            if (optgroupEl.classList.contains(this.classes.close)) {
+                                optgroupEl.classList.remove(this.classes.close);
+                                optgroupEl.classList.add(this.classes.open);
+                                optgroupClosableArrow.setAttribute('d', this.classes.arrowOpen);
+                            }
+                            else {
+                                optgroupEl.classList.remove(this.classes.open);
+                                optgroupEl.classList.add(this.classes.close);
+                                optgroupClosableArrow.setAttribute('d', this.classes.arrowClose);
+                            }
+                        });
+                        optgroupActions.appendChild(optgroupClosable);
+                    }
+                    optgroupEl.appendChild(optgroupLabel);
+                    for (const o of d.options) {
+                        optgroupEl.appendChild(this.option(o));
+                    }
+                    this.content.list.appendChild(optgroupEl);
+                }
+                if (d instanceof Option) {
+                    this.content.list.appendChild(this.option(d));
+                }
+            }
+        }
+        option(option) {
+            if (option.placeholder) {
+                const placeholder = document.createElement('div');
+                placeholder.classList.add(this.classes.option);
+                placeholder.classList.add(this.classes.hide);
+                return placeholder;
+            }
+            const optionEl = document.createElement('div');
+            optionEl.dataset.id = option.id;
+            optionEl.id = option.id;
+            optionEl.classList.add(this.classes.option);
+            optionEl.setAttribute('role', 'option');
+            if (option.class) {
+                option.class.split(' ').forEach((dataClass) => {
+                    optionEl.classList.add(dataClass);
+                });
+            }
+            if (option.style) {
+                optionEl.style.cssText = option.style;
+            }
+            if (this.settings.searchHighlight && this.content.search.input.value.trim() !== '') {
+                optionEl.innerHTML = this.highlightText(option.html !== '' ? option.html : option.text, this.content.search.input.value, this.classes.searchHighlighter);
+            }
+            else if (option.html !== '') {
+                optionEl.innerHTML = option.html;
+            }
+            else {
+                optionEl.textContent = option.text;
+            }
+            if (this.settings.showOptionTooltips && optionEl.textContent) {
+                optionEl.setAttribute('title', optionEl.textContent);
+            }
+            if (!option.display) {
+                optionEl.classList.add(this.classes.hide);
+            }
+            if (option.disabled) {
+                optionEl.classList.add(this.classes.disabled);
+            }
+            if (option.selected && this.settings.hideSelected) {
+                optionEl.classList.add(this.classes.hide);
+            }
+            if (option.selected) {
+                optionEl.classList.add(this.classes.selected);
+                optionEl.setAttribute('aria-selected', 'true');
+                this.main.main.setAttribute('aria-activedescendant', optionEl.id);
+            }
+            else {
+                optionEl.classList.remove(this.classes.selected);
+                optionEl.setAttribute('aria-selected', 'false');
+            }
+            optionEl.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                const selectedOptions = this.store.getSelected();
+                const element = e.currentTarget;
+                const elementID = String(element.dataset.id);
+                if (option.disabled || (option.selected && !this.settings.allowDeselect)) {
+                    return;
+                }
+                if ((this.settings.isMultiple && this.settings.maxSelected <= selectedOptions.length && !option.selected) ||
+                    (this.settings.isMultiple && this.settings.minSelected >= selectedOptions.length && option.selected)) {
+                    return;
+                }
+                let shouldUpdate = false;
+                const before = this.store.getSelectedOptions();
+                let after = [];
+                if (this.settings.isMultiple) {
+                    if (option.selected) {
+                        after = before.filter((o) => o.id !== elementID);
+                    }
+                    else {
+                        after = before.concat(option);
+                    }
+                }
+                if (!this.settings.isMultiple) {
+                    if (option.selected) {
+                        after = [];
+                    }
+                    else {
+                        after = [option];
+                    }
+                }
+                if (!this.callbacks.beforeChange) {
+                    shouldUpdate = true;
+                }
+                if (this.callbacks.beforeChange) {
+                    if (this.callbacks.beforeChange(after, before) === false) {
+                        shouldUpdate = false;
+                    }
+                    else {
+                        shouldUpdate = true;
+                    }
+                }
+                if (shouldUpdate) {
+                    if (!this.store.getOptionByID(elementID)) {
+                        this.callbacks.addOption(option);
+                    }
+                    this.callbacks.setSelected(after.map((o) => o.value), false);
+                    if (this.settings.closeOnSelect) {
+                        this.callbacks.close();
+                    }
+                    if (this.callbacks.afterChange) {
+                        this.callbacks.afterChange(after);
+                    }
+                }
+            });
+            return optionEl;
+        }
+        destroy() {
+            this.main.main.remove();
+            this.content.main.remove();
+        }
+        highlightText(str, search, className) {
+            let completedString = str;
+            const regex = new RegExp('(' + search.trim() + ')(?![^<]*>[^<>]*</)', 'i');
+            if (!str.match(regex)) {
+                return str;
+            }
+            const matchStartPosition = str.match(regex).index;
+            const matchEndPosition = matchStartPosition + str.match(regex)[0].toString().length;
+            const originalTextFoundByRegex = str.substring(matchStartPosition, matchEndPosition);
+            completedString = completedString.replace(regex, `<mark class="${className}">${originalTextFoundByRegex}</mark>`);
+            return completedString;
+        }
+        moveContentAbove() {
+            const mainHeight = this.main.main.offsetHeight;
+            const contentHeight = this.content.main.offsetHeight;
+            this.main.main.classList.remove(this.classes.openBelow);
+            this.main.main.classList.add(this.classes.openAbove);
+            this.content.main.classList.remove(this.classes.openBelow);
+            this.content.main.classList.add(this.classes.openAbove);
+            const containerRect = this.main.main.getBoundingClientRect();
+            this.content.main.style.margin = '-' + (mainHeight + contentHeight - 1) + 'px 0px 0px 0px';
+            this.content.main.style.top = containerRect.top + containerRect.height + window.scrollY + 'px';
+            this.content.main.style.left = containerRect.left + window.scrollX + 'px';
+            this.content.main.style.width = containerRect.width + 'px';
+        }
+        moveContentBelow() {
+            this.main.main.classList.remove(this.classes.openAbove);
+            this.main.main.classList.add(this.classes.openBelow);
+            this.content.main.classList.remove(this.classes.openAbove);
+            this.content.main.classList.add(this.classes.openBelow);
+            const containerRect = this.main.main.getBoundingClientRect();
+            this.content.main.style.margin = '-1px 0px 0px 0px';
+            if (this.settings.contentPosition !== 'relative') {
+                this.content.main.style.top = containerRect.top + containerRect.height + window.scrollY + 'px';
+                this.content.main.style.left = containerRect.left + window.scrollX + 'px';
+                this.content.main.style.width = containerRect.width + 'px';
+            }
+        }
+        ensureElementInView(container, element) {
+            const cTop = container.scrollTop + container.offsetTop;
+            const cBottom = cTop + container.clientHeight;
+            const eTop = element.offsetTop;
+            const eBottom = eTop + element.clientHeight;
+            if (eTop < cTop) {
+                container.scrollTop -= cTop - eTop;
+            }
+            else if (eBottom > cBottom) {
+                container.scrollTop += eBottom - cBottom;
+            }
+        }
+        putContent() {
+            const mainHeight = this.main.main.offsetHeight;
+            const mainRect = this.main.main.getBoundingClientRect();
+            const contentHeight = this.content.main.offsetHeight;
+            const spaceBelow = window.innerHeight - (mainRect.top + mainHeight);
+            if (spaceBelow <= contentHeight) {
+                if (mainRect.top > contentHeight) {
+                    return 'up';
+                }
+                else {
+                    return 'down';
+                }
+            }
+            return 'down';
+        }
+        updateDeselectAll() {
+            if (!this.store || !this.settings) {
+                return;
+            }
+            const selected = this.store.getSelectedOptions();
+            const hasSelectedItems = selected && selected.length > 0;
+            const isMultiple = this.settings.isMultiple;
+            const allowDeselect = this.settings.allowDeselect;
+            const deselectButton = this.main.deselect.main;
+            const hideClass = this.classes.hide;
+            if (allowDeselect && !(isMultiple && !hasSelectedItems)) {
+                deselectButton.classList.remove(hideClass);
+            }
+            else {
+                deselectButton.classList.add(hideClass);
+            }
+        }
+    }
+
+    class Select {
+        constructor(select) {
+            this.listen = false;
+            this.observer = null;
+            this.select = select;
+            this.valueChange = this.valueChange.bind(this);
+            this.select.addEventListener('change', this.valueChange, {
+                passive: true,
+            });
+            this.observer = new MutationObserver(this.observeCall.bind(this));
+            this.changeListen(true);
+        }
+        enable() {
+            this.select.disabled = false;
+        }
+        disable() {
+            this.select.disabled = true;
+        }
+        hideUI() {
+            this.select.tabIndex = -1;
+            this.select.style.display = 'none';
+            this.select.setAttribute('aria-hidden', 'true');
+        }
+        showUI() {
+            this.select.removeAttribute('tabindex');
+            this.select.style.display = '';
+            this.select.removeAttribute('aria-hidden');
+        }
+        changeListen(listen) {
+            this.listen = listen;
+            if (listen) {
+                if (this.observer) {
+                    this.observer.observe(this.select, {
+                        subtree: true,
+                        childList: true,
+                        attributes: true,
+                    });
+                }
+            }
+            if (!listen) {
+                if (this.observer) {
+                    this.observer.disconnect();
+                }
+            }
+        }
+        valueChange(ev) {
+            if (this.listen && this.onValueChange) {
+                this.onValueChange(this.getSelectedValues());
+            }
+            return true;
+        }
+        observeCall(mutations) {
+            if (!this.listen) {
+                return;
+            }
+            let classChanged = false;
+            let disabledChanged = false;
+            let optgroupOptionChanged = false;
+            for (const m of mutations) {
+                if (m.target === this.select) {
+                    if (m.attributeName === 'disabled') {
+                        disabledChanged = true;
+                    }
+                    if (m.attributeName === 'class') {
+                        classChanged = true;
+                    }
+                }
+                if (m.target.nodeName === 'OPTGROUP' || m.target.nodeName === 'OPTION') {
+                    optgroupOptionChanged = true;
+                }
+            }
+            if (classChanged && this.onClassChange) {
+                this.onClassChange(this.select.className.split(' '));
+            }
+            if (disabledChanged && this.onDisabledChange) {
+                this.changeListen(false);
+                this.onDisabledChange(this.select.disabled);
+                this.changeListen(true);
+            }
+            if (optgroupOptionChanged && this.onOptionsChange) {
+                this.changeListen(false);
+                this.onOptionsChange(this.getData());
+                this.changeListen(true);
+            }
+        }
+        getData() {
+            let data = [];
+            const nodes = this.select.childNodes;
+            for (const n of nodes) {
+                if (n.nodeName === 'OPTGROUP') {
+                    data.push(this.getDataFromOptgroup(n));
+                }
+                if (n.nodeName === 'OPTION') {
+                    data.push(this.getDataFromOption(n));
+                }
+            }
+            return data;
+        }
+        getDataFromOptgroup(optgroup) {
+            let data = {
+                id: optgroup.id,
+                label: optgroup.label,
+                selectAll: optgroup.dataset ? optgroup.dataset.selectall === 'true' : false,
+                selectAllText: optgroup.dataset ? optgroup.dataset.selectalltext : 'Select all',
+                closable: optgroup.dataset ? optgroup.dataset.closable : 'off',
+                options: [],
+            };
+            const options = optgroup.childNodes;
+            for (const o of options) {
+                if (o.nodeName === 'OPTION') {
+                    data.options.push(this.getDataFromOption(o));
+                }
+            }
+            return data;
+        }
+        getDataFromOption(option) {
+            return {
+                id: option.id,
+                value: option.value,
+                text: option.text,
+                html: option.dataset && option.dataset.html ? option.dataset.html : '',
+                selected: option.selected,
+                display: option.style.display === 'none' ? false : true,
+                disabled: option.disabled,
+                mandatory: option.dataset ? option.dataset.mandatory === 'true' : false,
+                placeholder: option.dataset.placeholder === 'true',
+                class: option.className,
+                style: option.style.cssText,
+                data: option.dataset,
+            };
+        }
+        getSelectedValues() {
+            let values = [];
+            const options = this.select.childNodes;
+            for (const o of options) {
+                if (o.nodeName === 'OPTGROUP') {
+                    const optgroupOptions = o.childNodes;
+                    for (const oo of optgroupOptions) {
+                        if (oo.nodeName === 'OPTION') {
+                            const option = oo;
+                            if (option.selected) {
+                                values.push(option.value);
+                            }
+                        }
+                    }
+                }
+                if (o.nodeName === 'OPTION') {
+                    const option = o;
+                    if (option.selected) {
+                        values.push(option.value);
+                    }
+                }
+            }
+            return values;
+        }
+        setSelected(value) {
+            this.changeListen(false);
+            const options = this.select.childNodes;
+            for (const o of options) {
+                if (o.nodeName === 'OPTGROUP') {
+                    const optgroup = o;
+                    const optgroupOptions = optgroup.childNodes;
+                    for (const oo of optgroupOptions) {
+                        if (oo.nodeName === 'OPTION') {
+                            const option = oo;
+                            option.selected = value.includes(option.value);
+                        }
+                    }
+                }
+                if (o.nodeName === 'OPTION') {
+                    const option = o;
+                    option.selected = value.includes(option.value);
+                }
+            }
+            this.changeListen(true);
+        }
+        updateSelect(id, style, classes) {
+            this.changeListen(false);
+            if (id) {
+                this.select.dataset.id = id;
+            }
+            if (style) {
+                this.select.style.cssText = style;
+            }
+            if (classes) {
+                this.select.className = '';
+                classes.forEach((c) => {
+                    if (c.trim() !== '') {
+                        this.select.classList.add(c.trim());
+                    }
+                });
+            }
+            this.changeListen(true);
+        }
+        updateOptions(data) {
+            this.changeListen(false);
+            this.select.innerHTML = '';
+            for (const d of data) {
+                if (d instanceof Optgroup) {
+                    this.select.appendChild(this.createOptgroup(d));
+                }
+                if (d instanceof Option) {
+                    this.select.appendChild(this.createOption(d));
+                }
+            }
+            this.select.dispatchEvent(new Event('change'));
+            this.changeListen(true);
+        }
+        createOptgroup(optgroup) {
+            const optgroupEl = document.createElement('optgroup');
+            optgroupEl.id = optgroup.id;
+            optgroupEl.label = optgroup.label;
+            if (optgroup.selectAll) {
+                optgroupEl.dataset.selectAll = 'true';
+            }
+            if (optgroup.closable !== 'off') {
+                optgroupEl.dataset.closable = optgroup.closable;
+            }
+            if (optgroup.options) {
+                for (const o of optgroup.options) {
+                    optgroupEl.appendChild(this.createOption(o));
+                }
+            }
+            return optgroupEl;
+        }
+        createOption(info) {
+            const optionEl = document.createElement('option');
+            optionEl.id = info.id;
+            optionEl.value = info.value;
+            optionEl.innerHTML = info.text;
+            if (info.html !== '') {
+                optionEl.setAttribute('data-html', info.html);
+            }
+            if (info.selected) {
+                optionEl.selected = info.selected;
+            }
+            if (info.disabled) {
+                optionEl.disabled = true;
+            }
+            if (info.display === false) {
+                optionEl.style.display = 'none';
+            }
+            if (info.placeholder) {
+                optionEl.setAttribute('data-placeholder', 'true');
+            }
+            if (info.mandatory) {
+                optionEl.setAttribute('data-mandatory', 'true');
+            }
+            if (info.class) {
+                info.class.split(' ').forEach((optionClass) => {
+                    optionEl.classList.add(optionClass);
+                });
+            }
+            if (info.data && typeof info.data === 'object') {
+                Object.keys(info.data).forEach((key) => {
+                    optionEl.setAttribute('data-' + kebabCase(key), info.data[key]);
+                });
+            }
+            return optionEl;
+        }
+        destroy() {
+            this.changeListen(false);
+            this.select.removeEventListener('change', this.valueChange);
+            if (this.observer) {
+                this.observer.disconnect();
+                this.observer = null;
+            }
+            delete this.select.dataset.id;
+            this.showUI();
+        }
+    }
+
+    class Settings {
+        constructor(settings) {
+            this.id = '';
+            this.style = '';
+            this.class = [];
+            this.isMultiple = false;
+            this.isOpen = false;
+            this.isFullOpen = false;
+            this.intervalMove = null;
+            if (!settings) {
+                settings = {};
+            }
+            this.id = 'ss-' + generateID();
+            this.style = settings.style || '';
+            this.class = settings.class || [];
+            this.disabled = settings.disabled !== undefined ? settings.disabled : false;
+            this.alwaysOpen = settings.alwaysOpen !== undefined ? settings.alwaysOpen : false;
+            this.showSearch = settings.showSearch !== undefined ? settings.showSearch : true;
+            this.ariaLabel = settings.ariaLabel || 'Combobox';
+            this.searchPlaceholder = settings.searchPlaceholder || 'Search';
+            this.searchText = settings.searchText || 'No Results';
+            this.searchingText = settings.searchingText || 'Searching...';
+            this.searchHighlight = settings.searchHighlight !== undefined ? settings.searchHighlight : false;
+            this.closeOnSelect = settings.closeOnSelect !== undefined ? settings.closeOnSelect : true;
+            this.contentLocation = settings.contentLocation || document.body;
+            this.contentPosition = settings.contentPosition || 'absolute';
+            this.openPosition = settings.openPosition || 'auto';
+            this.placeholderText = settings.placeholderText !== undefined ? settings.placeholderText : 'Select Value';
+            this.allowDeselect = settings.allowDeselect !== undefined ? settings.allowDeselect : false;
+            this.hideSelected = settings.hideSelected !== undefined ? settings.hideSelected : false;
+            this.keepOrder = settings.keepOrder !== undefined ? settings.keepOrder : false;
+            this.showOptionTooltips = settings.showOptionTooltips !== undefined ? settings.showOptionTooltips : false;
+            this.minSelected = settings.minSelected || 0;
+            this.maxSelected = settings.maxSelected || 1000;
+            this.timeoutDelay = settings.timeoutDelay || 200;
+            this.maxValuesShown = settings.maxValuesShown || 20;
+            this.maxValuesMessage = settings.maxValuesMessage || '{number} selected';
+        }
+    }
+
+    class SlimSelect {
+        constructor(config) {
+            var _a;
+            this.events = {
+                search: undefined,
+                searchFilter: (opt, search) => {
+                    return opt.text.toLowerCase().indexOf(search.toLowerCase()) !== -1;
+                },
+                addable: undefined,
+                beforeChange: undefined,
+                afterChange: undefined,
+                beforeOpen: undefined,
+                afterOpen: undefined,
+                beforeClose: undefined,
+                afterClose: undefined,
+            };
+            this.windowResize = debounce(() => {
+                if (!this.settings.isOpen && !this.settings.isFullOpen) {
+                    return;
+                }
+                this.render.moveContent();
+            });
+            this.windowScroll = debounce(() => {
+                if (!this.settings.isOpen && !this.settings.isFullOpen) {
+                    return;
+                }
+                this.render.moveContent();
+            });
+            this.documentClick = (e) => {
+                if (!this.settings.isOpen) {
+                    return;
+                }
+                if (e.target && !hasClassInTree(e.target, this.settings.id)) {
+                    this.close(e.type);
+                }
+            };
+            this.windowVisibilityChange = () => {
+                if (document.hidden) {
+                    this.close();
+                }
+            };
+            this.selectEl = (typeof config.select === 'string' ? document.querySelector(config.select) : config.select);
+            if (!this.selectEl) {
+                if (config.events && config.events.error) {
+                    config.events.error(new Error('Could not find select element'));
+                }
+                return;
+            }
+            if (this.selectEl.tagName !== 'SELECT') {
+                if (config.events && config.events.error) {
+                    config.events.error(new Error('Element isnt of type select'));
+                }
+                return;
+            }
+            if (this.selectEl.dataset.ssid) {
+                this.destroy();
+            }
+            this.settings = new Settings(config.settings);
+            const debounceEvents = ['afterChange', 'beforeOpen', 'afterOpen', 'beforeClose', 'afterClose'];
+            for (const key in config.events) {
+                if (!config.events.hasOwnProperty(key)) {
+                    continue;
+                }
+                if (debounceEvents.indexOf(key) !== -1) {
+                    this.events[key] = debounce(config.events[key], 100);
+                }
+                else {
+                    this.events[key] = config.events[key];
+                }
+            }
+            this.settings.disabled = ((_a = config.settings) === null || _a === void 0 ? void 0 : _a.disabled) ? config.settings.disabled : this.selectEl.disabled;
+            this.settings.isMultiple = this.selectEl.multiple;
+            this.settings.style = this.selectEl.style.cssText;
+            this.settings.class = this.selectEl.className.split(' ');
+            this.select = new Select(this.selectEl);
+            this.select.updateSelect(this.settings.id, this.settings.style, this.settings.class);
+            this.select.hideUI();
+            this.select.onValueChange = (values) => {
+                this.setSelected(values);
+            };
+            this.select.onClassChange = (classes) => {
+                this.settings.class = classes;
+                this.render.updateClassStyles();
+            };
+            this.select.onDisabledChange = (disabled) => {
+                if (disabled) {
+                    this.disable();
+                }
+                else {
+                    this.enable();
+                }
+            };
+            this.select.onOptionsChange = (data) => {
+                this.setData(data);
+            };
+            this.store = new Store(this.settings.isMultiple ? 'multiple' : 'single', config.data ? config.data : this.select.getData());
+            if (config.data) {
+                this.select.updateOptions(this.store.getData());
+            }
+            const renderCallbacks = {
+                open: this.open.bind(this),
+                close: this.close.bind(this),
+                addable: this.events.addable ? this.events.addable : undefined,
+                setSelected: this.setSelected.bind(this),
+                addOption: this.addOption.bind(this),
+                search: this.search.bind(this),
+                beforeChange: this.events.beforeChange,
+                afterChange: this.events.afterChange,
+            };
+            this.render = new Render(this.settings, this.store, renderCallbacks);
+            this.render.renderValues();
+            this.render.renderOptions(this.store.getData());
+            const selectAriaLabel = this.selectEl.getAttribute('aria-label');
+            const selectAriaLabelledBy = this.selectEl.getAttribute('aria-labelledby');
+            if (selectAriaLabel) {
+                this.render.main.main.setAttribute('aria-label', selectAriaLabel);
+            }
+            else if (selectAriaLabelledBy) {
+                this.render.main.main.setAttribute('aria-labelledby', selectAriaLabelledBy);
+            }
+            if (this.selectEl.parentNode) {
+                this.selectEl.parentNode.insertBefore(this.render.main.main, this.selectEl.nextSibling);
+            }
+            window.addEventListener('resize', this.windowResize, false);
+            if (this.settings.openPosition === 'auto') {
+                window.addEventListener('scroll', this.windowScroll, false);
+            }
+            document.addEventListener('visibilitychange', this.windowVisibilityChange);
+            if (this.settings.disabled) {
+                this.disable();
+            }
+            if (this.settings.alwaysOpen) {
+                this.open();
+            }
+            this.selectEl.slim = this;
+        }
+        enable() {
+            this.settings.disabled = false;
+            this.select.enable();
+            this.render.enable();
+        }
+        disable() {
+            this.settings.disabled = true;
+            this.select.disable();
+            this.render.disable();
+        }
+        getData() {
+            return this.store.getData();
+        }
+        setData(data) {
+            const selected = this.store.getSelected();
+            const err = this.store.validateDataArray(data);
+            if (err) {
+                if (this.events.error) {
+                    this.events.error(err);
+                }
+                return;
+            }
+            this.store.setData(data);
+            const dataClean = this.store.getData();
+            this.select.updateOptions(dataClean);
+            this.render.renderValues();
+            this.render.renderOptions(dataClean);
+            if (this.events.afterChange && !isEqual(selected, this.store.getSelected())) {
+                this.events.afterChange(this.store.getSelectedOptions());
+            }
+        }
+        getSelected() {
+            return this.store.getSelected();
+        }
+        setSelected(value, runAfterChange = true) {
+            const selected = this.store.getSelected();
+            this.store.setSelectedBy('value', Array.isArray(value) ? value : [value]);
+            const data = this.store.getData();
+            this.select.updateOptions(data);
+            this.render.renderValues();
+            if (this.render.content.search.input.value !== '') {
+                this.search(this.render.content.search.input.value);
+            }
+            else {
+                this.render.renderOptions(data);
+            }
+            if (runAfterChange && this.events.afterChange && !isEqual(selected, this.store.getSelected())) {
+                this.events.afterChange(this.store.getSelectedOptions());
+            }
+        }
+        addOption(option) {
+            const selected = this.store.getSelected();
+            if (!this.store.getDataOptions().some((o) => { var _a; return o.value === ((_a = option.value) !== null && _a !== void 0 ? _a : option.text); })) {
+                this.store.addOption(option);
+            }
+            const data = this.store.getData();
+            this.select.updateOptions(data);
+            this.render.renderValues();
+            this.render.renderOptions(data);
+            if (this.events.afterChange && !isEqual(selected, this.store.getSelected())) {
+                this.events.afterChange(this.store.getSelectedOptions());
+            }
+        }
+        open() {
+            if (this.settings.disabled || this.settings.isOpen) {
+                return;
+            }
+            if (this.events.beforeOpen) {
+                this.events.beforeOpen();
+            }
+            this.render.open();
+            if (this.settings.showSearch) {
+                this.render.searchFocus();
+            }
+            this.settings.isOpen = true;
+            setTimeout(() => {
+                if (this.events.afterOpen) {
+                    this.events.afterOpen();
+                }
+                if (this.settings.isOpen) {
+                    this.settings.isFullOpen = true;
+                }
+                document.addEventListener('click', this.documentClick);
+            }, this.settings.timeoutDelay);
+            if (this.settings.contentPosition === 'absolute') {
+                if (this.settings.intervalMove) {
+                    clearInterval(this.settings.intervalMove);
+                }
+                this.settings.intervalMove = setInterval(this.render.moveContent.bind(this.render), 500);
+            }
+        }
+        close(eventType = null) {
+            if (!this.settings.isOpen || this.settings.alwaysOpen) {
+                return;
+            }
+            if (this.events.beforeClose) {
+                this.events.beforeClose();
+            }
+            this.render.close();
+            if (this.render.content.search.input.value !== '') {
+                this.search('');
+            }
+            this.render.mainFocus(eventType);
+            this.settings.isOpen = false;
+            this.settings.isFullOpen = false;
+            setTimeout(() => {
+                if (this.events.afterClose) {
+                    this.events.afterClose();
+                }
+                document.removeEventListener('click', this.documentClick);
+            }, this.settings.timeoutDelay);
+            if (this.settings.intervalMove) {
+                clearInterval(this.settings.intervalMove);
+            }
+        }
+        search(value) {
+            if (this.render.content.search.input.value !== value) {
+                this.render.content.search.input.value = value;
+            }
+            if (!this.events.search) {
+                this.render.renderOptions(value === '' ? this.store.getData() : this.store.search(value, this.events.searchFilter));
+                return;
+            }
+            this.render.renderSearching();
+            const searchResp = this.events.search(value, this.store.getSelectedOptions());
+            if (searchResp instanceof Promise) {
+                searchResp
+                    .then((data) => {
+                    this.render.renderOptions(this.store.partialToFullData(data));
+                })
+                    .catch((err) => {
+                    this.render.renderError(typeof err === 'string' ? err : err.message);
+                });
+                return;
+            }
+            else if (Array.isArray(searchResp)) {
+                this.render.renderOptions(this.store.partialToFullData(searchResp));
+            }
+            else {
+                this.render.renderError('Search event must return a promise or an array of data');
+            }
+        }
+        destroy() {
+            document.removeEventListener('click', this.documentClick);
+            window.removeEventListener('resize', this.windowResize, false);
+            if (this.settings.openPosition === 'auto') {
+                window.removeEventListener('scroll', this.windowScroll, false);
+            }
+            document.removeEventListener('visibilitychange', this.windowVisibilityChange);
+            this.store.setData([]);
+            this.render.destroy();
+            this.select.destroy();
+        }
+    }
+
+    return SlimSelect;
+
+}));
+
+},{}],103:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -21695,7 +23565,7 @@ function getWindow() {
   return win;
 }
 
-},{}],103:[function(require,module,exports){
+},{}],104:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -21739,7 +23609,7 @@ function getBreakpoint(breakpoints, base = 'window', containerEl) {
   return breakpoint || 'max';
 }
 
-},{"ssr-window":102}],104:[function(require,module,exports){
+},{"ssr-window":103}],105:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -21754,7 +23624,7 @@ var _default = exports.default = {
   getBreakpoint: _getBreakpoint.default
 };
 
-},{"./getBreakpoint.js":103,"./setBreakpoint.js":105}],105:[function(require,module,exports){
+},{"./getBreakpoint.js":104,"./setBreakpoint.js":106}],106:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -21833,7 +23703,7 @@ function setBreakpoint() {
   swiper.emit('breakpoint', breakpointParams);
 }
 
-},{"../../shared/utils.js":201}],106:[function(require,module,exports){
+},{"../../shared/utils.js":202}],107:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -21873,7 +23743,7 @@ var _default = exports.default = {
   checkOverflow
 };
 
-},{}],107:[function(require,module,exports){
+},{}],108:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -21934,7 +23804,7 @@ function addClasses() {
   swiper.emitContainerClasses();
 }
 
-},{}],108:[function(require,module,exports){
+},{}],109:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -21949,7 +23819,7 @@ var _default = exports.default = {
   removeClasses: _removeClasses.default
 };
 
-},{"./addClasses.js":107,"./removeClasses.js":109}],109:[function(require,module,exports){
+},{"./addClasses.js":108,"./removeClasses.js":110}],110:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -21966,7 +23836,7 @@ function removeClasses() {
   swiper.emitContainerClasses();
 }
 
-},{}],110:[function(require,module,exports){
+},{}],111:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -22528,7 +24398,7 @@ Object.keys(prototypes).forEach(prototypeGroup => {
 Swiper.use([_resize.default, _observer.default]);
 var _default = exports.default = Swiper;
 
-},{"../shared/dom.js":194,"../shared/get-browser.js":198,"../shared/get-device.js":199,"../shared/get-support.js":200,"../shared/utils.js":201,"./breakpoints/index.js":104,"./check-overflow/index.js":106,"./classes/index.js":108,"./defaults.js":111,"./events-emitter.js":112,"./events/index.js":113,"./grab-cursor/index.js":120,"./images/index.js":123,"./loop/index.js":126,"./moduleExtendParams.js":130,"./modules/observer/observer.js":131,"./modules/resize/resize.js":132,"./slide/index.js":133,"./transition/index.js":141,"./translate/index.js":147,"./update/index.js":152,"ssr-window":102}],111:[function(require,module,exports){
+},{"../shared/dom.js":195,"../shared/get-browser.js":199,"../shared/get-device.js":200,"../shared/get-support.js":201,"../shared/utils.js":202,"./breakpoints/index.js":105,"./check-overflow/index.js":107,"./classes/index.js":109,"./defaults.js":112,"./events-emitter.js":113,"./events/index.js":114,"./grab-cursor/index.js":121,"./images/index.js":124,"./loop/index.js":127,"./moduleExtendParams.js":131,"./modules/observer/observer.js":132,"./modules/resize/resize.js":133,"./slide/index.js":134,"./transition/index.js":142,"./translate/index.js":148,"./update/index.js":153,"ssr-window":103}],112:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -22660,7 +24530,7 @@ var _default = exports.default = {
   _emitClasses: false
 };
 
-},{}],112:[function(require,module,exports){
+},{}],113:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -22765,7 +24635,7 @@ var _default = exports.default = {
   }
 };
 
-},{}],113:[function(require,module,exports){
+},{}],114:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -22858,7 +24728,7 @@ var _default = exports.default = {
   detachEvents
 };
 
-},{"./onClick.js":114,"./onResize.js":115,"./onScroll.js":116,"./onTouchEnd.js":117,"./onTouchMove.js":118,"./onTouchStart.js":119,"ssr-window":102}],114:[function(require,module,exports){
+},{"./onClick.js":115,"./onResize.js":116,"./onScroll.js":117,"./onTouchEnd.js":118,"./onTouchMove.js":119,"./onTouchStart.js":120,"ssr-window":103}],115:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -22877,7 +24747,7 @@ function onClick(e) {
   }
 }
 
-},{}],115:[function(require,module,exports){
+},{}],116:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -22923,7 +24793,7 @@ function onResize() {
   }
 }
 
-},{}],116:[function(require,module,exports){
+},{}],117:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -22961,7 +24831,7 @@ function onScroll() {
   swiper.emit('setTranslate', swiper.translate, false);
 }
 
-},{}],117:[function(require,module,exports){
+},{}],118:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -23105,7 +24975,7 @@ function onTouchEnd(event) {
   }
 }
 
-},{"../../shared/utils.js":201}],118:[function(require,module,exports){
+},{"../../shared/utils.js":202}],119:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -23301,7 +25171,7 @@ function onTouchMove(event) {
   swiper.setTranslate(data.currentTranslate);
 }
 
-},{"../../shared/dom.js":194,"../../shared/utils.js":201,"ssr-window":102}],119:[function(require,module,exports){
+},{"../../shared/dom.js":195,"../../shared/utils.js":202,"ssr-window":103}],120:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -23420,7 +25290,7 @@ function onTouchStart(event) {
   swiper.emit('touchStart', e);
 }
 
-},{"../../shared/dom.js":194,"../../shared/utils.js":201,"ssr-window":102}],120:[function(require,module,exports){
+},{"../../shared/dom.js":195,"../../shared/utils.js":202,"ssr-window":103}],121:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -23435,7 +25305,7 @@ var _default = exports.default = {
   unsetGrabCursor: _unsetGrabCursor.default
 };
 
-},{"./setGrabCursor.js":121,"./unsetGrabCursor.js":122}],121:[function(require,module,exports){
+},{"./setGrabCursor.js":122,"./unsetGrabCursor.js":123}],122:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -23450,7 +25320,7 @@ function setGrabCursor(moving) {
   el.style.cursor = moving ? 'grabbing' : 'grab';
 }
 
-},{}],122:[function(require,module,exports){
+},{}],123:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -23465,7 +25335,7 @@ function unsetGrabCursor() {
   swiper[swiper.params.touchEventsTarget === 'container' ? 'el' : 'wrapperEl'].style.cursor = '';
 }
 
-},{}],123:[function(require,module,exports){
+},{}],124:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -23480,7 +25350,7 @@ var _default = exports.default = {
   preloadImages: _preloadImages.default
 };
 
-},{"./loadImage.js":124,"./preloadImages.js":125}],124:[function(require,module,exports){
+},{"./loadImage.js":125,"./preloadImages.js":126}],125:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -23520,7 +25390,7 @@ function loadImage(imageEl, src, srcset, sizes, checkForComplete, callback) {
   }
 }
 
-},{"../../shared/dom.js":194,"ssr-window":102}],125:[function(require,module,exports){
+},{"../../shared/dom.js":195,"ssr-window":103}],126:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -23544,7 +25414,7 @@ function preloadImages() {
   }
 }
 
-},{}],126:[function(require,module,exports){
+},{}],127:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -23561,7 +25431,7 @@ var _default = exports.default = {
   loopDestroy: _loopDestroy.default
 };
 
-},{"./loopCreate.js":127,"./loopDestroy.js":128,"./loopFix.js":129}],127:[function(require,module,exports){
+},{"./loopCreate.js":128,"./loopDestroy.js":129,"./loopFix.js":130}],128:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -23617,7 +25487,7 @@ function loopCreate() {
   }
 }
 
-},{"../../shared/dom.js":194,"ssr-window":102}],128:[function(require,module,exports){
+},{"../../shared/dom.js":195,"ssr-window":103}],129:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -23635,7 +25505,7 @@ function loopDestroy() {
   slides.removeAttr('data-swiper-slide-index');
 }
 
-},{}],129:[function(require,module,exports){
+},{}],130:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -23681,7 +25551,7 @@ function loopFix() {
   swiper.emit('loopFix');
 }
 
-},{}],130:[function(require,module,exports){
+},{}],131:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -23721,7 +25591,7 @@ function moduleExtendParams(params, allModulesParams) {
   };
 }
 
-},{"../shared/utils.js":201}],131:[function(require,module,exports){
+},{"../shared/utils.js":202}],132:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -23795,7 +25665,7 @@ function Observer({
   on('destroy', destroy);
 }
 
-},{"ssr-window":102}],132:[function(require,module,exports){
+},{"ssr-window":103}],133:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -23870,7 +25740,7 @@ function Resize({
   });
 }
 
-},{"ssr-window":102}],133:[function(require,module,exports){
+},{"ssr-window":103}],134:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -23895,7 +25765,7 @@ var _default = exports.default = {
   slideToClickedSlide: _slideToClickedSlide.default
 };
 
-},{"./slideNext.js":134,"./slidePrev.js":135,"./slideReset.js":136,"./slideTo.js":137,"./slideToClickedSlide.js":138,"./slideToClosest.js":139,"./slideToLoop.js":140}],134:[function(require,module,exports){
+},{"./slideNext.js":135,"./slidePrev.js":136,"./slideReset.js":137,"./slideTo.js":138,"./slideToClickedSlide.js":139,"./slideToClosest.js":140,"./slideToLoop.js":141}],135:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -23928,7 +25798,7 @@ function slideNext(speed = this.params.speed, runCallbacks = true, internal) {
   return swiper.slideTo(swiper.activeIndex + increment, speed, runCallbacks, internal);
 }
 
-},{}],135:[function(require,module,exports){
+},{}],136:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -23989,7 +25859,7 @@ function slidePrev(speed = this.params.speed, runCallbacks = true, internal) {
   return swiper.slideTo(prevIndex, speed, runCallbacks, internal);
 }
 
-},{}],136:[function(require,module,exports){
+},{}],137:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -24002,7 +25872,7 @@ function slideReset(speed = this.params.speed, runCallbacks = true, internal) {
   return swiper.slideTo(swiper.activeIndex, speed, runCallbacks, internal);
 }
 
-},{}],137:[function(require,module,exports){
+},{}],138:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -24163,7 +26033,7 @@ function slideTo(index = 0, speed = this.params.speed, runCallbacks = true, inte
   return true;
 }
 
-},{"../../shared/utils.js":201}],138:[function(require,module,exports){
+},{"../../shared/utils.js":202}],139:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -24209,7 +26079,7 @@ function slideToClickedSlide() {
   }
 }
 
-},{"../../shared/dom.js":194,"../../shared/utils.js":201}],139:[function(require,module,exports){
+},{"../../shared/dom.js":195,"../../shared/utils.js":202}],140:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -24245,7 +26115,7 @@ function slideToClosest(speed = this.params.speed, runCallbacks = true, internal
   return swiper.slideTo(index, speed, runCallbacks, internal);
 }
 
-},{}],140:[function(require,module,exports){
+},{}],141:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -24281,7 +26151,7 @@ function slideToLoop(index = 0, speed = this.params.speed, runCallbacks = true, 
   return swiper.slideTo(newIndex, speed, runCallbacks, internal);
 }
 
-},{}],141:[function(require,module,exports){
+},{}],142:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -24298,7 +26168,7 @@ var _default = exports.default = {
   transitionEnd: _transitionEnd.default
 };
 
-},{"./setTransition.js":142,"./transitionEnd.js":144,"./transitionStart.js":145}],142:[function(require,module,exports){
+},{"./setTransition.js":143,"./transitionEnd.js":145,"./transitionStart.js":146}],143:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -24313,7 +26183,7 @@ function setTransition(duration, byController) {
   swiper.emit('setTransition', duration, byController);
 }
 
-},{}],143:[function(require,module,exports){
+},{}],144:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -24349,7 +26219,7 @@ function transitionEmit({
   }
 }
 
-},{}],144:[function(require,module,exports){
+},{}],145:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -24374,7 +26244,7 @@ function transitionEnd(runCallbacks = true, direction) {
   });
 }
 
-},{"./transitionEmit.js":143}],145:[function(require,module,exports){
+},{"./transitionEmit.js":144}],146:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -24400,7 +26270,7 @@ function transitionStart(runCallbacks = true, direction) {
   });
 }
 
-},{"./transitionEmit.js":143}],146:[function(require,module,exports){
+},{"./transitionEmit.js":144}],147:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -24427,7 +26297,7 @@ function getSwiperTranslate(axis = this.isHorizontal() ? 'x' : 'y') {
   return currentTranslate || 0;
 }
 
-},{"../../shared/utils.js":201}],147:[function(require,module,exports){
+},{"../../shared/utils.js":202}],148:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -24448,7 +26318,7 @@ var _default = exports.default = {
   translateTo: _translateTo.default
 };
 
-},{"./getTranslate.js":146,"./maxTranslate.js":148,"./minTranslate.js":149,"./setTranslate.js":150,"./translateTo.js":151}],148:[function(require,module,exports){
+},{"./getTranslate.js":147,"./maxTranslate.js":149,"./minTranslate.js":150,"./setTranslate.js":151,"./translateTo.js":152}],149:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -24459,7 +26329,7 @@ function maxTranslate() {
   return -this.snapGrid[this.snapGrid.length - 1];
 }
 
-},{}],149:[function(require,module,exports){
+},{}],150:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -24470,7 +26340,7 @@ function minTranslate() {
   return -this.snapGrid[0];
 }
 
-},{}],150:[function(require,module,exports){
+},{}],151:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -24519,7 +26389,7 @@ function setTranslate(translate, byController) {
   swiper.emit('setTranslate', swiper.translate, byController);
 }
 
-},{}],151:[function(require,module,exports){
+},{}],152:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -24598,7 +26468,7 @@ function translateTo(translate = 0, speed = this.params.speed, runCallbacks = tr
   return true;
 }
 
-},{"../../shared/utils.js":201}],152:[function(require,module,exports){
+},{"../../shared/utils.js":202}],153:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -24627,7 +26497,7 @@ var _default = exports.default = {
   updateClickedSlide: _updateClickedSlide.default
 };
 
-},{"./updateActiveIndex.js":153,"./updateAutoHeight.js":154,"./updateClickedSlide.js":155,"./updateProgress.js":156,"./updateSize.js":157,"./updateSlides.js":158,"./updateSlidesClasses.js":159,"./updateSlidesOffset.js":160,"./updateSlidesProgress.js":161}],153:[function(require,module,exports){
+},{"./updateActiveIndex.js":154,"./updateAutoHeight.js":155,"./updateClickedSlide.js":156,"./updateProgress.js":157,"./updateSize.js":158,"./updateSlides.js":159,"./updateSlidesClasses.js":160,"./updateSlidesOffset.js":161,"./updateSlidesProgress.js":162}],154:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -24696,7 +26566,7 @@ function updateActiveIndex(newActiveIndex) {
   }
 }
 
-},{}],154:[function(require,module,exports){
+},{}],155:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -24749,7 +26619,7 @@ function updateAutoHeight(speed) {
   if (newHeight || newHeight === 0) swiper.$wrapperEl.css('height', `${newHeight}px`);
 }
 
-},{"../../shared/dom.js":194}],155:[function(require,module,exports){
+},{"../../shared/dom.js":195}],156:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -24790,7 +26660,7 @@ function updateClickedSlide(e) {
   }
 }
 
-},{"../../shared/dom.js":194}],156:[function(require,module,exports){
+},{"../../shared/dom.js":195}],157:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -24840,7 +26710,7 @@ function updateProgress(translate) {
   swiper.emit('progress', progress);
 }
 
-},{}],157:[function(require,module,exports){
+},{}],158:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -24877,7 +26747,7 @@ function updateSize() {
   });
 }
 
-},{}],158:[function(require,module,exports){
+},{}],159:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -25151,7 +27021,7 @@ function updateSlides() {
   }
 }
 
-},{"../../shared/utils.js":201}],159:[function(require,module,exports){
+},{"../../shared/utils.js":202}],160:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -25213,7 +27083,7 @@ function updateSlidesClasses() {
   swiper.emitSlidesClasses();
 }
 
-},{}],160:[function(require,module,exports){
+},{}],161:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -25228,7 +27098,7 @@ function updateSlidesOffset() {
   }
 }
 
-},{}],161:[function(require,module,exports){
+},{}],162:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -25275,7 +27145,7 @@ function updateSlidesProgress(translate = this && this.translate || 0) {
   swiper.visibleSlides = (0, _dom.default)(swiper.visibleSlides);
 }
 
-},{"../../shared/dom.js":194}],162:[function(require,module,exports){
+},{"../../shared/dom.js":195}],163:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -25576,7 +27446,7 @@ function A11y({
   });
 }
 
-},{"../../shared/classes-to-selector.js":191,"../../shared/dom.js":194}],163:[function(require,module,exports){
+},{"../../shared/classes-to-selector.js":192,"../../shared/dom.js":195}],164:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -25789,7 +27659,7 @@ function Autoplay({
   });
 }
 
-},{"../../shared/utils.js":201,"ssr-window":102}],164:[function(require,module,exports){
+},{"../../shared/utils.js":202,"ssr-window":103}],165:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -25962,7 +27832,7 @@ function Controller({
   });
 }
 
-},{"../../shared/utils.js":201}],165:[function(require,module,exports){
+},{"../../shared/utils.js":202}],166:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -26085,7 +27955,7 @@ function EffectCards({
   });
 }
 
-},{"../../shared/create-shadow.js":193,"../../shared/effect-init.js":195,"../../shared/effect-target.js":196,"../../shared/effect-virtual-transition-end.js":197}],166:[function(require,module,exports){
+},{"../../shared/create-shadow.js":194,"../../shared/effect-init.js":196,"../../shared/effect-target.js":197,"../../shared/effect-virtual-transition-end.js":198}],167:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -26190,7 +28060,7 @@ function EffectCoverflow({
   });
 }
 
-},{"../../shared/create-shadow.js":193,"../../shared/effect-init.js":195,"../../shared/effect-target.js":196}],167:[function(require,module,exports){
+},{"../../shared/create-shadow.js":194,"../../shared/effect-init.js":196,"../../shared/effect-target.js":197}],168:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -26337,7 +28207,7 @@ function EffectCreative({
   });
 }
 
-},{"../../shared/create-shadow.js":193,"../../shared/effect-init.js":195,"../../shared/effect-target.js":196,"../../shared/effect-virtual-transition-end.js":197}],168:[function(require,module,exports){
+},{"../../shared/create-shadow.js":194,"../../shared/effect-init.js":196,"../../shared/effect-target.js":197,"../../shared/effect-virtual-transition-end.js":198}],169:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -26513,7 +28383,7 @@ function EffectCube({
   });
 }
 
-},{"../../shared/dom.js":194,"../../shared/effect-init.js":195}],169:[function(require,module,exports){
+},{"../../shared/dom.js":195,"../../shared/effect-init.js":196}],170:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -26586,7 +28456,7 @@ function EffectFade({
   });
 }
 
-},{"../../shared/effect-init.js":195,"../../shared/effect-target.js":196,"../../shared/effect-virtual-transition-end.js":197}],170:[function(require,module,exports){
+},{"../../shared/effect-init.js":196,"../../shared/effect-target.js":197,"../../shared/effect-virtual-transition-end.js":198}],171:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -26701,7 +28571,7 @@ function EffectFlip({
   });
 }
 
-},{"../../shared/create-shadow.js":193,"../../shared/dom.js":194,"../../shared/effect-init.js":195,"../../shared/effect-target.js":196,"../../shared/effect-virtual-transition-end.js":197}],171:[function(require,module,exports){
+},{"../../shared/create-shadow.js":194,"../../shared/dom.js":195,"../../shared/effect-init.js":196,"../../shared/effect-target.js":197,"../../shared/effect-virtual-transition-end.js":198}],172:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -26937,7 +28807,7 @@ function freeMode({
   });
 }
 
-},{"../../shared/utils.js":201}],172:[function(require,module,exports){
+},{"../../shared/utils.js":202}],173:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -27048,7 +28918,7 @@ function Grid({
   };
 }
 
-},{}],173:[function(require,module,exports){
+},{}],174:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -27142,7 +29012,7 @@ function HashNavigation({
   });
 }
 
-},{"../../shared/dom.js":194,"ssr-window":102}],174:[function(require,module,exports){
+},{"../../shared/dom.js":195,"ssr-window":103}],175:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -27283,7 +29153,7 @@ function History({
   });
 }
 
-},{"ssr-window":102}],175:[function(require,module,exports){
+},{"ssr-window":103}],176:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -27408,7 +29278,7 @@ function Keyboard({
   });
 }
 
-},{"../../shared/dom.js":194,"ssr-window":102}],176:[function(require,module,exports){
+},{"../../shared/dom.js":195,"ssr-window":103}],177:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -27674,7 +29544,7 @@ function Lazy({
   });
 }
 
-},{"../../shared/dom.js":194,"ssr-window":102}],177:[function(require,module,exports){
+},{"../../shared/dom.js":195,"ssr-window":103}],178:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -27699,7 +29569,7 @@ function Manipulation({
   });
 }
 
-},{"./methods/addSlide.js":178,"./methods/appendSlide.js":179,"./methods/prependSlide.js":180,"./methods/removeAllSlides.js":181,"./methods/removeSlide.js":182}],178:[function(require,module,exports){
+},{"./methods/addSlide.js":179,"./methods/appendSlide.js":180,"./methods/prependSlide.js":181,"./methods/removeAllSlides.js":182,"./methods/removeSlide.js":183}],179:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -27759,7 +29629,7 @@ function addSlide(index, slides) {
   }
 }
 
-},{}],179:[function(require,module,exports){
+},{}],180:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -27790,7 +29660,7 @@ function appendSlide(slides) {
   }
 }
 
-},{}],180:[function(require,module,exports){
+},{}],181:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -27825,7 +29695,7 @@ function prependSlide(slides) {
   swiper.slideTo(newActiveIndex, 0, false);
 }
 
-},{}],181:[function(require,module,exports){
+},{}],182:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -27841,7 +29711,7 @@ function removeAllSlides() {
   swiper.removeSlide(slidesIndexes);
 }
 
-},{}],182:[function(require,module,exports){
+},{}],183:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -27889,7 +29759,7 @@ function removeSlide(slidesIndexes) {
   }
 }
 
-},{}],183:[function(require,module,exports){
+},{}],184:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -28267,7 +30137,7 @@ function Mousewheel({
   });
 }
 
-},{"../../shared/dom.js":194,"../../shared/utils.js":201,"ssr-window":102}],184:[function(require,module,exports){
+},{"../../shared/dom.js":195,"../../shared/utils.js":202,"ssr-window":103}],185:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -28454,7 +30324,7 @@ function Navigation({
   });
 }
 
-},{"../../shared/create-element-if-not-defined.js":192,"../../shared/dom.js":194}],185:[function(require,module,exports){
+},{"../../shared/create-element-if-not-defined.js":193,"../../shared/dom.js":195}],186:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -28840,7 +30710,7 @@ function Pagination({
   });
 }
 
-},{"../../shared/classes-to-selector.js":191,"../../shared/create-element-if-not-defined.js":192,"../../shared/dom.js":194}],186:[function(require,module,exports){
+},{"../../shared/classes-to-selector.js":192,"../../shared/create-element-if-not-defined.js":193,"../../shared/dom.js":195}],187:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -28952,7 +30822,7 @@ function Parallax({
   });
 }
 
-},{"../../shared/dom.js":194}],187:[function(require,module,exports){
+},{"../../shared/dom.js":195}],188:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -29314,7 +31184,7 @@ function Scrollbar({
   });
 }
 
-},{"../../shared/create-element-if-not-defined.js":192,"../../shared/dom.js":194,"../../shared/utils.js":201,"ssr-window":102}],188:[function(require,module,exports){
+},{"../../shared/create-element-if-not-defined.js":193,"../../shared/dom.js":195,"../../shared/utils.js":202,"ssr-window":103}],189:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -29501,7 +31371,7 @@ function Thumb({
   });
 }
 
-},{"../../shared/dom.js":194,"../../shared/utils.js":201}],189:[function(require,module,exports){
+},{"../../shared/dom.js":195,"../../shared/utils.js":202}],190:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -29762,7 +31632,7 @@ function Virtual({
   });
 }
 
-},{"../../shared/dom.js":194,"../../shared/utils.js":201}],190:[function(require,module,exports){
+},{"../../shared/dom.js":195,"../../shared/utils.js":202}],191:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -30304,7 +32174,7 @@ function Zoom({
   });
 }
 
-},{"../../shared/dom.js":194,"../../shared/utils.js":201,"ssr-window":102}],191:[function(require,module,exports){
+},{"../../shared/dom.js":195,"../../shared/utils.js":202,"ssr-window":103}],192:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -30316,7 +32186,7 @@ function classesToSelector(classes = '') {
   .replace(/ /g, '.')}`;
 }
 
-},{}],192:[function(require,module,exports){
+},{}],193:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -30343,7 +32213,7 @@ function createElementIfNotDefined(swiper, originalParams, params, checkProps) {
   return params;
 }
 
-},{"ssr-window":102}],193:[function(require,module,exports){
+},{"ssr-window":103}],194:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -30363,7 +32233,7 @@ function createShadow(params, $slideEl, side) {
   return $shadowEl;
 }
 
-},{"./dom.js":194}],194:[function(require,module,exports){
+},{"./dom.js":195}],195:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -30417,7 +32287,7 @@ Object.keys(Methods).forEach(methodName => {
 });
 var _default = exports.default = _dom.$;
 
-},{"dom7":90}],195:[function(require,module,exports){
+},{"dom7":90}],196:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -30482,7 +32352,7 @@ function effectInit(params) {
   });
 }
 
-},{}],196:[function(require,module,exports){
+},{}],197:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -30499,7 +32369,7 @@ function effectTarget(effectParams, $slideEl) {
   return $slideEl;
 }
 
-},{}],197:[function(require,module,exports){
+},{}],198:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -30538,7 +32408,7 @@ function effectVirtualTransitionEnd({
   }
 }
 
-},{}],198:[function(require,module,exports){
+},{}],199:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -30565,7 +32435,7 @@ function getBrowser() {
   return browser;
 }
 
-},{"ssr-window":102}],199:[function(require,module,exports){
+},{"ssr-window":103}],200:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -30621,7 +32491,7 @@ function getDevice(overrides = {}) {
   return deviceCached;
 }
 
-},{"./get-support.js":200,"ssr-window":102}],200:[function(require,module,exports){
+},{"./get-support.js":201,"ssr-window":103}],201:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -30662,7 +32532,7 @@ function getSupport() {
   return support;
 }
 
-},{"ssr-window":102}],201:[function(require,module,exports){
+},{"ssr-window":103}],202:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -30836,7 +32706,7 @@ function animateCSSModeScroll({
   animate();
 }
 
-},{"ssr-window":102}],202:[function(require,module,exports){
+},{"ssr-window":103}],203:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -31025,7 +32895,7 @@ var _effectCreative = _interopRequireDefault(require("./modules/effect-creative/
 var _effectCards = _interopRequireDefault(require("./modules/effect-cards/effect-cards.js"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-},{"./core/core.js":110,"./modules/a11y/a11y.js":162,"./modules/autoplay/autoplay.js":163,"./modules/controller/controller.js":164,"./modules/effect-cards/effect-cards.js":165,"./modules/effect-coverflow/effect-coverflow.js":166,"./modules/effect-creative/effect-creative.js":167,"./modules/effect-cube/effect-cube.js":168,"./modules/effect-fade/effect-fade.js":169,"./modules/effect-flip/effect-flip.js":170,"./modules/free-mode/free-mode.js":171,"./modules/grid/grid.js":172,"./modules/hash-navigation/hash-navigation.js":173,"./modules/history/history.js":174,"./modules/keyboard/keyboard.js":175,"./modules/lazy/lazy.js":176,"./modules/manipulation/manipulation.js":177,"./modules/mousewheel/mousewheel.js":183,"./modules/navigation/navigation.js":184,"./modules/pagination/pagination.js":185,"./modules/parallax/parallax.js":186,"./modules/scrollbar/scrollbar.js":187,"./modules/thumbs/thumbs.js":188,"./modules/virtual/virtual.js":189,"./modules/zoom/zoom.js":190}],203:[function(require,module,exports){
+},{"./core/core.js":111,"./modules/a11y/a11y.js":163,"./modules/autoplay/autoplay.js":164,"./modules/controller/controller.js":165,"./modules/effect-cards/effect-cards.js":166,"./modules/effect-coverflow/effect-coverflow.js":167,"./modules/effect-creative/effect-creative.js":168,"./modules/effect-cube/effect-cube.js":169,"./modules/effect-fade/effect-fade.js":170,"./modules/effect-flip/effect-flip.js":171,"./modules/free-mode/free-mode.js":172,"./modules/grid/grid.js":173,"./modules/hash-navigation/hash-navigation.js":174,"./modules/history/history.js":175,"./modules/keyboard/keyboard.js":176,"./modules/lazy/lazy.js":177,"./modules/manipulation/manipulation.js":178,"./modules/mousewheel/mousewheel.js":184,"./modules/navigation/navigation.js":185,"./modules/pagination/pagination.js":186,"./modules/parallax/parallax.js":187,"./modules/scrollbar/scrollbar.js":188,"./modules/thumbs/thumbs.js":189,"./modules/virtual/virtual.js":190,"./modules/zoom/zoom.js":191}],204:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -31076,7 +32946,7 @@ var _default = function _default() {
 };
 exports["default"] = _default;
 
-},{"aos":69}],204:[function(require,module,exports){
+},{"aos":69}],205:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault2 = require("@babel/runtime/helpers/interopRequireDefault");
@@ -31171,7 +33041,7 @@ var _default = function _default() {
 };
 exports["default"] = _default;
 
-},{"@babel/runtime/helpers/interopRequireDefault":4,"@babel/runtime/helpers/toConsumableArray":7,"bootstrap/js/dist/alert":70,"bootstrap/js/dist/dropdown":76,"bootstrap/js/dist/modal":77,"bootstrap/js/dist/offcanvas":78,"bootstrap/js/dist/tab":79,"bootstrap/js/dist/toast":80,"bootstrap/js/dist/tooltip":81}],205:[function(require,module,exports){
+},{"@babel/runtime/helpers/interopRequireDefault":4,"@babel/runtime/helpers/toConsumableArray":7,"bootstrap/js/dist/alert":70,"bootstrap/js/dist/dropdown":76,"bootstrap/js/dist/modal":77,"bootstrap/js/dist/offcanvas":78,"bootstrap/js/dist/tab":79,"bootstrap/js/dist/toast":80,"bootstrap/js/dist/tooltip":81}],206:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -31191,7 +33061,7 @@ var _default = function _default() {
 };
 exports["default"] = _default;
 
-},{"flatpickr":91}],206:[function(require,module,exports){
+},{"flatpickr":91}],207:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -31235,7 +33105,7 @@ var _default = function _default() {
 };
 exports["default"] = _default;
 
-},{"@babel/runtime/helpers/defineProperty":3,"@babel/runtime/helpers/interopRequireDefault":4,"@babel/runtime/helpers/toConsumableArray":7,"jquery-bar-rating":99}],207:[function(require,module,exports){
+},{"@babel/runtime/helpers/defineProperty":3,"@babel/runtime/helpers/interopRequireDefault":4,"@babel/runtime/helpers/toConsumableArray":7,"jquery-bar-rating":99}],208:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault2 = require("@babel/runtime/helpers/interopRequireDefault");
@@ -31264,7 +33134,36 @@ var _default = function _default() {
 };
 exports["default"] = _default;
 
-},{"../utils/_dom":215,"../utils/_vars":216,"@babel/runtime/helpers/interopRequireDefault":4,"@babel/runtime/helpers/toConsumableArray":7,"rellax":101}],208:[function(require,module,exports){
+},{"../utils/_dom":217,"../utils/_vars":218,"@babel/runtime/helpers/interopRequireDefault":4,"@babel/runtime/helpers/toConsumableArray":7,"rellax":101}],209:[function(require,module,exports){
+"use strict";
+
+var _interopRequireDefault2 = require("@babel/runtime/helpers/interopRequireDefault");
+var _toConsumableArray2 = _interopRequireDefault2(require("@babel/runtime/helpers/toConsumableArray"));
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = void 0;
+var _slimSelect = _interopRequireDefault(require("slim-select"));
+function _interopRequireDefault(obj) {
+  return obj && obj.__esModule ? obj : {
+    "default": obj
+  };
+}
+var _default = function _default() {
+  (0, _toConsumableArray2["default"])(document.querySelectorAll(".slim-select") || []).map(function (ele) {
+    return new _slimSelect["default"]({
+      select: ele,
+      settings: {
+        allowDeselect: true,
+        closeOnSelect: false,
+        hideSelected: true
+      }
+    });
+  });
+};
+exports["default"] = _default;
+
+},{"@babel/runtime/helpers/interopRequireDefault":4,"@babel/runtime/helpers/toConsumableArray":7,"slim-select":102}],210:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault2 = require("@babel/runtime/helpers/interopRequireDefault");
@@ -31416,7 +33315,7 @@ var _default = function _default() {
 };
 exports["default"] = _default;
 
-},{"../utils/_dom":215,"../utils/_vars":216,"@babel/runtime/helpers/defineProperty":3,"@babel/runtime/helpers/interopRequireDefault":4,"@babel/runtime/helpers/toConsumableArray":7,"@babel/runtime/helpers/typeof":10,"swiper":202}],209:[function(require,module,exports){
+},{"../utils/_dom":217,"../utils/_vars":218,"@babel/runtime/helpers/defineProperty":3,"@babel/runtime/helpers/interopRequireDefault":4,"@babel/runtime/helpers/toConsumableArray":7,"@babel/runtime/helpers/typeof":10,"swiper":203}],211:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault2 = require("@babel/runtime/helpers/interopRequireDefault");
@@ -31446,7 +33345,7 @@ var navigateAnimation = function navigateAnimation() {
 };
 var _default = exports["default"] = navigateAnimation;
 
-},{"../utils/_animate-css":213,"@babel/runtime/helpers/interopRequireDefault":4,"@babel/runtime/helpers/toConsumableArray":7}],210:[function(require,module,exports){
+},{"../utils/_animate-css":215,"@babel/runtime/helpers/interopRequireDefault":4,"@babel/runtime/helpers/toConsumableArray":7}],212:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -31517,7 +33416,7 @@ var scrollToTopButton = function scrollToTopButton() {
 exports.scrollToTopButton = scrollToTopButton;
 var _default = exports["default"] = scrollToTopButton;
 
-},{"../utils/_animate-css":213,"../utils/_debounce":214,"../utils/_dom":215,"../utils/_vars":216}],211:[function(require,module,exports){
+},{"../utils/_animate-css":215,"../utils/_debounce":216,"../utils/_dom":217,"../utils/_vars":218}],213:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -31618,7 +33517,7 @@ var scrollingHeader = function scrollingHeader() {
 exports.scrollingHeader = scrollingHeader;
 var _default = exports["default"] = scrollingHeader;
 
-},{"../utils/_dom":215}],212:[function(require,module,exports){
+},{"../utils/_dom":217}],214:[function(require,module,exports){
 "use strict";
 
 var _jquery = _interopRequireDefault(require("jquery"));
@@ -31627,6 +33526,7 @@ var _bootstrap = _interopRequireDefault(require("./libs/_bootstrap"));
 var _flatpickr = _interopRequireDefault(require("./libs/_flatpickr"));
 var _jqueryBarRating = _interopRequireDefault(require("./libs/_jquery-bar-rating"));
 var _rellax = _interopRequireDefault(require("./libs/_rellax"));
+var _slimSelect = _interopRequireDefault(require("./libs/_slim-select"));
 var _swiper = _interopRequireDefault(require("./libs/_swiper"));
 var _navigateAnimation = _interopRequireDefault(require("./partials/_navigate-animation"));
 var _scrollToTopButton = _interopRequireDefault(require("./partials/_scroll-to-top-button"));
@@ -31661,10 +33561,11 @@ window.jQuery = _jquery["default"];
     (0, _swiper["default"])();
     (0, _flatpickr["default"])();
     (0, _jqueryBarRating["default"])();
+    (0, _slimSelect["default"])();
   });
 })();
 
-},{"./libs/_aos":203,"./libs/_bootstrap":204,"./libs/_flatpickr":205,"./libs/_jquery-bar-rating":206,"./libs/_rellax":207,"./libs/_swiper":208,"./partials/_navigate-animation":209,"./partials/_scroll-to-top-button":210,"./partials/_scrolling-header":211,"./utils/_animate-css":213,"jquery":100}],213:[function(require,module,exports){
+},{"./libs/_aos":204,"./libs/_bootstrap":205,"./libs/_flatpickr":206,"./libs/_jquery-bar-rating":207,"./libs/_rellax":208,"./libs/_slim-select":209,"./libs/_swiper":210,"./partials/_navigate-animation":211,"./partials/_scroll-to-top-button":212,"./partials/_scrolling-header":213,"./utils/_animate-css":215,"jquery":100}],215:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -31704,7 +33605,7 @@ var animateCss = function animateCss(element, animation) {
 exports.animateCss = animateCss;
 var _default = exports["default"] = animateCss;
 
-},{"./_dom":215}],214:[function(require,module,exports){
+},{"./_dom":217}],216:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -31737,7 +33638,7 @@ var debounce = function debounce(func, wait, immediate) {
 };
 var _default = exports["default"] = debounce;
 
-},{}],215:[function(require,module,exports){
+},{}],217:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -31821,7 +33722,7 @@ var scrollToTop = function scrollToTop() {
 };
 exports.scrollToTop = scrollToTop;
 
-},{"@babel/runtime/helpers/interopRequireDefault":4,"@babel/runtime/helpers/typeof":10}],216:[function(require,module,exports){
+},{"@babel/runtime/helpers/interopRequireDefault":4,"@babel/runtime/helpers/typeof":10}],218:[function(require,module,exports){
 "use strict";
 
 var _document$getElements, _document$getElements2;
@@ -31841,4 +33742,4 @@ var vars = {
 };
 var _default = exports["default"] = vars;
 
-},{"./_dom":215}]},{},[212]);
+},{"./_dom":217}]},{},[214]);

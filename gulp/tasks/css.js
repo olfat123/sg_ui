@@ -30,7 +30,7 @@ const unusedCSS = () =>
 		.pipe(
 			purgecss({
 				content: [config.paths.dest.html, config.paths.dest.javascript],
-				safelist: { greedy: [/^swiper/, /fancybox/, /^br-/] },
+				safelist: { greedy: [/^swiper/, /fancybox/, /^br-/, /^ss/] },
 				fontFace: false,
 				keyframes: false,
 				variables: false,

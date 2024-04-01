@@ -1,0 +1,57 @@
+@import "~slim-select/src/slim-select/slimselect.scss";
+
+.slim-select {
+	&:invalid {
+		& + .ss-main {
+			@extend .is-invalid !optional;
+		}
+	}
+	&:valid {
+		& + .ss-main {
+			@extend .is-valid !optional;
+		}
+	}
+}
+
+.ss-arrow {
+	display: none !important;
+}
+
+.ss-main {
+	@extend .form-select !optional;
+	@extend .form-select-sm !optional;
+	border-radius: $input-border-radius-sm !important;
+	.ss-values .ss-value .ss-value-text {
+		font-size: $font-size-sm !important;
+		text-transform: capitalize !important;
+	}
+}
+
+.ss-content {
+	margin-top: map-get($spacers, 1) !important;
+	border-radius: var(--#{$prefix}border-radius-lg) !important;
+
+	.ss-search {
+		input {
+			border-radius: $border-radius-sm !important;
+		}
+	}
+}
+
+.ss-search,
+.ss-search input,
+.ss-option {
+	padding: $input-padding-y-sm $input-padding-x-sm !important;
+}
+.ss-search,
+.ss-option:not(:last-child) {
+	border-bottom: $border-width solid $border-color;
+}
+
+.ss-deselect {
+	svg {
+		width: 10px;
+		height: 10px;
+		color: $form-select-indicator-color;
+	}
+}

@@ -5,6 +5,21 @@
 
 	--prefix: #{$prefix};
 	--swiper-pagination-color: #{$progress-bar-bg};
+
+	--ss-primary-color: #{$primary};
+	--ss-bg-color: #{$white};
+	--ss-font-color: #{$input-color};
+	--ss-font-placeholder-color: #{$input-placeholder-color};
+	--ss-disabled-color: #{$input-disabled-color};
+	--ss-border-color: #{$input-border-color};
+	--ss-highlight-color: #{$mark-bg};
+	--ss-success-color: #{$success};
+	--ss-error-color: #{$danger};
+	--ss-focus-color: #{$component-active-color};
+	--ss-border-radius: var(--#{$prefix}border-radius-pill);
+	--ss-spacing-l: 10px;
+	--ss-spacing-m: 8px;
+	--ss-spacing-s: 6px;
 }
 
 #app {

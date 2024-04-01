@@ -43,11 +43,21 @@ form.needs-validation#company-edit-form(action="dashboard-company-edit.html" met
 			.col-12
 				label.form-label(for="companyProvidedServiceField")
 					strong Provided Service
-				select#companyProvidedServiceField.form-select.form-select-sm.bg-white.text-truncate(name="provided_service", required)
-					option(value="", hidden) Select Provided Service
-					option(value="1", selected) option 1
+				select#companyProvidedServiceField.bg-white.slim-select(name="provided_service", multiple, required)
+					option(data-placeholder="true") Provided Service
+					option(value="1") option 1
 					option(value="2") option 2
 					option(value="3") option 3
+					option(value="4") option 4
+					option(value="5") option 5
+					option(value="6") option 6
+					option(value="7") option 7
+					option(value="8") option 8
+					option(value="9") option 9
+					option(value="10") option 10
+					option(value="11") option 11
+					option(value="12") option 12
+					option(value="13") option 13
 				.invalid-feedback.text-uppercase
 					strong mandatory field!
 			.col-12.col-md-6.col-xl-4
