@@ -1,0 +1,91 @@
+// company edit form starts
+form.needs-validation#company-edit-form(action="dashboard-company-edit.html" method="POST" novalidate)
+	fieldset
+		legend.visually-hidden company edit form
+		.row.g-4
+			.col-12
+				label.form-label(for="companyNameField")
+					strong Company Name
+				input#companyNameField.form-control.form-control-sm.bg-white.text-truncate(type="text", name="name", value="Black Hound Security", placeholder="Company Name", autocomplete="name", required)
+				.invalid-feedback.text-uppercase
+					strong mandatory field!
+			.col-12.col-md-6.col-xl-4
+				label.form-label(for="companyCountryField")
+					strong Country
+				select#companyCountryField.form-select.form-select-sm.bg-white.text-truncate(name="country", value="1", required)
+					option(value="", hidden) Select Country
+					option(value="1", selected) USA
+				.invalid-feedback.text-uppercase
+					strong mandatory field!
+			.col-12.col-md-6.col-xl-4
+				label.form-label(for="companyCityField")
+					strong Country
+				select#companyCityField.form-select.form-select-sm.bg-white.text-truncate(name="city", value="1", required)
+					option(value="", hidden) Select City
+					option(value="1", selected) California
+				.invalid-feedback.text-uppercase
+					strong mandatory field!
+			.col-12.col-md-6.col-xl-4
+				label.form-label(for="companyStateField")
+					strong Country
+				select#companyStateField.form-select.form-select-sm.bg-white.text-truncate(name="state", value="1", required)
+					option(value="", hidden) Select State
+					option(value="1", selected) Los Angeles
+				.invalid-feedback.text-uppercase
+					strong mandatory field!
+			.col-12
+				label.form-label(for="companyAboutUsField")
+					strong About us
+				textarea#companyAboutUsField.form-control.form-control-sm.bg-white(name="about_us", placeholder="About us", required)
+					| Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere laborum natus aut cumque reprehenderit odio! Vitae dolores praesentium, necessitatibus autem possimus veniam consectetur ad dicta suscipit laboriosam soluta ut ipsa!
+				.invalid-feedback.text-uppercase
+					strong mandatory field!
+			.col-12
+				label.form-label(for="companyProvidedServiceField")
+					strong Provided Service
+				select#companyProvidedServiceField.form-select.form-select-sm.bg-white.text-truncate(name="provided_service", required)
+					option(value="", hidden) Select Provided Service
+					option(value="1", selected) option 1
+					option(value="2") option 2
+					option(value="3") option 3
+				.invalid-feedback.text-uppercase
+					strong mandatory field!
+			.col-12.col-md-6.col-xl-4
+				label.form-label(for="companyLicenseTypeField")
+					strong License Type
+				input#companyLicenseTypeField.form-control.form-control-sm.bg-white.text-truncate(type="text", name="license_type", value="Class 1 License", placeholder="License Type", required)
+				.invalid-feedback.text-uppercase
+					strong mandatory field!
+			.col-12.col-md-6.col-xl-4
+				label.form-label(for="companyLicenseNumberField")
+					strong License Number
+				input#companyLicenseNumberField.form-control.form-control-sm.bg-white.text-truncate(type="text", name="license_number", value="729RD290K1", placeholder="License Number", required)
+				.invalid-feedback.text-uppercase
+					strong mandatory field!
+			.col-12.col-md-6.col-xl-4
+				label.form-label(for="companyLicenseExpirationDateField")
+					strong License Expiration Date
+				input#companyLicenseExpirationDateField.form-select.form-select-sm.bg-white.text-truncate.flatpickr(type="text", name="license_expiration_date", value="08-05-1995", placeholder="License Expiration Date", required)
+				.invalid-feedback.text-uppercase
+					strong mandatory field!
+			.col-12
+				label.form-label(for="companyAddressField")
+					strong Address
+				input#companyAddressField.form-control.form-control-sm.bg-white.text-truncate(type="text", name="address", value="5396 North Reese Avenue, Fresno CA 93722", placeholder="Address", autocomplete="address", required)
+				.invalid-feedback.text-uppercase
+					strong mandatory field!
+			.col-12
+				label.form-label(for="companyGoogleMapLinkField")
+					strong Google Maps Link
+				textarea#companyGoogleMapLinkField.form-control.form-control-sm.bg-white(name="map_link", placeholder="Google Maps Link", required)="<iframe src=“https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3557.248568207342!2d80.94759507635258!3d26.927333276638556!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x399957a4fe0cc8a9%3A0xb939e47e788e720f!2sBlack%20Hound%20Security%20Pvt.Ltd!5e0!3m2!1sen!2seg!4v1710089137050!5m2!1sen!2seg” width='572' height='294' style=“border:0;” allowfullscreen=“” loading=“lazy” referrerpolicy=“no-referrer-when-downgrade”></iframe>"
+				.invalid-feedback.text-uppercase
+					strong mandatory field!
+			.col-12.col-lg-11.col-xl-10.mt-5
+				.row.g-gutter
+					.col-12.col-lg
+						button.btn.btn-primary.text-capitalize.w-100.rounded-pill(type="submit")
+							strong submit
+					.col-12.col-lg
+						button.btn.btn-outline-primary.text-capitalize.w-100.rounded-pill(type="reset")
+							strong cancel
+// company edit form ends

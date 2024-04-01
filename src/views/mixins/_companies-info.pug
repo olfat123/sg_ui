@@ -18,7 +18,7 @@ mixin companiesInfo(isH1=false)
 							strong.fw-bolder Black Hound Security
 					address.d-block.mb-0
 						strong Los Angeles, California, USA
-					+rating()
+					+rating({rating: company.rating})
 			.card.mt-5
 				.card-body.p-2
 					.hstack.gap-3.align-items-center
@@ -72,6 +72,5 @@ mixin companiesInfo(isH1=false)
 				.card.rounded-4.overflow-hidden.shadow
 					.card-body.p-0
 						.ratio.ratio-286x147.text-bg-dark
-							// NOTE: Google map URL structure "https://maps.google.com/maps/embed/v1/place?key=<API_KEY>&q=<LOCATION_LAT>,<LOCATION_LONG>&zoom=<ZOOM_LEVEL>"
-							iframe.w-100.h-100(aria-hidden="false",src="https://maps.google.com/maps/embed/v1/place?key=AIzaSyCxkvH5GLpfLqDp-PFgNueG5hkCcGcfrI8&q=30.0444,31.2357&zoom=14",title="address map", width="572", height="294", loading="lazy",tabindex="0",allowfullscreen)
+							iframe.w-100.h-100(aria-hidden="false",src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3557.248568207342!2d80.94759507635258!3d26.927333276638556!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x399957a4fe0cc8a9%3A0xb939e47e788e720f!2sBlack%20Hound%20Security%20Pvt.Ltd!5e0!3m2!1sen!2seg!4v1710089137050!5m2!1sen!2seg",title="address map", width="572", height="294", loading="lazy",tabindex="0",allowfullscreen)
 	// companies info section ends

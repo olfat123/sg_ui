@@ -123,13 +123,13 @@ form.needs-validation#vendor-form(action="/" method="POST" novalidate)
 				.mb-3
 					label.form-label.visually-hidden(for="vendorLicenseExpirationDateField")
 						strong License Expiration Date
-					input#vendorLicenseExpirationDateField.form-control.text-truncate(type="month", name="license_expiration_date", placeholder="License Expiration Date", required)
+					input#vendorLicenseExpirationDateField.form-select.text-truncate.flatpickr(type="text", name="license_expiration_date", placeholder="License Expiration Date", required)
 					.invalid-feedback.text-uppercase
 						strong mandatory field!
 				.mb-3
 					label.form-label.visually-hidden(for="vendorAboutField")
 						strong About the company
-					textarea#vendorAboutField.form-control.text-truncate(name="about", placeholder="About the company", required)
+					textarea#vendorAboutField.form-control(name="about", placeholder="About the company", required)
 					.invalid-feedback.text-uppercase
 						strong mandatory field!
 			.col-12.col-md-8.mx-auto.mt-5

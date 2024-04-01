@@ -109,6 +109,9 @@
 		"animate-sass": "0.8.2",
 		"aos": "2.3.4",
 		"bootstrap": "5.3.3",
+		"flatpickr": "4.6.13",
+		"jquery": "3.7.1",
+		"jquery-bar-rating": "1.2.2",
 		"rellax": "1.12.1",
 		"swiper": "8.4.7"
 	},

@@ -1,0 +1,41 @@
+@import "~flatpickr/dist/flatpickr";
+
+:root {
+	--#{$prefix}flatpickr-primary: #{$primary};
+	--#{$prefix}flatpickr-text-color: #{color-contrast($primary)};
+}
+
+.flatpickr-day.selected,
+.flatpickr-day.startRange,
+.flatpickr-day.endRange,
+.flatpickr-day.selected.inRange,
+.flatpickr-day.startRange.inRange,
+.flatpickr-day.endRange.inRange,
+.flatpickr-day.selected:focus,
+.flatpickr-day.startRange:focus,
+.flatpickr-day.endRange:focus,
+.flatpickr-day.selected:hover,
+.flatpickr-day.startRange:hover,
+.flatpickr-day.endRange:hover,
+.flatpickr-day.selected.prevMonthDay,
+.flatpickr-day.startRange.prevMonthDay,
+.flatpickr-day.endRange.prevMonthDay,
+.flatpickr-day.selected.nextMonthDay,
+.flatpickr-day.startRange.nextMonthDay,
+.flatpickr-day.endRange.nextMonthDay {
+	background: var(--#{$prefix}flatpickr-primary);
+	border-color: var(--#{$prefix}flatpickr-primary);
+	color: var(--#{$prefix}flatpickr-text-color);
+}
+
+.flatpickr-day.selected.startRange + .endRange:not(:nth-child(7n + 1)),
+.flatpickr-day.startRange.startRange + .endRange:not(:nth-child(7n + 1)),
+.flatpickr-day.endRange.startRange + .endRange:not(:nth-child(7n + 1)) {
+	box-shadow: -10px 0 0 var(--#{$prefix}flatpickr-primary);
+}
+
+.flatpickr-day.week.selected {
+	box-shadow:
+		-5px 0 0 var(--#{$prefix}flatpickr-primary),
+		5px 0 0 var(--#{$prefix}flatpickr-primary);
+}

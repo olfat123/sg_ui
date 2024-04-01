@@ -14,4 +14,4 @@ mixin reviewCard(data={})
 						small
 							strong=data.author
 			p.mb-0
-				+rating()
+				+rating({rating: data.rating})

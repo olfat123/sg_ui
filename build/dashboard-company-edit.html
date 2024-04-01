@@ -277,7 +277,94 @@
 									<h1 class="text-capitalize text-primary mb-0"><strong class="fw-bolder">edit company</strong></h1>
 								</div>
 								<div class="col-12">
-									<p class="text-bg-dark p-2 mb-0">content</p>
+									<!-- company edit form starts-->
+									<form class="needs-validation" id="company-edit-form" action="dashboard-company-edit.html" method="POST" novalidate="">
+										<fieldset>
+											<legend class="visually-hidden">company edit form</legend>
+											<div class="row g-4">
+												<div class="col-12">
+													<label class="form-label" for="companyNameField"><strong>Company Name</strong></label>
+													<input class="form-control form-control-sm bg-white text-truncate" id="companyNameField" type="text" name="name" value="Black Hound Security" placeholder="Company Name" autocomplete="name" required="">
+													<div class="invalid-feedback text-uppercase"><strong>mandatory field!</strong></div>
+												</div>
+												<div class="col-12 col-md-6 col-xl-4">
+													<label class="form-label" for="companyCountryField"><strong>Country</strong></label>
+													<select class="form-select form-select-sm bg-white text-truncate" id="companyCountryField" name="country" value="1" required="">
+														<option value="" hidden="">Select Country</option>
+														<option value="1" selected="">USA</option>
+													</select>
+													<div class="invalid-feedback text-uppercase"><strong>mandatory field!</strong></div>
+												</div>
+												<div class="col-12 col-md-6 col-xl-4">
+													<label class="form-label" for="companyCityField"><strong>Country</strong></label>
+													<select class="form-select form-select-sm bg-white text-truncate" id="companyCityField" name="city" value="1" required="">
+														<option value="" hidden="">Select City</option>
+														<option value="1" selected="">California</option>
+													</select>
+													<div class="invalid-feedback text-uppercase"><strong>mandatory field!</strong></div>
+												</div>
+												<div class="col-12 col-md-6 col-xl-4">
+													<label class="form-label" for="companyStateField"><strong>Country</strong></label>
+													<select class="form-select form-select-sm bg-white text-truncate" id="companyStateField" name="state" value="1" required="">
+														<option value="" hidden="">Select State</option>
+														<option value="1" selected="">Los Angeles</option>
+													</select>
+													<div class="invalid-feedback text-uppercase"><strong>mandatory field!</strong></div>
+												</div>
+												<div class="col-12">
+													<label class="form-label" for="companyAboutUsField"><strong>About us</strong></label>
+													<textarea class="form-control form-control-sm bg-white" id="companyAboutUsField" name="about_us" placeholder="About us" required="">Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere laborum natus aut cumque reprehenderit odio! Vitae dolores praesentium, necessitatibus autem possimus veniam consectetur ad dicta suscipit laboriosam soluta ut ipsa!</textarea>
+													<div class="invalid-feedback text-uppercase"><strong>mandatory field!</strong></div>
+												</div>
+												<div class="col-12">
+													<label class="form-label" for="companyProvidedServiceField"><strong>Provided Service</strong></label>
+													<select class="form-select form-select-sm bg-white text-truncate" id="companyProvidedServiceField" name="provided_service" required="">
+														<option value="" hidden="">Select Provided Service</option>
+														<option value="1" selected="">option 1</option>
+														<option value="2">option 2</option>
+														<option value="3">option 3</option>
+													</select>
+													<div class="invalid-feedback text-uppercase"><strong>mandatory field!</strong></div>
+												</div>
+												<div class="col-12 col-md-6 col-xl-4">
+													<label class="form-label" for="companyLicenseTypeField"><strong>License Type</strong></label>
+													<input class="form-control form-control-sm bg-white text-truncate" id="companyLicenseTypeField" type="text" name="license_type" value="Class 1 License" placeholder="License Type" required="">
+													<div class="invalid-feedback text-uppercase"><strong>mandatory field!</strong></div>
+												</div>
+												<div class="col-12 col-md-6 col-xl-4">
+													<label class="form-label" for="companyLicenseNumberField"><strong>License Number</strong></label>
+													<input class="form-control form-control-sm bg-white text-truncate" id="companyLicenseNumberField" type="text" name="license_number" value="729RD290K1" placeholder="License Number" required="">
+													<div class="invalid-feedback text-uppercase"><strong>mandatory field!</strong></div>
+												</div>
+												<div class="col-12 col-md-6 col-xl-4">
+													<label class="form-label" for="companyLicenseExpirationDateField"><strong>License Expiration Date</strong></label>
+													<input class="form-select form-select-sm bg-white text-truncate flatpickr" id="companyLicenseExpirationDateField" type="text" name="license_expiration_date" value="08-05-1995" placeholder="License Expiration Date" required="">
+													<div class="invalid-feedback text-uppercase"><strong>mandatory field!</strong></div>
+												</div>
+												<div class="col-12">
+													<label class="form-label" for="companyAddressField"><strong>Address</strong></label>
+													<input class="form-control form-control-sm bg-white text-truncate" id="companyAddressField" type="text" name="address" value="5396 North Reese Avenue, Fresno CA 93722" placeholder="Address" autocomplete="address" required="">
+													<div class="invalid-feedback text-uppercase"><strong>mandatory field!</strong></div>
+												</div>
+												<div class="col-12">
+													<label class="form-label" for="companyGoogleMapLinkField"><strong>Google Maps Link</strong></label>
+													<textarea class="form-control form-control-sm bg-white" id="companyGoogleMapLinkField" name="map_link" placeholder="Google Maps Link" required="">&lt;iframe src=“https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3557.248568207342!2d80.94759507635258!3d26.927333276638556!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x399957a4fe0cc8a9%3A0xb939e47e788e720f!2sBlack%20Hound%20Security%20Pvt.Ltd!5e0!3m2!1sen!2seg!4v1710089137050!5m2!1sen!2seg” width='572' height='294' style=“border:0;” allowfullscreen=“” loading=“lazy” referrerpolicy=“no-referrer-when-downgrade”&gt;&lt;/iframe&gt;</textarea>
+													<div class="invalid-feedback text-uppercase"><strong>mandatory field!</strong></div>
+												</div>
+												<div class="col-12 col-lg-11 col-xl-10 mt-5">
+													<div class="row g-gutter">
+														<div class="col-12 col-lg">
+															<button class="btn btn-primary text-capitalize w-100 rounded-pill" type="submit"><strong>submit</strong></button>
+														</div>
+														<div class="col-12 col-lg">
+															<button class="btn btn-outline-primary text-capitalize w-100 rounded-pill" type="reset"><strong>cancel</strong></button>
+														</div>
+													</div>
+												</div>
+											</div>
+										</fieldset>
+									</form>
+									<!-- company edit form ends-->
 								</div>
 							</div>
 						</div>
