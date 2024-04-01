@@ -1444,91 +1444,91 @@ textarea.form-control-sm {
 }
 
 
-.slim-select:valid + .ss-main ~ .valid-feedback,
-.slim-select:valid + .ss-main ~ .valid-tooltip {
+.was-validated .slim-select:valid + .ss-main ~ .valid-feedback,
+.was-validated .slim-select:valid + .ss-main ~ .valid-tooltip {
   display: block;
 }
 
-.was-validated .form-control:valid, .slim-select:valid + .form-control.ss-main {
+.was-validated .form-control:valid, .was-validated .slim-select:valid + .form-control.ss-main {
   border-color: var(--tcg-form-valid-border-color);
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%23198754' d='M2.3 6.73.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z'/%3e%3c/svg%3e");
   background-repeat: no-repeat;
   background-size: calc(0.75em + 0.75rem) calc(0.75em + 0.75rem);
 }
 
-[dir="ltr"] .was-validated .form-control:valid, [dir="ltr"] .slim-select:valid + .form-control.ss-main {
+[dir="ltr"] .was-validated .form-control:valid, [dir="ltr"] .was-validated .slim-select:valid + .form-control.ss-main {
   padding-right: calc(1.5em + 1.5rem);
   background-position: right calc(0.375em + 0.375rem) center;
 }
 
-[dir="rtl"] .was-validated .form-control:valid, [dir="rtl"] .slim-select:valid + .form-control.ss-main {
+[dir="rtl"] .was-validated .form-control:valid, [dir="rtl"] .was-validated .slim-select:valid + .form-control.ss-main {
   padding-left: calc(1.5em + 1.5rem);
   background-position: left calc(0.375em + 0.375rem) center;
 }
 
-.was-validated .form-control:valid:focus, .slim-select:valid + .form-control.ss-main:focus {
+.was-validated .form-control:valid:focus, .was-validated .slim-select:valid + .form-control.ss-main:focus {
   border-color: var(--tcg-form-valid-border-color);
   box-shadow: 0 0 0 0.25rem rgba(var(--tcg-success-rgb), 0.25);
 }
 
-[dir="ltr"] .was-validated textarea.form-control:valid, [dir="ltr"] .slim-select:valid + textarea.form-control.ss-main {
+[dir="ltr"] .was-validated textarea.form-control:valid, [dir="ltr"] .was-validated .slim-select:valid + textarea.form-control.ss-main {
   padding-right: calc(1.5em + 1.5rem);
   background-position: top calc(0.375em + 0.375rem) right calc(0.375em + 0.375rem);
 }
 
-[dir="rtl"] .was-validated textarea.form-control:valid, [dir="rtl"] .slim-select:valid + textarea.form-control.ss-main {
+[dir="rtl"] .was-validated textarea.form-control:valid, [dir="rtl"] .was-validated .slim-select:valid + textarea.form-control.ss-main {
   padding-left: calc(1.5em + 1.5rem);
   background-position: top calc(0.375em + 0.375rem) left calc(0.375em + 0.375rem);
 }
 
-.was-validated .form-select:valid, .was-validated .ss-main:valid, .slim-select:valid + .ss-main, .is-valid.ss-main {
+.was-validated .form-select:valid, .was-validated .ss-main:valid, .was-validated .slim-select:valid + .ss-main, .is-valid.ss-main {
   border-color: var(--tcg-form-valid-border-color);
 }
 
-.was-validated .form-select:valid:not([multiple]):not([size]), .was-validated .ss-main:valid:not([multiple]):not([size]), .was-validated .form-select:valid:not([multiple])[size="1"], .was-validated .ss-main:valid:not([multiple])[size="1"], .slim-select:valid + .ss-main:not([multiple]):not([size]), .is-valid.ss-main:not([multiple]):not([size]), .slim-select:valid + .ss-main:not([multiple])[size="1"], .is-valid.ss-main:not([multiple])[size="1"] {
+.was-validated .form-select:valid:not([multiple]):not([size]), .was-validated .ss-main:valid:not([multiple]):not([size]), .was-validated .form-select:valid:not([multiple])[size="1"], .was-validated .ss-main:valid:not([multiple])[size="1"], .was-validated .slim-select:valid + .ss-main:not([multiple]):not([size]), .is-valid.ss-main:not([multiple]):not([size]), .was-validated .slim-select:valid + .ss-main:not([multiple])[size="1"], .is-valid.ss-main:not([multiple])[size="1"] {
   --tcg-form-select-bg-icon: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%23198754' d='M2.3 6.73.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z'/%3e%3c/svg%3e");
   background-size: 14px, calc(0.75em + 0.75rem) calc(0.75em + 0.75rem);
 }
 
-[dir="ltr"] .was-validated .form-select:valid:not([multiple]):not([size]), [dir="ltr"] .was-validated .ss-main:valid:not([multiple]):not([size]), [dir="ltr"] .was-validated .form-select:valid:not([multiple])[size="1"], [dir="ltr"] .was-validated .ss-main:valid:not([multiple])[size="1"], [dir="ltr"] .slim-select:valid + .ss-main:not([multiple]):not([size]), [dir="ltr"] .is-valid.ss-main:not([multiple]):not([size]), [dir="ltr"] .slim-select:valid + .ss-main:not([multiple])[size="1"], [dir="ltr"] .is-valid.ss-main:not([multiple])[size="1"] {
+[dir="ltr"] .was-validated .form-select:valid:not([multiple]):not([size]), [dir="ltr"] .was-validated .ss-main:valid:not([multiple]):not([size]), [dir="ltr"] .was-validated .form-select:valid:not([multiple])[size="1"], [dir="ltr"] .was-validated .ss-main:valid:not([multiple])[size="1"], [dir="ltr"] .was-validated .slim-select:valid + .ss-main:not([multiple]):not([size]), [dir="ltr"] .is-valid.ss-main:not([multiple]):not([size]), [dir="ltr"] .was-validated .slim-select:valid + .ss-main:not([multiple])[size="1"], [dir="ltr"] .is-valid.ss-main:not([multiple])[size="1"] {
   padding-right: 4.125rem;
   background-position: right 0.75rem center, center right 2.25rem;
 }
 
-[dir="rtl"] .was-validated .form-select:valid:not([multiple]):not([size]), [dir="rtl"] .was-validated .ss-main:valid:not([multiple]):not([size]), [dir="rtl"] .was-validated .form-select:valid:not([multiple])[size="1"], [dir="rtl"] .was-validated .ss-main:valid:not([multiple])[size="1"], [dir="rtl"] .slim-select:valid + .ss-main:not([multiple]):not([size]), [dir="rtl"] .is-valid.ss-main:not([multiple]):not([size]), [dir="rtl"] .slim-select:valid + .ss-main:not([multiple])[size="1"], [dir="rtl"] .is-valid.ss-main:not([multiple])[size="1"] {
+[dir="rtl"] .was-validated .form-select:valid:not([multiple]):not([size]), [dir="rtl"] .was-validated .ss-main:valid:not([multiple]):not([size]), [dir="rtl"] .was-validated .form-select:valid:not([multiple])[size="1"], [dir="rtl"] .was-validated .ss-main:valid:not([multiple])[size="1"], [dir="rtl"] .was-validated .slim-select:valid + .ss-main:not([multiple]):not([size]), [dir="rtl"] .is-valid.ss-main:not([multiple]):not([size]), [dir="rtl"] .was-validated .slim-select:valid + .ss-main:not([multiple])[size="1"], [dir="rtl"] .is-valid.ss-main:not([multiple])[size="1"] {
   padding-left: 4.125rem;
   background-position: left 0.75rem center, center left 2.25rem;
 }
 
-.was-validated .form-select:valid:focus, .was-validated .ss-main:valid:focus, .slim-select:valid + .ss-main:focus, .is-valid.ss-main:focus {
+.was-validated .form-select:valid:focus, .was-validated .ss-main:valid:focus, .was-validated .slim-select:valid + .ss-main:focus, .is-valid.ss-main:focus {
   border-color: var(--tcg-form-valid-border-color);
   box-shadow: 0 0 0 0.25rem rgba(var(--tcg-success-rgb), 0.25);
 }
 
- .slim-select:valid + .form-control-color.ss-main {
+ .was-validated .slim-select:valid + .form-control-color.ss-main {
   width: calc(3rem + calc(1.5em + 1.5rem));
 }
 
-.was-validated .form-check-input:valid, .slim-select:valid + .form-check-input.ss-main {
+.was-validated .form-check-input:valid, .was-validated .slim-select:valid + .form-check-input.ss-main {
   border-color: var(--tcg-form-valid-border-color);
 }
 
-.was-validated .form-check-input:valid:checked, .slim-select:valid + .form-check-input.ss-main:checked {
+.was-validated .form-check-input:valid:checked, .was-validated .slim-select:valid + .form-check-input.ss-main:checked {
   background-color: var(--tcg-form-valid-color);
 }
 
-.was-validated .form-check-input:valid:focus, .slim-select:valid + .form-check-input.ss-main:focus {
+.was-validated .form-check-input:valid:focus, .was-validated .slim-select:valid + .form-check-input.ss-main:focus {
   box-shadow: 0 0 0 0.25rem rgba(var(--tcg-success-rgb), 0.25);
 }
 
-.was-validated .form-check-input:valid ~ .form-check-label, .slim-select:valid + .form-check-input.ss-main ~ .form-check-label {
+.was-validated .form-check-input:valid ~ .form-check-label, .was-validated .slim-select:valid + .form-check-input.ss-main ~ .form-check-label {
   color: var(--tcg-form-valid-color);
 }
 
-.was-validated .input-group > .form-control:not(:focus):valid, .input-group > .slim-select:valid + .form-control.ss-main:not(:focus), .was-validated .input-group > .form-select:not(:focus):valid, .was-validated .input-group > .ss-main:not(:focus):valid,
-.input-group > .slim-select:valid + .ss-main:not(:focus),
+.was-validated .input-group > .form-control:not(:focus):valid, .was-validated .input-group > .slim-select:valid + .form-control.ss-main:not(:focus), .was-validated .input-group > .form-select:not(:focus):valid, .was-validated .input-group > .ss-main:not(:focus):valid,
+.was-validated .input-group > .slim-select:valid + .ss-main:not(:focus),
 .input-group > .ss-main:not(:focus).is-valid,
-.input-group > .slim-select:valid + .form-floating.ss-main:not(:focus-within) {
+.was-validated .input-group > .slim-select:valid + .form-floating.ss-main:not(:focus-within) {
   z-index: 3;
 }
 
@@ -1541,91 +1541,91 @@ textarea.form-control-sm {
 }
 
 .was-validated :invalid ~ .invalid-feedback,
-.slim-select:invalid + .ss-main ~ .invalid-feedback,
-.slim-select:invalid + .ss-main ~ .invalid-tooltip {
+.was-validated .slim-select:invalid + .ss-main ~ .invalid-feedback,
+.was-validated .slim-select:invalid + .ss-main ~ .invalid-tooltip {
   display: block;
 }
 
-.was-validated .form-control:invalid, .slim-select:invalid + .form-control.ss-main {
+.was-validated .form-control:invalid, .was-validated .slim-select:invalid + .form-control.ss-main {
   border-color: var(--tcg-form-invalid-border-color);
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' width='12' height='12' fill='none' stroke='%23af3a3a'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3e%3ccircle cx='6' cy='8.2' r='.6' fill='%23af3a3a' stroke='none'/%3e%3c/svg%3e");
   background-repeat: no-repeat;
   background-size: calc(0.75em + 0.75rem) calc(0.75em + 0.75rem);
 }
 
-[dir="ltr"] .was-validated .form-control:invalid, [dir="ltr"] .slim-select:invalid + .form-control.ss-main {
+[dir="ltr"] .was-validated .form-control:invalid, [dir="ltr"] .was-validated .slim-select:invalid + .form-control.ss-main {
   padding-right: calc(1.5em + 1.5rem);
   background-position: right calc(0.375em + 0.375rem) center;
 }
 
-[dir="rtl"] .was-validated .form-control:invalid, [dir="rtl"] .slim-select:invalid + .form-control.ss-main {
+[dir="rtl"] .was-validated .form-control:invalid, [dir="rtl"] .was-validated .slim-select:invalid + .form-control.ss-main {
   padding-left: calc(1.5em + 1.5rem);
   background-position: left calc(0.375em + 0.375rem) center;
 }
 
-.was-validated .form-control:invalid:focus, .slim-select:invalid + .form-control.ss-main:focus {
+.was-validated .form-control:invalid:focus, .was-validated .slim-select:invalid + .form-control.ss-main:focus {
   border-color: var(--tcg-form-invalid-border-color);
   box-shadow: 0 0 0 0.25rem rgba(var(--tcg-danger-rgb), 0.25);
 }
 
-[dir="ltr"] .was-validated textarea.form-control:invalid, [dir="ltr"] .slim-select:invalid + textarea.form-control.ss-main {
+[dir="ltr"] .was-validated textarea.form-control:invalid, [dir="ltr"] .was-validated .slim-select:invalid + textarea.form-control.ss-main {
   padding-right: calc(1.5em + 1.5rem);
   background-position: top calc(0.375em + 0.375rem) right calc(0.375em + 0.375rem);
 }
 
-[dir="rtl"] .was-validated textarea.form-control:invalid, [dir="rtl"] .slim-select:invalid + textarea.form-control.ss-main {
+[dir="rtl"] .was-validated textarea.form-control:invalid, [dir="rtl"] .was-validated .slim-select:invalid + textarea.form-control.ss-main {
   padding-left: calc(1.5em + 1.5rem);
   background-position: top calc(0.375em + 0.375rem) left calc(0.375em + 0.375rem);
 }
 
-.was-validated .form-select:invalid, .was-validated .ss-main:invalid, .slim-select:invalid + .ss-main, .is-invalid.ss-main {
+.was-validated .form-select:invalid, .was-validated .ss-main:invalid, .was-validated .slim-select:invalid + .ss-main, .is-invalid.ss-main {
   border-color: var(--tcg-form-invalid-border-color);
 }
 
-.was-validated .form-select:invalid:not([multiple]):not([size]), .was-validated .ss-main:invalid:not([multiple]):not([size]), .was-validated .form-select:invalid:not([multiple])[size="1"], .was-validated .ss-main:invalid:not([multiple])[size="1"], .slim-select:invalid + .ss-main:not([multiple]):not([size]), .is-invalid.ss-main:not([multiple]):not([size]), .slim-select:invalid + .ss-main:not([multiple])[size="1"], .is-invalid.ss-main:not([multiple])[size="1"] {
+.was-validated .form-select:invalid:not([multiple]):not([size]), .was-validated .ss-main:invalid:not([multiple]):not([size]), .was-validated .form-select:invalid:not([multiple])[size="1"], .was-validated .ss-main:invalid:not([multiple])[size="1"], .was-validated .slim-select:invalid + .ss-main:not([multiple]):not([size]), .is-invalid.ss-main:not([multiple]):not([size]), .was-validated .slim-select:invalid + .ss-main:not([multiple])[size="1"], .is-invalid.ss-main:not([multiple])[size="1"] {
   --tcg-form-select-bg-icon: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' width='12' height='12' fill='none' stroke='%23af3a3a'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3e%3ccircle cx='6' cy='8.2' r='.6' fill='%23af3a3a' stroke='none'/%3e%3c/svg%3e");
   background-size: 14px, calc(0.75em + 0.75rem) calc(0.75em + 0.75rem);
 }
 
-[dir="ltr"] .was-validated .form-select:invalid:not([multiple]):not([size]), [dir="ltr"] .was-validated .ss-main:invalid:not([multiple]):not([size]), [dir="ltr"] .was-validated .form-select:invalid:not([multiple])[size="1"], [dir="ltr"] .was-validated .ss-main:invalid:not([multiple])[size="1"], [dir="ltr"] .slim-select:invalid + .ss-main:not([multiple]):not([size]), [dir="ltr"] .is-invalid.ss-main:not([multiple]):not([size]), [dir="ltr"] .slim-select:invalid + .ss-main:not([multiple])[size="1"], [dir="ltr"] .is-invalid.ss-main:not([multiple])[size="1"] {
+[dir="ltr"] .was-validated .form-select:invalid:not([multiple]):not([size]), [dir="ltr"] .was-validated .ss-main:invalid:not([multiple]):not([size]), [dir="ltr"] .was-validated .form-select:invalid:not([multiple])[size="1"], [dir="ltr"] .was-validated .ss-main:invalid:not([multiple])[size="1"], [dir="ltr"] .was-validated .slim-select:invalid + .ss-main:not([multiple]):not([size]), [dir="ltr"] .is-invalid.ss-main:not([multiple]):not([size]), [dir="ltr"] .was-validated .slim-select:invalid + .ss-main:not([multiple])[size="1"], [dir="ltr"] .is-invalid.ss-main:not([multiple])[size="1"] {
   padding-right: 4.125rem;
   background-position: right 0.75rem center, center right 2.25rem;
 }
 
-[dir="rtl"] .was-validated .form-select:invalid:not([multiple]):not([size]), [dir="rtl"] .was-validated .ss-main:invalid:not([multiple]):not([size]), [dir="rtl"] .was-validated .form-select:invalid:not([multiple])[size="1"], [dir="rtl"] .was-validated .ss-main:invalid:not([multiple])[size="1"], [dir="rtl"] .slim-select:invalid + .ss-main:not([multiple]):not([size]), [dir="rtl"] .is-invalid.ss-main:not([multiple]):not([size]), [dir="rtl"] .slim-select:invalid + .ss-main:not([multiple])[size="1"], [dir="rtl"] .is-invalid.ss-main:not([multiple])[size="1"] {
+[dir="rtl"] .was-validated .form-select:invalid:not([multiple]):not([size]), [dir="rtl"] .was-validated .ss-main:invalid:not([multiple]):not([size]), [dir="rtl"] .was-validated .form-select:invalid:not([multiple])[size="1"], [dir="rtl"] .was-validated .ss-main:invalid:not([multiple])[size="1"], [dir="rtl"] .was-validated .slim-select:invalid + .ss-main:not([multiple]):not([size]), [dir="rtl"] .is-invalid.ss-main:not([multiple]):not([size]), [dir="rtl"] .was-validated .slim-select:invalid + .ss-main:not([multiple])[size="1"], [dir="rtl"] .is-invalid.ss-main:not([multiple])[size="1"] {
   padding-left: 4.125rem;
   background-position: left 0.75rem center, center left 2.25rem;
 }
 
-.was-validated .form-select:invalid:focus, .was-validated .ss-main:invalid:focus, .slim-select:invalid + .ss-main:focus, .is-invalid.ss-main:focus {
+.was-validated .form-select:invalid:focus, .was-validated .ss-main:invalid:focus, .was-validated .slim-select:invalid + .ss-main:focus, .is-invalid.ss-main:focus {
   border-color: var(--tcg-form-invalid-border-color);
   box-shadow: 0 0 0 0.25rem rgba(var(--tcg-danger-rgb), 0.25);
 }
 
- .slim-select:invalid + .form-control-color.ss-main {
+ .was-validated .slim-select:invalid + .form-control-color.ss-main {
   width: calc(3rem + calc(1.5em + 1.5rem));
 }
 
-.was-validated .form-check-input:invalid, .slim-select:invalid + .form-check-input.ss-main {
+.was-validated .form-check-input:invalid, .was-validated .slim-select:invalid + .form-check-input.ss-main {
   border-color: var(--tcg-form-invalid-border-color);
 }
 
-.was-validated .form-check-input:invalid:checked, .slim-select:invalid + .form-check-input.ss-main:checked {
+.was-validated .form-check-input:invalid:checked, .was-validated .slim-select:invalid + .form-check-input.ss-main:checked {
   background-color: var(--tcg-form-invalid-color);
 }
 
-.was-validated .form-check-input:invalid:focus, .slim-select:invalid + .form-check-input.ss-main:focus {
+.was-validated .form-check-input:invalid:focus, .was-validated .slim-select:invalid + .form-check-input.ss-main:focus {
   box-shadow: 0 0 0 0.25rem rgba(var(--tcg-danger-rgb), 0.25);
 }
 
-.was-validated .form-check-input:invalid ~ .form-check-label, .slim-select:invalid + .form-check-input.ss-main ~ .form-check-label {
+.was-validated .form-check-input:invalid ~ .form-check-label, .was-validated .slim-select:invalid + .form-check-input.ss-main ~ .form-check-label {
   color: var(--tcg-form-invalid-color);
 }
 
-.was-validated .input-group > .form-control:not(:focus):invalid, .input-group > .slim-select:invalid + .form-control.ss-main:not(:focus), .was-validated .input-group > .form-select:not(:focus):invalid, .was-validated .input-group > .ss-main:not(:focus):invalid,
-.input-group > .slim-select:invalid + .ss-main:not(:focus),
+.was-validated .input-group > .form-control:not(:focus):invalid, .was-validated .input-group > .slim-select:invalid + .form-control.ss-main:not(:focus), .was-validated .input-group > .form-select:not(:focus):invalid, .was-validated .input-group > .ss-main:not(:focus):invalid,
+.was-validated .input-group > .slim-select:invalid + .ss-main:not(:focus),
 .input-group > .ss-main:not(:focus).is-invalid,
-.input-group > .slim-select:invalid + .form-floating.ss-main:not(:focus-within) {
+.was-validated .input-group > .slim-select:invalid + .form-floating.ss-main:not(:focus-within) {
   z-index: 4;
 }
 

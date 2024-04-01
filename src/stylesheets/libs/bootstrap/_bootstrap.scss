@@ -222,3 +222,18 @@
 			)} !important;
 	}
 }
+
+.was-validated {
+	.slim-select {
+		&:invalid {
+			& + .ss-main {
+				@extend .is-invalid !optional;
+			}
+		}
+		&:valid {
+			& + .ss-main {
+				@extend .is-valid !optional;
+			}
+		}
+	}
+}

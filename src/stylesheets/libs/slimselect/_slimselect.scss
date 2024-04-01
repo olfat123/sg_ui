@@ -1,18 +1,5 @@
 @import "~slim-select/src/slim-select/slimselect.scss";
 
-.slim-select {
-	&:invalid {
-		& + .ss-main {
-			@extend .is-invalid !optional;
-		}
-	}
-	&:valid {
-		& + .ss-main {
-			@extend .is-valid !optional;
-		}
-	}
-}
-
 .ss-arrow {
 	display: none !important;
 }
