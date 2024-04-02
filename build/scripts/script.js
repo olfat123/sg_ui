@@ -33134,7 +33134,7 @@ var _default = function _default() {
 };
 exports["default"] = _default;
 
-},{"../utils/_dom":217,"../utils/_vars":218,"@babel/runtime/helpers/interopRequireDefault":4,"@babel/runtime/helpers/toConsumableArray":7,"rellax":101}],209:[function(require,module,exports){
+},{"../utils/_dom":218,"../utils/_vars":219,"@babel/runtime/helpers/interopRequireDefault":4,"@babel/runtime/helpers/toConsumableArray":7,"rellax":101}],209:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault2 = require("@babel/runtime/helpers/interopRequireDefault");
@@ -33315,7 +33315,51 @@ var _default = function _default() {
 };
 exports["default"] = _default;
 
-},{"../utils/_dom":217,"../utils/_vars":218,"@babel/runtime/helpers/defineProperty":3,"@babel/runtime/helpers/interopRequireDefault":4,"@babel/runtime/helpers/toConsumableArray":7,"@babel/runtime/helpers/typeof":10,"swiper":203}],211:[function(require,module,exports){
+},{"../utils/_dom":218,"../utils/_vars":219,"@babel/runtime/helpers/defineProperty":3,"@babel/runtime/helpers/interopRequireDefault":4,"@babel/runtime/helpers/toConsumableArray":7,"@babel/runtime/helpers/typeof":10,"swiper":203}],211:[function(require,module,exports){
+"use strict";
+
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+var _toConsumableArray2 = _interopRequireDefault(require("@babel/runtime/helpers/toConsumableArray"));
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = void 0;
+var _default = function _default() {
+  (0, _toConsumableArray2["default"])(document.querySelectorAll("input.custom-file-input[type='file']") || []).forEach(function (fileInput) {
+    var targetDataMaxSize = fileInput.getAttribute("data-max-size");
+    var targetPreviewImage = fileInput.getAttribute("data-preview");
+    var targetPreviewImageDefault = document.querySelector(targetPreviewImage).getAttribute("src");
+    var inputInvalidFeedBack = fileInput.parentElement.querySelector("[class^='invalid-'] strong");
+    var inputInvalidFeedBackText = inputInvalidFeedBack ? (inputInvalidFeedBack === null || inputInvalidFeedBack === void 0 ? void 0 : inputInvalidFeedBack.textContent) || "" : "";
+    fileInput.addEventListener("change", function (_ref) {
+      var target = _ref.target;
+      var files = (0, _toConsumableArray2["default"])(target.files || []);
+
+      // resetting input
+      target.classList.remove("is-invalid");
+      if (inputInvalidFeedBack) inputInvalidFeedBack.textContent = inputInvalidFeedBackText;
+      if (targetPreviewImage && targetPreviewImageDefault) document.querySelector(targetPreviewImage).setAttribute("src", targetPreviewImageDefault);
+
+      // validating input
+      if (files.length) {
+        var filteredFiles = targetDataMaxSize ? files.filter(function (_ref2) {
+          var size = _ref2.size;
+          return size && size <= +targetDataMaxSize * 1024 * 1024;
+        }) : files;
+        if (!filteredFiles.length) {
+          if (inputInvalidFeedBack) inputInvalidFeedBack.textContent = "Invalid file size";
+          target.classList.add("is-invalid");
+        }
+        filteredFiles.forEach(function (file) {
+          if (targetPreviewImage) document.querySelector(targetPreviewImage).setAttribute("src", window.URL.createObjectURL(file));
+        });
+      }
+    });
+  });
+};
+exports["default"] = _default;
+
+},{"@babel/runtime/helpers/interopRequireDefault":4,"@babel/runtime/helpers/toConsumableArray":7}],212:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault2 = require("@babel/runtime/helpers/interopRequireDefault");
@@ -33345,7 +33389,7 @@ var navigateAnimation = function navigateAnimation() {
 };
 var _default = exports["default"] = navigateAnimation;
 
-},{"../utils/_animate-css":215,"@babel/runtime/helpers/interopRequireDefault":4,"@babel/runtime/helpers/toConsumableArray":7}],212:[function(require,module,exports){
+},{"../utils/_animate-css":216,"@babel/runtime/helpers/interopRequireDefault":4,"@babel/runtime/helpers/toConsumableArray":7}],213:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -33416,7 +33460,7 @@ var scrollToTopButton = function scrollToTopButton() {
 exports.scrollToTopButton = scrollToTopButton;
 var _default = exports["default"] = scrollToTopButton;
 
-},{"../utils/_animate-css":215,"../utils/_debounce":216,"../utils/_dom":217,"../utils/_vars":218}],213:[function(require,module,exports){
+},{"../utils/_animate-css":216,"../utils/_debounce":217,"../utils/_dom":218,"../utils/_vars":219}],214:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -33517,7 +33561,7 @@ var scrollingHeader = function scrollingHeader() {
 exports.scrollingHeader = scrollingHeader;
 var _default = exports["default"] = scrollingHeader;
 
-},{"../utils/_dom":217}],214:[function(require,module,exports){
+},{"../utils/_dom":218}],215:[function(require,module,exports){
 "use strict";
 
 var _jquery = _interopRequireDefault(require("jquery"));
@@ -33528,6 +33572,7 @@ var _jqueryBarRating = _interopRequireDefault(require("./libs/_jquery-bar-rating
 var _rellax = _interopRequireDefault(require("./libs/_rellax"));
 var _slimSelect = _interopRequireDefault(require("./libs/_slim-select"));
 var _swiper = _interopRequireDefault(require("./libs/_swiper"));
+var _customFileInput = _interopRequireDefault(require("./partials/_custom-file-input"));
 var _navigateAnimation = _interopRequireDefault(require("./partials/_navigate-animation"));
 var _scrollToTopButton = _interopRequireDefault(require("./partials/_scroll-to-top-button"));
 var _scrollingHeader = _interopRequireDefault(require("./partials/_scrolling-header"));
@@ -33562,10 +33607,11 @@ window.jQuery = _jquery["default"];
     (0, _flatpickr["default"])();
     (0, _jqueryBarRating["default"])();
     (0, _slimSelect["default"])();
+    (0, _customFileInput["default"])();
   });
 })();
 
-},{"./libs/_aos":204,"./libs/_bootstrap":205,"./libs/_flatpickr":206,"./libs/_jquery-bar-rating":207,"./libs/_rellax":208,"./libs/_slim-select":209,"./libs/_swiper":210,"./partials/_navigate-animation":211,"./partials/_scroll-to-top-button":212,"./partials/_scrolling-header":213,"./utils/_animate-css":215,"jquery":100}],215:[function(require,module,exports){
+},{"./libs/_aos":204,"./libs/_bootstrap":205,"./libs/_flatpickr":206,"./libs/_jquery-bar-rating":207,"./libs/_rellax":208,"./libs/_slim-select":209,"./libs/_swiper":210,"./partials/_custom-file-input":211,"./partials/_navigate-animation":212,"./partials/_scroll-to-top-button":213,"./partials/_scrolling-header":214,"./utils/_animate-css":216,"jquery":100}],216:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -33605,7 +33651,7 @@ var animateCss = function animateCss(element, animation) {
 exports.animateCss = animateCss;
 var _default = exports["default"] = animateCss;
 
-},{"./_dom":217}],216:[function(require,module,exports){
+},{"./_dom":218}],217:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -33638,7 +33684,7 @@ var debounce = function debounce(func, wait, immediate) {
 };
 var _default = exports["default"] = debounce;
 
-},{}],217:[function(require,module,exports){
+},{}],218:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -33722,7 +33768,7 @@ var scrollToTop = function scrollToTop() {
 };
 exports.scrollToTop = scrollToTop;
 
-},{"@babel/runtime/helpers/interopRequireDefault":4,"@babel/runtime/helpers/typeof":10}],218:[function(require,module,exports){
+},{"@babel/runtime/helpers/interopRequireDefault":4,"@babel/runtime/helpers/typeof":10}],219:[function(require,module,exports){
 "use strict";
 
 var _document$getElements, _document$getElements2;
@@ -33742,4 +33788,4 @@ var vars = {
 };
 var _default = exports["default"] = vars;
 
-},{"./_dom":217}]},{},[214]);
+},{"./_dom":218}]},{},[215]);

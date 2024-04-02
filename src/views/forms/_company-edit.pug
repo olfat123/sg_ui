@@ -1,14 +1,58 @@
 // company edit form starts
 form.needs-validation#company-edit-form(action="dashboard-company-edit.html" method="POST" novalidate)
+	- var company = locals.companies[1];
 	fieldset
 		legend.visually-hidden company edit form
 		.row.g-4
 			.col-12
 				label.form-label(for="companyNameField")
 					strong Company Name
-				input#companyNameField.form-control.form-control-sm.bg-white.text-truncate(type="text", name="name", value="Black Hound Security", placeholder="Company Name", autocomplete="name", required)
+				input#companyNameField.form-control.form-control-sm.bg-white.text-truncate(type="text", name="name", value=company.title, placeholder="Company Name", autocomplete="name", required)
 				.invalid-feedback.text-uppercase
 					strong mandatory field!
+			.col-auto
+				label.form-label(for="companyLogoField")
+					strong Company Logo
+				.hstack.gap-2.flex-nowrap.align-items-center.position-relative.mb-3
+					.ratio.ratio-1x1.w-116px.h-116px.flex-shrink-0.text-bg-dark.shadow.rounded-circle
+						img#companyLogoPreview.w-116px.h-116px.rounded-circle.object-fit-cover(src=company.logo, alt="", height="116", width="116", loading="lazy")
+					.vstack.gap-3.flex-grow-1.justify-content-center.align-items-start
+						div
+							label.btn.btn-primary.icon-link.rounded-circle.p-2(type="button", for="companyLogoField", title="Edit", data-bs-placement="top", data-bs-toggle="tooltip")
+								svg.bi.h-auto.w-auto(width="16", height="16", fill="currentColor")
+									use(href="#icon-edit")
+								span.visually-hidden select logo
+							// NOTE: [data-max-size] should hold max file size in MB for front-end size validate.
+							input#companyLogoField.custom-file-input.visually-hidden(name="company_logo", aria-describedby="companyLogoFieldHelp", data-preview="#companyLogoPreview", data-max-size="5", type="file", accept="image/*", required)
+							.invalid-tooltip.text-uppercase.start-0.mt-3
+								strong mandatory field!
+						button.btn.btn-primary.icon-link.rounded-circle.p-2(type="button", title="Delete", data-bs-placement="top", data-bs-toggle="tooltip")
+							svg.bi.h-auto.w-auto(width="16", height="16", fill="currentColor")
+								use(href="#icon-delete")
+							span.visually-hidden delete logo
+				p#companyLogoFieldHelp.form-text.text-capitalize.m-0 Max File size 5MB.
+			.col-12.col-md.offset-md-1
+				label.form-label(for="companyCoverField")
+					strong Cover Photo
+				.hstack.gap-2.flex-nowrap.align-items-center.position-relative.mb-3
+					.ratio.ratio-139x58.w-278px.h-116px.flex-shrink-0.text-bg-dark.shadow.rounded-3
+						img#companyCoverPreview.w-278px.h-116px.rounded-3.object-fit-cover(src=company.header_img, alt="", height="116", width="278", loading="lazy")
+					.vstack.gap-3.flex-grow-1.justify-content-center.align-items-start
+						div
+							label.btn.btn-primary.icon-link.rounded-circle.p-2(type="button", for="companyCoverField", title="Edit", data-bs-placement="top", data-bs-toggle="tooltip")
+								svg.bi.h-auto.w-auto(width="16", height="16", fill="currentColor")
+									use(href="#icon-edit")
+								span.visually-hidden Cover Photo
+							// NOTE: [data-max-size] should hold max file size in MB for front-end size validate.
+							input#companyCoverField.custom-file-input.visually-hidden(name="company_logo", aria-describedby="companyCoverFieldHelp", data-preview="#companyCoverPreview", data-max-size="5", type="file", accept="image/*", required)
+							.invalid-tooltip.text-uppercase.start-0.mt-3
+								strong mandatory field!
+						button.btn.btn-primary.icon-link.rounded-circle.p-2(type="button", title="Delete", data-bs-placement="top", data-bs-toggle="tooltip")
+							svg.bi.h-auto.w-auto(width="16", height="16", fill="currentColor")
+								use(href="#icon-delete")
+							span.visually-hidden delete logo
+				p#companyCoverFieldHelp.form-text.text-capitalize.m-0 Max File size 5MB.
+			.col-12.m-0
 			.col-12.col-md-6.col-xl-4
 				label.form-label(for="companyCountryField")
 					strong Country
@@ -45,9 +89,9 @@ form.needs-validation#company-edit-form(action="dashboard-company-edit.html" met
 					strong Provided Service
 				select#companyProvidedServiceField.bg-white.slim-select(name="provided_service", multiple, required)
 					option(data-placeholder="true") Provided Service
-					option(value="1") option 1
-					option(value="2") option 2
-					option(value="3") option 3
+					option(value="1", selected) option 1
+					option(value="2", selected) option 2
+					option(value="3", selected) option 3
 					option(value="4") option 4
 					option(value="5") option 5
 					option(value="6") option 6
@@ -90,6 +134,11 @@ form.needs-validation#company-edit-form(action="dashboard-company-edit.html" met
 				textarea#companyGoogleMapLinkField.form-control.form-control-sm.bg-white(name="map_link", placeholder="Google Maps Link", required)="<iframe src=“https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3557.248568207342!2d80.94759507635258!3d26.927333276638556!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x399957a4fe0cc8a9%3A0xb939e47e788e720f!2sBlack%20Hound%20Security%20Pvt.Ltd!5e0!3m2!1sen!2seg!4v1710089137050!5m2!1sen!2seg” width='572' height='294' style=“border:0;” allowfullscreen=“” loading=“lazy” referrerpolicy=“no-referrer-when-downgrade”></iframe>"
 				.invalid-feedback.text-uppercase
 					strong mandatory field!
+			.col-12
+				.form-check
+					input#companyVerifiedCheckField.form-check-input(type="checkbox", name="is_verified", value="1", checked)
+					label.form-check-label(for="companyVerifiedCheckField")
+						strong I Am A verified security company
 			.col-12.col-lg-11.col-xl-10.mt-5
 				.row.g-gutter
 					.col-12.col-lg

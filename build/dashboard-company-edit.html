@@ -147,6 +147,11 @@
 				<path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"></path>
 				<path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"></path>
 			</symbol>
+			<symbol id="icon-delete" viewBox="0 0 16 16">
+				<title>delete</title>
+				<path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"></path>
+				<path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"></path>
+			</symbol>
 		</defs>
 	</svg>
 	<!-- app SVGs ends-->
@@ -287,6 +292,55 @@
 													<input class="form-control form-control-sm bg-white text-truncate" id="companyNameField" type="text" name="name" value="Black Hound Security" placeholder="Company Name" autocomplete="name" required="">
 													<div class="invalid-feedback text-uppercase"><strong>mandatory field!</strong></div>
 												</div>
+												<div class="col-auto">
+													<label class="form-label" for="companyLogoField"><strong>Company Logo</strong></label>
+													<div class="hstack gap-2 flex-nowrap align-items-center position-relative mb-3">
+														<div class="ratio ratio-1x1 w-116px h-116px flex-shrink-0 text-bg-dark shadow rounded-circle"><img class="w-116px h-116px rounded-circle object-fit-cover" id="companyLogoPreview" src="./assets/images/companies/2-logo-compressed.webp" alt="" height="116" width="116" loading="lazy"></div>
+														<div class="vstack gap-3 flex-grow-1 justify-content-center align-items-start">
+															<div>
+																<label class="btn btn-primary icon-link rounded-circle p-2" type="button" for="companyLogoField" title="Edit" data-bs-placement="top" data-bs-toggle="tooltip">
+																	<svg class="bi h-auto w-auto" width="16" height="16" fill="currentColor">
+																		<use href="#icon-edit"></use>
+																	</svg><span class="visually-hidden">select logo</span>
+																</label>
+																<!-- NOTE: [data-max-size] should hold max file size in MB for front-end size validate.-->
+																<input class="custom-file-input visually-hidden" id="companyLogoField" name="company_logo" aria-describedby="companyLogoFieldHelp" data-preview="#companyLogoPreview" data-max-size="5" type="file" accept="image/*" required="">
+																<div class="invalid-tooltip text-uppercase start-0 mt-3"><strong>mandatory field!</strong></div>
+															</div>
+															<button class="btn btn-primary icon-link rounded-circle p-2" type="button" title="Delete" data-bs-placement="top" data-bs-toggle="tooltip">
+																<svg class="bi h-auto w-auto" width="16" height="16" fill="currentColor">
+																	<use href="#icon-delete"></use>
+																</svg><span class="visually-hidden">delete logo</span>
+															</button>
+														</div>
+													</div>
+													<p class="form-text text-capitalize m-0" id="companyLogoFieldHelp">Max File size 5MB.</p>
+												</div>
+												<div class="col-12 col-md offset-md-1">
+													<label class="form-label" for="companyCoverField"><strong>Cover Photo</strong></label>
+													<div class="hstack gap-2 flex-nowrap align-items-center position-relative mb-3">
+														<div class="ratio ratio-139x58 w-278px h-116px flex-shrink-0 text-bg-dark shadow rounded-3"><img class="w-278px h-116px rounded-3 object-fit-cover" id="companyCoverPreview" src="./assets/images/companies/2-compressed.webp" alt="" height="116" width="278" loading="lazy"></div>
+														<div class="vstack gap-3 flex-grow-1 justify-content-center align-items-start">
+															<div>
+																<label class="btn btn-primary icon-link rounded-circle p-2" type="button" for="companyCoverField" title="Edit" data-bs-placement="top" data-bs-toggle="tooltip">
+																	<svg class="bi h-auto w-auto" width="16" height="16" fill="currentColor">
+																		<use href="#icon-edit"></use>
+																	</svg><span class="visually-hidden">Cover Photo</span>
+																</label>
+																<!-- NOTE: [data-max-size] should hold max file size in MB for front-end size validate.-->
+																<input class="custom-file-input visually-hidden" id="companyCoverField" name="company_logo" aria-describedby="companyCoverFieldHelp" data-preview="#companyCoverPreview" data-max-size="5" type="file" accept="image/*" required="">
+																<div class="invalid-tooltip text-uppercase start-0 mt-3"><strong>mandatory field!</strong></div>
+															</div>
+															<button class="btn btn-primary icon-link rounded-circle p-2" type="button" title="Delete" data-bs-placement="top" data-bs-toggle="tooltip">
+																<svg class="bi h-auto w-auto" width="16" height="16" fill="currentColor">
+																	<use href="#icon-delete"></use>
+																</svg><span class="visually-hidden">delete logo</span>
+															</button>
+														</div>
+													</div>
+													<p class="form-text text-capitalize m-0" id="companyCoverFieldHelp">Max File size 5MB.</p>
+												</div>
+												<div class="col-12 m-0"></div>
 												<div class="col-12 col-md-6 col-xl-4">
 													<label class="form-label" for="companyCountryField"><strong>Country</strong></label>
 													<select class="form-select form-select-sm bg-white text-truncate" id="companyCountryField" name="country" value="1" required="">
@@ -320,9 +374,9 @@
 													<label class="form-label" for="companyProvidedServiceField"><strong>Provided Service</strong></label>
 													<select class="bg-white slim-select" id="companyProvidedServiceField" name="provided_service" multiple="" required="">
 														<option data-placeholder="true">Provided Service</option>
-														<option value="1">option 1</option>
-														<option value="2">option 2</option>
-														<option value="3">option 3</option>
+														<option value="1" selected="">option 1</option>
+														<option value="2" selected="">option 2</option>
+														<option value="3" selected="">option 3</option>
 														<option value="4">option 4</option>
 														<option value="5">option 5</option>
 														<option value="6">option 6</option>
@@ -360,6 +414,12 @@
 													<label class="form-label" for="companyGoogleMapLinkField"><strong>Google Maps Link</strong></label>
 													<textarea class="form-control form-control-sm bg-white" id="companyGoogleMapLinkField" name="map_link" placeholder="Google Maps Link" required="">&lt;iframe src=“https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3557.248568207342!2d80.94759507635258!3d26.927333276638556!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x399957a4fe0cc8a9%3A0xb939e47e788e720f!2sBlack%20Hound%20Security%20Pvt.Ltd!5e0!3m2!1sen!2seg!4v1710089137050!5m2!1sen!2seg” width='572' height='294' style=“border:0;” allowfullscreen=“” loading=“lazy” referrerpolicy=“no-referrer-when-downgrade”&gt;&lt;/iframe&gt;</textarea>
 													<div class="invalid-feedback text-uppercase"><strong>mandatory field!</strong></div>
+												</div>
+												<div class="col-12">
+													<div class="form-check">
+														<input class="form-check-input" id="companyVerifiedCheckField" type="checkbox" name="is_verified" value="1" checked="">
+														<label class="form-check-label" for="companyVerifiedCheckField"><strong>I Am A verified security company</strong></label>
+													</div>
 												</div>
 												<div class="col-12 col-lg-11 col-xl-10 mt-5">
 													<div class="row g-gutter">

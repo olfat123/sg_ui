@@ -29,7 +29,7 @@ const config = {
 			es6: `${SOURCE_FOLDER}/**/[^_]*.js`,
 			es6_all: `${SOURCE_FOLDER}/**/*.js`,
 			fonts: `${SOURCE_FOLDER}/**/*.+(eot|svg|ttf|woff|woff2)`,
-			images: `${SOURCE_FOLDER}/**/*.+(png|jpg|webp|gif|svg|ico)`,
+			images: `${SOURCE_FOLDER}/**/*.+(png|jpg|jpeg|webp|gif|svg|ico)`,
 			videos: `${SOURCE_FOLDER}/**/*.+(mp4)`,
 			favicon: `${SOURCE_FOLDER}/assets/images/favicon.png`,
 			favicon_data: "./faviconData.json",

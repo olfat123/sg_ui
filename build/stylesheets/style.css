@@ -747,6 +747,9 @@ progress {
 }
 
 @media (min-width: 768px) {
+  .col-md {
+    flex: 1 0 0%;
+  }
 
   .row-cols-md-2 > * {
     flex: 0 0 auto;
@@ -781,6 +784,14 @@ progress {
   .col-md-10 {
     flex: 0 0 auto;
     width: 83.33333%;
+  }
+
+  [dir="ltr"] .offset-md-1 {
+    margin-left: 8.33333%;
+  }
+
+  [dir="rtl"] .offset-md-1 {
+    margin-right: 8.33333%;
   }
 
   
@@ -1540,64 +1551,81 @@ textarea.form-control-sm {
   color: var(--tcg-form-invalid-color);
 }
 
+.invalid-tooltip {
+  position: absolute;
+  top: 100%;
+  z-index: 5;
+  display: none;
+  max-width: 100%;
+  padding: 0.25rem 0.5rem;
+  margin-top: .1rem;
+  font-size: 0.875rem;
+  color: #fff;
+  background-color: var(--tcg-danger);
+  border-radius: var(--tcg-border-radius);
+}
+
 .was-validated :invalid ~ .invalid-feedback,
+.was-validated :invalid ~ .invalid-tooltip,
+.is-invalid ~ .invalid-feedback,
 .was-validated .slim-select:invalid + .ss-main ~ .invalid-feedback,
+.is-invalid ~ .invalid-tooltip,
 .was-validated .slim-select:invalid + .ss-main ~ .invalid-tooltip {
   display: block;
 }
 
-.was-validated .form-control:invalid, .was-validated .slim-select:invalid + .form-control.ss-main {
+.was-validated .form-control:invalid, .form-control.is-invalid, .was-validated .slim-select:invalid + .form-control.ss-main {
   border-color: var(--tcg-form-invalid-border-color);
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' width='12' height='12' fill='none' stroke='%23af3a3a'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3e%3ccircle cx='6' cy='8.2' r='.6' fill='%23af3a3a' stroke='none'/%3e%3c/svg%3e");
   background-repeat: no-repeat;
   background-size: calc(0.75em + 0.75rem) calc(0.75em + 0.75rem);
 }
 
-[dir="ltr"] .was-validated .form-control:invalid, [dir="ltr"] .was-validated .slim-select:invalid + .form-control.ss-main {
+[dir="ltr"] .was-validated .form-control:invalid, [dir="ltr"] .form-control.is-invalid, [dir="ltr"] .was-validated .slim-select:invalid + .form-control.ss-main {
   padding-right: calc(1.5em + 1.5rem);
   background-position: right calc(0.375em + 0.375rem) center;
 }
 
-[dir="rtl"] .was-validated .form-control:invalid, [dir="rtl"] .was-validated .slim-select:invalid + .form-control.ss-main {
+[dir="rtl"] .was-validated .form-control:invalid, [dir="rtl"] .form-control.is-invalid, [dir="rtl"] .was-validated .slim-select:invalid + .form-control.ss-main {
   padding-left: calc(1.5em + 1.5rem);
   background-position: left calc(0.375em + 0.375rem) center;
 }
 
-.was-validated .form-control:invalid:focus, .was-validated .slim-select:invalid + .form-control.ss-main:focus {
+.was-validated .form-control:invalid:focus, .form-control.is-invalid:focus, .was-validated .slim-select:invalid + .form-control.ss-main:focus {
   border-color: var(--tcg-form-invalid-border-color);
   box-shadow: 0 0 0 0.25rem rgba(var(--tcg-danger-rgb), 0.25);
 }
 
-[dir="ltr"] .was-validated textarea.form-control:invalid, [dir="ltr"] .was-validated .slim-select:invalid + textarea.form-control.ss-main {
+[dir="ltr"] .was-validated textarea.form-control:invalid, [dir="ltr"] textarea.form-control.is-invalid, [dir="ltr"] .was-validated .slim-select:invalid + textarea.form-control.ss-main {
   padding-right: calc(1.5em + 1.5rem);
   background-position: top calc(0.375em + 0.375rem) right calc(0.375em + 0.375rem);
 }
 
-[dir="rtl"] .was-validated textarea.form-control:invalid, [dir="rtl"] .was-validated .slim-select:invalid + textarea.form-control.ss-main {
+[dir="rtl"] .was-validated textarea.form-control:invalid, [dir="rtl"] textarea.form-control.is-invalid, [dir="rtl"] .was-validated .slim-select:invalid + textarea.form-control.ss-main {
   padding-left: calc(1.5em + 1.5rem);
   background-position: top calc(0.375em + 0.375rem) left calc(0.375em + 0.375rem);
 }
 
-.was-validated .form-select:invalid, .was-validated .ss-main:invalid, .was-validated .slim-select:invalid + .ss-main, .is-invalid.ss-main {
+.was-validated .form-select:invalid, .was-validated .ss-main:invalid, .form-select.is-invalid, .was-validated .slim-select:invalid + .ss-main, .is-invalid.ss-main {
   border-color: var(--tcg-form-invalid-border-color);
 }
 
-.was-validated .form-select:invalid:not([multiple]):not([size]), .was-validated .ss-main:invalid:not([multiple]):not([size]), .was-validated .form-select:invalid:not([multiple])[size="1"], .was-validated .ss-main:invalid:not([multiple])[size="1"], .was-validated .slim-select:invalid + .ss-main:not([multiple]):not([size]), .is-invalid.ss-main:not([multiple]):not([size]), .was-validated .slim-select:invalid + .ss-main:not([multiple])[size="1"], .is-invalid.ss-main:not([multiple])[size="1"] {
+.was-validated .form-select:invalid:not([multiple]):not([size]), .was-validated .ss-main:invalid:not([multiple]):not([size]), .was-validated .form-select:invalid:not([multiple])[size="1"], .was-validated .ss-main:invalid:not([multiple])[size="1"], .form-select.is-invalid:not([multiple]):not([size]), .was-validated .slim-select:invalid + .ss-main:not([multiple]):not([size]), .is-invalid.ss-main:not([multiple]):not([size]), .form-select.is-invalid:not([multiple])[size="1"], .was-validated .slim-select:invalid + .ss-main:not([multiple])[size="1"], .is-invalid.ss-main:not([multiple])[size="1"] {
   --tcg-form-select-bg-icon: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' width='12' height='12' fill='none' stroke='%23af3a3a'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3e%3ccircle cx='6' cy='8.2' r='.6' fill='%23af3a3a' stroke='none'/%3e%3c/svg%3e");
   background-size: 14px, calc(0.75em + 0.75rem) calc(0.75em + 0.75rem);
 }
 
-[dir="ltr"] .was-validated .form-select:invalid:not([multiple]):not([size]), [dir="ltr"] .was-validated .ss-main:invalid:not([multiple]):not([size]), [dir="ltr"] .was-validated .form-select:invalid:not([multiple])[size="1"], [dir="ltr"] .was-validated .ss-main:invalid:not([multiple])[size="1"], [dir="ltr"] .was-validated .slim-select:invalid + .ss-main:not([multiple]):not([size]), [dir="ltr"] .is-invalid.ss-main:not([multiple]):not([size]), [dir="ltr"] .was-validated .slim-select:invalid + .ss-main:not([multiple])[size="1"], [dir="ltr"] .is-invalid.ss-main:not([multiple])[size="1"] {
+[dir="ltr"] .was-validated .form-select:invalid:not([multiple]):not([size]), [dir="ltr"] .was-validated .ss-main:invalid:not([multiple]):not([size]), [dir="ltr"] .was-validated .form-select:invalid:not([multiple])[size="1"], [dir="ltr"] .was-validated .ss-main:invalid:not([multiple])[size="1"], [dir="ltr"] .form-select.is-invalid:not([multiple]):not([size]), [dir="ltr"] .was-validated .slim-select:invalid + .ss-main:not([multiple]):not([size]), [dir="ltr"] .is-invalid.ss-main:not([multiple]):not([size]), [dir="ltr"] .form-select.is-invalid:not([multiple])[size="1"], [dir="ltr"] .was-validated .slim-select:invalid + .ss-main:not([multiple])[size="1"], [dir="ltr"] .is-invalid.ss-main:not([multiple])[size="1"] {
   padding-right: 4.125rem;
   background-position: right 0.75rem center, center right 2.25rem;
 }
 
-[dir="rtl"] .was-validated .form-select:invalid:not([multiple]):not([size]), [dir="rtl"] .was-validated .ss-main:invalid:not([multiple]):not([size]), [dir="rtl"] .was-validated .form-select:invalid:not([multiple])[size="1"], [dir="rtl"] .was-validated .ss-main:invalid:not([multiple])[size="1"], [dir="rtl"] .was-validated .slim-select:invalid + .ss-main:not([multiple]):not([size]), [dir="rtl"] .is-invalid.ss-main:not([multiple]):not([size]), [dir="rtl"] .was-validated .slim-select:invalid + .ss-main:not([multiple])[size="1"], [dir="rtl"] .is-invalid.ss-main:not([multiple])[size="1"] {
+[dir="rtl"] .was-validated .form-select:invalid:not([multiple]):not([size]), [dir="rtl"] .was-validated .ss-main:invalid:not([multiple]):not([size]), [dir="rtl"] .was-validated .form-select:invalid:not([multiple])[size="1"], [dir="rtl"] .was-validated .ss-main:invalid:not([multiple])[size="1"], [dir="rtl"] .form-select.is-invalid:not([multiple]):not([size]), [dir="rtl"] .was-validated .slim-select:invalid + .ss-main:not([multiple]):not([size]), [dir="rtl"] .is-invalid.ss-main:not([multiple]):not([size]), [dir="rtl"] .form-select.is-invalid:not([multiple])[size="1"], [dir="rtl"] .was-validated .slim-select:invalid + .ss-main:not([multiple])[size="1"], [dir="rtl"] .is-invalid.ss-main:not([multiple])[size="1"] {
   padding-left: 4.125rem;
   background-position: left 0.75rem center, center left 2.25rem;
 }
 
-.was-validated .form-select:invalid:focus, .was-validated .ss-main:invalid:focus, .was-validated .slim-select:invalid + .ss-main:focus, .is-invalid.ss-main:focus {
+.was-validated .form-select:invalid:focus, .was-validated .ss-main:invalid:focus, .form-select.is-invalid:focus, .was-validated .slim-select:invalid + .ss-main:focus, .is-invalid.ss-main:focus {
   border-color: var(--tcg-form-invalid-border-color);
   box-shadow: 0 0 0 0.25rem rgba(var(--tcg-danger-rgb), 0.25);
 }
@@ -1606,23 +1634,24 @@ textarea.form-control-sm {
   width: calc(3rem + calc(1.5em + 1.5rem));
 }
 
-.was-validated .form-check-input:invalid, .was-validated .slim-select:invalid + .form-check-input.ss-main {
+.was-validated .form-check-input:invalid, .form-check-input.is-invalid, .was-validated .slim-select:invalid + .form-check-input.ss-main {
   border-color: var(--tcg-form-invalid-border-color);
 }
 
-.was-validated .form-check-input:invalid:checked, .was-validated .slim-select:invalid + .form-check-input.ss-main:checked {
+.was-validated .form-check-input:invalid:checked, .form-check-input.is-invalid:checked, .was-validated .slim-select:invalid + .form-check-input.ss-main:checked {
   background-color: var(--tcg-form-invalid-color);
 }
 
-.was-validated .form-check-input:invalid:focus, .was-validated .slim-select:invalid + .form-check-input.ss-main:focus {
+.was-validated .form-check-input:invalid:focus, .form-check-input.is-invalid:focus, .was-validated .slim-select:invalid + .form-check-input.ss-main:focus {
   box-shadow: 0 0 0 0.25rem rgba(var(--tcg-danger-rgb), 0.25);
 }
 
-.was-validated .form-check-input:invalid ~ .form-check-label, .was-validated .slim-select:invalid + .form-check-input.ss-main ~ .form-check-label {
+.was-validated .form-check-input:invalid ~ .form-check-label, .form-check-input.is-invalid ~ .form-check-label, .was-validated .slim-select:invalid + .form-check-input.ss-main ~ .form-check-label {
   color: var(--tcg-form-invalid-color);
 }
 
-.was-validated .input-group > .form-control:not(:focus):invalid, .was-validated .input-group > .slim-select:invalid + .form-control.ss-main:not(:focus), .was-validated .input-group > .form-select:not(:focus):invalid, .was-validated .input-group > .ss-main:not(:focus):invalid,
+.was-validated .input-group > .form-control:not(:focus):invalid, .input-group > .form-control:not(:focus).is-invalid, .was-validated .input-group > .slim-select:invalid + .form-control.ss-main:not(:focus), .was-validated .input-group > .form-select:not(:focus):invalid, .was-validated .input-group > .ss-main:not(:focus):invalid,
+.input-group > .form-select:not(:focus).is-invalid,
 .was-validated .input-group > .slim-select:invalid + .ss-main:not(:focus),
 .input-group > .ss-main:not(:focus).is-invalid,
 .was-validated .input-group > .slim-select:invalid + .form-floating.ss-main:not(:focus-within) {
@@ -3255,6 +3284,10 @@ fieldset:disabled .btn {
   --tcg-aspect-ratio: calc(147 / 286 * 100%);
 }
 
+.ratio-139x58 {
+  --tcg-aspect-ratio: calc(58 / 139 * 100%);
+}
+
 .fixed-top {
   position: fixed;
   top: 0;
@@ -3531,6 +3564,14 @@ fieldset:disabled .btn {
   width: 32px !important;
 }
 
+.w-116px {
+  width: 116px !important;
+}
+
+.w-278px {
+  width: 278px !important;
+}
+
 .vw-100 {
   width: 100vw !important;
 }
@@ -3577,6 +3618,10 @@ fieldset:disabled .btn {
 
 .h-32px {
   height: 32px !important;
+}
+
+.h-116px {
+  height: 116px !important;
 }
 
 .vh-100 {
@@ -4041,6 +4086,10 @@ fieldset:disabled .btn {
 
 .rounded-0 {
   border-radius: 0 !important;
+}
+
+.rounded-3 {
+  border-radius: var(--tcg-border-radius-lg) !important;
 }
 
 .rounded-4 {
