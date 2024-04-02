@@ -3,11 +3,11 @@
 	.offcanvas-header
 		.row.g-0.align-items-center.justify-content-between.flex-nowrap.w-100
 			.col.col-xl-auto
-				+app-logo({ name: locals.APP_NAME, href: "index.html",  logos: [{ src: "./assets/images/logo/logo-light.svg", width: "180", height: "67.33" }] })
+				+app-logo({ name: locals.APP_NAME, href: "index.html",  logos: [{ src: "./assets/images/logo/logo-light.svg", width: "180", height: "67" }] })
 			.col-auto
 				.hstack.align-items-stretch
 					.flex-shrink-0.align-self-center.me-2
-						+app-social-nav({ type: "header" })
+						+app-social-nav({ type: "header" }, "Social Media offcanvas navigation")
 					.overflow-hidden.me-2(aria-hidden="true")
 						.vr.h-100
 					.flex-shrink-0.align-self-center
@@ -17,7 +17,7 @@
 							span.visually-hidden close
 	.offcanvas-body.py-4
 		.vstack.gap-3.h-100
-			+app-nav({ type: "offcanvas", list: locals.navList })
+			+app-nav({ type: "offcanvas", list: locals.navList }, "offcanvas navigation")
 			hr.border.bg-transparent.m-0
 			// login modal open button starts
 			button.btn.btn-link.text-uppercase.text-reset.text-primary-hover.text-primary-focus.rounded-pill.text-decoration-none(data-bs-target="#login-modal" data-bs-toggle="modal" type="button")

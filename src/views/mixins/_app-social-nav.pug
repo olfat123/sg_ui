@@ -1,8 +1,8 @@
-mixin app-social-nav(data={ type: "", labelledby: "" })
+mixin app-social-nav(data={ type: "", labelledby: "" }, label)
 	- var list = [{title: "linkedin", icon: "linkedin-in", href: "https://linkedin.com"}, {title: "facebook", icon: "facebook-f", href: "https://facebook.com"}, {title: "X", icon: "x-twitter", href: "https://x.com"}];
 	if (list.length)
 		// social nav starts
-		nav(class=`app-social-nav${data.type ? ` app-social-nav-${data.type}` : ""}`, aria-labelledby=(data.labelledby || undefined), aria-label=!data.labelledby ? "Social Media navigation" : undefined)
+		nav(class=`app-social-nav${data.type ? ` app-social-nav-${data.type}` : ""}`, aria-labelledby=(data.labelledby || undefined), aria-label=!data.labelledby && label ? label : undefined)
 			ul.nav.mb-0
 				each listItem in list
 					li.nav-item

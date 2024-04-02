@@ -71,7 +71,7 @@ form.needs-validation#vendor-form(action="/" method="POST" novalidate)
 				.mb-3
 					label.form-label.visually-hidden(for="vendorAddressField")
 						strong Address
-					input#vendorAddressField.form-control.text-truncate(type="text", name="address", placeholder="Address", autocomplete="street-address", required)
+					input#vendorAddressField.form-control.text-truncate(type="text", name="address", placeholder="Address", autocomplete="address-line1", required)
 					.invalid-feedback.text-uppercase
 						strong mandatory field!
 				.mb-3
@@ -101,7 +101,7 @@ form.needs-validation#vendor-form(action="/" method="POST" novalidate)
 				.mb-3
 					label.form-label.visually-hidden(for="vendorProvidedServicesField")
 						strong Select Provided Services
-					select#vendorProvidedServicesField.form-select.text-truncate(name="provided_services", value="", required)
+					select#vendorProvidedServicesField.form-select.text-truncate(name="provided_services", required)
 						option(value="", selected, hidden) Select Provided Services
 						option(value="1") Service One
 						option(value="2") Service Two

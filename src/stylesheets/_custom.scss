@@ -156,3 +156,9 @@ textarea {
 		}
 	}
 }
+
+.br-widget {
+	a {
+		@extend .rtl-mirror;
+	}
+}

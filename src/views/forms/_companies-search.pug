@@ -3,11 +3,11 @@ form#companies-search-form(action="companies.html" method="GET")
 	fieldset
 		legend.visually-hidden companies search form
 		.input-group.input-group-sm.flex-lg-nowrap.text-capitalize.border.p-2.gap-2.bg-white.flex-column.flex-lg-row
-			input#companiesSearchPostalCodeField.form-control.w-100.w-lg-fit-content.bg-transparent.text-truncate.m-0.border-0.px-3(type="text", name="postal", placeholder="Your Postal code", autocomplete="postal", required)
+			input#companiesSearchPostalCodeField.form-control.w-100.w-lg-fit-content.bg-transparent.text-truncate.m-0.border-0.px-3(type="text", name="postal", placeholder="Your Postal code", required)
 			label.form-label.visually-hidden(for="companiesSearchPostalCodeField") Your Postal Code
 			.vr.border.bg-transparent.op-100.d-none.d-lg-block.m-0(aria-hidden="true")
 			hr.border.bg-transparent.op-100.d-lg-none.m-0(aria-hidden="true")
-			label.form-label.visually-hidden(for="companiesSearchServiceField")
+			label.form-label.visually-hidden(for="companiesSearchServiceField") Select Service
 			select#companiesSearchServiceField.form-select.w-100.w-lg-fit-content.bg-transparent.text-truncate.text-capitalize.m-0.border-0.px-3(name="service", required)
 				option(value="" selected hidden) - Select Service -
 				option(value="1") service One

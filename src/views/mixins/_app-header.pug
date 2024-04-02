@@ -14,14 +14,14 @@ mixin app-header(data={logo: { name: locals.APP_NAME, href: "index.html",  logos
 					.col-auto
 						.hstack.align-items-stretch
 							.flex-shrink-0.align-self-center.d-none.d-xl-inline-block.me-1.me-xl-3
-								+app-nav({ type: "header", list: locals.navList }, true)
+								+app-nav({ type: "header", list: locals.navList }, "header navigation", true)
 							.flex-shrink-0.align-self-center.me-1.me-xl-3
-								+app-social-nav({ type: "header" })
+								+app-social-nav({ type: "header" }, "Social Media header navigation")
 							.overflow-hidden.me-1.me-xl-3(aria-hidden="true")
 								.vr.h-100
 							.flex-shrink-0.align-self-center
 								// login modal open button starts
-								button.d-none.d-xl-inline-block.btn.btn-link.text-uppercase.text-reset.text-primary-hover.text-primary-focus.rounded-pill.text-decoration-none(data-bs-target="#login-modal" data-bs-toggle="modal" aria-controls="" type="button")
+								button.d-none.d-xl-inline-block.btn.btn-link.text-uppercase.text-reset.text-primary-hover.text-primary-focus.rounded-pill.text-decoration-none(data-bs-target="#login-modal" data-bs-toggle="modal" aria-controls="login-modal" type="button")
 									strong login
 								// login modal open button ends
 

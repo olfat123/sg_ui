@@ -168,14 +168,14 @@
 				<div class="container">
 					<div class="row g-0 align-items-center justify-content-between flex-nowrap w-100">
 						<div class="col col-xl-auto">
-							<!-- app logo starts--><a class="app-logo focus-ring d-block w-fit-content p-1 rounded" href="index.html" title="Click For The City Guards Hub Home"><img class="app-logo-image img-fluid text-reset" src="./assets/images/logo/logo-light.svg" alt="Click For The City Guards Hub Home" width="180" height="67.33"></a>
+							<!-- app logo starts--><a class="app-logo focus-ring d-block w-fit-content p-1 rounded" href="index.html" title="Click For The City Guards Hub Home"><img class="app-logo-image img-fluid text-reset" src="./assets/images/logo/logo-light.svg" alt="Click For The City Guards Hub Home" width="180" height="67"></a>
 							<!-- app logo ends-->
 						</div>
 						<div class="col-auto">
 							<div class="hstack align-items-stretch">
 								<div class="flex-shrink-0 align-self-center d-none d-xl-inline-block me-1 me-xl-3">
 									<!-- navigation list starts-->
-									<nav class="app-nav app-nav-header w-100">
+									<nav class="app-nav app-nav-header w-100" aria-label="header navigation">
 										<ul class="nav mb-0" role="menubar">
 											<li class="nav-item position-absolute top-0 start-50 translate-middle-x"><a class="nav-link btn btn-link text-reset visually-hidden-focusable rounded-top-0" href="#main" role="menuitem"><strong>skip to content</strong></a></li>
 											<li class="nav-item"><a class="nav-link btn btn-link text-uppercase text-reset rounded-pill " href="index.html" role="menuitem"><strong>Home</strong></a>
@@ -194,7 +194,7 @@
 								</div>
 								<div class="flex-shrink-0 align-self-center me-1 me-xl-3">
 									<!-- social nav starts-->
-									<nav class="app-social-nav app-social-nav-header" aria-label="Social Media navigation">
+									<nav class="app-social-nav app-social-nav-header" aria-label="Social Media header navigation">
 										<ul class="nav mb-0">
 											<li class="nav-item"><a class="nav-link btn btn-link px-2 py-1 text-reset text-primary-hover text-primary-focus" data-bs-placement="top" data-bs-toggle="tooltip" aria-label="Follow Us On linkedin" href="https://linkedin.com" target="_blank" rel="noopener noreferrer" title="Follow Us On linkedin"><i class="fab fa-linkedin-in" aria-hidden="true"></i></a></li>
 											<li class="nav-item"><a class="nav-link btn btn-link px-2 py-1 text-reset text-primary-hover text-primary-focus" data-bs-placement="top" data-bs-toggle="tooltip" aria-label="Follow Us On facebook" href="https://facebook.com" target="_blank" rel="noopener noreferrer" title="Follow Us On facebook"><i class="fab fa-facebook-f" aria-hidden="true"></i></a></li>
@@ -208,7 +208,7 @@
 								</div>
 								<div class="flex-shrink-0 align-self-center">
 									<!-- login modal open button starts-->
-									<button class="d-none d-xl-inline-block btn btn-link text-uppercase text-reset text-primary-hover text-primary-focus rounded-pill text-decoration-none" data-bs-target="#login-modal" data-bs-toggle="modal" aria-controls="" type="button"><strong>login</strong></button>
+									<button class="d-none d-xl-inline-block btn btn-link text-uppercase text-reset text-primary-hover text-primary-focus rounded-pill text-decoration-none" data-bs-target="#login-modal" data-bs-toggle="modal" aria-controls="login-modal" type="button"><strong>login</strong></button>
 									<!-- login modal open button ends-->
 									<!-- side menu open button starts-->
 									<button class="app-nav-offcanvas-toggler d-xl-none btn btn-link text-reset text-primary-hover text-primary-focus text-decoration-none" data-bs-target="#app-header-offcanvas" data-bs-toggle="offcanvas" aria-controls="app-header-offcanvas" type="button">
@@ -298,7 +298,7 @@
 														<div class="ratio ratio-1x1 w-116px h-116px flex-shrink-0 text-bg-dark shadow rounded-circle"><img class="w-116px h-116px rounded-circle object-fit-cover" id="companyLogoPreview" src="./assets/images/companies/2-logo-compressed.webp" alt="" height="116" width="116" loading="lazy"></div>
 														<div class="vstack gap-3 flex-grow-1 justify-content-center align-items-start">
 															<div>
-																<label class="btn btn-primary icon-link rounded-circle p-2" type="button" for="companyLogoField" title="Edit" data-bs-placement="top" data-bs-toggle="tooltip">
+																<label class="btn btn-primary icon-link rounded-circle p-2" for="companyLogoField" title="Edit" data-bs-placement="top" data-bs-toggle="tooltip">
 																	<svg class="bi h-auto w-auto" width="16" height="16" fill="currentColor">
 																		<use href="#icon-edit"></use>
 																	</svg><span class="visually-hidden">select logo</span>
@@ -322,7 +322,7 @@
 														<div class="ratio ratio-139x58 w-278px h-116px flex-shrink-0 text-bg-dark shadow rounded-3"><img class="w-278px h-116px rounded-3 object-fit-cover" id="companyCoverPreview" src="./assets/images/companies/2-compressed.webp" alt="" height="116" width="278" loading="lazy"></div>
 														<div class="vstack gap-3 flex-grow-1 justify-content-center align-items-start">
 															<div>
-																<label class="btn btn-primary icon-link rounded-circle p-2" type="button" for="companyCoverField" title="Edit" data-bs-placement="top" data-bs-toggle="tooltip">
+																<label class="btn btn-primary icon-link rounded-circle p-2" for="companyCoverField" title="Edit" data-bs-placement="top" data-bs-toggle="tooltip">
 																	<svg class="bi h-auto w-auto" width="16" height="16" fill="currentColor">
 																		<use href="#icon-edit"></use>
 																	</svg><span class="visually-hidden">Cover Photo</span>
@@ -343,7 +343,7 @@
 												<div class="col-12 m-0"></div>
 												<div class="col-12 col-md-6 col-xl-4">
 													<label class="form-label" for="companyCountryField"><strong>Country</strong></label>
-													<select class="form-select form-select-sm bg-white text-truncate" id="companyCountryField" name="country" value="1" required="">
+													<select class="form-select form-select-sm bg-white text-truncate" id="companyCountryField" name="country" required="">
 														<option value="" hidden="">Select Country</option>
 														<option value="1" selected="">USA</option>
 													</select>
@@ -351,7 +351,7 @@
 												</div>
 												<div class="col-12 col-md-6 col-xl-4">
 													<label class="form-label" for="companyCityField"><strong>Country</strong></label>
-													<select class="form-select form-select-sm bg-white text-truncate" id="companyCityField" name="city" value="1" required="">
+													<select class="form-select form-select-sm bg-white text-truncate" id="companyCityField" name="city" required="">
 														<option value="" hidden="">Select City</option>
 														<option value="1" selected="">California</option>
 													</select>
@@ -359,7 +359,7 @@
 												</div>
 												<div class="col-12 col-md-6 col-xl-4">
 													<label class="form-label" for="companyStateField"><strong>Country</strong></label>
-													<select class="form-select form-select-sm bg-white text-truncate" id="companyStateField" name="state" value="1" required="">
+													<select class="form-select form-select-sm bg-white text-truncate" id="companyStateField" name="state" required="">
 														<option value="" hidden="">Select State</option>
 														<option value="1" selected="">Los Angeles</option>
 													</select>
@@ -407,7 +407,7 @@
 												</div>
 												<div class="col-12">
 													<label class="form-label" for="companyAddressField"><strong>Address</strong></label>
-													<input class="form-control form-control-sm bg-white text-truncate" id="companyAddressField" type="text" name="address" value="5396 North Reese Avenue, Fresno CA 93722" placeholder="Address" autocomplete="address" required="">
+													<input class="form-control form-control-sm bg-white text-truncate" id="companyAddressField" type="text" name="address" value="5396 North Reese Avenue, Fresno CA 93722" placeholder="Address" autocomplete="address-line1" required="">
 													<div class="invalid-feedback text-uppercase"><strong>mandatory field!</strong></div>
 												</div>
 												<div class="col-12">
@@ -454,7 +454,7 @@
 					</div>
 					<div class="col-12 col-lg">
 						<!-- navigation list starts-->
-						<nav class="app-nav app-nav-footer w-100">
+						<nav class="app-nav app-nav-footer w-100" aria-label="footer navigation">
 							<ul class="nav mb-0" role="menubar">
 								<li class="nav-item"><a class="nav-link btn btn-link text-uppercase text-reset rounded-pill " href="index.html" role="menuitem"><strong>Home</strong></a>
 								</li>
@@ -472,7 +472,7 @@
 					</div>
 					<div class="col-12 col-lg-auto">
 						<!-- social nav starts-->
-						<nav class="app-social-nav app-social-nav-footer" aria-label="Social Media navigation">
+						<nav class="app-social-nav app-social-nav-footer" aria-label="Social Media footer navigation">
 							<ul class="nav mb-0">
 								<li class="nav-item"><a class="nav-link btn btn-link px-2 py-1 text-reset text-primary-hover text-primary-focus" data-bs-placement="top" data-bs-toggle="tooltip" aria-label="Follow Us On linkedin" href="https://linkedin.com" target="_blank" rel="noopener noreferrer" title="Follow Us On linkedin"><i class="fab fa-linkedin-in" aria-hidden="true"></i></a></li>
 								<li class="nav-item"><a class="nav-link btn btn-link px-2 py-1 text-reset text-primary-hover text-primary-focus" data-bs-placement="top" data-bs-toggle="tooltip" aria-label="Follow Us On facebook" href="https://facebook.com" target="_blank" rel="noopener noreferrer" title="Follow Us On facebook"><i class="fab fa-facebook-f" aria-hidden="true"></i></a></li>
@@ -600,14 +600,14 @@
 			<div class="offcanvas-header">
 				<div class="row g-0 align-items-center justify-content-between flex-nowrap w-100">
 					<div class="col col-xl-auto">
-						<!-- app logo starts--><a class="app-logo focus-ring d-block w-fit-content p-1 rounded" href="index.html" title="Click For The City Guards Hub Home"><img class="app-logo-image img-fluid text-reset" src="./assets/images/logo/logo-light.svg" alt="Click For The City Guards Hub Home" width="180" height="67.33"></a>
+						<!-- app logo starts--><a class="app-logo focus-ring d-block w-fit-content p-1 rounded" href="index.html" title="Click For The City Guards Hub Home"><img class="app-logo-image img-fluid text-reset" src="./assets/images/logo/logo-light.svg" alt="Click For The City Guards Hub Home" width="180" height="67"></a>
 						<!-- app logo ends-->
 					</div>
 					<div class="col-auto">
 						<div class="hstack align-items-stretch">
 							<div class="flex-shrink-0 align-self-center me-2">
 								<!-- social nav starts-->
-								<nav class="app-social-nav app-social-nav-header" aria-label="Social Media navigation">
+								<nav class="app-social-nav app-social-nav-header" aria-label="Social Media offcanvas navigation">
 									<ul class="nav mb-0">
 										<li class="nav-item"><a class="nav-link btn btn-link px-2 py-1 text-reset text-primary-hover text-primary-focus" data-bs-placement="top" data-bs-toggle="tooltip" aria-label="Follow Us On linkedin" href="https://linkedin.com" target="_blank" rel="noopener noreferrer" title="Follow Us On linkedin"><i class="fab fa-linkedin-in" aria-hidden="true"></i></a></li>
 										<li class="nav-item"><a class="nav-link btn btn-link px-2 py-1 text-reset text-primary-hover text-primary-focus" data-bs-placement="top" data-bs-toggle="tooltip" aria-label="Follow Us On facebook" href="https://facebook.com" target="_blank" rel="noopener noreferrer" title="Follow Us On facebook"><i class="fab fa-facebook-f" aria-hidden="true"></i></a></li>
@@ -633,7 +633,7 @@
 			<div class="offcanvas-body py-4">
 				<div class="vstack gap-3 h-100">
 					<!-- navigation list starts-->
-					<nav class="app-nav app-nav-offcanvas w-100">
+					<nav class="app-nav app-nav-offcanvas w-100" aria-label="offcanvas navigation">
 						<ul class="nav mb-0" role="menubar">
 							<li class="nav-item"><a class="nav-link btn btn-link text-uppercase text-reset rounded-pill " href="index.html" role="menuitem"><strong>Home</strong></a>
 							</li>

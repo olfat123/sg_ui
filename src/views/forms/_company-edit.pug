@@ -18,7 +18,7 @@ form.needs-validation#company-edit-form(action="dashboard-company-edit.html" met
 						img#companyLogoPreview.w-116px.h-116px.rounded-circle.object-fit-cover(src=company.logo, alt="", height="116", width="116", loading="lazy")
 					.vstack.gap-3.flex-grow-1.justify-content-center.align-items-start
 						div
-							label.btn.btn-primary.icon-link.rounded-circle.p-2(type="button", for="companyLogoField", title="Edit", data-bs-placement="top", data-bs-toggle="tooltip")
+							label.btn.btn-primary.icon-link.rounded-circle.p-2(for="companyLogoField", title="Edit", data-bs-placement="top", data-bs-toggle="tooltip")
 								svg.bi.h-auto.w-auto(width="16", height="16", fill="currentColor")
 									use(href="#icon-edit")
 								span.visually-hidden select logo
@@ -39,7 +39,7 @@ form.needs-validation#company-edit-form(action="dashboard-company-edit.html" met
 						img#companyCoverPreview.w-278px.h-116px.rounded-3.object-fit-cover(src=company.header_img, alt="", height="116", width="278", loading="lazy")
 					.vstack.gap-3.flex-grow-1.justify-content-center.align-items-start
 						div
-							label.btn.btn-primary.icon-link.rounded-circle.p-2(type="button", for="companyCoverField", title="Edit", data-bs-placement="top", data-bs-toggle="tooltip")
+							label.btn.btn-primary.icon-link.rounded-circle.p-2(for="companyCoverField", title="Edit", data-bs-placement="top", data-bs-toggle="tooltip")
 								svg.bi.h-auto.w-auto(width="16", height="16", fill="currentColor")
 									use(href="#icon-edit")
 								span.visually-hidden Cover Photo
@@ -56,7 +56,7 @@ form.needs-validation#company-edit-form(action="dashboard-company-edit.html" met
 			.col-12.col-md-6.col-xl-4
 				label.form-label(for="companyCountryField")
 					strong Country
-				select#companyCountryField.form-select.form-select-sm.bg-white.text-truncate(name="country", value="1", required)
+				select#companyCountryField.form-select.form-select-sm.bg-white.text-truncate(name="country", required)
 					option(value="", hidden) Select Country
 					option(value="1", selected) USA
 				.invalid-feedback.text-uppercase
@@ -64,7 +64,7 @@ form.needs-validation#company-edit-form(action="dashboard-company-edit.html" met
 			.col-12.col-md-6.col-xl-4
 				label.form-label(for="companyCityField")
 					strong Country
-				select#companyCityField.form-select.form-select-sm.bg-white.text-truncate(name="city", value="1", required)
+				select#companyCityField.form-select.form-select-sm.bg-white.text-truncate(name="city", required)
 					option(value="", hidden) Select City
 					option(value="1", selected) California
 				.invalid-feedback.text-uppercase
@@ -72,7 +72,7 @@ form.needs-validation#company-edit-form(action="dashboard-company-edit.html" met
 			.col-12.col-md-6.col-xl-4
 				label.form-label(for="companyStateField")
 					strong Country
-				select#companyStateField.form-select.form-select-sm.bg-white.text-truncate(name="state", value="1", required)
+				select#companyStateField.form-select.form-select-sm.bg-white.text-truncate(name="state", required)
 					option(value="", hidden) Select State
 					option(value="1", selected) Los Angeles
 				.invalid-feedback.text-uppercase
@@ -125,7 +125,7 @@ form.needs-validation#company-edit-form(action="dashboard-company-edit.html" met
 			.col-12
 				label.form-label(for="companyAddressField")
 					strong Address
-				input#companyAddressField.form-control.form-control-sm.bg-white.text-truncate(type="text", name="address", value="5396 North Reese Avenue, Fresno CA 93722", placeholder="Address", autocomplete="address", required)
+				input#companyAddressField.form-control.form-control-sm.bg-white.text-truncate(type="text", name="address", value="5396 North Reese Avenue, Fresno CA 93722", placeholder="Address", autocomplete="address-line1", required)
 				.invalid-feedback.text-uppercase
 					strong mandatory field!
 			.col-12

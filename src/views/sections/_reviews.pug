@@ -3,17 +3,17 @@ include ../mixins/_review-card.pug
 // reviews section starts
 section.py-5.py-lg-6
 	.container
-		.row.gy-3.justify-content-center.justify-content-md-between.align-items-md-center
-			.col-12.col-md-auto
+		.row.gy-3.justify-content-between.align-items-center
+			.col.col-md-auto
 				h2.h5.text-capitalize.mb-0
 					strong Reviews
-			.col-12.order-md-last
+			.col-12.order-last
 				#reviews-slider.swiper.container-off-canvas-end.container-off-canvas-start.vw-100
 					.swiper-wrapper
 						each review in locals.reviews
 							.swiper-slide
 								+reviewCard(review)
-			.col-12.col-md-auto
+			.col-auto
 				// NOTE: slider navigation buttons [for], and [aria-controls] attributes must has slider unique id value.
 				.btn-group.swiper-navigation-wrapper.rounded-pill.bg-gray-400
 					button.btn.btn-link.link-dark.p-3.pe-2.icon-link.icon-link-hover.icon-link-hover-reversed.swiper-navigation-btn.swiper-navigation-btn-prev(aria-label="prev" type="button" data-target="#reviews-slider", aria-controls="reviews-slider")
