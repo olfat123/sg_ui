@@ -945,7 +945,7 @@
      --tcg-table-color: var(--tcg-emphasis-color);
      --tcg-table-bg: var(--tcg-body-bg);
      --tcg-table-border-color: var(--tcg-border-color);
-     --tcg-table-accent-bg: transparent;
+     --tcg-table-accent-bg: #EBEBEB;
      --tcg-table-striped-color: var(--tcg-emphasis-color);
      --tcg-table-striped-bg: rgba(var(--tcg-emphasis-color-rgb), 0.05);
      --tcg-table-active-color: var(--tcg-emphasis-color);
@@ -4347,7 +4347,10 @@
    }
    
    .icon-link-hover-rotate {
-     --tcg-icon-link-transform: rotate(90deg);
+     --tcg-icon-link-transform: rotate(180deg);
+   }
+   .icon-link-hover-size {
+     --tcg-icon-link-transform: scale(1.2);
    }
    
    .text-reset {

@@ -32,8 +32,8 @@
 	<title>Directory Listing | The City Guards Hub</title>
 	<!-- title ends-->
 	<!-- preload files starts-->
-	<link rel="preload" href="./scripts/script.min.js" as="script">
-	<link rel="preload" href="./stylesheets/style.min.css" as="style">
+	<link rel="preload" href="./scripts/script.js" as="script">
+	<link rel="preload" href="./stylesheets/style.css" as="style">
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
 	<!-- preload files ends-->
@@ -42,7 +42,7 @@
 	<noscript>
 		<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&amp;display=swap" rel="stylesheet">
 	</noscript>
-	<link href="./stylesheets/style.min.css" rel="stylesheet" type="text/css">
+	<link href="./stylesheets/style.css" rel="stylesheet" type="text/css">
 	<!-- style files ends-->
 	<link rel="apple-touch-icon" sizes="180x180" href="./assets/images/favicon/apple-touch-icon.png">
 	<link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon/favicon-32x32.png">
@@ -162,31 +162,51 @@
 		</div>
 		<!-- app preloader section ends-->
 		<!-- app header section starts-->
-		<header class="app-header">
+		<header class="app-header" >
 			<!-- app header content starts-->
-			<div class="app-header-content">
+			<div class="app-header-content ">
 				<div class="container">
-					<div class="row g-0 align-items-center justify-content-between flex-nowrap w-100">
+					<div style=" margin-bottom: 10px; display: flex; justify-content: end;">
+						<section  style="display: flex; align-items: baseline; margin-right: 15px;">
+							<div class="rounded-pill" style="background-color: #F70D28; padding:5px;">
+								<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="search" width="25" fill="white"><g><path d="m20.71 19.29-3.4-3.39A7.92 7.92 0 0 0 19 11a8 8 0 1 0-8 8 7.92 7.92 0 0 0 4.9-1.69l3.39 3.4a1 1 0 0 0 1.42 0 1 1 0 0 0 0-1.42zM5 11a6 6 0 1 1 6 6 6 6 0 0 1-6-6z"></path></g></svg>
+							</div>
+							<p style="margin-left: 10px; color: #F70D28;">Search</p>
+						</section>
+						<section  style="display: flex; align-items: baseline; margin-right: 15px;">
+							<div class="rounded-pill" style="background-color: #F70D28;padding:5px;" >
+								<svg xmlns="http://www.w3.org/2000/svg" width="25" fill="white" viewBox="0 0 24 24" id="phone-in-talk"><path fill="none" d="M0 0h24v24H0V0z"></path><path d="M12.88 5.05c3.18.4 5.67 2.89 6.07 6.07.06.51.49.88.99.88.04 0 .08 0 .12-.01.55-.07.94-.57.87-1.12-.51-4.09-3.72-7.3-7.81-7.81-.55-.06-1.05.33-1.11.88-.07.55.32 1.05.87 1.11zm.38 2.11c-.53-.14-1.08.18-1.22.72s.18 1.08.72 1.22c1.05.27 1.87 1.09 2.15 2.15.12.45.52.75.97.75.08 0 .17-.01.25-.03.53-.14.85-.69.72-1.22-.47-1.77-1.84-3.14-3.59-3.59zm5.97 8.1l-2.54-.29c-.61-.07-1.21.14-1.64.57l-1.84 1.84c-2.83-1.44-5.15-3.75-6.59-6.59l1.85-1.85c.43-.43.64-1.03.57-1.64l-.29-2.52c-.12-1.01-.97-1.77-1.99-1.77H5.03c-1.13 0-2.07.94-2 2.07.53 8.54 7.36 15.36 15.89 15.89 1.13.07 2.07-.87 2.07-2v-1.73c.01-1.01-.75-1.86-1.76-1.98z"></path></svg>
+							</div>
+							<p style="margin-left: 10px;  color: #F70D28;">Contact Us</p>
+						</section>
+						<section  style="display: flex; align-items: baseline; margin-right: 15px;">
+							<div class="rounded-pill" style="background-color: #F70D28; padding:5px;">
+								<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" id="log-in" width="25" >
+									<path fill="white" d="M26 9v14a3 3 0 0 1-3 3H11a3 3 0 0 1-3-3v-3a1 1 0 0 1 2 0v3a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V9a1 1 0 0 0-1-1H11a1 1 0 0 0-1 1v3a1 1 0 0 1-2 0V9a3 3 0 0 1 3-3h12a3 3 0 0 1 3 3ZM14.29 19.29a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l4-4a1 1 0 0 0 0-1.42l-4-4a1 1 0 0 0-1.42 1.42l2.3 2.29H7a1 1 0 0 0 0 2h9.59Z"></path>
+									<path fill="none" d="M0 0h32v32H0z"></path>
+								</svg>
+							</div>
+							<p style="margin-left: 10px;  color: #F70D28;">Login</p>
+						</section>
+					</div>
+					<div class="row g-0 align-items-center justify-content-between  flex-nowrap w-100  rounded p-3  bg-white" >
 						<div class="col col-xl-auto">
-							<!-- app logo starts--><a class="app-logo focus-ring d-block w-fit-content p-1 rounded" href="index.html" title="Click For The City Guards Hub Home"><img class="app-logo-image img-fluid text-reset" src="./assets/images/logo/logo-light.svg" alt="Click For The City Guards Hub Home" width="180" height="67"></a>
+							<!-- app logo starts--><a class="app-logo focus-ring d-block w-fit-content p-1 rounded" href="index.html" title="Click For The City Guards Hub Home"><img class="app-logo-image img-fluid text-reset"  src="./assets/images/logo/logo-dark.svg" alt="Click For The City Guards Hub Home" width="129" height="48"></a>
 							<!-- app logo ends-->
 						</div>
-						<div class="col-auto">
-							<div class="hstack align-items-stretch">
+						<div class="col-auto ">
+							<div class="hstack align-items-stretch ">
 								<div class="flex-shrink-0 align-self-center d-none d-xl-inline-block me-1 me-xl-3">
 									<!-- navigation list starts-->
 									<nav class="app-nav app-nav-header w-100" aria-label="header navigation">
 										<ul class="nav mb-0" role="menubar">
-											<li class="nav-item position-absolute top-0 start-50 translate-middle-x"><a class="nav-link btn btn-link text-reset visually-hidden-focusable rounded-top-0" href="#main" role="menuitem"><strong>skip to content</strong></a></li>
-											<li class="nav-item"><a class="nav-link btn btn-link text-uppercase text-reset rounded-pill " href="index.html" role="menuitem"><strong>Home</strong></a>
+											<li class="nav-item"><a class="nav-link btn btn-link text-reset " aria-current="page" href="index.html" style="color: black;" role="menuitem"><strong style="color: black;">Home</strong></a>
 											</li>
-											<li class="nav-item"><a class="nav-link btn btn-link text-uppercase text-reset rounded-pill active" aria-current="page" href="companies.html" role="menuitem"><strong>Directory Listing</strong></a>
+											<li class="nav-item"><a class="nav-link btn btn-link text-reset " href="about-us.html" role="menuitem"><strong style="color: black;" >Solutions</strong></a>
 											</li>
-											<li class="nav-item"><a class="nav-link btn btn-link text-uppercase text-reset rounded-pill " href="about-us.html" role="menuitem"><strong>About Us</strong></a>
+											<li class="nav-item"><a class="nav-link btn btn-link text-reset active " href="companies.html" role="menuitem"><strong style="color: black;">Directory Listing</strong></a>
 											</li>
-											<li class="nav-item"><a class="nav-link btn btn-link text-uppercase text-reset rounded-pill " href="news.html" role="menuitem"><strong>Our News</strong></a>
-											</li>
-											<li class="nav-item"><a class="nav-link btn btn-link text-uppercase text-reset rounded-pill " href="career.html" role="menuitem"><strong>Careers</strong></a>
+											<li class="nav-item"><a class="nav-link btn btn-link text-reset " href="news.html" role="menuitem"><strong style="color: black;">Who we are?</strong></a>
 											</li>
 										</ul>
 									</nav>
@@ -194,36 +214,83 @@
 								</div>
 								<div class="flex-shrink-0 align-self-center me-1 me-xl-3">
 									<!-- social nav starts-->
-									<nav class="app-social-nav app-social-nav-header" aria-label="Social Media header navigation">
+									<!-- <nav class="app-social-nav app-social-nav-header" aria-label="Social Media header navigation">
 										<ul class="nav mb-0">
 											<li class="nav-item"><a class="nav-link btn btn-link px-2 py-1 text-reset text-primary-hover text-primary-focus" data-bs-placement="top" data-bs-toggle="tooltip" aria-label="Follow Us On linkedin" href="https://linkedin.com" target="_blank" rel="noopener noreferrer" title="Follow Us On linkedin"><i class="fab fa-linkedin-in" aria-hidden="true"></i></a></li>
 											<li class="nav-item"><a class="nav-link btn btn-link px-2 py-1 text-reset text-primary-hover text-primary-focus" data-bs-placement="top" data-bs-toggle="tooltip" aria-label="Follow Us On facebook" href="https://facebook.com" target="_blank" rel="noopener noreferrer" title="Follow Us On facebook"><i class="fab fa-facebook-f" aria-hidden="true"></i></a></li>
 											<li class="nav-item"><a class="nav-link btn btn-link px-2 py-1 text-reset text-primary-hover text-primary-focus" data-bs-placement="top" data-bs-toggle="tooltip" aria-label="Follow Us On X" href="https://x.com" target="_blank" rel="noopener noreferrer" title="Follow Us On X"><i class="fab fa-x-twitter" aria-hidden="true"></i></a></li>
 										</ul>
-									</nav>
+									</nav> -->
 									<!-- social nav ends/.-->
 								</div>
 								<div class="overflow-hidden me-1 me-xl-3" aria-hidden="true">
-									<div class="vr h-100"></div>
+									<div class="vr h-100" ></div>
 								</div>
 								<div class="flex-shrink-0 align-self-center">
 									<!-- login modal open button starts-->
-									<button class="d-none d-xl-inline-block btn btn-link text-uppercase text-reset text-primary-hover text-primary-focus rounded-pill text-decoration-none" data-bs-target="#login-modal" data-bs-toggle="modal" aria-controls="login-modal" type="button"><strong>login</strong></button>
+									<button class="d-none d-xl-inline-block btn btn-link text-reset text-primary-hover text-primary-focus rounded  text-decoration-none" data-bs-target="#login-modal" data-bs-toggle="modal" style="border-color: #F70D28;border-width: 2px;" aria-controls="login-modal" type="button"><strong style="color: #F70D28;">Request a demo</strong></button>
 									<!-- login modal open button ends-->
 									<!-- side menu open button starts-->
 									<button class="app-nav-offcanvas-toggler d-xl-none btn btn-link text-reset text-primary-hover text-primary-focus text-decoration-none" data-bs-target="#app-header-offcanvas" data-bs-toggle="offcanvas" aria-controls="app-header-offcanvas" type="button">
-										<svg width="32" height="18" stroke="currentColor">
+										<svg width="32" height="18" stroke="currentColor" style="color: black">
 											<use href="#icon-menu"></use>
 										</svg><span class="visually-hidden">menu</span>
 									</button>
 									<!-- side menu open button ends-->
 								</div>
 							</div>
+							
 						</div>
 					</div>
 				</div>
 			</div>
 			<!-- app header content ends-->
+			<!-- app notifications starts-->
+			<div class="container position-relative">
+				<!-- app toasts section starts-->
+				<!-- <div class="position-absolute end-0 w-100 w-xl-40 mw-md-75 mw-lg-50 mw-xl-40 mt-3" aria-atomic="true" aria-live="polite">
+					<div class="toast-container py-3 px-2 ms-auto w-100 customized-scroll overflow-y-auto overflow-x-hidden">
+						<div class="toast fade show w-100 border-danger border-2 mb-2" aria-atomic="true" aria-live="assertive" role="alert">
+							<div class="toast-body hstack gap-2 flex-nowrap align-items-start">
+								<svg class="text-danger flex-shrink-0" xmlns="http://www.w3.org/2000/svg" width="1.5rem" height="1.5rem" fill="currentColor" viewBox="0 0 16 16">
+									<path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"></path>
+								</svg>
+								<p class="mb-0 text-break flex-grow-1 small">Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta, aut provident quidem odit nesciunt obcaecati sit nemo recusandae animi non eaque quia eveniet molestias tempora dicta libero? Optio, velit quod!</p>
+								<button class="btn-close flex-shrink-0" data-bs-dismiss="toast" aria-label="Close" type="button"></button>
+							</div>
+						</div>
+						<div class="toast fade show w-100 border-success border-2 mb-2" aria-atomic="true" aria-live="assertive" role="alert">
+							<div class="toast-body hstack gap-2 flex-nowrap align-items-start">
+								<svg class="text-success flex-shrink-0" xmlns="http://www.w3.org/2000/svg" width="1.5rem" height="1.5rem" fill="currentColor" viewBox="0 0 16 16">
+									<path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"></path>
+								</svg>
+								<p class="mb-0 text-break flex-grow-1 small">Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta, aut provident quidem odit nesciunt obcaecati sit nemo recusandae animi non eaque quia eveniet molestias tempora dicta libero? Optio, velit quod!</p>
+								<button class="btn-close flex-shrink-0" data-bs-dismiss="toast" aria-label="Close" type="button"></button>
+							</div>
+						</div>
+						<div class="toast fade show w-100 border-warning border-2 mb-2" aria-atomic="true" aria-live="assertive" role="alert">
+							<div class="toast-body hstack gap-2 flex-nowrap align-items-start">
+								<svg class="text-warning flex-shrink-0" xmlns="http://www.w3.org/2000/svg" width="1.5rem" height="1.5rem" fill="currentColor" viewBox="0 0 16 16">
+									<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"></path>
+								</svg>
+								<p class="mb-0 text-break flex-grow-1 small">Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta, aut provident quidem odit nesciunt obcaecati sit nemo recusandae animi non eaque quia eveniet molestias tempora dicta libero? Optio, velit quod!</p>
+								<button class="btn-close flex-shrink-0" data-bs-dismiss="toast" aria-label="Close" type="button"></button>
+							</div>
+						</div>
+						<div class="toast fade show w-100 border-info border-2 mb-2" aria-atomic="true" aria-live="assertive" role="alert">
+							<div class="toast-body hstack gap-2 flex-nowrap align-items-start">
+								<svg class="text-info flex-shrink-0" xmlns="http://www.w3.org/2000/svg" width="1.5rem" height="1.5rem" fill="currentColor" viewBox="0 0 16 16">
+									<path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4zm.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"></path>
+								</svg>
+								<p class="mb-0 text-break flex-grow-1 small">Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta, aut provident quidem odit nesciunt obcaecati sit nemo recusandae animi non eaque quia eveniet molestias tempora dicta libero? Optio, velit quod!</p>
+								<button class="btn-close flex-shrink-0" data-bs-dismiss="toast" aria-label="Close" type="button"></button>
+							</div>
+						</div>
+					</div>
+				</div> -->
+				<!-- app toasts section ends-->
+			</div>
+			<!-- app notifications ends-->
 		</header>
 		<!-- app header section ends-->
 		<!-- application main content stars-->
@@ -237,11 +304,11 @@
 					<!-- breadcrumb nav starts-->
 					<nav aria-label="breadcrumb">
 						<ol class="breadcrumb p-0 m-0">
-							<li class="breadcrumb-item text-capitalize"><a class="focus-ring focus-ring-dark link-white text-dark-hover text-dark-focus text-decoration-none" href="index.html">Home</a>
+							<li class="breadcrumb-item text-capitalize link-dark" ><a class="focus-ring focus-ring-dark link-dark  text-dark-hover text-dark-focus text-decoration-none" href="index.html">Home</a>
 							</li>
-							<li class="breadcrumb-item text-capitalize"><a class="focus-ring focus-ring-dark link-white text-dark-hover text-dark-focus text-decoration-none" href="companies.html">search</a>
+							<li class="breadcrumb-item text-capitalize link-dark"><a class="focus-ring focus-ring-dark link-dark  text-dark-hover text-dark-focus text-decoration-none" href="companies.html">search</a>
 							</li>
-							<li class="breadcrumb-item text-capitalize active" aria-current="page">Black Hound Security
+							<li class="breadcrumb-item text-capitalize active link-dark" aria-current="page">Black Hound Security
 							</li>
 						</ol>
 					</nav>
@@ -253,7 +320,7 @@
 			<article class="companies-single">
 				<div class="container">
 					<div class="row gy-5">
-						<div class="col-12 col-lg-7 col-xl-6">
+						<div class="col-12 col-lg-7 col-xl-7">
 							<!-- companies info section starts-->
 							<section>
 								<header class="mb-5">
@@ -262,13 +329,16 @@
 										<div class="vstack gap-1 flex-grow-1 align-self-center">
 											<h1 class="display-6 text-capitalize mb-0"><strong class="fw-bolder">Black Hound Security</strong></h1>
 											<address class="d-block mb-0"><strong>Los Angeles, California, USA</strong></address>
-											<select class="stars-readOnly" data-init="4.7">
-												<option value="1">1</option>
-												<option value="2">2</option>
-												<option value="3">3</option>
-												<option value="4">4</option>
-												<option value="5">5</option>
-											</select>
+											<div  style="display: flex; align-items: center; margin-top: 5px;">
+												<select class="stars-readOnly" data-init="4.7">
+													<option value="1">1</option>
+													<option value="2">2</option>
+													<option value="3">3</option>
+													<option value="4">4</option>
+													<option value="5">5</option>
+												</select>
+												<a class="p-2 btn-primary text-capitalize rounded text-decoration-none " style="background-color: #F70D28; color:white; margin-left: 10px; font-size: 0.8rem; padding: 0.5rem 1rem;"  href="vendor.html"><strong>write a review</strong></a>
+											</div>
 										</div>
 									</div>
 									<div class="card mt-5">
@@ -284,27 +354,26 @@
 								</header>
 								<div class="row gy-5">
 									<div class="col-12">
-										<h2 class="h5 text-primary text-capitalize mb-3"><strong>About Us</strong></h2>
-										<div class="small white-space-pre-wrap">
-											<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
-												At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam</p>
+										<h2 class="h5 text-dark text-capitalize mb-3" ><strong>About our company</strong></h2>
+										<div class="small">
+											Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem fuga temporibus eius asperiores quod sunt quam dolores non minima, explicabo nisi officiis obcaecati labore facere, ipsa ea itaque reiciendis natus!Lorem ipsum dolor sit amet consectetur adipis Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum a dolore corporis quia at tenetur, mollitia delectus eos impedit similique, animi, odit provident! Aliquid ducimus fuga consequuntur odit suscipit quisquam?
 										</div>
 									</div>
 									<div class="col-12">
-										<h2 class="h5 text-primary text-capitalize mb-3"><strong>provided services</strong></h2>
+										<h2 class="h5 text-dark text-capitalize mb-3"><strong>provided services</strong></h2>
 										<div class="hstack gap-gutter flex-wrap">
-											<div class="badge text-bg-gray-400 text-capitalize rounded-pill text-start white-space-pre-wrap">Security Guard Services</div>
-											<div class="badge text-bg-gray-400 text-capitalize rounded-pill text-start white-space-pre-wrap">Mobile Patrols</div>
-											<div class="badge text-bg-gray-400 text-capitalize rounded-pill text-start white-space-pre-wrap">Event Security</div>
-											<div class="badge text-bg-gray-400 text-capitalize rounded-pill text-start white-space-pre-wrap">Access Control Systems</div>
-											<div class="badge text-bg-gray-400 text-capitalize rounded-pill text-start white-space-pre-wrap">Private Investigation Services</div>
-											<div class="badge text-bg-gray-400 text-capitalize rounded-pill text-start white-space-pre-wrap">Security Consultation and Risk Assessment</div>
+											<div class="badge text-bg-gray-400 text-capitalize rounded text-start white-space-pre-wrap">Security Guard Services</div>
+											<div class="badge text-bg-gray-400 text-capitalize rounded text-start white-space-pre-wrap">Mobile Patrols</div>
+											<div class="badge text-bg-gray-400 text-capitalize rounded text-start white-space-pre-wrap">Event Security</div>
+											<div class="badge text-bg-gray-400 text-capitalize rounded text-start white-space-pre-wrap">Access Control Systems</div>
+											<div class="badge text-bg-gray-400 text-capitalize rounded text-start white-space-pre-wrap">Private Investigation Services</div>
+											<div class="badge text-bg-gray-400 text-capitalize rounded text-start white-space-pre-wrap">Security Consultation and Risk Assessment</div>
 										</div>
 									</div>
-									<div class="col-12">
-										<h2 class="h5 text-primary text-capitalize mb-3"><strong>License</strong></h2>
-										<div class="table-responsive">
-											<table class="table table-striped table-borderless">
+									<div class="col-12" >
+										<h2 class="h5 text-dark text-capitalize mb-3"><strong>License</strong></h2>
+										<div class="table-responsive" >
+											<table class="table" style="border: 1px solid #C7C7C7;" >
 												<caption class="visually-hidden">license information</caption>
 												<tbody>
 													<tr>
@@ -323,27 +392,364 @@
 											</table>
 										</div>
 									</div>
-									<div class="col-12">
-										<h2 class="h5 text-primary text-capitalize mb-3"><strong>License</strong></h2>
-										<address class="d-block"><strong>5396 North Reese Avenue, Fresno CA 93722</strong></address>
-										<div class="card rounded-4 overflow-hidden shadow">
-											<div class="card-body p-0">
-												<div class="ratio ratio-286x147 text-bg-dark">
-													<iframe class="w-100 h-100" aria-hidden="false" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3557.248568207342!2d80.94759507635258!3d26.927333276638556!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x399957a4fe0cc8a9%3A0xb939e47e788e720f!2sBlack%20Hound%20Security%20Pvt.Ltd!5e0!3m2!1sen!2seg!4v1710089137050!5m2!1sen!2seg" title="address map" width="572" height="294" loading="lazy" tabindex="0" allowfullscreen=""></iframe>
-												</div>
+									<div class="col-12" >
+										<h2 class="h5 text-dark text-capitalize mb-3"><strong>Highlights from the Business</strong></h2>
+										<div class="mt-5" style="display: flex; justify-content: space-around; flex-wrap:wrap">
+											<div  style="display: flex; justify-content: center; align-items: center; flex-direction: column;">
+												<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="verified" width="30" fill="red"><path  d="M22.51 13.76a3 3 0 0 1 0-3.52l.76-1.05a1 1 0 0 0 .14-.9 1.018 1.018 0 0 0-.64-.64l-1.23-.4a2.987 2.987 0 0 1-2.07-2.85V3.1a1 1 0 0 0-1.31-.95l-1.24.4a3 3 0 0 1-3.35-1.09L12.81.41a1.036 1.036 0 0 0-1.62 0l-.76 1.05a3 3 0 0 1-3.35 1.09l-1.24-.4a1 1 0 0 0-1.31.95v1.3a2.987 2.987 0 0 1-2.07 2.85l-1.23.4a1.018 1.018 0 0 0-.64.64 1 1 0 0 0 .14.9l.76 1.05a3 3 0 0 1 0 3.52l-.76 1.05a1 1 0 0 0-.14.9 1.018 1.018 0 0 0 .64.64l1.23.4a2.987 2.987 0 0 1 2.07 2.85v1.3a1 1 0 0 0 1.31.95l1.23-.4a2.994 2.994 0 0 1 3.36 1.09l.76 1.05a1.005 1.005 0 0 0 1.62 0l.76-1.05a3 3 0 0 1 3.36-1.09l1.23.4a1 1 0 0 0 1.31-.95v-1.3a2.987 2.987 0 0 1 2.07-2.85l1.23-.4a1.018 1.018 0 0 0 .64-.64 1 1 0 0 0-.14-.9Zm-5.8-3.053-5 5a1 1 0 0 1-1.414 0l-3-3a1 1 0 1 1 1.414-1.414L11 13.586l4.293-4.293a1 1 0 0 1 1.414 1.414Z"></path></svg>
+												<p class="mt-3"><small style="font-size: 13px;">Certified Professional</small></p>
+											</div>
+											<div style="display: flex; justify-content: center; align-items: center; flex-direction: column;">
+												<svg xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 24 24" width="30" fill="red"><path d="M0 0h24v24H0z" fill="none"/><path d="M21.41 11.58l-9-9C12.05 2.22 11.55 2 11 2H4c-1.1 0-2 .9-2 2v7c0 .55.22 1.05.59 1.42l9 9c.36.36.86.58 1.41.58.55 0 1.05-.22 1.41-.59l7-7c.37-.36.59-.86.59-1.41 0-.55-.23-1.06-.59-1.42zM5.5 7C4.67 7 4 6.33 4 5.5S4.67 4 5.5 4 7 4.67 7 5.5 6.33 7 5.5 7zm11.77 8.27L13 19.54l-4.27-4.27C8.28 14.81 8 14.19 8 13.5c0-1.38 1.12-2.5 2.5-2.5.69 0 1.32.28 1.77.74l.73.72.73-.73c.45-.45 1.08-.73 1.77-.73 1.38 0 2.5 1.12 2.5 2.5 0 .69-.28 1.32-.73 1.77z"/></svg>
+												<p class="mt-3"><small style="font-size: 13px;">Loyally Owned & operated</small></p>
+											</div>
+											<div style="display: flex; justify-content: center; align-items: center; flex-direction: column;">
+												<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="red" version="1.1" id="Capa_1" width="30" viewBox="0 0 943.118 943.118" xml:space="preserve">
+													<g>
+														<g>
+															<g>
+																<path  d="M54.182,670.915v189.128c0,11.047,8.955,20,20,20h362.347c-3.137-6.688-4.899-14.143-4.899-22.006V670.915H54.182z"/>
+																<path fill="black" d="M30,639.904h24.182h377.446V622.67v-24.418c0-0.229,0.007-0.456,0.009-0.685c0.107-15.218,3.8-29.6,10.277-42.337     c2.796-5.496,6.107-10.688,9.873-15.506c4.478-5.729,9.597-10.934,15.245-15.507c16.361-13.248,37.182-21.197,59.827-21.197     h22.555v-43.313c0-32.846-26.627-59.473-59.473-59.473h-53.809c-10.504,0-19.628,7.229-22.029,17.455l-25.013,106.529     l-3.642,15.507l-2.578,10.977c-0.36,1.538-0.785,3.049-1.271,4.528h-16.584c-0.183-5.188-0.711-10.367-1.577-15.506     c-0.148-0.892-0.306-1.779-0.476-2.666l-3.326-12.841l-19.571-75.542l15.62-34.473c2.965-6.545-1.82-13.968-9.006-13.968h-33.525     c-7.186,0-11.972,7.423-9.006,13.968l15.62,34.473l-20.313,75.542l-3.086,11.478c-0.268,1.339-0.506,2.683-0.728,4.029     c-0.848,5.14-1.36,10.317-1.527,15.506h-15.88c-0.484-1.48-0.909-2.99-1.271-4.528l-2.578-10.977l-3.641-15.508l-25.013-106.525     c-2.401-10.227-11.524-17.455-22.029-17.455h-53.808c-32.846,0-59.473,26.627-59.473,59.473v64.513v15.506v15.506H30     c-16.568,0-30,13.431-30,30v24.674C0,626.474,13.432,639.904,30,639.904z"/>
+																<path fill="black"  d="M329.919,368.094c73.717,0,133.477-59.76,133.477-133.477V92.744c0-18.391-16.561-32.347-34.686-29.233     c-39.276,6.747-128.839,24.62-184.565,35.864c-27.752,5.599-47.704,29.986-47.704,58.297v76.946     C196.442,308.335,256.202,368.094,329.919,368.094z"/>
+																<path   d="M526.859,533.021c-10.345,0-20.121,2.418-28.812,6.703c-7.723,3.809-14.576,9.102-20.201,15.506     c-9.95,11.325-16.036,26.118-16.204,42.337c-0.002,0.229-0.017,0.455-0.017,0.685v24.418v17.234v15.505v15.506v187.122     c0,12.154,9.853,22.006,22.005,22.006h334.086h103.396c12.153,0,22.006-9.852,22.006-22.006V598.252     c0-31.565-22.422-57.893-52.209-63.928c-4.207-0.852-8.562-1.303-13.021-1.303H549.414H526.859L526.859,533.021z"/>
+																<path  d="M702.375,497.769c80.854,0,146.4-65.546,146.4-146.4v-84.396c0-31.052-21.886-57.8-52.322-63.941     c-61.123-12.332-159.355-31.935-202.434-39.336c-1.879-0.323-3.743-0.478-5.577-0.478c-17.574,0-32.468,14.276-32.468,32.542     v155.609C555.975,432.223,621.52,497.769,702.375,497.769z"/>
+															</g>
+														</g>
+													</g>
+													</svg>
+												<p class="mt-3"><small>Free Consultation</small></p>
+											</div>
+											<div style="display: flex; justify-content: center; align-items: center; flex-direction: column;">
+												<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="red"  width="30" version="1.1" id="Capa_1" viewBox="0 0 460.873 460.873" xml:space="preserve">
+													<g>
+														<path fill="black" d="M216.5,80.169c22.102,0,40.084-17.982,40.084-40.084C256.584,17.982,238.602,0,216.5,0   c-22.097,0-40.074,17.982-40.074,40.084C176.426,62.187,194.403,80.169,216.5,80.169z"/>
+														<path fill="black" d="M386.039,180.178l-28.902-28.9c-1.649-1.649-3.849-2.558-6.193-2.558c-2.345,0-4.544,0.909-6.193,2.558l-8.463,8.462   c-0.348-0.406-0.694-0.811-1.076-1.193c-3.623-3.625-8.435-5.703-13.635-5.961c-0.309-0.535-0.643-1.06-1.017-1.569l-13.768-18.771   c-3.971-5.414-11.031-12.517-16.425-16.521l-36.486-27.085c-1.164-0.858-5.064-3.34-9.269-3.34c0,0-51.336,0.012-51.436,0.015   c-5.96,0.129-10.318,3.365-13.304,9.898l-15.724,34.394c-0.333,0.422-1.266,1.188-1.744,1.432l-32.047,7.624   c-4.408,1.049-8.144,3.751-10.519,7.609c-2.375,3.858-3.105,8.411-2.057,12.818c1.826,7.678,8.606,13.04,16.488,13.04   c1.317,0,2.643-0.156,3.939-0.464l32.354-7.697c10.027-2.385,20.022-10.598,24.307-19.971l1.338-2.926l8.72,34.247l-22.551,19.587   c-8.741,7.591-13.23,20.817-10.916,32.163l10.453,51.215c1.693,8.293,9.056,14.312,17.507,14.311c1.199,0,2.408-0.123,3.594-0.364   c9.662-1.973,15.918-11.438,13.946-21.1l-10.209-50.018l23.322-20.257c0.619-0.538,1.174-1.119,1.701-1.719h17.158l11.561,43.137   c1.673,6.241,5.252,15.227,8.325,20.902l25.384,46.884c3.132,5.781,9.164,9.373,15.743,9.373c0.322,0,0.646-0.009,0.968-0.026   c2.647-0.145,5.183-0.862,7.531-2.134c8.672-4.695,11.908-15.57,7.214-24.243l-25.387-46.886c-1.771-3.272-4.264-9.531-5.231-13.14   l-24.252-89.539c2.739,2.196,6.808,6.338,8.645,8.844l13.767,18.771c1.191,1.623,2.651,3.002,4.297,4.091   c-0.101,5.763,2.01,11.112,5.993,15.095c0.381,0.381,0.785,0.731,1.191,1.078l-8.461,8.46c-3.415,3.415-3.415,8.973,0,12.388   l28.9,28.9c1.65,1.649,3.849,2.558,6.193,2.558h0.001c2.343,0,4.542-0.909,6.192-2.558l48.529-48.527   C389.454,189.15,389.454,183.593,386.039,180.178z M310.851,182.906c-1.358-1.358-2.266-3.061-2.688-4.944   c3.16-0.234,6.162-1.339,8.748-3.235c3.834-2.811,6.133-6.943,6.748-11.316c1.587,0.482,3.021,1.326,4.191,2.496   c0.384,0.384,0.721,0.802,1.033,1.236l-16.797,16.797C311.652,183.627,311.234,183.289,310.851,182.906z"/>
+														<path d="M140.952,260.554H82.567c-5.677,0-10.295,4.618-10.295,10.294v179.73c0,5.676,4.618,10.294,10.295,10.294h58.385   c5.677,0,10.295-4.618,10.295-10.294v-179.73C151.247,265.172,146.629,260.554,140.952,260.554z"/>
+														<path d="M233.718,299.512h-58.385c-5.677,0-10.295,4.618-10.295,10.294v140.772c0,5.676,4.618,10.294,10.295,10.294h58.385   c5.677,0,10.295-4.618,10.295-10.294V309.806C244.013,304.13,239.394,299.512,233.718,299.512z"/>
+														<path d="M326.48,325.506h-58.382c-5.677,0-10.295,4.618-10.295,10.294v114.778c0,5.676,4.618,10.294,10.295,10.294h58.382   c5.677,0,10.296-4.618,10.296-10.294V335.8C336.776,330.124,332.157,325.506,326.48,325.506z"/>
+													</g>
+													</svg>
+													<p class="mt-3"><small style="font-size: 13px;">5 Years in Business</small></p>
+											</div>
+											<div style="display: flex; justify-content: center; align-items: center; flex-direction: column;">
+												<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="red"  width="30" version="1.1" id="Capa_1" viewBox="0 0 279.525 279.525" xml:space="preserve">
+													<g>
+														<path d="M165.066,1.544c-29.272,0-56.007,11.05-76.268,29.191c4.494,7.146,7.047,15.46,7.287,24.042l0.001,0.025l0.001,0.025   c0.102,3.867,0.333,7.735,0.664,11.597c15.368-21.117,40.258-34.88,68.315-34.88c46.571,0,84.459,37.888,84.459,84.459   c0,46.08-37.098,83.634-82.994,84.422c4.191,3.502,8.518,6.84,12.976,9.974l0.02,0.015l0.021,0.014   c6.07,4.282,11.014,9.896,14.483,16.317c49.133-12.861,85.493-57.633,85.493-110.742C279.525,52.89,228.18,1.544,165.066,1.544z"/>
+														<path  d="M162.256,234.942c-13.076-10.438-21.234-17.389-32.909-28.204c-3.435-3.182-7.633-5.164-11.944-5.164   c-3.299,0-6.557,1.051-9.239,3.252c-2.768,2.33-5.536,4.66-8.305,6.989c-22.499-26.738-39.206-57.895-49.027-91.431   c3.472-1.016,6.945-2.033,10.417-3.049c7.652-2.343,11.252-10.512,10.129-18.701c-2.443-17.824-3.77-26.679-5.282-43.018   c-0.775-8.375-6.349-15.65-14.338-16.085c-1.246-0.121-2.491-0.181-3.726-0.181c-29.71,0-55.578,34.436-46.009,76.564   c11.907,52.172,37.684,100.243,74.551,139.031c15.102,15.856,33.603,23.036,50.312,23.036c17.627,0,33.261-7.984,40.833-22.195   C171.778,248.891,168.83,240.19,162.256,234.942z"/>
+														<path fill="black" d="M130.645,118.121c-7.912,7.341-13.089,13.113-15.823,17.643c-1.93,3.195-3.338,6.573-4.187,10.04   c-0.399,1.632-0.032,3.326,1.007,4.649c1.038,1.321,2.596,2.079,4.276,2.079h37.758c4.626,0,8.39-3.764,8.39-8.39   c0-4.626-3.764-8.39-8.39-8.39h-17.051c0.139-0.164,0.282-0.328,0.428-0.493c1.114-1.254,3.842-3.874,8.107-7.785   c4.473-4.105,7.493-7.179,9.232-9.398c2.621-3.336,4.571-6.593,5.794-9.679c1.247-3.145,1.88-6.498,1.88-9.967   c0-6.224-2.254-11.507-6.699-15.705c-4.416-4.164-10.495-6.274-18.071-6.274c-6.884,0-12.731,1.802-17.377,5.356   c-2.803,2.146-4.961,5.119-6.415,8.839c-0.982,2.513-0.728,5.388,0.68,7.689c1.408,2.302,3.852,3.837,6.537,4.105   c0.299,0.03,0.597,0.045,0.891,0.045c3.779,0,7.149-2.403,8.387-5.979c0.388-1.121,0.901-2.012,1.527-2.65   c1.318-1.343,3.093-1.997,5.428-1.997c2.373,0,4.146,0.618,5.418,1.889c1.269,1.269,1.886,3.12,1.886,5.66   c0,2.359-0.843,4.819-2.505,7.314C140.862,108.028,138.199,111.083,130.645,118.121z"/>
+														<path fill="black" d="M206.235,76.451h-6.307c-1.797,0-3.475,0.886-4.489,2.37l-29.168,42.698c-0.851,1.246-1.301,2.703-1.301,4.212v6.919   c0,2.997,2.439,5.436,5.436,5.436h23.945v5.787c0,4.775,3.885,8.66,8.66,8.66c4.775,0,8.66-3.885,8.66-8.66v-5.787h0.865   c4.437,0,8.047-3.61,8.047-8.047c0-4.437-3.61-8.047-8.047-8.047h-0.865V81.887C211.671,78.89,209.232,76.451,206.235,76.451z    M194.352,121.992h-10.748l10.748-15.978V121.992z"/>
+													</g>
+													</svg>
+												<p class="mt-3"><small style="font-size: 13px;">24/7 Availability</small></p>
 											</div>
 										</div>
 									</div>
+									<div class="col-12 ">
+										<h2 class="h5 text-dark text-capitalize mb-3"><strong>Address</strong></h2>
+										<address class="d-block"><strong>5396 North Reese Avenue, Fresno CA 93722</strong></address>
+										<div class="row">
+											<div class="col-xl-8 ">
+												<div class="row card rounded-4 overflow-hidden shadow h-100">
+													<div class="card-body p-0">
+														<div class="ratio ratio-286x147 text-bg-dark h-100" >
+															<iframe class="w-100 h-100" aria-hidden="false" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3557.248568207342!2d80.94759507635258!3d26.927333276638556!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x399957a4fe0cc8a9%3A0xb939e47e788e720f!2sBlack%20Hound%20Security%20Pvt.Ltd!5e0!3m2!1sen!2seg!4v1710089137050!5m2!1sen!2seg" title="address map" width="572" height="294" loading="lazy" tabindex="0" allowfullscreen=""></iframe>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class="col-xl-4 d-flex align-items-center justify-content-center" style="padding-left: 50px;" > 
+												<div>
+													<p class="text-uppercase fw-bold" style="color: #45800A;"><strong>Open Now</strong></p>
+												</div>
+												<div style="display: flex; justify-content: space-between;">
+													<p>
+														<strong>Mon</strong>
+													</p>
+													<p>
+														Open 24 hours
+													</p>
+												</div>
+												<div style="display: flex; justify-content: space-between;">
+													<p>
+														<strong>Tue</strong>
+													</p>
+													<p>
+														Open 24 hours
+													</p>
+												</div>
+												<div style="display: flex; justify-content: space-between;">
+													<p>
+														<strong>Wed</strong>
+													</p>
+													<p>
+														Open 24 hours
+													</p>
+												</div>
+												<div style="display: flex; justify-content: space-between;">
+													<p>
+														<strong>Thu</strong>
+													</p>
+													<p>
+														Open 24 hours
+													</p>
+												</div>
+												<div style="display: flex; justify-content: space-between;">
+													<p>
+														<strong>Fri</strong>
+													</p>
+													<p>
+														Open 24 hours
+													</p>
+												</div>
+												<div style="display: flex; justify-content: space-between;">
+													<p>
+														<strong>Sat</strong>
+													</p>
+													<p>
+														Open 24 hours
+													</p>
+												</div>
+												<div style="display: flex; justify-content: space-between;">
+													<p>
+														<strong>Sun</strong>
+													</p>
+													<p>
+														Open 24 hours
+													</p>
+												</div>
+												<div class="col-12">
+													<button class="btn btn-primary rounded text-capitalize w-100 " type="submit" style="background-color: transparent;">
+														<strong>submit request</strong>
+													</button>
+												</div>
+											</div>
+										</div>
+										
+									</div>
+									<div class="col-12">
+										<h2 class="h5 text-dark text-capitalize mb-3"><strong>Photos & portfolio</strong></h2>
+										<div class="row">
+											<div class="col-lg-4 col-md-6 mb-5">
+												<img style="border-radius: 5px;" src="./assets/images/companies/6-compressed.webp" alt="" class="img-fluid">
+											</div>
+											<div class="col-lg-4 col-md-6 mb-5">
+												<img style="border-radius: 5px;" src="./assets/images/companies/5-compressed.webp" alt="" class="img-fluid">
+											</div>
+											<div class="col-lg-4 col-md-6 ">
+												<img style="border-radius: 5px;" src="./assets/images/companies/4-compressed.webp" alt="" class="img-fluid">
+											</div>
+										</div>
+									</div>
+									
+									<div class="col-12">
+										<h2 class="h5 text-dark text-capitalize mb-3" ><strong>Resources</strong></h2>
+										<div class="row">
+											<div class="col-md-6 mb-5">
+												<article class="card company-card shadow p-gutter" style="height: 100%;">
+													<div class=" ratio ratio-89x44 text-bg-dark overflow-hidden mb-3">
+														<img class="object-fit-cover w-100 h-100" src="./assets/images/companies/6-compressed.webp" alt="Leo Security Services" loading="lazy">
+													</div>
+													<div class="p-3">
+														<h6>Project Title</h6>
+														<p> <small>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur officia molestiae rem velit est.</small></p>
+													</div>
+													<div style="display: flex; padding-left: 3px;">
+														<a href="./companies.html" class="rounded">
+															<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="40" height="30" fill="red" style="padding-bottom:5px ;">
+															<path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"/></svg>
+														</a>
+														<p class="fw-bolder" style="color: #F70D28;">View More</p>
+													</div>
+												</article>
+											</div>
+											<div class="col-md-6 mb-5">
+												<article class="card company-card shadow p-gutter" style="height: 100%;">
+													<div class="ratio ratio-89x44 text-bg-dark overflow-hidden mb-3">
+														<img class="object-fit-cover w-100 h-100" src="./assets/images/companies/5-compressed.webp" alt="Leo Security Services" loading="lazy">
+													</div>
+													<div class="p-3">
+														<h6>Project Title</h6>
+														<p> <small>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur officia molestiae rem velit est.</small></p>
+													</div>
+													<div style="display: flex; padding-left: 3px;">
+														<a href="./companies.html" class="rounded">
+															<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="40" height="30" fill="red" style="padding-bottom:5px ;">
+															<path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"/></svg>
+														</a>
+														<p class="fw-bolder" style="color: #F70D28;">View More</p>
+													</div>
+												</article>
+											</div>
+										</div>
+									</div>
+									<section class="">
+										<div class="col-12">
+											<div class="row gy-3 justify-content-between align-items-center">
+												<div class="col col-md-auto">
+													<h2 class="h5 text-capitalize mb-0"><strong>Reviews</strong></h2>
+												</div>
+												<div class="col-12 order-last">
+													<div class="swiper" style="width: 66vw;" id="reviews-slider">
+														<div class="swiper-wrapper">
+															<div class="swiper-slide col-md-6">
+																<div class="card review-card">
+																	<div class="card-body">
+																		<p class="mb-0"><small>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</small></p>
+																	</div>
+																	<div class="card-footer pt-0 hstack gap-3 flex-nowrap align-items-center justify-content-between">
+																		<div class="hstack gap-2 flex-nowrap align-items-center">
+																			<div class="ratio ratio-1x1 w-32px h-32px flex-shrink-0 text-bg-dark shadow rounded-circle"><img class="w-32px h-32px rounded-circle object-fit-cover" src="./assets/images/avatars/1-compressed.webp" alt="" height="32" width="32" loading="lazy"></div>
+																			<div class="flex-grow-1">
+																				<p class="text-capitalize mb-0 lh-1"><small><strong>username</strong></small></p>
+																			</div>
+																		</div>
+																		<p class="mb-0">
+																			<select class="stars-readOnly" data-init="4">
+																				<option value="1">1</option>
+																				<option value="2">2</option>
+																				<option value="3">3</option>
+																				<option value="4">4</option>
+																				<option value="5">5</option>
+																			</select>
+																		</p>
+																	</div>
+																</div>
+															</div>
+															<div class="swiper-slide col-md-6">
+																<div class="card review-card">
+																	<div class="card-body">
+																		<p class="mb-0"><small>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. </small></p>
+																	</div>
+																	<div class="card-footer pt-0 hstack gap-3 flex-nowrap align-items-center justify-content-between">
+																		<div class="hstack gap-2 flex-nowrap align-items-center">
+																			<div class="ratio ratio-1x1 w-32px h-32px flex-shrink-0 text-bg-dark shadow rounded-circle"><img lass="w-32px h-32px rounded-circle object-fit-cover" src="./assets/images/avatars/2-compressed.webp" alt="" height="32" width="32" loading="lazy"></div>
+																			<div class="flex-grow-1">
+																				<p class="text-capitalize mb-0 lh-1"><small><strong>username</strong></small></p>
+																			</div>
+																		</div>
+																		<p class="mb-0">
+																			<select class="stars-readOnly" data-init="4">
+																				<option value="1">1</option>
+																				<option value="2">2</option>
+																				<option value="3">3</option>
+																				<option value="4">4</option>
+																				<option value="5">5</option>
+																			</select>
+																		</p>
+																	</div>
+																</div>
+															</div>
+															<div class="swiper-slide col-md-6">
+																<div class="card review-card">
+																	<div class="card-body">
+																		<p class="mb-0"><small>Lorem ipsum, dolor sit amet consectetur adipisicing elit. At alias iste a doloribus, unde atque minus quidem omnis molestias sequi suscipit eum eaque sunt autem </small></p>
+																	</div>
+																	<div class="card-footer pt-0 hstack gap-3 flex-nowrap align-items-center justify-content-between">
+																		<div class="hstack gap-2 flex-nowrap align-items-center">
+																			<div class="ratio ratio-1x1 w-32px h-32px flex-shrink-0 text-bg-dark shadow rounded-circle"><img lass="w-32px h-32px rounded-circle object-fit-cover" src="./assets/images/avatars/2-compressed.webp" alt="" height="32" width="32" loading="lazy"></div>
+																			<div class="flex-grow-1">
+																				<p class="text-capitalize mb-0 lh-1"><small><strong>username</strong></small></p>
+																			</div>
+																		</div>
+																		<p class="mb-0">
+																			<select class="stars-readOnly" data-init="4">
+																				<option value="1">1</option>
+																				<option value="2">2</option>
+																				<option value="3">3</option>
+																				<option value="4">4</option>
+																				<option value="5">5</option>
+																			</select>
+																		</p>
+																	</div>
+																</div>
+															</div>
+															<div class="swiper-slide col-md-6">
+																<div class="card review-card">
+																	<div class="card-body">
+																		<p class="mb-0"><small>Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio, repudiandae a! Tempora rem quasi soluta odit est fugiat repudiandae laudantium qui ex, voluptates </small></p>
+																	</div>
+																	<div class="card-footer pt-0 hstack gap-3 flex-nowrap align-items-center justify-content-between">
+																		<div class="hstack gap-2 flex-nowrap align-items-center">
+																			<div class="ratio ratio-1x1 w-32px h-32px flex-shrink-0 text-bg-dark shadow rounded-circle"><img lass="w-32px h-32px rounded-circle object-fit-cover" src="./assets/images/avatars/2-compressed.webp" alt="" height="32" width="32" loading="lazy"></div>
+																			<div class="flex-grow-1">
+																				<p class="text-capitalize mb-0 lh-1"><small><strong>username</strong></small></p>
+																			</div>
+																		</div>
+																		<p class="mb-0">
+																			<select class="stars-readOnly" data-init="4">
+																				<option value="1">1</option>
+																				<option value="2">2</option>
+																				<option value="3">3</option>
+																				<option value="4">4</option>
+																				<option value="5">5</option>
+																			</select>
+																		</p>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+												<div class="col-auto">
+													<!-- NOTE: slider navigation buttons [for], and [aria-controls] attributes must has slider unique id value.-->
+													<div class="btn-group swiper-navigation-wrapper rounded-pill bg-gray-400">
+														<button class="btn btn-link link-dark p-3 pe-2 icon-link icon-link-hover icon-link-hover-reversed swiper-navigation-btn swiper-navigation-btn-prev" aria-label="prev" type="button" data-target="#reviews-slider" aria-controls="reviews-slider">
+															<svg class="bi rtl-mirror h-auto w-auto" width="14.405" height="12.99" fill="currentColor">
+																<use href="#icon-arrow-left-sm"></use>
+															</svg><span class="visually-hidden">prev</span>
+														</button>
+														<button class="btn btn-link link-dark p-3 ps-2 icon-link icon-link-hover swiper-navigation-btn swiper-navigation-btn-next" aria-label="next" type="button" data-target="#reviews-slider" aria-controls="reviews-slider">
+															<svg class="bi rtl-mirror h-auto w-auto" width="14.405" height="12.99" fill="currentColor">
+																<use href="#icon-arrow-right-sm"></use>
+															</svg><span class="visually-hidden">next</span>
+														</button>
+													</div>
+												</div>
+											</div>
+										</div>
+									</section>
 								</div>
 							</section>
 							<!-- companies info section ends-->
 						</div>
-						<div class="col-12 col-lg-5 offset-xl-1">
+						<div class="col-12 col-lg-4 offset-xl-1" >
 							<!-- companies quote section starts-->
 							<aside class="sticky-top mt-n5 pt-5">
 								<div class="card shadow">
 									<div class="card-header py-4">
-										<h5 class="text-capitalize mb-0"><strong>Get A Quote</strong></h5>
+										<h5 class="text-capitalize mb-0"><strong class="fw-bolder">Get A Quote</strong></h5>
+									</div>
+									<div class="card-body pt-0">
+										<!-- quote form starts-->
+										<form class="needs-validation" id="quote-form" action="companies-single.html" method="POST" novalidate="">
+											<fieldset>
+												<legend class="visually-hidden">quote form</legend>
+												<div class=" gy-3">
+													<div style="display: flex; justify-content: space-around;">
+														<div class="col-md-6 d-flex justify-content-center align-items-center py-1 ">
+															<small>Response time</small>
+															<p  style="color: #45800B; font-weight: 800;">10 minuits</p>
+														</div>
+														<div class="col-md-6  d-flex justify-content-center align-items-center py-1 ">
+															<small >Resopnse rate</small>
+															<p  style="color: #45800B; font-weight: 800;">100%</p>
+														</div>
+													</div>
+													<div class="col-12">
+														<button class="btn btn-primary rounded text-capitalize w-100" type="submit"><strong>submit request</strong></button>
+													</div>
+													<div class="col-12 text-center">
+														<small>70 locals recently requested a quote</small>
+													</div>
+												</div>
+											</fieldset>
+										</form>
+										<!-- quote form ends-->
+									</div>
+								</div>
+								<div class="card shadow mt-3 ">
+									<div class="card-header py-4">
+										<h5 class="text-capitalize mb-0"><strong class="fw-bolder">Free virtual estimates</strong></h5>
 									</div>
 									<div class="card-body pt-0">
 										<!-- quote form starts-->
@@ -352,42 +758,37 @@
 												<legend class="visually-hidden">quote form</legend>
 												<div class="row gy-3">
 													<div class="col-12">
-														<label class="form-label visually-hidden" for="quoteFullNameField"><strong>Your Name</strong></label>
-														<input class="form-control text-truncate" id="quoteFullNameField" type="text" name="full_name" placeholder="Your Name" autocomplete="name" required="">
-														<div class="invalid-feedback text-uppercase"><strong>mandatory field!</strong></div>
-													</div>
-													<div class="col-12">
-														<label class="form-label visually-hidden" for="quoteEmailField"><strong>Email</strong></label>
-														<input class="form-control text-truncate" id="quoteEmailField" type="email" name="email" placeholder="Email" autocomplete="email" required="">
-														<div class="invalid-feedback text-uppercase"><strong>mandatory field!</strong></div>
-													</div>
-													<div class="col-12">
-														<label class="form-label visually-hidden" for="quotePhoneField"><strong>Phone</strong></label>
-														<input class="form-control text-truncate" id="quotePhoneField" type="tel" name="phone" placeholder="Phone" autocomplete="tel" required="">
-														<div class="invalid-feedback text-uppercase"><strong>mandatory field!</strong></div>
-													</div>
-													<div class="col-12">
-														<label class="form-label visually-hidden" for="quoteNeededServicesField"><strong>Needed Services</strong></label>
-														<select class="form-select text-truncate" id="quoteNeededServicesField" name="needed_services" required="">
-															<option value="" selected="" hidden="">Needed Services</option>
-															<option value="1">Service One</option>
-															<option value="2">Service Two</option>
-															<option value="3">Service Three</option>
-														</select>
-														<div class="invalid-feedback text-uppercase"><strong>mandatory field!</strong></div>
-													</div>
-													<div class="col-12">
-														<label class="form-label visually-hidden" for="quoteNotesField"><strong>Notes</strong></label>
-														<textarea class="form-control" id="quoteNotesField" name="notes" placeholder="Notes" required=""></textarea>
-														<div class="invalid-feedback text-uppercase"><strong>mandatory field!</strong></div>
-													</div>
-													<div class="col-12">
-														<button class="btn btn-primary rounded-pill text-capitalize w-100" type="submit"><strong>submit request</strong></button>
+														<button class="btn btn-primary rounded text-capitalize w-100" type="submit"><strong>call for details</strong></button>
 													</div>
 												</div>
 											</fieldset>
 										</form>
 										<!-- quote form ends-->
+									</div>
+								</div>
+								<div class="card shadow mt-3 ">
+									<div class="card-body pt-0">
+										<div class="row gy-3 p-3">
+											<div style="display: flex; justify-content: space-between;" class="mt-4 ">
+												<h6>Black.Hound.Security.com</h6>
+												<svg xmlns="http://www.w3.org/2000/svg" width="30" fill="red" viewBox="0 0 64 64" style="isolation:isolate" id="send"><defs><clipPath id="a"><rect width="64" height="64"></rect></clipPath></defs><g clip-path="url(#a)"><path d=" M 8.216 36.338 L 26.885 32.604 C 28.552 32.271 28.552 31.729 26.885 31.396 L 8.216 27.662 C 7.104 27.44 6.021 26.356 5.799 25.245 L 2.065 6.576 C 1.731 4.908 2.714 4.133 4.259 4.846 L 61.228 31.139 C 62.257 31.614 62.257 32.386 61.228 32.861 L 4.259 59.154 C 2.714 59.867 1.731 59.092 2.065 57.424 L 5.799 38.755 C 6.021 37.644 7.104 36.56 8.216 36.338 Z "></path></g></svg>
+											</div>
+											<hr class="container hr mt-3 " />
+											<div style="display: flex; justify-content: space-between;">
+												<h6>(951) 536-5678</h6>
+												<div class="rounded-pill" >
+													<svg xmlns="http://www.w3.org/2000/svg" width="30" fill="red" viewBox="0 0 24 24" id="phone-in-talk"><path fill="none" d="M0 0h24v24H0V0z"></path><path d="M12.88 5.05c3.18.4 5.67 2.89 6.07 6.07.06.51.49.88.99.88.04 0 .08 0 .12-.01.55-.07.94-.57.87-1.12-.51-4.09-3.72-7.3-7.81-7.81-.55-.06-1.05.33-1.11.88-.07.55.32 1.05.87 1.11zm.38 2.11c-.53-.14-1.08.18-1.22.72s.18 1.08.72 1.22c1.05.27 1.87 1.09 2.15 2.15.12.45.52.75.97.75.08 0 .17-.01.25-.03.53-.14.85-.69.72-1.22-.47-1.77-1.84-3.14-3.59-3.59zm5.97 8.1l-2.54-.29c-.61-.07-1.21.14-1.64.57l-1.84 1.84c-2.83-1.44-5.15-3.75-6.59-6.59l1.85-1.85c.43-.43.64-1.03.57-1.64l-.29-2.52c-.12-1.01-.97-1.77-1.99-1.77H5.03c-1.13 0-2.07.94-2 2.07.53 8.54 7.36 15.36 15.89 15.89 1.13.07 2.07-.87 2.07-2v-1.73c.01-1.01-.75-1.86-1.76-1.98z"></path></svg>
+												</div>
+											</div>
+											<hr class="container hr mt-3 " />
+											<div style="display: flex; justify-content: space-between;">
+												<h6>Get Direction</h6>
+												<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="30" fill="red"><path d="M256 0c17.7 0 32 14.3 32 32V66.7C368.4 80.1 431.9 143.6 445.3 224H480c17.7 0 32 14.3 32 32s-14.3 32-32 32H445.3C431.9 368.4 368.4 431.9 288 445.3V480c0 17.7-14.3 32-32 32s-32-14.3-32-32V445.3C143.6 431.9 80.1 368.4 66.7 288H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H66.7C80.1 143.6 143.6 80.1 224 66.7V32c0-17.7 14.3-32 32-32zM128 256a128 128 0 1 0 256 0 128 128 0 1 0 -256 0zm128-80a80 80 0 1 1 0 160 80 80 0 1 1 0-160z"/></svg>
+											</div>
+											<div>
+												9636 Garden Grove Blvd Garden grove, <br> CA 92844
+											</div>
+										</div>
 									</div>
 								</div>
 							</aside>
@@ -401,10 +802,10 @@
 			<section class="py-5 py-lg-6">
 				<div class="container">
 					<div class="row gy-3 justify-content-between align-items-center">
-						<div class="col col-md-auto">
+						<!-- <div class="col col-md-auto">
 							<h2 class="h5 text-capitalize mb-0"><strong>Reviews</strong></h2>
-						</div>
-						<div class="col-12 order-last">
+						</div> -->
+						<!-- <div class="col-12 order-last">
 							<div class="swiper container-off-canvas-end container-off-canvas-start vw-100" id="reviews-slider">
 								<div class="swiper-wrapper">
 									<div class="swiper-slide">
@@ -553,10 +954,10 @@
 									</div>
 								</div>
 							</div>
-						</div>
+						</div> -->
 						<div class="col-auto">
 							<!-- NOTE: slider navigation buttons [for], and [aria-controls] attributes must has slider unique id value.-->
-							<div class="btn-group swiper-navigation-wrapper rounded-pill bg-gray-400">
+							<!-- <div class="btn-group swiper-navigation-wrapper rounded-pill bg-gray-400">
 								<button class="btn btn-link link-dark p-3 pe-2 icon-link icon-link-hover icon-link-hover-reversed swiper-navigation-btn swiper-navigation-btn-prev" aria-label="prev" type="button" data-target="#reviews-slider" aria-controls="reviews-slider">
 									<svg class="bi rtl-mirror h-auto w-auto" width="14.405" height="12.99" fill="currentColor">
 										<use href="#icon-arrow-left-sm"></use>
@@ -567,7 +968,7 @@
 										<use href="#icon-arrow-right-sm"></use>
 									</svg><span class="visually-hidden">next</span>
 								</button>
-							</div>
+							</div> -->
 						</div>
 					</div>
 				</div>
@@ -601,19 +1002,18 @@
 											</div>
 											<h3 class="card-title h5 text-capitalize"><strong class="fw-bolder">Black Hound Security</strong></h3>
 											<div class="hstack gap-gutter flex-wrap">
-												<div class="badge text-bg-gray-400 text-capitalize rounded-pill text-start white-space-pre-wrap">Security Guard Services</div>
-												<div class="badge text-bg-gray-400 text-capitalize rounded-pill text-start white-space-pre-wrap">Mobile Patrols</div>
 												<div class="badge text-bg-gray-400 text-capitalize rounded-pill text-start white-space-pre-wrap">Event Security</div>
-												<p class="mb-0"><small>+4</small></p>
+												<div class="badge text-bg-gray-400 text-capitalize rounded-pill text-start white-space-pre-wrap">Mobile Patrols</div>
+												<div class="badge text-bg-gray-400 text-capitalize rounded-pill text-start white-space-pre-wrap">Private Investigation Services</div>
 											</div>
 										</div>
 										<div class="card-footer p-1 pt-3">
 											<div class="row g-gutter flex-wrap">
-												<div class="col"><a class="btn btn-primary white-space-nowrap rounded-pill w-100 text-capitalize text-decoration-none" href="companies-single.html"><strong>get a quot</strong></a></div>
+												<div class="col"><a class="btn btn-primary text-capitalize rounded px-5 py-2" style="background-color: #F70D28; color:white"  href="vendor.html"><strong style="font-size: 12px;">Get a quote</strong></a></div>
 												<div class="col"><a class="btn btn-link white-space-nowrap flex-nowrap rounded-pill w-100 icon-link gap-3 icon-link-hover justify-content-center text-decoration-none" href="companies-single.html">
-														<svg class="bi rtl-mirror h-auto w-auto ms-n2" width="14.405" height="12.99" fill="currentColor">
-															<use href="#icon-arrow-right-sm"></use>
-														</svg><strong>know more</strong></a></div>
+														<svg class="bi rtl-mirror h-auto w-auto ms-n2" width="14.405" height="12.99" >
+															<use fill="red" href="#icon-arrow-right-sm"></use>
+														</svg><strong style="color: red;">Know More</strong></a></div>
 											</div>
 										</div>
 									</article>
@@ -640,16 +1040,15 @@
 												<div class="badge text-bg-gray-400 text-capitalize rounded-pill text-start white-space-pre-wrap">Event Security</div>
 												<div class="badge text-bg-gray-400 text-capitalize rounded-pill text-start white-space-pre-wrap">Mobile Patrols</div>
 												<div class="badge text-bg-gray-400 text-capitalize rounded-pill text-start white-space-pre-wrap">Private Investigation Services</div>
-												<p class="mb-0"><small>+4</small></p>
 											</div>
 										</div>
 										<div class="card-footer p-1 pt-3">
 											<div class="row g-gutter flex-wrap">
-												<div class="col"><a class="btn btn-primary white-space-nowrap rounded-pill w-100 text-capitalize text-decoration-none" href="companies-single.html"><strong>get a quot</strong></a></div>
+												<div class="col"><a class="btn btn-primary text-capitalize rounded px-5 py-2" style="background-color: #F70D28; color:white"  href="vendor.html"><strong style="font-size: 12px;">Get a quote</strong></a></div>
 												<div class="col"><a class="btn btn-link white-space-nowrap flex-nowrap rounded-pill w-100 icon-link gap-3 icon-link-hover justify-content-center text-decoration-none" href="companies-single.html">
-														<svg class="bi rtl-mirror h-auto w-auto ms-n2" width="14.405" height="12.99" fill="currentColor">
-															<use href="#icon-arrow-right-sm"></use>
-														</svg><strong>know more</strong></a></div>
+														<svg class="bi rtl-mirror h-auto w-auto ms-n2" width="14.405" height="12.99" >
+															<use fill="red" href="#icon-arrow-right-sm"></use>
+														</svg><strong style="color: red;">Know More</strong></a></div>
 											</div>
 										</div>
 									</article>
@@ -673,19 +1072,18 @@
 											</div>
 											<h3 class="card-title h5 text-capitalize"><strong class="fw-bolder">Interforce Professional</strong></h3>
 											<div class="hstack gap-gutter flex-wrap">
-												<div class="badge text-bg-gray-400 text-capitalize rounded-pill text-start white-space-pre-wrap">Security Guard Services</div>
-												<div class="badge text-bg-gray-400 text-capitalize rounded-pill text-start white-space-pre-wrap">Mobile Patrols</div>
 												<div class="badge text-bg-gray-400 text-capitalize rounded-pill text-start white-space-pre-wrap">Event Security</div>
-												<p class="mb-0"><small>+4</small></p>
+												<div class="badge text-bg-gray-400 text-capitalize rounded-pill text-start white-space-pre-wrap">Mobile Patrols</div>
+												<div class="badge text-bg-gray-400 text-capitalize rounded-pill text-start white-space-pre-wrap">Private Investigation Services</div>
 											</div>
 										</div>
 										<div class="card-footer p-1 pt-3">
 											<div class="row g-gutter flex-wrap">
-												<div class="col"><a class="btn btn-primary white-space-nowrap rounded-pill w-100 text-capitalize text-decoration-none" href="companies-single.html"><strong>get a quot</strong></a></div>
+												<div class="col"><a class="btn btn-primary text-capitalize rounded px-5 py-2" style="background-color: #F70D28; color:white"  href="vendor.html"><strong style="font-size: 12px;">Get a quote</strong></a></div>
 												<div class="col"><a class="btn btn-link white-space-nowrap flex-nowrap rounded-pill w-100 icon-link gap-3 icon-link-hover justify-content-center text-decoration-none" href="companies-single.html">
-														<svg class="bi rtl-mirror h-auto w-auto ms-n2" width="14.405" height="12.99" fill="currentColor">
-															<use href="#icon-arrow-right-sm"></use>
-														</svg><strong>know more</strong></a></div>
+														<svg class="bi rtl-mirror h-auto w-auto ms-n2" width="14.405" height="12.99" >
+															<use fill="red" href="#icon-arrow-right-sm"></use>
+														</svg><strong style="color: red;">Know More</strong></a></div>
 											</div>
 										</div>
 									</article>
@@ -703,16 +1101,154 @@
 						<div class="section-bg-content"><img class="section-bg-image object-position-top op-50" src="./assets/images/backgrounds/vendor-home-compressed.webp" alt="" loading="lazy" width="1160" height="370"></div>
 					</div>
 					<div class="row">
-						<div class="col-12 col-md-6 col-xl-7">
-							<h2 class="display-4 text-capitalize mb-5"><strong class="fw-bolder">Are You A Reliable Security Company?</strong></h2><a class="btn btn-primary text-capitalize rounded-pill px-5 py-2" href="vendor.html"><strong>Join Us Now</strong></a>
+						<div class="col-12 col-md-6 col-xl-7" >
+							<h2 class="h1 text-capitalize mb-5"><strong class="fw-bolder">Missing Your Security Service?</strong></h2>
+							<p class="h2 mb-5" >List your company and join our community of trusted security providers</p>
+							<a class="btn btn-primary text-capitalize rounded-pill px-5 py-2" style="background-color: #F70D28; color:white"  href="vendor.html"><strong>Sign up</strong></a>
 						</div>
 					</div>
 				</div>
 			</section>
 			<!-- vendor home section ends-->
 		</main>
+				<!-- Top Cities Starts -->
+				<div class="container mt-3 mb-5" >
+					<ul class="nav w-100 m-auto" >
+						<li><a class="nav-link text-reset" href="companies.html" ><strong>Top Cities</strong></a>
+						</li>
+						<div  aria-hidden="true">
+							<div class="vr h-100" ></div>
+						</div>
+						<li><a class="nav-link text-reset" href="companies.html">New York</a>
+						</li>
+						<div  aria-hidden="true">
+							<div class="vr h-100 m-auto" ></div>
+						</div>
+						<li><a class="nav-link text-reset" href="companies.html" >Houston</a>
+						</li>
+						<div  aria-hidden="true">
+							<div class="vr h-100" ></div>
+						</div>
+						<li><a class="nav-link  text-reset" href="companies.html" >Atlanta</a>
+						</li>
+						<div  aria-hidden="true">
+							<div class="vr h-100" ></div>
+						</div>
+						<li><a class="nav-link  text-reset" href="companies.html" >Chicago</a>
+						</li>
+						<div  aria-hidden="true">
+							<div class="vr h-100" ></div>
+						</div>
+						<li><a class="nav-link  text-reset" href="companies.html" >Boston</a>
+						</li>
+						<div  aria-hidden="true">
+							<div class="vr h-100" ></div>
+						</div>
+						<li><a class="nav-link  text-reset" href="companies.html" >Cincinnati</a>
+						</li>
+						<div  aria-hidden="true">
+							<div class="vr h-100" ></div>
+						</div>
+						<li><a class="nav-link  text-reset" href="companies.html" >Los Angeles</a>
+						</li>
+						<div  aria-hidden="true">
+							<div class="vr h-100" ></div>
+						</div>
+						<li><a class="nav-link  text-reset" href="companies.html" >Dallas</a>
+						</li>
+						<div  aria-hidden="true">
+							<div class="vr h-100" ></div>
+						</div>
+						<li><a class="nav-link  text-reset" href="companies.html" >Las Vegas</a>
+						</li>
+						<div  aria-hidden="true">
+							<div class="vr h-100" ></div>
+						</div>
+						<li><a class="nav-link  text-reset" href="companies.html" >San Antonio</a>
+						</li>
+						<div  aria-hidden="true">
+							<div class="vr h-100" ></div>
+						</div>
+						<li><a class="nav-link  text-reset " href="companies.html" >Tampa</a>
+						</li>
+					</ul>
+		</div>
+				<!-- Top Cities Ends -->
+						<!-- Pre footer Begins -->
+		<div class="container mb-3 ">
+			<div class="row">
+				<div class="col-md d-flex justify-content-center align-items-center py-3 border-bottom">
+					<div class="d-flex justify-content-center rounded" style="background-color: #f0efef; border: 1px solid #707070;">
+						<form action="#" class="contact-form" style="padding: 30px;">
+							<h5 class="title" style="padding-bottom: 20px;"><strong class="fw-bolder">Contact us</strong></h5>
+							<div>
+								<input type="email" class="form-control rounded border-white mb-2 form-input bg-transparent" placeholder="Email" required>
+							</div>
+							<div>
+								<input id="message" class="form-control rounded border-white mb-3 form-text-area bg-transparent " placeholder="Zip Code" required></input>
+							</div>
+							<div class="row g-gutter flex-wrap mb-2 mt-5">
+								<a class="btn btn-primary text-capitalize rounded px-5 py-2" style="background-color: #F70D28; color:white" href="vendor.html"><strong>Join Us</strong></a>
+							</div>
+						</form>
+					</div>
+				</div>
+				<div class="col-md d-flex justify-content-center align-items-center py-3 border-bottom">
+					<div class="d-flex justify-content-center rounded">
+						<div style="width: 40%; margin: auto;">
+							<h5 class="title mb-3"><strong class="fw-bolder">Legal</strong></h5>
+						</div>
+						<div style="width: 50%; margin: auto;">
+							<ul class="mb-5" style="list-style-type: none;">
+								<li>
+									- Privacy Policy
+								</li>
+								<li>
+									- Terms of Service
+								</li>
+								<li>
+									- License agreement
+								</li>
+								<li>
+									- Copyright information
+								</li>
+								<li>
+									- Cookies Policy
+								</li>
+								<li>
+									- Legal Disclaimer
+								</li>
+							</ul>
+						</div>
+					</div>
+					<h5 class="title mb-3 text-center"><strong class="fw-bolder">Connect with Us</strong></h5>
+					<div style="width: 45%; margin: auto;">
+						<svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="red" class="bi bi-youtube"  viewBox="0 0 16 16" style="padding-top:2px;">
+							<path  d="M8.051 1.999h.089c.822.003 4.987.033 6.11.335a2.01 2.01 0 0 1 1.415 1.42c.101.38.172.883.22 1.402l.01.104.022.26.008.104c.065.914.073 1.77.074 1.957v.075c-.001.194-.01 1.108-.082 2.06l-.008.105-.009.104c-.05.572-.124 1.14-.235 1.558a2.01 2.01 0 0 1-1.415 1.42c-1.16.312-5.569.334-6.18.335h-.142c-.309 0-1.587-.006-2.927-.052l-.17-.006-.087-.004-.171-.007-.171-.007c-1.11-.049-2.167-.128-2.654-.26a2.01 2.01 0 0 1-1.415-1.419c-.111-.417-.185-.986-.235-1.558L.09 9.82l-.008-.104A31 31 0 0 1 0 7.68v-.123c.002-.215.01-.958.064-1.778l.007-.103.003-.052.008-.104.022-.26.01-.104c.048-.519.119-1.023.22-1.402a2.01 2.01 0 0 1 1.415-1.42c.487-.13 1.544-.21 2.654-.26l.17-.007.172-.006.086-.003.171-.007A100 100 0 0 1 7.858 2zM6.4 5.209v4.818l4.157-2.408z"/>
+						  </svg>
+						  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="36" height="31.5" fill="red">
+							<path d="M64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64h98.2V334.2H109.4V256h52.8V222.3c0-87.1 39.4-127.5 125-127.5c16.2 0 44.2 3.2 55.7 6.4V172c-6-.6-16.5-1-29.6-1c-42 0-58.2 15.9-58.2 57.2V256h83.6l-14.4 78.2H255V480H384c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64z"/></svg>
+	
+						  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="31.5" height="31.5" fill="red">
+							<path d="M64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64zm297.1 84L257.3 234.6 379.4 396H283.8L209 298.1 123.3 396H75.8l111-126.9L69.7 116h98l67.7 89.5L313.6 116h47.5zM323.3 367.6L153.4 142.9H125.1L296.9 367.6h26.3z"/></svg>
+	
+							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="31.5" height="31.5" fill="red">
+								<path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"/></svg>
+					</div>
+				</div>
+				<div class="col-md d-flex justify-content-center align-items-center py-3">
+					<div class="d-flex justify-content-center rounded">
+						<h5 class="title mb-3"><strong class="fw-bolder">About Us</strong></h5>
+						<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium doloribus debitis delectus unde, repellendus explicabo veniam accusamus libero placeat, maiores quae ipsa dolor, voluptatibus dignissimos necessitatibus enim laudantium aut veritatis.</p>
+						<p class="mt-5">United States</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- Pre footer Ends -->
 		<!-- application main content ends-->
 		<!-- app footer starts-->
+		<hr class="container hr" />
 		<footer class="app-footer">
 			<div class="container">
 				<div class="row gy-3 align-items-xl-center justify-content-xl-between">
@@ -724,31 +1260,21 @@
 						<!-- navigation list starts-->
 						<nav class="app-nav app-nav-footer w-100" aria-label="footer navigation">
 							<ul class="nav mb-0" role="menubar">
-								<li class="nav-item"><a class="nav-link btn btn-link text-uppercase text-reset rounded-pill " href="index.html" role="menuitem"><strong>Home</strong></a>
+								<li class="nav-item"><a class="nav-link btn btn-link text-uppercase text-capitalize  text-reset rounded-pill " href="about-us.html" role="menuitem"><strong>DIRECTORY LISTING</strong></a>
 								</li>
-								<li class="nav-item"><a class="nav-link btn btn-link text-uppercase text-reset rounded-pill active" aria-current="page" href="companies.html" role="menuitem"><strong>Directory Listing</strong></a>
+								<li class="nav-item"><a class="nav-link btn btn-link text-uppercase text-reset text-capitalize rounded-pill " href="companies.html" role="menuitem"><strong>ABOUT US</strong></a>
 								</li>
-								<li class="nav-item"><a class="nav-link btn btn-link text-uppercase text-reset rounded-pill " href="about-us.html" role="menuitem"><strong>About Us</strong></a>
+								<li class="nav-item"><a class="nav-link btn btn-link text-uppercase text-reset text-capitalize rounded-pill " href="news.html" role="menuitem"><strong>OUR NEWS</strong></a>
 								</li>
-								<li class="nav-item"><a class="nav-link btn btn-link text-uppercase text-reset rounded-pill " href="news.html" role="menuitem"><strong>Our News</strong></a>
+								<li class="nav-item"><a class="nav-link btn btn-link text-uppercase text-reset text-capitalize rounded-pill " href="news.html" role="menuitem"><strong>CAREERS</strong></a>
 								</li>
-								<li class="nav-item"><a class="nav-link btn btn-link text-uppercase text-reset rounded-pill " href="career.html" role="menuitem"><strong>Careers</strong></a>
+								<li class="nav-item"><a class="nav-link btn btn-link text-uppercase text-reset text-capitalize rounded-pill " href="news.html" role="menuitem"><strong>LOGIN</strong></a>
 								</li>
 							</ul>
 						</nav>
 						<!-- navigation list ends-->
 					</div>
-					<div class="col-12 col-lg-auto">
-						<!-- social nav starts-->
-						<nav class="app-social-nav app-social-nav-footer" aria-label="Social Media footer navigation">
-							<ul class="nav mb-0">
-								<li class="nav-item"><a class="nav-link btn btn-link px-2 py-1 text-reset text-primary-hover text-primary-focus" data-bs-placement="top" data-bs-toggle="tooltip" aria-label="Follow Us On linkedin" href="https://linkedin.com" target="_blank" rel="noopener noreferrer" title="Follow Us On linkedin"><i class="fab fa-linkedin-in" aria-hidden="true"></i></a></li>
-								<li class="nav-item"><a class="nav-link btn btn-link px-2 py-1 text-reset text-primary-hover text-primary-focus" data-bs-placement="top" data-bs-toggle="tooltip" aria-label="Follow Us On facebook" href="https://facebook.com" target="_blank" rel="noopener noreferrer" title="Follow Us On facebook"><i class="fab fa-facebook-f" aria-hidden="true"></i></a></li>
-								<li class="nav-item"><a class="nav-link btn btn-link px-2 py-1 text-reset text-primary-hover text-primary-focus" data-bs-placement="top" data-bs-toggle="tooltip" aria-label="Follow Us On X" href="https://x.com" target="_blank" rel="noopener noreferrer" title="Follow Us On X"><i class="fab fa-x-twitter" aria-hidden="true"></i></a></li>
-							</ul>
-						</nav>
-						<!-- social nav ends/.-->
-					</div>
+
 					<div class="col-12">
 						<!-- app copyrights starts-->
 						<p class="fw-light small text-capitalize text-secondary mb-0"><small>© 2024<span class="mx-1">The City Guards Hub -</span>Premium Space Helping Security Guards &amp; Security Investigation.</small></p>
@@ -927,7 +1453,7 @@
 	</div>
 	<!-- application ends-->
 	<!-- script files-->
-	<script src="./scripts/script.min.js"></script>
+	<script src="./scripts/script.js"></script>
 	<!-- script files end/.-->
 </body>
 
