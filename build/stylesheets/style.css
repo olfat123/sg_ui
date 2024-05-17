@@ -1153,7 +1153,7 @@
    .form-select:focus, .ss-main:focus {
      border-color: #d79d9d;
      outline: 0;
-     box-shadow: 0 0 0 0.25rem rgba(175, 58, 58, 0.25);
+     box-shadow: 0 0 0 0.25rem #F70D28;
    }
    
    .form-select[multiple], .ss-main[multiple], .form-select[size]:not([size="1"]), .ss-main[size]:not([size="1"]) {
@@ -6679,7 +6679,28 @@
    :root {
      --swiper-theme-color: var(--tcg-primary);
    }
-   
+   swiper-container {
+    width: 100%;
+    height: 100%;
+  }
+
+  swiper-slide {
+  }
+
+  swiper-slide img {
+  }
+
+  swiper-slide {
+    width: 80%;
+  }
+
+  swiper-slide:nth-child(2n) {
+    width: 80%;
+  }
+
+  swiper-slide:nth-child(3n) {
+    width: 80%;
+  }
    .swiper {
      margin-left: auto;
      margin-right: auto;
