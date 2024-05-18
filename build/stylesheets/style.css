@@ -6684,7 +6684,8 @@
     height: 100%;
   }
 
-  swiper-slide {
+  .swiper-slide {
+
   }
 
   swiper-slide img {
@@ -6701,6 +6702,28 @@
   swiper-slide:nth-child(3n) {
     width: 80%;
   }
+
+
+
+  .swiper-container {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    height: auto;
+  }
+  
+  .swiper-wrapper {
+    width: 100%;
+    transition: transform 0.3s ease;
+  }
+  
+  .swiper-slide {
+    flex: 0 0 80%; 
+    width: 100%;
+  }
+  
+
+
    .swiper {
      margin-left: auto;
      margin-right: auto;
