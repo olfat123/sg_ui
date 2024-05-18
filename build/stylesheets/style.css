@@ -6705,7 +6705,7 @@
 
 
 
-  .swiper-container {
+  .swiper-cont{
     position: relative;
     overflow: hidden;
     width: 100%;
@@ -6717,7 +6717,7 @@
     transition: transform 0.3s ease;
   }
   
-  .swiper-slide {
+  .slide {
     flex: 0 0 80%; 
     width: 100%;
   }
