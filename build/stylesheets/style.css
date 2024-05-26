@@ -1031,10 +1031,6 @@
   .content {
     width:75%; /* Adjust as necessary */
   }
-        .badge {
-            font-weight: 800;
-            width: 150px;
-        }
         .social-nav .nav-item .nav-link {
             color: red;
         }
@@ -6734,20 +6730,20 @@
 
 
 
-  .swiper-cont{
+  .swiper-cont {
     position: relative;
     overflow: hidden;
     width: 100%;
     height: auto;
   }
-  
+
   .swiper-wrapper {
-    width: 100%;
+    display: flex;
     transition: transform 0.3s ease;
   }
-  
+
   .slide {
-    flex: 0 0 49%; 
+    flex: 0 0 50%; 
     width: 100%;
   }
   
