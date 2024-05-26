@@ -1025,6 +1025,38 @@
        transition: none;
      }
    }
+   .content-wrapper {
+    max-width: 100%;
+  }
+  .content {
+    width:75%; /* Adjust as necessary */
+  }
+        .badge {
+            font-weight: 800;
+            width: 150px;
+        }
+        .social-nav .nav-item .nav-link {
+            color: red;
+        }
+        @media (max-width: 576px) {
+            .content-wrapper {
+                padding: 10px;
+            }
+            .badge {
+                width: auto;
+                padding: 5px 10px;
+            }
+            .content p {
+                margin-bottom: 10px;
+            }
+            .app-social-nav ul {
+                justify-content: center;
+            }
+            .content {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
    
    .form-control[type="file"] {
      overflow: hidden;
@@ -1169,7 +1201,7 @@
    }
    
    .form-select:disabled, .ss-main:disabled {
-     background-color: rgba(var(--tcg-black-rgb), 0.3);
+
    }
    
    .form-select:-moz-focusring, .ss-main:-moz-focusring {
@@ -2412,17 +2444,14 @@
      --tcg-pagination-border-width: 0;
      --tcg-pagination-border-color: var(--tcg-border-color);
      --tcg-pagination-border-radius: var(--tcg-border-radius);
-     --tcg-pagination-hover-color: var(--tcg-link-hover-color);
      --tcg-pagination-hover-bg: var(--tcg-tertiary-bg);
      --tcg-pagination-hover-border-color: var(--tcg-border-color);
      --tcg-pagination-focus-color: var(--tcg-link-hover-color);
      --tcg-pagination-focus-bg: var(--tcg-secondary-bg);
-     --tcg-pagination-focus-box-shadow: 0 0 0 0.25rem rgba(175, 58, 58, 0.25);
      --tcg-pagination-active-color: #fff;
      --tcg-pagination-active-bg: #af3a3a;
      --tcg-pagination-active-border-color: #af3a3a;
      --tcg-pagination-disabled-color: var(--tcg-secondary-color);
-     --tcg-pagination-disabled-bg: #d8d8d8;
      --tcg-pagination-disabled-border-color: var(--tcg-border-color);
      display: flex;
      list-style: none;
@@ -2443,7 +2472,7 @@
      font-size: var(--tcg-pagination-font-size);
      color: var(--tcg-pagination-color);
      text-decoration: none;
-     background-color: var(--tcg-pagination-bg);
+
      border: var(--tcg-pagination-border-width) solid var(--tcg-pagination-border-color);
      transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
    }
