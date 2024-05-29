@@ -49,6 +49,7 @@
 	<link rel="icon" type="image/png" sizes="16x16" href="./assets/images/favicon/favicon-16x16.png">
 	<link rel="manifest" href="./assets/images/favicon/site.webmanifest">
 	<link rel="mask-icon" href="./assets/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 	<link rel="shortcut icon" href="./assets/images/favicon/favicon.ico">
 	<meta name="msapplication-TileColor" content="#da532c">
 	<meta name="msapplication-config" content="./assets/images/favicon/browserconfig.xml">
@@ -341,17 +342,36 @@
 								</header>
 								<div class="row gy-5">
 									<div class="col-12">
-										<h2 class="h5 text-dark text-capitalize mb-3" ><strong>Sponsored Companies</strong></h2>
-                                        <div>
-                                            <swiper-container class="mySwiper" space-between="30" slides-per-view="auto" >
-                                            <swiper-slide class="card company-card p-gutter">
-                                                <div class="text-capitalize  px-3 py-1 position-absolute top-0  z-3 ms-gutter mt-gutter" style="border-radius:0 10px  0 10px; background-color: #F70D28; right:8px"><small style="color: #f0efef;"><strong>sponsored</strong></small></div>
+										<div style="width: 100%;display: flex;justify-content: space-between; align-items: center;">
+											<h2 class="h5 text-dark text-capitalize mb-3" ><strong>Sponsored Companies</strong></h2>
+											<div class="row gy-3 justify-content-between align-items-center" style="padding-bottom: 15px;">
+												<div class="col-auto">
+													<!-- NOTE: slider navigation buttons [for], and [aria-controls] attributes must has slider unique id value.-->
+													<div class="btn-group swiper-navigation-wrapper rounded bg-gray-400">
+														<button class="btn btn-link link-dark p-3 pe-2 icon-link icon-link-hover swiper-button prev swipe-prev" type="button">
+															<svg class="bi rtl-mirror h-auto w-auto" width="14.405" height="12.99" fill="currentColor">
+																<use href="#icon-arrow-left-sm"></use>
+															</svg><span class="visually-hidden">prev</span>
+														</button>
+														<button class="btn btn-link link-dark p-3 ps-2 icon-link icon-link-hover next swipe-next" type="button" >
+															<svg class="bi rtl-mirror h-auto w-auto" width="14.405" height="12.99" fill="currentColor">
+																<use href="#icon-arrow-right-sm"></use>
+															</svg><span class="visually-hidden">next</span>
+														</button>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="swiper mySwiper">
+											<div class="swiper-wrapper">
+											  <div class="swiper-slide card company-card p-gutter">
+												<div class="text-capitalize  px-3 py-1 position-absolute top-0  z-3 ms-gutter mt-gutter" style="border-radius:0 6px  0 6px; background-color: #F70D28; right:8px"><small style="color: #f0efef;"><strong>sponsored</strong></small></div>
                                                 <div class="card-sponsored-flag text-capitalize px-3 py-1 position-absolute top-0 start-0 z-3 ms-gutter mt-gutter">
                                                     <div class="hstack align-items-end mb-3">
                                                         <div class=" w-50px h-50px flex-shrink-0 text-bg-dark shadow rounded-circle"><img class="w-50px h-50px rounded-circle object-fit-cover" src="./assets/images/companies/5-logo-compressed.webp" alt="" height="50" width="50" loading="lazy"></div>
                                                     </div>
                                                 </div>
-                                                <div class="card-img-top  text-bg-dark overflow-hidden"><img class="object-fit-cover w-100 h-100 swiper-lazy" src="./assets/images/backgrounds/directories-compressed.webp" alt="Redteam Tactical Security" width="356" height="176" loading="lazy">
+                                                <div class="card-img-top overflow-hidden" style="height: 150px;"><img class="object-fit-cover w-100 h-100 swiper-lazy rounded" src="./assets/images/backgrounds/directories-compressed.webp" alt="Redteam Tactical Security" width="356" height="176" loading="lazy">
                                                     <div class="swiper-lazy-preloader swiper-lazy-preloader-white start-50"></div>
                                                 </div>
                                                     <div class="card-body p-1">
@@ -377,15 +397,15 @@
                                                         <div  style="display: flex; justify-content: end; ">
                                                             <div ><a class="btn btn-primary text-capitalize rounded px-5 py-2" style="background-color: transparent; color:#F70D28"  href="vendor.html"><strong style="font-size: 12px;">Get a quote</strong></a></div>
                                                         </div>
-                                            </swiper-slide>
-                                            <swiper-slide class="card company-card p-gutter">
-                                                <div class="text-capitalize  px-3 py-1 position-absolute top-0  z-3 ms-gutter mt-gutter" style="border-radius:0 10px  0 10px; background-color: #F70D28; right:8px"><small style="color: #f0efef;"><strong>sponsored</strong></small></div>
+											  </div>
+											  <div class="swiper-slide card company-card p-gutter">
+												<div class="text-capitalize  px-3 py-1 position-absolute top-0  z-3 ms-gutter mt-gutter" style="border-radius:0 6px  0 6px; background-color: #F70D28; right:8px"><small style="color: #f0efef;"><strong>sponsored</strong></small></div>
                                                 <div class="card-sponsored-flag text-capitalize px-3 py-1 position-absolute top-0 start-0 z-3 ms-gutter mt-gutter">
                                                     <div class="hstack align-items-end mb-3">
                                                         <div class=" w-50px h-50px flex-shrink-0 text-bg-dark shadow rounded-circle"><img class="w-50px h-50px rounded-circle object-fit-cover" src="./assets/images/companies/5-logo-compressed.webp" alt="" height="50" width="50" loading="lazy"></div>
                                                     </div>
                                                 </div>
-                                                <div class="card-img-top  text-bg-dark overflow-hidden"><img class="object-fit-cover w-100 h-100 swiper-lazy" src="./assets/images//backgrounds/directories-compressed.webp" alt="Redteam Tactical Security" width="356" height="176" loading="lazy">
+                                                <div class="card-img-top overflow-hidden" style="height: 150px;"><img class="object-fit-cover w-100 h-100 swiper-lazy rounded" src="./assets/images/backgrounds/resources-1.jpg" alt="Redteam Tactical Security" width="356" height="176" loading="lazy">
                                                     <div class="swiper-lazy-preloader swiper-lazy-preloader-white start-50"></div>
                                                 </div>
                                                     <div class="card-body p-1">
@@ -411,15 +431,15 @@
                                                         <div  style="display: flex; justify-content: end; ">
                                                             <div ><a class="btn btn-primary text-capitalize rounded px-5 py-2" style="background-color: transparent; color:#F70D28"  href="vendor.html"><strong style="font-size: 12px;">Get a quote</strong></a></div>
                                                         </div>
-                                            </swiper-slide>
-                                            <swiper-slide class="card company-card p-gutter">
-                                                <div class="text-capitalize  px-3 py-1 position-absolute top-0  z-3 ms-gutter mt-gutter" style="border-radius:0 10px  0 10px; background-color: #F70D28; right:8px"><small style="color: #f0efef;"><strong>sponsored</strong></small></div>
+											  </div>
+											  <div class="swiper-slide card company-card p-gutter">
+												<div class="text-capitalize  px-3 py-1 position-absolute top-0  z-3 ms-gutter mt-gutter" style="border-radius:0 6px  0 6px; background-color: #F70D28; right:8px"><small style="color: #f0efef;"><strong>sponsored</strong></small></div>
                                                 <div class="card-sponsored-flag text-capitalize px-3 py-1 position-absolute top-0 start-0 z-3 ms-gutter mt-gutter">
                                                     <div class="hstack align-items-end mb-3">
                                                         <div class=" w-50px h-50px flex-shrink-0 text-bg-dark shadow rounded-circle"><img class="w-50px h-50px rounded-circle object-fit-cover" src="./assets/images/companies/5-logo-compressed.webp" alt="" height="50" width="50" loading="lazy"></div>
                                                     </div>
                                                 </div>
-                                                <div class="card-img-top  text-bg-dark overflow-hidden"><img class="object-fit-cover w-100 h-100 swiper-lazy" src="./assets/images//backgrounds/directories-compressed.webp" alt="Redteam Tactical Security" width="356" height="176" loading="lazy">
+                                                <div class="card-img-top overflow-hidden" style="height: 150px;"><img class="object-fit-cover w-100 h-100 swiper-lazy rounded" src="./assets/images/backgrounds/resources-3.jpg" alt="Redteam Tactical Security" width="356" height="176" loading="lazy">
                                                     <div class="swiper-lazy-preloader swiper-lazy-preloader-white start-50"></div>
                                                 </div>
                                                     <div class="card-body p-1">
@@ -445,10 +465,25 @@
                                                         <div  style="display: flex; justify-content: end; ">
                                                             <div ><a class="btn btn-primary text-capitalize rounded px-5 py-2" style="background-color: transparent; color:#F70D28"  href="vendor.html"><strong style="font-size: 12px;">Get a quote</strong></a></div>
                                                         </div>
-                                            </swiper-slide>
-                                        </swiper-container>
-                                        </div>
-                                        
+											  </div>
+											</div>
+										  </div>
+										  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+										  <script>
+											var swiper = new Swiper(".mySwiper", {
+												slidesPerView: "auto",
+												spaceBetween:30,
+												speed:400,
+											  pagination: {
+												el: ".swiper-pagination",
+												type: "progressbar",
+											  },
+											  navigation: {
+												nextEl: ".swipe-next",
+												prevEl: ".swipe-prev",
+											  },
+											});
+										  </script>
 									</div>
 								</div>
 							</section>
@@ -1708,6 +1743,7 @@
 	<!-- script files-->
 	<script src="./scripts/script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-element-bundle.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 	<!-- script files end/.-->
 </body>
 
